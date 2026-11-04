@@ -1,0 +1,30 @@
+# robots.txt for https://www.weightlosspercentage.com/
+User-agent: *
+Allow: /
+
+# AI & Research Crawlers
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+# Sitemaps & LLM Context
+Sitemap: https://www.weightlosspercentage.com/sitemap.xml
+# LLMs Context: https://www.weightlosspercentage.com/llms.txt
+# LLMs Full Context: https://www.weightlosspercentage.com/llms-full.txt

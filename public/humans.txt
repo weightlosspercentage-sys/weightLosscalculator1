@@ -1,0 +1,16 @@
+/* TEAM */
+Lead Medical Reviewer: Dr. Rekha Kumar, M.D., M.S.
+Role: Board-Certified Endocrinologist & ABOM Diplomate
+Affiliation: Weill Cornell Medicine | New York, NY
+Profile: https://www.weightlosspercentage.com/authors/dr-rekha-kumar/
+LinkedIn: https://www.linkedin.com/in/rekha-kumar-m-d-m-s-70b481237/
+
+Platform Developer: Lead Application Developer
+LinkedIn: https://www.linkedin.com/in/wordpress-seo-specialist-abhi/
+
+/* SITE */
+Site Name: Weight Loss Percentage
+Site URL: https://www.weightlosspercentage.com/
+Last Updated: 2026-11-02
+Language: English / Multi-regional
+Standards: HTML5, CSS3, TypeScript, React, Schema.org JSON-LD, IEEE-754 Double Precision

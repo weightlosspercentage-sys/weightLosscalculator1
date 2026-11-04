@@ -1,0 +1,64 @@
+---
+export interface Props {
+  title: string;
+  description: string;
+  canonical?: string;
+  locale?: string;
+}
+
+const {
+  title = "Weight Loss Calculator | Percentage & Newborn Weight Loss Tool",
+  description = "Calculate body weight loss percentage, newborn weight loss, BMR, and clinical health milestones. 100% free, private, client-side calculator.",
+  canonical = "https://www.weightlosspercentage.com/",
+  locale = "en"
+} = Astro.props;
+
+const hreflangs = [
+  { lang: "en", href: "https://www.weightlosspercentage.com/" },
+  { lang: "en-CA", href: "https://www.weightlosspercentage.com/ca/" },
+  { lang: "en-GB", href: "https://www.weightlosspercentage.com/uk/" },
+  { lang: "ru", href: "https://www.weightlosspercentage.com/ru/" },
+  { lang: "zh", href: "https://www.weightlosspercentage.com/zh/" },
+  { lang: "de", href: "https://www.weightlosspercentage.com/de/" },
+  { lang: "it", href: "https://www.weightlosspercentage.com/it/" },
+  { lang: "x-default", href: "https://www.weightlosspercentage.com/" }
+];
+---
+
+<!doctype html>
+<html lang={locale} class="scroll-smooth bg-[#fbfbfd]">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+
+    {/* Bidirectional Hreflangs */}
+    {hreflangs.map((item) => (
+      <link rel="alternate" hreflang={item.lang} href={item.href} />
+    ))}
+
+    {/* Open Graph / Social */}
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    {/* JSON-LD Schema */}
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Weight Loss Percentage Calculator",
+      "url": "https://www.weightlosspercentage.com/",
+      "applicationCategory": "HealthApplication",
+      "operatingSystem": "All",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+    })} />
+  </head>
+  <body class="text-slate-900 antialiased selection:bg-[#ca3500] selection:text-white min-h-screen flex flex-col font-sans">
+    <slot />
+  </body>
+</html>

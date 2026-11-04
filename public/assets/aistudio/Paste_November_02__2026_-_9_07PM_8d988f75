@@ -1,0 +1,672 @@
+You are an elite Lead Frontend Architect, Visual Semantics Engineer and Algorithmic SEO Specialist working in Astro.js, Tailwind CSS and TypeScript. Build a complete one-page Exact Match Domain (EMD) web tool that is fast, useful on first interaction, semantically rich, and credible enough to earn topical authority and E-E-A-T signals in every market it serves.
+
+[TECH STACK]
+- Astro.js (island architecture, static generation, zero JS by default for non-interactive parts)
+- Tailwind CSS (utility-first, inline critical CSS)
+- Interactivity via Astro islands (Vanilla JS / Preact), Web Workers or Canvas, client:visible or client:idle. Processing under 300ms.
+- TypeScript, strict mode
+- astro:assets for images, automatic sitemap, Astro SEO head management
+
+[PROJECT INPUT]
+- Domain: https://www.weightlosspercentage.com/
+- Primary EMD / core tool concept: weight loss calculator (auto-selected from the CSV data)
+- Competitor benchmark: https://newbornweight.org/
+- Data coverage: 1000 unique keywords (1000 from GSC, 0 from Ahrefs), 25 clusters, 14k total GSC impressions
+
+The analysis below was computed from the real Google Search Console and Ahrefs exports. Do not re-cluster it. Use the clusters, counts and priorities as given.
+
+=== SECTION 1: SILO ARCHITECTURE (from GSC + Ahrefs) ===
+Structure mode: one-page. Pillar is the page itself. Each silo is a section with the anchor shown, in the order listed.
+The keyword data is already grouped into one pillar and several silos. Do not re-cluster or reorder it. Each silo becomes one section (or page) with its own H2 and anchor, each subtopic becomes an H3, and the keywords listed are the phrases to cover there. Format: keyword [imp = GSC impressions, pos = average position, vol = Ahrefs volume, kd = keyword difficulty].
+
+PILLAR: "weight loss calculator" (auto-selected from the CSV data) -> page top, H1
+Pillar keyword variants (use in H1, title, meta description, hero micro-copy):
+- weight loss calculator [imp 953, pos 74.3]
+- of weight loss calculator [imp 6, pos 63.3]
+- weight loss loss calculator [imp 3, pos 68.3]
+- calculator for weight loss [imp 3, pos 80.3]
+
+### Silo 1: Percentage -> #percentage  (tool, 174 keywords, 3.3k impressions, avg pos 32.4)
+Hub keyword for the H2: "weight loss percentage calculator"
+Subtopic 1.1: Calculate (H3, 47 keywords)
+- calculate baby weight loss percentage [imp 21, pos 7.6]
+- calculate weight loss percentage newborn [imp 19, pos 10.2]
+- how to calculate weight loss percentage [imp 47, pos 36.3]
+- how to calculate percentage of weight loss [imp 28, pos 41.5]
+Subtopic 1.2: Newborn (H3, 7 keywords)
+- newborn weight loss percentage calculator [imp 87, pos 8.1]
+- weight loss percentage calculator newborn [imp 146, pos 8.7]
+- percentage weight loss calculator newborn [imp 35, pos 9.6]
+- newborn percentage weight loss calculator [imp 19, pos 7.4]
+Subtopic 1.3: Baby (H3, 5 keywords)
+- baby weight loss percentage calculator [imp 117, pos 6.9]
+- weight loss percentage calculator baby [imp 24, pos 6.5]
+- percentage weight loss calculator baby [imp 33, pos 7.8]
+- how to work out baby weight loss percentage [imp 11, pos 8.9]
+Subtopic 1.4: Body (H3, 25 keywords)
+- body weight percentage calculator [imp 12, pos 65.9]
+- how do you get your percentage body fat? [imp 10, pos 81.1]
+- body percentage weight loss calculator [imp 8, pos 56.5]
+- percentage body weight loss [imp 8, pos 67.0]
+Subtopic 1.5: Figure (H3, 12 keywords)
+- figure weight loss percentage [imp 43, pos 35.6]
+- figure out percentage of weight loss [imp 29, pos 43.9]
+- how to figure out your percentage of weight loss [imp 12, pos 57.3]
+- how to figure out percentage of weight loss [imp 9, pos 46.3]
+Subtopic 1.6: General (H3, 78 keywords)
+- weight loss percentage calculator [imp 754, pos 28.3]
+- weight loss percentage [imp 240, pos 49.5]
+- infant weight loss percentage calculator [imp 52, pos 8.6]
+- birth weight loss percentage calculator [imp 59, pos 6.8]
+
+### Silo 2: Newborn -> #newborn  (tool, 21 keywords, 1.7k impressions, avg pos 10.1)
+Hub keyword for the H2: "newborn weight loss calculator"
+Subtopic 2.1: Percent (H3, 5 keywords)
+- percent weight loss calculator newborn [imp 69, pos 10.1]
+- percent weight loss newborn calculator [imp 61, pos 8.7]
+- newborn percent weight loss calculator [imp 37, pos 11.9]
+- calculate percent weight loss newborn [imp 20, pos 8.8]
+- percent weight loss newborn [imp 3, pos 65.3]
+Subtopic 2.2: Calculate (H3, 4 keywords)
+- calculate newborn weight loss [imp 23, pos 7.8]
+- calculate weight loss newborn [imp 16, pos 16.1]
+- how to calculate newborn weight loss [imp 15, pos 18.8]
+- how to calculate weight loss in newborn [imp 5, pos 39.6]
+Subtopic 2.3: General (H3, 12 keywords)
+- newborn weight loss calculator [imp 1.1k, pos 9.1]
+- weight loss calculator newborn [imp 214, pos 9.5]
+- weight loss calculator for newborn [imp 22, pos 7.4]
+- weight loss newborn calculator [imp 42, pos 11.2]
+- newborn weight loss calculator lbs and oz [imp 20, pos 6.2]
+- newborn weight loss calculation [imp 7, pos 34.3]
+- calculating newborn weight loss [imp 5, pos 8.2]
+- newborn weight loss tool [imp 5, pos 42.4]
+
+### Silo 3: Calorie -> #calorie  (tool, 109 keywords, 953 impressions, avg pos 43.3)
+Hub keyword for the H2: "subway calorie calculator"
+Subtopic 3.1: Subway (H3, 22 keywords)
+- subway calorie calculator [imp 132, pos 28.4]
+- subway calorie calculator nz [imp 34, pos 8.8]
+- subway calorie counter [imp 43, pos 34.6]
+- subway sandwich calorie calculator [imp 26, pos 33.9]
+Subtopic 3.2: Bike (H3, 9 keywords)
+- exercise bike calorie calculator [imp 21, pos 50.5]
+- bike calorie calculator [imp 19, pos 52.2]
+- stationary bike calorie calculator [imp 10, pos 49.3]
+- bike exercise calorie calculator [imp 10, pos 51.9]
+Subtopic 3.3: Cycling (H3, 11 keywords)
+- cycling calorie calculator [imp 16, pos 49.9]
+- calorie calculator cycling [imp 10, pos 52.5]
+- cycling calorie burner calculator [imp 7, pos 56.3]
+- cycling calorie calc [imp 5, pos 53.8]
+Subtopic 3.4: Breastfeeding (H3, 7 keywords)
+- breastfeeding calorie calculator [imp 43, pos 44.9]
+- calorie calculator breastfeeding [imp 8, pos 43.3]
+- breastfeeding calorie counter [imp 3, pos 36.7]
+- breastfeeding calorie calculator to lose weight [imp 3, pos 41.7]
+Subtopic 3.5: Burn (H3, 9 keywords)
+- resting calorie burn [imp 18, pos 82.1]
+- resting calorie burn calculator [imp 9, pos 66.3]
+- calorie burn calculator bicycle [imp 4, pos 56.8]
+- what is my resting calorie burn [imp 4, pos 69.5]
+Subtopic 3.6: General (H3, 51 keywords)
+- five guys calorie calculator [imp 7, pos 26.3]
+- bicycle calorie calculator [imp 21, pos 52.8]
+- resting calorie calculator [imp 18, pos 65.0]
+- mcdonald's calorie calculator [imp 17, pos 42.1]
+
+### Silo 4: Nutrition -> #nutrition  (tool, 25 keywords, 649 impressions, avg pos 37.0)
+Hub keyword for the H2: "subway nutrition calculator"
+Subtopic 4.1: Subway (H3, 15 keywords)
+- subway nutrition calculator [imp 305, pos 32.9]
+- subway nutrition calc [imp 17, pos 33.7]
+- nutrition calculator subway [imp 13, pos 28.4]
+- subway sandwich nutrition calculator [imp 13, pos 30.8]
+- calculate subway nutrition [imp 13, pos 32.4]
+- subway nutrition calculator uk [imp 11, pos 27.8]
+- subway sandwiches nutrition calculator [imp 6, pos 30.8]
+- subway nutrition calculator australia [imp 5, pos 27.0]
+Subtopic 4.2: Mcdonald (H3, 2 keywords)
+- mcdonald's nutrition calculator [imp 33, pos 43.8]
+- mcdonald nutrition calculator [imp 3, pos 44.3]
+Subtopic 4.3: General (H3, 8 keywords)
+- mcdonalds nutrition calculator [imp 152, pos 43.7]
+- chipotle nutrition calculator [imp 14, pos 29.9]
+- nutrition calculator [imp 9, pos 79.6]
+- mcd nutrition calculator [imp 8, pos 32.1]
+- fast food nutrition calculator [imp 6, pos 21.7]
+- five guys nutrition calculator [imp 6, pos 41.8]
+- starbucks nutrition calculator [imp 5, pos 73.4]
+- free nutrition calculator [imp 3, pos 77.3]
+
+### Silo 5: Lbs -> #lbs  (informational, 104 keywords, 637 impressions, avg pos 11.0)
+Hub keyword for the H2: "5'2 105 lbs"
+Subtopic 5.1: Man (H3, 9 keywords)
+- 6 3 235 lbs man [imp 2, pos 6.0]
+- 5'11 235 lbs man [imp 15, pos 6.9]
+- 5 11 235 lbs man [imp 13, pos 3.2]
+- 6'3 235 lbs man [imp 13, pos 5.2]
+Subtopic 5.2: Bmi (H3, 10 keywords)
+- 5'2 105 lbs bmi [imp 10, pos 7.9]
+- what is the patient’s bmi if the patient weighs 125 lbs and is 5’6” tall? 2.2 20.2 22.3 70 [imp 8, pos 4.8]
+- 5'4 115 lbs bmi [imp 8, pos 5.9]
+- bmi 5'6 125 lbs [imp 6, pos 8.7]
+Subtopic 5.3: Underweight (H3, 5 keywords)
+- is 105 lbs underweight for 5'6 [imp 13, pos 9.6]
+- is 105 lbs underweight for 5'2 [imp 6, pos 8.0]
+- is 95 lbs underweight for 5'3 [imp 4, pos 9.5]
+- is 140 lbs underweight for 6 0 [imp 3, pos 9.7]
+Subtopic 5.4: Male (H3, 4 keywords)
+- 6'2 235 lbs male [imp 3, pos 13.3]
+- 5 7 210 lbs male [imp 3, pos 28.0]
+- 5'11 160 lbs male [imp 3, pos 51.7]
+- 5 11 255 lbs male [imp 2, pos 1.0]
+Subtopic 5.5: Female (H3, 3 keywords)
+- 5'8 270 lbs female [imp 6, pos 9.8]
+- 5'3 95 lbs female [imp 4, pos 10.3]
+- 5'7 142 lbs female [imp 3, pos 51.3]
+Subtopic 5.6: General (H3, 73 keywords)
+- 5'2 105 lbs [imp 30, pos 8.9]
+- 5'5 120 lbs [imp 25, pos 11.4]
+- 4'9 300 lbs [imp 3, pos 4.7]
+- 6'3 230 lbs [imp 16, pos 14.3]
+
+### Silo 6: Much -> #much  (question, 43 keywords, 590 impressions, avg pos 49.8)
+Hub keyword for the H2: "how much weight have i lost calculator"
+Subtopic 6.1: Lose (H3, 30 keywords)
+- how much weight can i lose in a month [imp 77, pos 59.5]
+- how much weight can you lose in a month [imp 70, pos 60.2]
+- how much weight will i lose with gastric sleeve calculator [imp 22, pos 70.8]
+- how much weight can you lose in a month calculator [imp 21, pos 6.3]
+- how much weight do you lose after giving birth calculator [imp 16, pos 9.8]
+- how much weight can i lose in a month calculator [imp 15, pos 10.5]
+- how much weight could i lose in a month [imp 15, pos 57.8]
+- how much weight will i lose with gastric bypass calculator [imp 14, pos 76.9]
+Subtopic 6.2: Have Lost (H3, 11 keywords)
+- how much weight have i lost calculator [imp 93, pos 43.3]
+- how much weight have i lost [imp 74, pos 49.3]
+- how much weight have i lost calculator free [imp 14, pos 42.8]
+- how much have i lost in weight [imp 8, pos 39.8]
+- how.much weight have i lost [imp 4, pos 41.3]
+- how much weight have i lost in kg [imp 4, pos 46.0]
+- weight calculator how much have i lost [imp 4, pos 54.5]
+- calculate how much weight i have lost [imp 4, pos 67.0]
+Subtopic 6.3: Month (H3, 2 keywords)
+- how much weight loss in a month is healthy [imp 8, pos 64.9]
+- how much is healthy weight loss per month [imp 3, pos 66.3]
+
+### Silo 7: Calories -> #calories  (tool, 106 keywords, 574 impressions, avg pos 55.2)
+Hub keyword for the H2: "subway calories calculator"
+Subtopic 7.1: Burned (H3, 34 keywords)
+- calories burned at rest [imp 11, pos 76.9]
+- resting calories burned [imp 10, pos 78.5]
+- calories burned bike riding calculator [imp 9, pos 57.0]
+- calories burned at rest calculator [imp 9, pos 61.3]
+Subtopic 7.2: Subway (H3, 16 keywords)
+- subway calories calculator [imp 46, pos 27.0]
+- subway calories counter [imp 9, pos 34.2]
+- calculate calories subway [imp 7, pos 29.7]
+- subway calories calculator uk [imp 7, pos 37.1]
+Subtopic 7.3: Bike (H3, 9 keywords)
+- stationary bike calories calculator [imp 6, pos 46.2]
+- bike calories calculator [imp 9, pos 55.4]
+- calculate bike calories [imp 8, pos 59.0]
+- calories bike ride calculator [imp 4, pos 54.8]
+Subtopic 7.4: Cycling (H3, 8 keywords)
+- cycling calculator calories [imp 10, pos 56.4]
+- burning calories cycling calculator [imp 8, pos 54.8]
+- calories burn in cycling calculator [imp 6, pos 58.8]
+- 1 hour cycling calories calculator [imp 5, pos 54.8]
+Subtopic 7.5: Basal (H3, 5 keywords)
+- basal metabolic rate calories [imp 10, pos 74.5]
+- basal calories [imp 8, pos 73.5]
+- basal metabolic calories [imp 7, pos 74.1]
+- basal metabolism calories [imp 4, pos 72.5]
+Subtopic 7.6: General (H3, 34 keywords)
+- bmr calories [imp 16, pos 75.1]
+- 5 guys calories calculator [imp 9, pos 30.3]
+- biking calories calculator [imp 9, pos 53.6]
+- resting calories calculator [imp 9, pos 61.2]
+
+### Silo 8: Percent -> #percent  (informational, 33 keywords, 475 impressions, avg pos 46.4)
+Hub keyword for the H2: "percent weight loss calculator"
+Subtopic 8.1: Calculate (H3, 8 keywords)
+- how to calculate percent weight loss [imp 15, pos 24.7]
+- how to calculate percent loss of weight [imp 11, pos 51.8]
+- how to calculate percent body weight loss [imp 10, pos 58.1]
+- calculate percent weight change [imp 8, pos 46.1]
+- calculate percent weight loss [imp 7, pos 65.7]
+Subtopic 8.2: Body (H3, 7 keywords)
+- percent body weight loss calculator [imp 6, pos 53.7]
+- what is 5 percent of my body weight [imp 5, pos 64.2]
+- body percent weight loss calculator [imp 4, pos 43.8]
+- percent body fat loss calculator [imp 4, pos 68.3]
+- percent of body weight loss [imp 3, pos 61.7]
+Subtopic 8.3: Change (H3, 3 keywords)
+- percent weight change [imp 13, pos 56.1]
+- percent weight change calculator [imp 10, pos 21.6]
+- calculating percent weight change [imp 5, pos 61.0]
+Subtopic 8.4: Birth (H3, 2 keywords)
+- percent down from birth weight calculator [imp 6, pos 8.0]
+- percent birth weight loss calculator [imp 6, pos 15.0]
+Subtopic 8.5: General (H3, 13 keywords)
+- percent weight loss calculator [imp 257, pos 45.5]
+- percent weight loss [imp 18, pos 50.2]
+- how to figure percent of weight loss [imp 11, pos 41.6]
+- percent weight loss equation [imp 8, pos 59.0]
+- weight loss percent calculator [imp 7, pos 37.6]
+
+### Silo 9: Baby -> #baby  (informational, 9 keywords, 371 impressions, avg pos 9.3)
+Hub keyword for the H2: "baby weight loss calculator"
+Keywords
+- baby weight loss calculator [imp 258, pos 8.0]
+- weight loss calculator baby [imp 42, pos 8.5]
+- weight loss baby calculator [imp 33, pos 8.1]
+- baby weight loss after birth calculator [imp 13, pos 9.2]
+- calculate baby weight loss [imp 11, pos 8.4]
+- calculating baby weight loss [imp 4, pos 7.8]
+- lose baby weight login [imp 4, pos 76.3]
+- baby weight loss calculation [imp 3, pos 9.3]
+- baby weight loss [imp 3, pos 59.3]
+
+### Silo 10: Keto -> #keto  (tool, 9 keywords, 306 impressions, avg pos 57.1)
+Hub keyword for the H2: "keto diet calculator"
+Subtopic 10.1: Diet (H3, 3 keywords)
+- keto diet calculator [imp 242, pos 58.5]
+- calculator for keto diet [imp 4, pos 53.3]
+- keto diet calculator free [imp 3, pos 59.0]
+Subtopic 10.2: Tdee (H3, 2 keywords)
+- keto tdee calculator [imp 11, pos 44.1]
+- tdee calculator keto [imp 7, pos 49.7]
+Subtopic 10.3: General (H3, 4 keywords)
+- keto calculator [imp 18, pos 58.7]
+- keto weight loss calculator [imp 14, pos 45.4]
+- weight loss calculator keto [imp 4, pos 50.8]
+- keto calculator for weight loss [imp 3, pos 60.0]
+
+### Silo 11: Metabolic Rate -> #metabolic-rate  (tool, 22 keywords, 271 impressions, avg pos 58.1)
+Hub keyword for the H2: "basal metabolic rate calculator"
+Subtopic 11.1: Basal (H3, 10 keywords)
+- basal metabolic rate calculator [imp 135, pos 52.9]
+- basal metabolic rate calc [imp 10, pos 63.1]
+- basal metabolic rate calculator weight loss [imp 6, pos 70.7]
+- bmr basal metabolic rate calculator [imp 5, pos 63.6]
+- resting basal metabolic rate calculator [imp 4, pos 62.0]
+- basal metabolic rate [imp 3, pos 36.3]
+- basal metabolic rate cal [imp 3, pos 61.0]
+- free basal metabolic rate calculator [imp 3, pos 61.0]
+Subtopic 11.2: Resting (H3, 7 keywords)
+- resting metabolic rate calculator [imp 29, pos 65.2]
+- find resting metabolic rate [imp 11, pos 72.0]
+- calculate my resting metabolic rate [imp 6, pos 80.3]
+- calculate resting metabolic rate [imp 5, pos 78.4]
+- calculator resting metabolic rate [imp 4, pos 63.3]
+- what's my resting metabolic rate [imp 3, pos 71.0]
+- what is my resting metabolic rate [imp 3, pos 72.7]
+Subtopic 11.3: General (H3, 5 keywords)
+- metabolic rate calculator [imp 22, pos 53.0]
+- metabolic rate calculator for weight loss [imp 5, pos 61.2]
+- basil metabolic rate calculator [imp 3, pos 58.3]
+- body metabolic rate calculator [imp 3, pos 59.0]
+- metabolic rate tdee calculator -site:youtube.com -site:reddit.com -site:x.com -site:twitter.com -site:facebook.com -site:instagram.com -site:tiktok.com -site:linkedin.com -site:pinterest.com -site:nytimes.com -site:wsj.com -site:yelp.com -site:rottentomatoes.com [imp 2, pos 6.0]
+
+### Silo 12: Gastric Bypass -> #gastric-bypass  (tool, 12 keywords, 262 impressions, avg pos 70.5)
+Hub keyword for the H2: "gastric bypass surgery weight loss calculator"
+Subtopic 12.1: Sleeve (H3, 5 keywords)
+- weight loss calculator gastric sleeve [imp 45, pos 69.6]
+- gastric sleeve calculator [imp 38, pos 76.3]
+- gastric sleeve weight loss calculator [imp 20, pos 63.3]
+- gastric sleeve weight loss timeline [imp 16, pos 71.3]
+- weight loss calculator after gastric sleeve [imp 7, pos 5.7]
+Subtopic 12.2: Surgery (H3, 3 keywords)
+- gastric bypass surgery weight loss calculator [imp 45, pos 69.2]
+- gastric surgery calculator [imp 32, pos 76.9]
+- gastric bypass surgery weight loss timeline [imp 7, pos 74.9]
+Subtopic 12.3: General (H3, 4 keywords)
+- gastric bypass weight loss chart [imp 19, pos 74.3]
+- gastric bypass calculator [imp 14, pos 80.9]
+- gastric bypass weight loss timeline [imp 12, pos 71.9]
+- gastric bypass weight loss calculator [imp 7, pos 68.9]
+
+### Silo 13: Calculate Birth -> #calculate-birth  (tool, 2 keywords, 219 impressions, avg pos 9.0)
+Hub keyword for the H2: "birth weight loss calculator"
+Keywords
+- birth weight loss calculator [imp 205, pos 9.0]
+- calculate birth weight loss [imp 14, pos 9.1]
+
+### Silo 14: Per Month -> #per-month  (informational, 36 keywords, 218 impressions, avg pos 52.2)
+Hub keyword for the H2: "healthy weight loss per month"
+Subtopic 14.1: Lose (H3, 14 keywords)
+- how many pounds can you lose in a month [imp 18, pos 58.1]
+- healthy amount of weight to lose per month [imp 18, pos 65.9]
+- lose 10 pounds in a month calculator [imp 14, pos 14.4]
+- how to lose 15 pounds in a month calculator [imp 12, pos 17.6]
+- lose 5 pounds in a month calculator [imp 9, pos 21.2]
+Subtopic 14.2: Healthy (H3, 8 keywords)
+- healthy weight loss per month [imp 19, pos 60.4]
+- what is a healthy weight loss per month [imp 7, pos 66.1]
+- healthy loss of weight per month [imp 4, pos 59.0]
+- healthy weight loss amount per month [imp 4, pos 71.5]
+- what is healthy weight loss per month [imp 3, pos 57.7]
+Subtopic 14.3: Normal (H3, 4 keywords)
+- normal weight loss per month [imp 8, pos 64.4]
+- normal weight loss per month kg [imp 4, pos 60.5]
+- what is the normal weight loss per month [imp 4, pos 62.0]
+- what is normal weight loss per month [imp 3, pos 65.0]
+Subtopic 14.4: Average (H3, 2 keywords)
+- average weight loss per month [imp 8, pos 60.3]
+- average weight loss in a month [imp 5, pos 62.6]
+Subtopic 14.5: General (H3, 8 keywords)
+- glp-1 weight loss percentages by month [imp 10, pos 9.4]
+- how many pounds can be lost in a month [imp 6, pos 50.3]
+- safe weight loss per month [imp 6, pos 59.2]
+- realistic weight loss per month [imp 4, pos 59.8]
+- ideal weight loss per month [imp 4, pos 67.8]
+
+### Silo 15: Bmr -> #bmr  (tool, 14 keywords, 204 impressions, avg pos 43.2)
+Hub keyword for the H2: "bmr calculator"
+Subtopic 15.1: Tdee (H3, 2 keywords)
+- bmr vs tdee [imp 5, pos 50.4]
+- tdee vs bmr [imp 4, pos 50.8]
+Subtopic 15.2: Rest (H3, 2 keywords)
+- bmr at rest calculator [imp 4, pos 54.3]
+- bmr at rest [imp 4, pos 71.0]
+Subtopic 15.3: General (H3, 10 keywords)
+- bmr calculator [imp 119, pos 36.2]
+- bmr [imp 8, pos 15.6]
+- calculate bmr [imp 5, pos 16.6]
+- bmr calculator for men [imp 24, pos 56.4]
+- bmr calculator free [imp 2, pos 13.5]
+- bmr calculator to lose weight [imp 14, pos 73.4]
+- find bmr calculator [imp 5, pos 59.2]
+- bmr rate calculator [imp 4, pos 59.3]
+
+### Silo 16: Infant -> #infant  (informational, 3 keywords, 155 impressions, avg pos 10.8)
+Hub keyword for the H2: "infant weight loss calculator"
+Keywords
+- infant weight loss calculator [imp 146, pos 9.5]
+- calculate infant weight loss [imp 6, pos 8.2]
+- infant weight loss [imp 3, pos 77.3]
+
+### Silo 17: Bmi -> #bmi  (informational, 20 keywords, 138 impressions, avg pos 21.0)
+Hub keyword for the H2: "5'4 115 bmi"
+Keywords
+- 5'4 115 bmi [imp 17, pos 8.8]
+- 5'5 120 bmi [imp 15, pos 10.3]
+- 6'4 225 bmi [imp 13, pos 7.6]
+- 6'3 230 bmi [imp 12, pos 4.8]
+- 5'11 235 bmi [imp 10, pos 9.1]
+- 6'5 250 bmi [imp 7, pos 8.1]
+- 5'6 125 bmi [imp 7, pos 9.0]
+
+### Silo 18: Subway -> #subway  (tool, 14 keywords, 109 impressions, avg pos 30.1)
+Hub keyword for the H2: "subway macro calculator"
+Subtopic 18.1: Nutritionix (H3, 3 keywords)
+- (omitted, keyword cap reached)
+Subtopic 18.2: Nutritional (H3, 2 keywords)
+- (omitted, keyword cap reached)
+Subtopic 18.3: General (H3, 9 keywords)
+- (omitted, keyword cap reached)
+
+### Silo 19: Bariatric Surgery -> #bariatric-surgery  (tool, 8 keywords, 103 impressions, avg pos 58.4)
+Hub keyword for the H2: "bariatric calculator"
+Subtopic 19.1: Timeline (H3, 2 keywords)
+- (omitted, keyword cap reached)
+Subtopic 19.2: General (H3, 6 keywords)
+- (omitted, keyword cap reached)
+
+### Silo 20: Biggest Loser -> #biggest-loser  (tool, 3 keywords, 80 impressions, avg pos 8.0)
+Hub keyword for the H2: "biggest loser calculator"
+Keywords
+- (omitted, keyword cap reached)
+
+### Silo 21: Calculate -> #calculate  (informational, 6 keywords, 79 impressions, avg pos 57.4)
+Hub keyword for the H2: "calculate weight loss"
+Keywords
+- (omitted, keyword cap reached)
+
+### Silo 22: Body -> #body  (tool, 13 keywords, 76 impressions, avg pos 63.5)
+Hub keyword for the H2: "total body weight loss"
+Subtopic 22.1: Fat (H3, 4 keywords)
+- (omitted, keyword cap reached)
+Subtopic 22.2: Total (H3, 2 keywords)
+- (omitted, keyword cap reached)
+Subtopic 22.3: General (H3, 7 keywords)
+- (omitted, keyword cap reached)
+
+### Silo 23: Pounds -> #pounds  (informational, 14 keywords, 58 impressions, avg pos 18.7)
+Hub keyword for the H2: "10% of 7 pounds"
+Subtopic 23.1: Lost (H3, 3 keywords)
+- (omitted, keyword cap reached)
+Subtopic 23.2: General (H3, 11 keywords)
+- (omitted, keyword cap reached)
+
+### Silo 24: Tdee -> #tdee  (tool, 8 keywords, 56 impressions, avg pos 63.2)
+Hub keyword for the H2: "tdee calculator"
+Subtopic 24.1: Total Daily (H3, 3 keywords)
+- (omitted, keyword cap reached)
+Subtopic 24.2: Breastfeeding (H3, 3 keywords)
+- (omitted, keyword cap reached)
+Subtopic 24.3: General (H3, 2 keywords)
+- (omitted, keyword cap reached)
+
+UNASSIGNED LONG-TAIL (188 keywords). No silo of their own: fold into FAQ answers and body copy.
+
+Internal linking plan (use the anchor text exactly as written):
+- Pillar "weight loss calculator" links to every silo below, using each hub keyword as anchor text.
+- Percentage (#percentage): anchor "weight loss percentage calculator" from the pillar; links back to the pillar with anchor "weight loss calculator"; also links to Newborn (anchor "newborn weight loss calculator") and Calorie (anchor "subway calorie calculator")
+- Newborn (#newborn): anchor "newborn weight loss calculator" from the pillar; links back to the pillar with anchor "weight loss calculator"; also links to Percentage (anchor "weight loss percentage calculator") and Calorie (anchor "subway calorie calculator")
+- Calorie (#calorie): anchor "subway calorie calculator" from the pillar; links back to the pillar with anchor "weight loss calculator"; also links to Percentage (anchor "weight loss percentage calculator") and Newborn (anchor "newborn weight loss calculator")
+- Nutrition (#nutrition): anchor "subway nutrition calculator" from the pillar; links back to the pillar with anchor "weight loss calculator"; also links to Percentage (anchor "weight loss percentage calculator") and Newborn (anchor "newborn weight loss calculator")
+- Lbs (#lbs): anchor "5'2 105 lbs" from the pillar; links back to the pillar with anchor "weight loss calculator"; also links to Percent (anchor "percent weight loss calculator") and Baby (anchor "baby weight loss calculator")
+- Much (#much): anchor "how much weight have i lost calculator" from the pillar; links back to the pillar with anchor "weight loss calculator"; also links to Percentage (anchor "weight loss percentage calculator")
+- Calories (#calories): anchor "subway calories calculator" from the pillar; links back to the pillar with anchor "weight loss calculator"; also links to Percentage (anchor "weight loss percentage calculator") and Newborn (anchor "newborn weight loss calculator")
+- Percent (#percent): anchor "percent weight loss calculator" from the pillar; links back to the pillar with anchor "weight loss calculator"; also links to Lbs (anchor "5'2 105 lbs") and Baby (anchor "baby weight loss calculator")
+- Baby (#baby): anchor "baby weight loss calculator" from the pillar; links back to the pillar with anchor "weight loss calculator"; also links to Lbs (anchor "5'2 105 lbs") and Percent (anchor "percent weight loss calculator")
+- Keto (#keto): anchor "keto diet calculator" from the pillar; links back to the pillar with anchor "weight loss calculator"; also links to Percentage (anchor "weight loss percentage calculator") and Newborn (anchor "newborn weight loss calculator")
+- Metabolic Rate (#metabolic-rate): anchor "basal metabolic rate calculator" from the pillar; links back to the pillar with anchor "weight loss calculator"; also links to Percentage (anchor "weight loss percentage calculator") and Newborn (anchor "newborn weight loss calculator")
+- Gastric Bypass (#gastric-bypass): anchor "gastric bypass surgery weight loss calculator" from the pillar; links back to the pillar with anchor "weight loss calculator"; also links to Percentage (anchor "weight loss percentage calculator") and Newborn (anchor "newborn weight loss calculator")
+- Calculate Birth (#calculate-birth): anchor "birth weight loss calculator" from the pillar; links back to the pillar with anchor "weight loss calculator"; also links to Percentage (anchor "weight loss percentage calculator") and Newborn (anchor "newborn weight loss calculator")
+- Per Month (#per-month): anchor "healthy weight loss per month" from the pillar; links back to the pillar with anchor "weight loss calculator"; also links to Lbs (anchor "5'2 105 lbs") and Percent (anchor "percent weight loss calculator")
+- Bmr (#bmr): anchor "bmr calculator" from the pillar; links back to the pillar with anchor "weight loss calculator"; also links to Percentage (anchor "weight loss percentage calculator") and Newborn (anchor "newborn weight loss calculator")
+- Infant (#infant): anchor "infant weight loss calculator" from the pillar; links back to the pillar with anchor "weight loss calculator"; also links to Lbs (anchor "5'2 105 lbs") and Percent (anchor "percent weight loss calculator")
+- Bmi (#bmi): anchor "5'4 115 bmi" from the pillar; links back to the pillar with anchor "weight loss calculator"; also links to Lbs (anchor "5'2 105 lbs") and Percent (anchor "percent weight loss calculator")
+- Subway (#subway): anchor "subway macro calculator" from the pillar; links back to the pillar with anchor "weight loss calculator"; also links to Percentage (anchor "weight loss percentage calculator") and Newborn (anchor "newborn weight loss calculator")
+- Bariatric Surgery (#bariatric-surgery): anchor "bariatric calculator" from the pillar; links back to the pillar with anchor "weight loss calculator"; also links to Percentage (anchor "weight loss percentage calculator") and Newborn (anchor "newborn weight loss calculator")
+- Biggest Loser (#biggest-loser): anchor "biggest loser calculator" from the pillar; links back to the pillar with anchor "weight loss calculator"; also links to Percentage (anchor "weight loss percentage calculator") and Newborn (anchor "newborn weight loss calculator")
+- Calculate (#calculate): anchor "calculate weight loss" from the pillar; links back to the pillar with anchor "weight loss calculator"; also links to Lbs (anchor "5'2 105 lbs") and Percent (anchor "percent weight loss calculator")
+- Body (#body): anchor "total body weight loss" from the pillar; links back to the pillar with anchor "weight loss calculator"; also links to Percentage (anchor "weight loss percentage calculator") and Newborn (anchor "newborn weight loss calculator")
+- Pounds (#pounds): anchor "10% of 7 pounds" from the pillar; links back to the pillar with anchor "weight loss calculator"; also links to Lbs (anchor "5'2 105 lbs") and Percent (anchor "percent weight loss calculator")
+- Tdee (#tdee): anchor "tdee calculator" from the pillar; links back to the pillar with anchor "weight loss calculator"; also links to Percentage (anchor "weight loss percentage calculator") and Newborn (anchor "newborn weight loss calculator")
+
+=== SECTION 2: QUICK-WIN KEYWORDS (high impressions, weak position or CTR) ===
+Work these exact phrases into button labels, option pills, headings, alt text and the first screen of copy.
+
+- newborn weight loss calculator [imp 1.1k, pos 9.1]
+- weight loss calculator [imp 953, pos 74.3]
+- weight loss percentage calculator [imp 754, pos 28.3]
+- subway nutrition calculator [imp 305, pos 32.9]
+- percent weight loss calculator [imp 257, pos 45.5]
+- keto diet calculator [imp 242, pos 58.5]
+- weight loss percentage [imp 240, pos 49.5]
+- weight loss calculator newborn [imp 214, pos 9.5]
+- birth weight loss calculator [imp 205, pos 9.0]
+- mcdonalds nutrition calculator [imp 152, pos 43.7]
+- weight loss percentage calculator newborn [imp 146, pos 8.7]
+- infant weight loss calculator [imp 146, pos 9.5]
+- basal metabolic rate calculator [imp 135, pos 52.9]
+- subway calorie calculator [imp 132, pos 28.4]
+- bmr calculator [imp 119, pos 36.2]
+- how much weight have i lost calculator [imp 93, pos 43.3]
+- newborn weight loss percentage calculator [imp 87, pos 8.1]
+- how much weight can i lose in a month [imp 77, pos 59.5]
+- how much weight have i lost [imp 74, pos 49.3]
+- bmi weight loss percentage calculator [imp 74, pos 59.2]
+- how much weight can you lose in a month [imp 70, pos 60.2]
+- percent weight loss calculator newborn [imp 69, pos 10.1]
+- neonatal weight loss calculator [imp 68, pos 10.6]
+- percentage weight loss calculator [imp 64, pos 42.9]
+- percent weight loss newborn calculator [imp 61, pos 8.7]
+- fat loss percentage calculator [imp 59, pos 48.2]
+- infant weight loss percentage calculator [imp 52, pos 8.6]
+- ketogenic calculator for weight loss [imp 49, pos 57.9]
+- how to calculate weight loss percentage [imp 47, pos 36.3]
+- subway calories calculator [imp 46, pos 27.0]
+- gastric bypass surgery weight loss calculator [imp 45, pos 69.2]
+- weight loss calculator gastric sleeve [imp 45, pos 69.6]
+- percentage of weight loss calculator [imp 44, pos 38.2]
+- calculate weight loss [imp 44, pos 61.4]
+- subway calorie counter [imp 43, pos 34.6]
+- figure weight loss percentage [imp 43, pos 35.6]
+- breastfeeding calorie calculator [imp 43, pos 44.9]
+- weight loss calculator baby [imp 42, pos 8.5]
+- weight loss newborn calculator [imp 42, pos 11.2]
+- weight loss calculator percentage [imp 42, pos 33.8]
+
+=== SECTION 3: QUESTION KEYWORDS (FAQ source) ===
+Answer these directly in the FAQ with labelled accordion cards.
+
+- how much weight have i lost calculator [imp 93, pos 43.3]
+- how much weight can i lose in a month [imp 77, pos 59.5]
+- how much weight have i lost [imp 74, pos 49.3]
+- how much weight can you lose in a month [imp 70, pos 60.2]
+- how to calculate weight loss percentage [imp 47, pos 36.3]
+- how to calculate percentage of weight loss [imp 28, pos 41.5]
+- how to calculate birth weight loss percentage [imp 26, pos 7.2]
+- how to calculate baby weight loss percentage [imp 22, pos 8.8]
+- how to calculate weight loss percentage newborn [imp 22, pos 11.6]
+- how much weight will i lose with gastric sleeve calculator [imp 22, pos 70.8]
+- how much weight can you lose in a month calculator [imp 21, pos 6.3]
+- how do you calculate percentage of weight loss [imp 21, pos 47.0]
+- how many pounds can you lose in a month [imp 18, pos 58.1]
+- how to calculate body fat percentage loss [imp 17, pos 69.9]
+- how much weight do you lose after giving birth calculator [imp 16, pos 9.8]
+- how to calculate percentage of weight loss in newborns [imp 16, pos 9.8]
+- how much weight can i lose in a month calculator [imp 15, pos 10.5]
+- how to calculate newborn weight loss [imp 15, pos 18.8]
+- how to calculate percent weight loss [imp 15, pos 24.7]
+- how much weight could i lose in a month [imp 15, pos 57.8]
+
+=== SECTION 4: ROUTES AND LOCALES (from GSC pages) ===
+Existing routes by impressions:
+- /calculators/newborn-weight-loss/ [imp 11k, clicks 267]
+- / [imp 9k, clicks 13]
+- /restaurants/subway/ [imp 1.2k, clicks 3]
+- /calculators/bmr/ [imp 1.2k, clicks 8]
+- /calculators/weight-loss/ [imp 1.1k]
+- /calculators/baby-weight-loss/ [imp 979, clicks 14]
+- /blog/how-to-calculate-weight-loss-percentage/ [imp 920, clicks 1]
+- /blog/healthy-weight-loss-per-month/ [imp 851]
+- /calculators/cycling/ [imp 725, clicks 1]
+- /calculators/keto/ [imp 481, clicks 1]
+- /restaurants/mcdonalds/ [imp 454]
+- /blog/weight-loss-percentage-by-starting-weight/ [imp 380]
+- /blog/healthy-weight-loss-per-month [imp 368]
+- /calculators/bmi/height-weight/5-8/270/ [imp 357]
+- /calculators/bmi/height-weight/6-3/230/ [imp 308]
+- /calculators/bariatric-surgery-weight-loss/ [imp 297, clicks 1]
+- /ca/calculators/bmi/height-weight/5-11/235/ [imp 291, clicks 1]
+- /blog/5-percent-weight-loss [imp 274]
+- /calculators/bmi/height-weight/5-3/95/ [imp 272]
+- /calculator/female/ [imp 263]
+- /ca/calculators/bmi/height-weight/5-5/120/ [imp 260]
+- /calculators/bmi/height-weight/5-6/105/ [imp 258, clicks 1]
+- /calculators/smoothie/ [imp 244]
+- /calculators/bmi/height-weight/5-2/105/ [imp 243, clicks 1]
+- /calculators/postpartum-weight-loss/ [imp 243, clicks 1]
+- /blog/weight-loss-formulas-explained/ [imp 237]
+- /calculators/bmi/height-weight/5-6/125/ [imp 231]
+- /blog/how-to-calculate-weight-loss-percentage [imp 231]
+- /calculators/bmi/height-weight/6-2/275/ [imp 221, clicks 2]
+- /calculators/bmi/height-weight/6-3/250/ [imp 218]
+- /calculators/bmi/height-weight/5-7/165/ [imp 218]
+- /nz/calculators/bmi/height-weight/5-5/175/ [imp 217]
+- /ca/calculators/bmi/height-weight/5-8/175/ [imp 213]
+- /calculators/bmi/height-weight/6-3/160/ [imp 188]
+- /calculators/biggest-loser/ [imp 185, clicks 7]
+- /ru/calculators/fat-loss/ [imp 184, clicks 1]
+- /blog/weight-loss-percentage-chart/ [imp 184, clicks 1]
+- /uk/calculators/fat-loss/ [imp 178]
+- /calculators/bmi/height-weight/5-9/235/ [imp 167]
+- /ru/calculators/bmi/height-weight/5-5/95/ [imp 163]
+
+Detected locales by impressions:
+- en (root) [imp 54k]
+- ca [imp 5.4k]
+- uk [imp 2.6k]
+- ru [imp 1.6k]
+- zh [imp 1k]
+- de [imp 33]
+- it [imp 23]
+
+Top countries:
+- United States [imp 44k, clicks 249]
+- United Kingdom [imp 4k, clicks 36]
+- Canada [imp 4k, clicks 23]
+- Australia [imp 1.7k, clicks 23]
+- India [imp 1.2k, clicks 21]
+- France [imp 996, clicks 0]
+- Philippines [imp 640, clicks 4]
+- Russia [imp 499, clicks 3]
+- New Zealand [imp 446, clicks 9]
+- Germany [imp 388, clicks 0]
+- Malaysia [imp 316, clicks 3]
+- Ireland [imp 295, clicks 6]
+- Netherlands [imp 289, clicks 1]
+- Turkey [imp 276, clicks 0]
+- Indonesia [imp 274, clicks 0]
+
+Generate Astro dynamic routes (src/pages/[locale]/[tool].astro or [...slug].astro) that preserve every existing path above so no ranking URL breaks. Add bidirectional hreflang tags plus x-default for all locales.
+
+=== SECTION 5: ABOVE-THE-FOLD ARCHITECTURE ===
+1. Build a high-contrast drag-and-drop tool component (class="hero-tool-box") as the visually dominant element, at least 45% of the initial viewport.
+2. Zero friction: no sign-up, no login modal, no email capture before use.
+3. Place format pills, option tags and action chips built from the Section 1 and 2 keywords inside or directly beside the hero tool.
+4. Keep intro text above and around the tool under 45 words.
+5. After processing, show a single-click "Download Result" button immediately.
+
+=== SECTION 5B: VISUAL REFERENCE ===
+I am attaching 2 screenshots of the landing page UI to this same message. Use them as the layout reference: match the layout hierarchy, spacing rhythm, component shapes, typography feel and colour palette. Do not copy its logo, brand name, copy or imagery. Where it conflicts with Section 5 (tool box at least 45% of the viewport, zero friction, intro under 45 words), Section 5 wins.
+
+Screenshot 1: image.png (1271x538)
+  Dominant colours, most common first: #fbfbfd, #ca3500, #d35a2f, #7334fd, #4950fc, #b24764
+Screenshot 2: image.png (286x49)
+  Dominant colours, most common first: #ffffff, #8757ff, #ca3907, #436392, #5973ff, #ca5983
+
+=== SECTION 6: MULTILINGUAL ROUTING ===
+Keep identical syntactic structure, component layout, hierarchy and spacing across all localized routes. Translate meaning, keep structure. Use natural phrasing for each locale, informed by the keywords in Section 1 where the data includes that language.
+
+=== SECTION 7: SEMANTIC SEO AND TOPICAL AUTHORITY ===
+1. Treat the Section 1 silos as the topical map. Each silo gets one clearly headed section, ordered by demand, with a stable id for anchor links. Keep every silo strictly on its own topic and link between silos only as the linking plan says.
+2. Cover related entities, attributes and synonyms for the core concept (definitions, formulas or methods, units, ranges, edge cases, common mistakes, worked examples). Use real values.
+3. Use descriptive headings (one H1, logical H2/H3), short answer-first paragraphs, and a table or worked example wherever the query implies one.
+4. Add a "Related tools and guides" block with descriptive internal anchor text for each cluster.
+5. Use semantic HTML: main, section, article, nav, details, table, figure.
+
+=== SECTION 7B: TOPICAL MAP (deliver this before any code) ===
+First output a topical map built from Section 1, as a table with one row per pillar, silo and subtopic and these columns: Level, Title, Target keywords, Search intent, URL or anchor, Purpose of the section, Entities and attributes to cover, Internal links in and out, Content format (tool, table, worked example, FAQ, definition), Priority (high, medium, low, based on the impressions, positions and volume given).
+Then add a short gap list: subtopics, entities or questions a searcher would expect for this topic that the data does not contain. Mark each as "suggested, no keyword data" so I can tell data-backed rows from inferred ones.
+Then build the page strictly from the map. No section may exist outside it, and no keyword group may be left uncovered.
+
+=== SECTION 8: E-E-A-T ===
+1. Experience: include a worked example and a short "how we tested or verified this tool" note.
+2. Expertise: show an author/reviewer block with name, credentials and role. Use clearly marked placeholders ({{AUTHOR_NAME}}, {{AUTHOR_CREDENTIALS}}) for me to fill. Never invent people, credentials, reviews, ratings or statistics.
+3. Authoritativeness: cite primary sources (official bodies, standards, peer-reviewed research) with outbound links in a Sources section.
+4. Trust: add a privacy statement (files or inputs processed locally in the browser, nothing uploaded), About, Contact, Terms and Privacy links in the footer, a visible "Last updated" date, and a short methodology note.
+5. For health, finance or other YMYL topics, add a plain-language disclaimer and recommend consulting a qualified professional.
+
+=== SECTION 9: FAQ WITH LABELS AND SCHEMA ===
+1. Directly under the hero tool, render a FAQ with accordion cards and entity badges such as [Security & Privacy], [Supported Formats], [Limits], [Accuracy], [Performance]. Answers are 2-3 sentences and use the Section 3 questions.
+2. Inject WebApplication, FAQPage, BreadcrumbList and Organization JSON-LD into the head. Do not add aggregateRating or review markup unless real data is provided.
+
+=== COMPETITOR GAP ===
+If a competitor URL is given: list its missing features, friction points (login walls, slow uploads, ads over the tool) and layout weaknesses, then beat it on each.
+
+=== DELIVERABLES ===
+0. The topical map and gap list from Section 7B, delivered first.
+1. Full Astro project structure: src/layouts/Layout.astro, src/pages/index.astro, src/pages/[locale]/[tool].astro, src/components/HeroTool.astro, src/components/FAQWithLabels.astro, plus any islands and workers.
+2. Tailwind configuration and layout/viewport styling.
+3. TypeScript keyword matrix and locale route-switcher built from the data above.
+4. Complete JSON-LD blocks.
+5. Full page copy in English for every section, using the keywords above naturally (no stuffing).
+6. A short launch checklist: Core Web Vitals targets, sitemap, robots, canonical, hreflang validation.

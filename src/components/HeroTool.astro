@@ -1,0 +1,96 @@
+---
+// Astro Component wrapper with Preact or Vanilla Island fallback
+---
+
+<div class="hero-tool-box w-full bg-[#fbfbfd] rounded-3xl border border-slate-200/90 shadow-xl overflow-hidden">
+  <div class="bg-gradient-to-r from-[#7334fd] via-[#4950fc] to-[#ca3500] p-1">
+    <div class="bg-white px-4 py-3 sm:px-6 flex items-center justify-between rounded-t-[22px]">
+      <div class="flex items-center gap-2 overflow-x-auto text-xs font-bold">
+        <button id="pill-adult" class="px-3 py-1.5 rounded-xl bg-[#7334fd] text-white shadow-sm">
+          Weight Loss Percentage Calculator
+        </button>
+        <button id="pill-newborn" class="px-3 py-1.5 rounded-xl bg-slate-100 text-slate-700 hover:bg-slate-200">
+          Newborn Weight Loss Calculator
+        </button>
+        <button id="pill-bmr" class="px-3 py-1.5 rounded-xl bg-slate-100 text-slate-700 hover:bg-slate-200">
+          BMR & TDEE Calculator
+        </button>
+      </div>
+      <div class="hidden sm:flex text-xs font-semibold bg-slate-100 p-0.5 rounded-lg">
+        <span class="px-2 py-0.5 bg-white text-slate-900 rounded shadow-xs">lbs</span>
+        <span class="px-2 py-0.5 text-slate-500">kg</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="p-6 sm:p-8 grid grid-cols-1 lg:grid-cols-12 gap-8">
+    <div class="lg:col-span-7 space-y-4">
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Starting Weight (lbs)</label>
+          <input type="number" id="input-start" value="215" class="w-full px-4 py-2.5 border rounded-xl font-bold text-lg" />
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Current Weight (lbs)</label>
+          <input type="number" id="input-current" value="193.5" class="w-full px-4 py-2.5 border rounded-xl font-bold text-lg" />
+        </div>
+      </div>
+      <div>
+        <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Target Goal Weight (Optional)</label>
+        <input type="number" id="input-goal" value="175" class="w-full px-4 py-2 border rounded-xl text-sm font-semibold" />
+      </div>
+      <div class="p-3 bg-slate-50 rounded-xl text-xs text-slate-600 border flex justify-between">
+        <span>Formula: <strong>((Start - Current) ÷ Start) × 100</strong></span>
+        <span class="text-slate-400 font-mono">Real-time &lt;50ms</span>
+      </div>
+    </div>
+
+    <div class="lg:col-span-5 bg-gradient-to-br from-white to-indigo-50/30 rounded-2xl p-6 border border-slate-200 flex flex-col justify-between space-y-4">
+      <div>
+        <span class="text-[11px] font-bold uppercase text-slate-400">Total Body Weight Loss</span>
+        <div class="text-5xl font-black text-[#7334fd] mt-1" id="display-pct">-10.00%</div>
+        <p class="text-xs font-medium text-slate-600 mt-1" id="display-sub">You have lost 21.5 lbs from 215.0 lbs.</p>
+        <div class="mt-3 p-2.5 bg-indigo-50 text-indigo-900 rounded-xl text-xs font-semibold">
+          🎉 10% Metabolic Reset Landmark Reached!
+        </div>
+      </div>
+
+      <button id="btn-download" class="w-full py-3 px-4 bg-gradient-to-r from-[#ca3500] to-[#7334fd] text-white font-extrabold text-xs rounded-xl shadow-md cursor-pointer">
+        Download Result (.txt summary)
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Island Vanilla Script for instantaneous zero-framework reactivity
+  const startEl = document.getElementById('input-start') as HTMLInputElement;
+  const currentEl = document.getElementById('input-current') as HTMLInputElement;
+  const displayPct = document.getElementById('display-pct');
+  const displaySub = document.getElementById('display-sub');
+  const downloadBtn = document.getElementById('btn-download');
+
+  function calculate() {
+    const s = parseFloat(startEl?.value || '0');
+    const c = parseFloat(currentEl?.value || '0');
+    if (s > 0 && c > 0) {
+      const diff = s - c;
+      const pct = ((diff / s) * 100).toFixed(2);
+      if (displayPct) displayPct.textContent = `${diff >= 0 ? '-' : '+'}${Math.abs(Number(pct))}%`;
+      if (displaySub) displaySub.textContent = `You have ${diff >= 0 ? 'lost' : 'gained'} ${Math.abs(diff).toFixed(1)} lbs from ${s} lbs.`;
+    }
+  }
+
+  startEl?.addEventListener('input', calculate);
+  currentEl?.addEventListener('input', calculate);
+
+  downloadBtn?.addEventListener('click', () => {
+    const s = startEl?.value;
+    const c = currentEl?.value;
+    const blob = new Blob([`Weight Loss Summary:\nStarting: ${s} lbs\nCurrent: ${c} lbs\nCalculated at weightlosspercentage.com`], { type: 'text/plain' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'weight_loss_percentage_report.txt';
+    a.click();
+  });
+</script>

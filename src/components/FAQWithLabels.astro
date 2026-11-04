@@ -1,0 +1,58 @@
+---
+const faqs = [
+  {
+    q: "How to calculate weight loss percentage accurately?",
+    b: "[Clinical Standard]",
+    c: "bg-emerald-50 text-emerald-800 border-emerald-200",
+    a: "Subtract current weight from starting weight, divide by starting weight, and multiply by 100. For example, 20 lbs lost from 200 lbs equals 10% weight loss."
+  },
+  {
+    q: "How to calculate baby weight loss percentage and newborn weight loss?",
+    b: "[Clinical Standard]",
+    c: "bg-emerald-50 text-emerald-800 border-emerald-200",
+    a: "Take birth weight minus discharge weight, divide by birth weight, and multiply by 100. A loss of 5% to 7% is physiologically normal, while over 10% requires clinical evaluation."
+  },
+  {
+    q: "How much weight can you lose in a month safely?",
+    b: "[Limits]",
+    c: "bg-amber-50 text-amber-800 border-amber-200",
+    a: "Clinical guidelines recommend 4 to 8 pounds per month (1-2 lbs per week). Losing faster than 1% body weight weekly risks muscle loss and electrolyte imbalance."
+  },
+  {
+    q: "Is my personal data or health input saved on your server?",
+    b: "[Security & Privacy]",
+    c: "bg-purple-50 text-purple-800 border-purple-200",
+    a: "No. All calculation logic runs locally inside your browser client. No medical, infant, or personal inputs are transmitted to external servers."
+  }
+];
+---
+
+<section id="faq-section" class="w-full bg-white rounded-3xl p-6 sm:p-10 border border-slate-200 shadow-sm space-y-6">
+  <div class="border-b pb-4">
+    <h2 class="text-xl sm:text-2xl font-black text-slate-900">
+      Frequently Answered Clinical & Calculation Questions
+    </h2>
+    <p class="text-xs sm:text-sm text-slate-500">
+      Verified answers tagged with semantic entity labels.
+    </p>
+  </div>
+
+  <div class="space-y-3">
+    {faqs.map((faq) => (
+      <details class="border border-slate-200 rounded-2xl p-4 transition-all group">
+        <summary class="font-bold text-sm sm:text-base text-slate-900 cursor-pointer list-none flex items-center justify-between">
+          <div class="space-y-1">
+            <span class={`inline-block px-2 py-0.5 rounded text-[10px] font-bold border ${faq.c}`}>
+              {faq.b}
+            </span>
+            <div class="pt-0.5">{faq.q}</div>
+          </div>
+          <span class="text-slate-400 group-open:rotate-180 transition-transform">▼</span>
+        </summary>
+        <p class="text-xs sm:text-sm text-slate-600 mt-3 pt-3 border-t border-slate-100 leading-relaxed">
+          {faq.a}
+        </p>
+      </details>
+    ))}
+  </div>
+</section>

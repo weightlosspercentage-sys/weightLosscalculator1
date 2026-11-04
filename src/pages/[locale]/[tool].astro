@@ -1,0 +1,55 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import HeroTool from '../../components/HeroTool.astro';
+import FAQWithLabels from '../../components/FAQWithLabels.astro';
+
+export async function getStaticPaths() {
+  const locales = ['ca', 'uk', 'ru', 'zh', 'de', 'it'];
+  const tools = [
+    'newborn-weight-loss',
+    'bmr',
+    'weight-loss',
+    'baby-weight-loss',
+    'cycling',
+    'keto',
+    'bariatric-surgery-weight-loss',
+    'biggest-loser',
+    'fat-loss'
+  ];
+
+  const paths = [];
+  for (const locale of locales) {
+    for (const tool of tools) {
+      paths.push({ params: { locale, tool } });
+    }
+  }
+  return paths;
+}
+
+const { locale, tool } = Astro.params;
+const formattedTitle = `${tool?.replace(/-/g, ' ')} | weightlosspercentage.com (${locale.toUpperCase()})`;
+---
+
+<Layout
+  title={formattedTitle}
+  description={`Localized clinical calculator for ${tool} in ${locale}. Fast, accurate, client-side calculation.`}
+  canonical={`https://www.weightlosspercentage.com/${locale}/calculators/${tool}/`}
+  locale={locale}
+>
+  <main class="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
+    <div class="space-y-2">
+      <span class="text-xs uppercase font-bold text-[#7334fd] bg-indigo-50 px-2.5 py-1 rounded-md">
+        Regional Clinical Route [{locale.toUpperCase()}]
+      </span>
+      <h1 class="text-3xl font-black text-slate-900 capitalize">
+        {tool?.replace(/-/g, ' ')}
+      </h1>
+      <p class="text-sm text-slate-600">
+        Clinical and percentage calculations configured for {locale.toUpperCase()} health guidelines.
+      </p>
+    </div>
+
+    <HeroTool />
+    <FAQWithLabels />
+  </main>
+</Layout>

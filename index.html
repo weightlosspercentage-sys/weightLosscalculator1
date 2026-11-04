@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="canonical" id="canonical-link" href="https://www.weightlosspercentage.com/" />
+    <link rel="alternate" hreflang="en" href="https://www.weightlosspercentage.com/" />
+    <link rel="alternate" hreflang="en-ca" href="https://www.weightlosspercentage.com/ca/" />
+    <link rel="alternate" hreflang="en-gb" href="https://www.weightlosspercentage.com/uk/" />
+    <link rel="alternate" hreflang="ru" href="https://www.weightlosspercentage.com/ru/" />
+    <link rel="alternate" hreflang="zh" href="https://www.weightlosspercentage.com/zh/" />
+    <link rel="alternate" hreflang="de" href="https://www.weightlosspercentage.com/de/" />
+    <link rel="alternate" hreflang="it" href="https://www.weightlosspercentage.com/it/" />
+    <link rel="alternate" hreflang="x-default" href="https://www.weightlosspercentage.com/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#7334fd" />
+    <script>
+      (function() {
+        try {
+          var realFetch = window.fetch;
+          var customFetch = realFetch;
+          Object.defineProperty(window, 'fetch', {
+            get: function() {
+              return customFetch;
+            },
+            set: function(val) {
+              customFetch = val;
+            },
+            configurable: true,
+            enumerable: true
+          });
+        } catch (e) {
+          // ignore
+        }
+
+        window.addEventListener('error', function(event) {
+          if (event && event.filename && event.filename.startsWith('chrome-extension://')) {
+            event.stopImmediatePropagation();
+            event.preventDefault();
+            return true;
+          }
+          if (event && event.message && event.message.includes('Cannot set property fetch of #<Window>')) {
+            event.stopImmediatePropagation();
+            event.preventDefault();
+            return true;
+          }
+        }, true);
+      })();
+    </script>
+    <title>Weight Loss Percentage Calculator</title>
+    <meta name="description" content="Accurately calculate percentage of weight lost, analyze clinical health milestones, track weigh-in progress history, and run percentage-based group challenges." />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Weight Loss Percentage" />
+    <meta property="og:title" content="Weight Loss Percentage Calculator" />
+    <meta property="og:description" content="Accurately calculate percentage of weight lost, analyze clinical health milestones, track weigh-in progress history, and run percentage-based group challenges." />
+    <meta property="og:url" content="https://www.weightlosspercentage.com/" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Weight Loss Percentage Calculator" />
+    <meta name="twitter:description" content="Accurately calculate percentage of weight lost, analyze clinical health milestones, track weigh-in progress history, and run percentage-based group challenges." />
+    <script id="schema-webapp" type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Weight Loss Percentage Calculator",
+        "url": "https://www.weightlosspercentage.com/",
+        "description": "Accurately calculate weight loss percentage, newborn weight loss (AAP guidelines), BMR/TDEE, and clinical health milestones with 100% private client-side precision.",
+        "applicationCategory": "HealthApplication",
+        "operatingSystem": "All",
+        "browserRequirements": "Requires JavaScript. Operates offline.",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        }
+      }
+    </script>
+    <script id="schema-faq" type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How do I calculate weight loss percentage accurately?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Subtract your current weight from your starting weight, divide that number by your starting weight, and multiply by 100. For example, if you started at 200 lbs and now weigh 180 lbs, you lost 20 lbs: (20 ÷ 200) × 100 = 10%."
+            }
+          }
+        ]
+      }
+    </script>
+  </head>
+  <body class="bg-slate-50 text-slate-900 antialiased selection:bg-emerald-500 selection:text-white">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

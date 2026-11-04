@@ -1,0 +1,58 @@
+# Weight Loss Percentage (https://www.weightlosspercentage.com/)
+
+> Weight Loss Percentage is a client-side clinical calculator suite for tracking total body weight loss percentage, newborn weight loss (AAP guidelines), BMR/TDEE energy expenditure (Mifflin-St Jeor), and body composition—operating entirely in the browser with zero server-side data storage.
+
+## Client-Side Clinical Architecture & Privacy (No Server-Side Data Storage)
+- **100% Client-Side Execution**: All biometric calculations—including starting weight, current weight, newborn birth weight, height, age, and body measurements—are computed locally within the user's browser using JavaScript/TypeScript.
+- **Zero Server-Side Data Storage**: This application does not use a backend database to store user health inputs, does not transmit personal biometric records to external servers, and requires no user accounts or sign-ups.
+- **Clinical Utility**: Designed as a fast, private, medically reviewed reference tool for patients, parents, and healthcare professionals.
+
+## Medical Review & Clinical Governance
+- **Lead Medical Reviewer**: Dr. Rekha Kumar, M.D., M.S. — Board-Certified Endocrinologist & ABOM Diplomate, Associate Professor of Clinical Medicine at Weill Cornell Medicine, Attending Physician at NewYork-Presbyterian Hospital, and Former Medical Director of the American Board of Obesity Medicine (ABOM).
+- **Medical Reviewer Profile**: https://www.weightlosspercentage.com/authors/dr-rekha-kumar/
+- **Reviewer LinkedIn**: https://www.linkedin.com/in/rekha-kumar-m-d-m-s-70b481237/
+- **Lead Developer**: https://www.linkedin.com/in/wordpress-seo-specialist-abhi/
+
+## Core Mathematical & Clinical Formulas
+1. **Weight Loss Percentage Formula**:
+   `Weight Loss % = ((Starting Weight - Current Weight) / Starting Weight) * 100`
+2. **Newborn Weight Loss Formula (AAP Protocol)**:
+   `Newborn Loss % = ((Birth Weight - Current Weight) / Birth Weight) * 100`
+   - Normal physiological diuresis (0–48h): < 7%
+   - Clinical observation & lactation evaluation: 7% – 10%
+   - Pediatric evaluation alert threshold: > 10%
+3. **Basal Metabolic Rate (Mifflin-St Jeor Equation)**:
+   - Male: `BMR = (10 * weight_kg) + (6.25 * height_cm) - (5 * age) + 5`
+   - Female: `BMR = (10 * weight_kg) + (6.25 * height_cm) - (5 * age) - 161`
+4. **Clinical Health Milestones (AHA / ADA / NIH Look AHEAD)**:
+   - **5% Total Body Weight Loss**: Clinically meaningful improvements in HbA1c, blood pressure (~5 mmHg reduction), and insulin sensitivity.
+   - **10% Total Body Weight Loss**: Significant visceral fat reduction, lipid profile improvement, and obstructive sleep apnea relief.
+   - **15%+ Total Body Weight Loss**: Major metabolic improvement and potential remission markers in Type 2 Diabetes.
+
+## Calculator Types & Sections
+- [Home & Primary Weight Loss Percentage Calculator](https://www.weightlosspercentage.com/): Instant percentage loss, goal progress, BMI shift, and clinical milestone tracker.
+- [Weight Loss Percentage Calculator](https://www.weightlosspercentage.com/calculators/weight-loss/): Dedicated adult total body weight loss percentage analyzer.
+- [Newborn Weight Loss Calculator](https://www.weightlosspercentage.com/calculators/newborn-weight-loss/): Postnatal weight tracking in pounds/ounces and grams against AAP 5%, 7%, and 10% thresholds.
+- [Baby Weight Loss & Growth Tracker](https://www.weightlosspercentage.com/calculators/baby-weight-loss/): Infant weight recovery and birth-weight regain verification (days 10–14).
+- [BMR & TDEE Calculator](https://www.weightlosspercentage.com/calculators/bmr/): Resting energy expenditure and daily caloric deficit planning.
+- [Body Fat Percentage Calculator](https://www.weightlosspercentage.com/calculators/body-fat-percentage/): US Navy method and lean mass preservation modeling.
+- [Bariatric Surgery Weight Loss Calculator](https://www.weightlosspercentage.com/calculators/bariatric-surgery-weight-loss/): Excess Body Weight Loss (EWL) and Total Body Weight Loss (TBWL) projections.
+- [Keto Macro & Weight Loss Calculator](https://www.weightlosspercentage.com/calculators/keto/): Ketogenic macronutrient ratios and fat-loss projection.
+- [Cycling Calorie & Weight Loss Calculator](https://www.weightlosspercentage.com/calculators/cycling/): MET-based cycling energy expenditure and weight loss estimator.
+- [Postpartum Weight Loss Calculator](https://www.weightlosspercentage.com/calculators/postpartum-weight-loss/): Safe postnatal caloric deficit and lactation-adjusted timeline planner.
+- [Subway Calorie & Nutrition Calculator](https://www.weightlosspercentage.com/restaurants/subway/): Restaurant meal calorie and macronutrient planner.
+- [McDonald's Calorie & Nutrition Calculator](https://www.weightlosspercentage.com/restaurants/mcdonalds/): Fast-food meal calorie and sodium tracker.
+
+## Medical Reviewer, Methodology & Policy Pages
+- [Dr. Rekha Kumar, M.D., M.S. — Clinical Medical Reviewer](https://www.weightlosspercentage.com/authors/dr-rekha-kumar/): Credentials, education, board certifications, and four-pillar medical review commitment.
+- [About Us](https://www.weightlosspercentage.com/about/): Platform mission, clinical editorial independence, and privacy-first architecture.
+- [Medical Review & Methodology](https://www.weightlosspercentage.com/methodology/): Peer-reviewed mathematical formulas, clinical literature citations, and verification standards.
+- [Privacy Policy](https://www.weightlosspercentage.com/privacy-policy/): Zero server-side data storage guarantee and browser-only calculation policy.
+- [Terms of Service](https://www.weightlosspercentage.com/terms-of-service/): Medical disclaimer and educational terms of use.
+- [Contact](https://www.weightlosspercentage.com/contact/): Editorial and clinical review contact information.
+- [Full LLM Documentation](https://www.weightlosspercentage.com/llms-full.txt): Complete reference equations, tables, and clinical methodology.
+
+## Official Social Profiles
+- Instagram: https://www.instagram.com/weightlosspercentage
+- X (Twitter): https://x.com/weightlossperce
+- Facebook: https://www.facebook.com/weightlossnewborn/

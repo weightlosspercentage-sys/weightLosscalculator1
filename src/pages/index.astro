@@ -1,0 +1,53 @@
+---
+import Layout from '../layouts/Layout.astro';
+import HeroTool from '../components/HeroTool.astro';
+import FAQWithLabels from '../components/FAQWithLabels.astro';
+---
+
+<Layout
+  title="Weight Loss Calculator | Weight Loss Percentage & Newborn Weight Loss"
+  description="Free instant Weight Loss Percentage Calculator, Newborn Weight Loss Calculator, and BMR tracker. Zero friction, private client-side calculations under 50ms."
+>
+  <header class="border-b bg-white/90 backdrop-blur sticky top-0 z-30">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-[#7334fd] to-[#ca3500] flex items-center justify-center text-white font-black text-lg">
+          %
+        </div>
+        <div>
+          <span class="font-extrabold text-slate-900 text-lg tracking-tight block leading-tight">
+            weightlosspercentage<span class="text-[#ca3500]">.com</span>
+          </span>
+          <span class="text-[11px] text-slate-400 font-medium hidden sm:block">
+            Exact Match Domain (EMD) Clinical Engine
+          </span>
+        </div>
+      </div>
+
+      <nav class="flex items-center gap-4 text-xs font-semibold text-slate-600">
+        <a href="#percentage" class="hover:text-[#7334fd]">Calculator</a>
+        <a href="#newborn" class="hover:text-[#ca3500]">Newborn</a>
+        <a href="#calorie" class="hover:text-[#4950fc]">Calories & BMR</a>
+        <a href="#faq-section" class="hover:text-slate-900">FAQ</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
+    {/* Page Title & Intro under 45 words */}
+    <div class="space-y-2 max-w-3xl">
+      <h1 class="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">
+        Weight Loss Calculator
+      </h1>
+      <p class="text-sm sm:text-base text-slate-600 leading-snug">
+        Calculate your body weight loss percentage, newborn weight loss, and basal caloric needs with instant, client-side clinical precision. No sign-up, zero data stored.
+      </p>
+    </div>
+
+    {/* Hero Tool Box */}
+    <HeroTool />
+
+    {/* FAQ Accordions */}
+    <FAQWithLabels />
+  </main>
+</Layout>

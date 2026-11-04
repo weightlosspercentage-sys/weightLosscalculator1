@@ -1,0 +1,62 @@
+# Weight Loss Percentage — Full Clinical & Mathematical Reference (llms-full.txt)
+
+Website: https://www.weightlosspercentage.com/
+Medical Reviewer: Dr. Rekha Kumar, M.D., M.S. (https://www.weightlosspercentage.com/authors/dr-rekha-kumar/)
+Medical Reviewer LinkedIn: https://www.linkedin.com/in/rekha-kumar-m-d-m-s-70b481237/
+Developer LinkedIn: https://www.linkedin.com/in/wordpress-seo-specialist-abhi/
+Last Reviewed: November 2026
+
+## 1. Mission & Privacy Architecture
+Weight Loss Percentage delivers mathematically exact, scientifically validated health calculators without paywalls or unverified claims. All calculations run 100% client-side in the user's browser; personal weight and infant measurements are never transmitted to external servers.
+
+## 2. Lead Medical Reviewer: Dr. Rekha Kumar, M.D., M.S.
+Dr. Rekha Kumar, M.D., M.S. is an internationally recognized physician leader in endocrinology, diabetes, metabolism, and clinical obesity medicine. She serves as an Associate Professor of Clinical Medicine at Weill Cornell Medicine and an Attending Physician at NewYork-Presbyterian Hospital.
+Dr. Kumar previously served as the Medical Director of the American Board of Obesity Medicine (ABOM), where she oversaw national clinical standards and physician examination development for the discipline of obesity medicine.
+
+### Education & Training
+- **Fellowship**: Endocrinology, Diabetes & Metabolism — NewYork-Presbyterian / Weill Cornell Medical Center & Memorial Sloan Kettering Cancer Center
+- **Residency**: Internal Medicine — NewYork-Presbyterian / Weill Cornell Medical Center
+- **Doctor of Medicine (M.D.)**: New York Medical College
+- **Master of Science (M.S.)**: Institute of Human Nutrition, Columbia University
+- **Bachelor of Arts (B.A.)**: Duke University
+
+### Board Certifications
+- **Endocrinology, Diabetes & Metabolism**: American Board of Internal Medicine (ABIM)
+- **Obesity Medicine**: Diplomate, American Board of Obesity Medicine (ABOM)
+- **Internal Medicine**: American Board of Internal Medicine (ABIM)
+- **New York State Medical License**: Active & In Good Standing
+
+### Four-Pillar Medical Review Protocol
+1. **Physiological Formula Verification**: Validating that Mifflin-St Jeor, Katch-McArdle, US Navy Body Fat, Total Body Weight Loss (TBWL), and Excess Weight Loss (EWL) formulas reflect current clinical consensus.
+2. **Clinical Decision Thresholds**: Reviewing landmark health milestones—including the AHA/ADA 5% metabolic improvement marker, the 10% cardiovascular milestone, and the AAP 7%–10% pediatric action levels.
+3. **Evidence-Based Guidance**: Ensuring all recommendations on safe weekly deficits (0.5%–1.0% per week) protect lean muscle mass and prevent metabolic slowing.
+4. **Patient Safety & Disclaimers**: Reviewing pediatric, bariatric, and GLP-1 guidance to provide clear medical boundaries and consult-your-doctor recommendations.
+
+## 3. Core Formulas & Reference Benchmarks
+
+### 3.1 Adult Weight Loss Percentage
+Formula:
+`Weight Loss Percentage = ((Starting Weight - Current Weight) / Starting Weight) * 100`
+
+Worked Example:
+- Starting Weight: 215.0 lbs
+- Current Weight: 193.5 lbs
+- Net Loss: 21.5 lbs
+- Percentage Lost: `(21.5 / 215.0) * 100 = 10.00%`
+
+### 3.2 Newborn Weight Loss Percentage (AAP Guidelines)
+Unit conversion: `1 lb = 16 oz`, `1 oz = 28.349523125 g`
+- **0 to 24 Hours**: 2.0% – 4.5% expected physiological fluid shift.
+- **24 to 48 Hours**: 5.0% – 7.5% expected; monitor wet diapers and latch efficiency.
+- **48 to 72 Hours (Nadir)**: 7.0% – 9.0%; transitional milk onset expected.
+- **> 72 Hours or > 10% Loss**: Clinical alert threshold requiring pediatric assessment and feeding evaluation.
+
+### 3.3 Basal Metabolic Rate (BMR) & Total Daily Energy Expenditure (TDEE)
+Mifflin-St Jeor Equations:
+- Men: `(10 × weight in kg) + (6.25 × height in cm) - (5 × age in years) + 5`
+- Women: `(10 × weight in kg) + (6.25 × height in cm) - (5 × age in years) - 161`
+Activity Multipliers:
+- Sedentary: `BMR × 1.2`
+- Lightly Active (1–3 days/wk): `BMR × 1.375`
+- Moderately Active (3–5 days/wk): `BMR × 1.55`
+- Very Active (6–7 days/wk): `BMR × 1.725`
