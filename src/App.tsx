@@ -6,6 +6,8 @@ import { EEATFooter } from './components/EEATFooter';
 import { StructuredData } from './components/StructuredData';
 import { MedicalReviewerProfile } from './components/MedicalReviewerProfile';
 import { SiteInfoPages, SitePageKey } from './components/SiteInfoPages';
+import { AdSlot } from './components/AdSlot';
+import { AD_SLOT_HERO_BELOW, AD_SLOT_IN_ARTICLE, AD_SLOT_ABOVE_FAQ } from './config/adsense';
 import { TopToolSearchBar } from './components/TopToolSearchBar';
 import { SearchableToolItem } from './utils/toolSearch';
 import { LOCALES } from './data/keywordMatrix';
@@ -814,8 +816,14 @@ export const App: React.FC = () => {
               />
             </section>
 
+            {/* AdSense: display unit below the calculator results */}
+            <AdSlot slot={AD_SLOT_HERO_BELOW} minHeight={280} />
+
             {/* Frequently Answered Clinical & Calculation Questions */}
             <FAQWithLabels locale={selectedLocale} />
+
+            {/* AdSense: in-article unit between content sections */}
+            <AdSlot slot={AD_SLOT_IN_ARTICLE} minHeight={300} />
 
             {/* Comprehensive 24 Calculators & Clinical Reference Guides */}
             <SiloContentSections
@@ -827,6 +835,9 @@ export const App: React.FC = () => {
                 setActiveBottomNav(mode);
               }}
             />
+
+            {/* AdSense: display unit above the trust footer */}
+            <AdSlot slot={AD_SLOT_ABOVE_FAQ} minHeight={250} />
 
             {/* Complete Medical Review & Trust Footer */}
             <EEATFooter
