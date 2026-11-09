@@ -18,37 +18,124 @@ export interface SiloMetadata {
 
 export const LOCALES = [
   { code: 'en', name: 'English (US)', default: true, pathPrefix: '' },
-  { code: 'ca', name: 'Canada (EN)', default: false, pathPrefix: '/ca' },
   { code: 'uk', name: 'United Kingdom (EN)', default: false, pathPrefix: '/uk' },
-  { code: 'ru', name: 'Русский', default: false, pathPrefix: '/ru' },
-  { code: 'zh', name: '中文', default: false, pathPrefix: '/zh' },
+  { code: 'ca', name: 'Canada (EN)', default: false, pathPrefix: '/ca' },
+  { code: 'au', name: 'Australia (EN)', default: false, pathPrefix: '/au' },
   { code: 'de', name: 'Deutsch', default: false, pathPrefix: '/de' },
   { code: 'it', name: 'Italiano', default: false, pathPrefix: '/it' },
+  { code: 'ru', name: 'Русский', default: false, pathPrefix: '/ru' },
+  { code: 'zh', name: '中文', default: false, pathPrefix: '/zh' },
 ];
 
 export const PRESERVED_ROUTES = [
+  '/authors/dr-rekha-kumar/',
+  '/about/',
+  '/methodology/',
+  '/privacy-policy/',
+  '/terms-of-service/',
+  '/contact/',
   '/calculators/newborn-weight-loss/',
-  '/restaurants/subway/',
-  '/calculators/bmr/',
-  '/calculators/weight-loss/',
   '/calculators/baby-weight-loss/',
-  '/blog/how-to-calculate-weight-loss-percentage/',
-  '/blog/healthy-weight-loss-per-month/',
-  '/calculators/cycling/',
-  '/calculators/keto/',
-  '/restaurants/mcdonalds/',
-  '/blog/weight-loss-percentage-by-starting-weight/',
-  '/calculators/bmi/height-weight/5-8/270/',
-  '/calculators/bmi/height-weight/6-3/230/',
+  '/calculators/infant-weight-loss/',
+  '/calculators/weight-loss/',
+  '/calculators/water-fasting-weight-loss/',
+  '/calculators/omad-weight-loss/',
+  '/calculators/glp1-weight-loss/',
   '/calculators/bariatric-surgery-weight-loss/',
-  '/ca/calculators/bmi/height-weight/5-11/235/',
-  '/blog/5-percent-weight-loss/',
+  '/calculators/postpartum-weight-loss/',
+  '/calculators/bmr/',
+  '/calculators/tdee/',
+  '/calculators/calorie-deficit/',
+  '/calculators/body-fat-percentage/',
+  '/calculators/keto/',
   '/calculators/biggest-loser/',
+  '/calculators/cycling/',
+  '/calculators/walking/',
+  '/calculators/rowing/',
+  '/calculators/running/',
+  '/calculators/smoothie/',
+  '/uk/calculators/baby-weight-loss/',
+  '/uk/calculators/newborn-weight-loss/',
+  '/au/calculators/newborn-weight-loss/',
+  '/au/calculators/baby-weight-loss/',
+  '/ca/calculators/newborn-weight-loss/',
+  '/ca/calculators/baby-weight-loss/',
+  '/uk/calculators/weight-loss/',
+  '/au/calculators/weight-loss/',
+  '/ca/calculators/weight-loss/',
+  '/de/calculators/weight-loss/',
+  '/it/calculators/weight-loss/',
+  '/ru/calculators/weight-loss/',
+  '/zh/calculators/weight-loss/',
+  '/uk/calculators/bmr/',
+  '/ca/calculators/bmr/',
+  '/au/calculators/bmr/',
+  '/it/calculators/bmr/',
+  '/uk/calculators/tdee/',
+  '/ca/calculators/tdee/',
+  '/au/calculators/tdee/',
+  '/it/calculators/tdee/',
+  '/uk/calculators/calorie-deficit/',
+  '/ca/calculators/calorie-deficit/',
+  '/au/calculators/calorie-deficit/',
+  '/zh/calculators/calorie-deficit/',
+  '/au/calculators/calorie/',
+  '/ca/calculators/calorie/',
+  '/uk/calculators/bariatric-surgery-weight-loss/',
+  '/ca/calculators/bariatric-surgery-weight-loss/',
+  '/au/calculators/bariatric-surgery-weight-loss/',
+  '/uk/calculators/postpartum-weight-loss/',
+  '/uk/calculators/keto/',
+  '/uk/calculators/biggest-loser/',
+  '/ca/calculators/biggest-loser/',
+  '/au/calculators/biggest-loser/',
   '/uk/calculators/fat-loss/',
   '/ru/calculators/fat-loss/',
-  '/calculators/smoothie/',
-  '/calculators/postpartum-weight-loss/',
-  '/blog/weight-loss-formulas-explained/'
+  '/uk/calculators/walking/',
+  '/au/calculators/walking/',
+  '/ru/calculators/walking/',
+  '/zh/calculators/walking/',
+  '/restaurants/mcdonalds/',
+  '/uk/restaurants/mcdonalds/',
+  '/au/restaurants/mcdonalds/',
+  '/ca/restaurants/mcdonalds/',
+  '/zh/restaurants/mcdonalds/',
+  '/restaurants/subway/',
+  '/uk/restaurants/subway/',
+  '/au/restaurants/subway/',
+  '/ca/restaurants/subway/',
+  '/blog/newborn-weight-loss/',
+  '/uk/blog/newborn-weight-loss/',
+  '/ca/blog/newborn-weight-loss/',
+  '/blog/weight-loss-percentage-chart/',
+  '/uk/blog/weight-loss-percentage-chart/',
+  '/ca/blog/weight-loss-percentage-chart/',
+  '/blog/how-to-calculate-weight-loss-percentage/',
+  '/uk/blog/how-to-calculate-weight-loss-percentage/',
+  '/ca/blog/how-to-calculate-weight-loss-percentage/',
+  '/blog/healthy-weight-loss-per-month/',
+  '/uk/blog/healthy-weight-loss-per-month/',
+  '/ca/blog/healthy-weight-loss-per-month/',
+  '/au/blog/healthy-weight-loss-per-month/',
+  '/blog/weight-loss-percentage-by-starting-weight/',
+  '/blog/5-percent-weight-loss/',
+  '/blog/weight-loss-formulas-explained/',
+  '/ca/blog/weight-loss-formulas-explained/',
+  '/blog/calorie-deficit-weight-loss/',
+  '/ca/blog/calorie-deficit-weight-loss/',
+  '/au/blog/calorie-deficit-weight-loss/',
+  '/zh/blog/calorie-deficit-weight-loss/',
+  '/blog/signs-body-burning-fat/',
+  '/ca/blog/signs-body-burning-fat/',
+  '/au/blog/signs-body-burning-fat/',
+  '/blog/how-to-calculate-body-fat/',
+  '/uk/blog/how-to-calculate-body-fat/',
+  '/au/blog/how-to-calculate-body-fat/',
+  '/blog/weight-tracking-guide/',
+  '/ca/blog/weight-tracking-guide/',
+  '/blog/water-fasting-weight-loss/',
+  '/ca/blog/water-fasting-weight-loss/',
+  '/zh/blog/water-fasting-weight-loss/'
 ];
 
 export const SILOS_DATA: SiloMetadata[] = [
@@ -112,14 +199,17 @@ export const SILOS_DATA: SiloMetadata[] = [
           'weight loss percentage calculator',
           'weight loss percentage',
           'infant weight loss percentage calculator',
-          'birth weight loss percentage calculator'
+          'birth weight loss percentage calculator',
+          'weight loss percentage calculator kg',
+          'weight loss percentage calculator stones'
         ]
       }
     ],
     linksTo: [
       { targetAnchor: '#', anchorText: 'Weight Loss Calculator' },
       { targetAnchor: '#newborn', anchorText: 'Newborn Weight Loss Calculator' },
-      { targetAnchor: '#calorie', anchorText: 'Subway Calorie Calculator' }
+      { targetAnchor: '#water-fasting', anchorText: 'Water Fasting Weight Loss Calculator' },
+      { targetAnchor: '#glp1-calculator', anchorText: 'GLP-1 & Semaglutide Weight Loss Calculator' }
     ]
   },
   {
@@ -127,8 +217,8 @@ export const SILOS_DATA: SiloMetadata[] = [
     anchor: '#newborn',
     hubKeyword: 'Newborn Weight Loss Calculator',
     type: 'tool',
-    keywordsCount: 21,
-    impressions: 1700,
+    keywordsCount: 28,
+    impressions: 2950,
     avgPos: 10.1,
     subtopics: [
       {
@@ -138,7 +228,9 @@ export const SILOS_DATA: SiloMetadata[] = [
           'percent weight loss newborn calculator',
           'newborn percent Weight Loss Calculator',
           'calculate percent weight loss newborn',
-          'percent weight loss newborn'
+          'percent weight loss newborn',
+          'newborn weight loss percentage calculator',
+          'baby weight loss percentage calculator'
         ]
       },
       {
@@ -147,7 +239,8 @@ export const SILOS_DATA: SiloMetadata[] = [
           'calculate newborn weight loss',
           'calculate weight loss newborn',
           'how to calculate newborn weight loss',
-          'how to calculate weight loss in newborn'
+          'how to calculate weight loss in newborn',
+          'newborn weight loss calculator grams'
         ]
       },
       {
@@ -160,14 +253,111 @@ export const SILOS_DATA: SiloMetadata[] = [
           'newborn Weight Loss Calculator lbs and oz',
           'newborn weight loss calculation',
           'calculating newborn weight loss',
-          'newborn weight loss tool'
+          'newborn weight loss tool',
+          'infant weight loss calculator',
+          'baby weight loss calculator'
         ]
       }
     ],
     linksTo: [
       { targetAnchor: '#', anchorText: 'Weight Loss Calculator' },
       { targetAnchor: '#percentage', anchorText: 'Weight Loss Percentage Calculator' },
-      { targetAnchor: '#calorie', anchorText: 'Subway Calorie Calculator' }
+      { targetAnchor: '#baby', anchorText: 'Baby Weight Loss Calculator' }
+    ]
+  },
+  {
+    id: 'water-fasting',
+    anchor: '#water-fasting',
+    hubKeyword: 'Water Fasting & OMAD Weight Loss Calculator',
+    type: 'tool',
+    keywordsCount: 18,
+    impressions: 2620,
+    avgPos: 8.4,
+    subtopics: [
+      {
+        title: 'Water Fast Protocols',
+        keywords: [
+          'water fast weight loss calculator',
+          'water fasting weight loss calculator',
+          '24 hour water fast weight loss calculator',
+          '48 hour water fast weight loss calculator',
+          '72 hour water fast weight loss calculator',
+          '5 day water fast weight loss calculator',
+          '7 day water fast weight loss calculator'
+        ]
+      },
+      {
+        title: 'OMAD & Intermittent Fasting',
+        keywords: [
+          'omad weight loss calculator',
+          'one meal a day weight loss calculator',
+          'intermittent fasting weight loss calculator',
+          '16:8 intermittent fasting weight loss calculator',
+          'fasting weight loss calculator'
+        ]
+      },
+      {
+        title: 'Glycogen vs True Fat Loss',
+        keywords: [
+          'water weight vs fat loss fasting',
+          'glycogen depletion water weight calculator',
+          'post refeed net fat loss calculator'
+        ]
+      }
+    ],
+    linksTo: [
+      { targetAnchor: '#', anchorText: 'Weight Loss Calculator' },
+      { targetAnchor: '#bmr', anchorText: 'BMR & TDEE Deficit Calculator' },
+      { targetAnchor: '#keto', anchorText: 'Keto Diet Macro Calculator' }
+    ]
+  },
+  {
+    id: 'glp1-calculator',
+    anchor: '#glp1-calculator',
+    hubKeyword: 'GLP-1, Semaglutide & Tirzepatide Weight Loss Calculator',
+    type: 'tool',
+    keywordsCount: 22,
+    impressions: 1410,
+    avgPos: 11.2,
+    subtopics: [
+      {
+        title: 'Semaglutide (Ozempic & Wegovy)',
+        keywords: [
+          'ozempic weight loss calculator',
+          'wegovy weight loss calculator',
+          'semaglutide weight loss calculator',
+          'step-1 trial 14.9% tbwl calculator'
+        ]
+      },
+      {
+        title: 'Tirzepatide (Mounjaro & Zepbound)',
+        keywords: [
+          'mounjaro weight loss calculator',
+          'zepbound weight loss calculator',
+          'tirzepatide weight loss calculator',
+          'surmount-1 trial 20.9% tbwl calculator'
+        ]
+      },
+      {
+        title: 'Clinical Trial & Peptide Benchmarks',
+        keywords: [
+          'glp 1 weight loss calculator',
+          'glp-1 weight loss calculator',
+          'retatrutide weight loss calculator',
+          'phentermine weight loss calculator',
+          'tesamorelin weight loss calculator',
+          'peptide weight loss calculator',
+          'lipo c weight loss calculator',
+          'mots c weight loss calculator',
+          'sermorelin weight loss calculator',
+          'aod 9604 weight loss calculator'
+        ]
+      }
+    ],
+    linksTo: [
+      { targetAnchor: '#', anchorText: 'Weight Loss Calculator' },
+      { targetAnchor: '#gastric-bypass', anchorText: 'Gastric Bypass & Sleeve Calculator' },
+      { targetAnchor: '#per-month', anchorText: 'Healthy Weight Loss Per Month' }
     ]
   },
   {
@@ -175,7 +365,7 @@ export const SILOS_DATA: SiloMetadata[] = [
     anchor: '#calorie',
     hubKeyword: 'Subway Calorie Calculator',
     type: 'tool',
-    keywordsCount: 109,
+    keywordsCount: 114,
     impressions: 953,
     avgPos: 43.3,
     subtopics: [
@@ -184,20 +374,28 @@ export const SILOS_DATA: SiloMetadata[] = [
         keywords: ['subway calorie calculator', 'subway calorie calculator nz', 'subway calorie counter', 'subway sandwich calorie calculator']
       },
       {
-        title: 'Bike',
-        keywords: ['exercise bike calorie calculator', 'bike calorie calculator', 'stationary bike calorie calculator', 'bike exercise calorie calculator']
+        title: 'Bike & Treadmill',
+        keywords: ['exercise bike calorie calculator', 'bike calorie calculator', 'stationary bike calorie calculator', 'treadmill weight loss calculator', 'walking weight loss calculator']
       },
       {
         title: 'Cycling',
         keywords: ['cycling calorie calculator', 'calorie calculator cycling', 'cycling calorie burner calculator', 'cycling calorie calc']
       },
       {
-        title: 'Breastfeeding',
-        keywords: ['breastfeeding calorie calculator', 'calorie calculator breastfeeding', 'breastfeeding calorie counter', 'breastfeeding calorie calculator to lose weight']
+        title: 'Breastfeeding & Postpartum',
+        keywords: [
+          'breastfeeding calorie calculator',
+          'calorie calculator breastfeeding',
+          'breastfeeding calorie counter',
+          'breastfeeding calorie calculator to lose weight',
+          'weight loss while breastfeeding calculator',
+          'breastfeeding weight loss calculator',
+          'postpartum weight loss calculator'
+        ]
       },
       {
-        title: 'Burn',
-        keywords: ['resting calorie burn', 'resting calorie burn calculator', 'calorie burn calculator bicycle', 'what is my resting calorie burn']
+        title: 'Burn & Sweat Loss',
+        keywords: ['resting calorie burn', 'resting calorie burn calculator', 'sauna weight loss calculator', 'what is my resting calorie burn']
       },
       {
         title: 'General',
@@ -326,15 +524,15 @@ export const SILOS_DATA: SiloMetadata[] = [
     anchor: '#baby',
     hubKeyword: 'Baby Weight Loss Calculator',
     type: 'informational',
-    keywordsCount: 9,
-    impressions: 371,
+    keywordsCount: 12,
+    impressions: 971,
     avgPos: 9.3,
     subtopics: [
-      { title: 'Baby Growth & Post-birth', keywords: ['baby Weight Loss Calculator', 'Weight Loss Calculator baby', 'weight loss baby calculator', 'baby weight loss after birth calculator', 'calculate baby weight loss', 'calculating baby weight loss', 'lose baby weight login', 'baby weight loss calculation', 'baby weight loss'] }
+      { title: 'Baby Growth & Post-birth', keywords: ['baby Weight Loss Calculator', 'Weight Loss Calculator baby', 'weight loss baby calculator', 'baby weight loss after birth calculator', 'calculate baby weight loss', 'calculating baby weight loss', 'lose baby weight login', 'baby weight loss calculation', 'baby weight loss', 'baby weight loss percentage calculator'] }
     ],
     linksTo: [
       { targetAnchor: '#', anchorText: 'Weight Loss Calculator' },
-      { targetAnchor: '#lbs', anchorText: "5'2\" 105 lbs" },
+      { targetAnchor: '#newborn', anchorText: 'Newborn Weight Loss Calculator' },
       { targetAnchor: '#percent', anchorText: 'Percent Weight Loss Calculator' }
     ]
   },
@@ -353,8 +551,8 @@ export const SILOS_DATA: SiloMetadata[] = [
     ],
     linksTo: [
       { targetAnchor: '#', anchorText: 'Weight Loss Calculator' },
-      { targetAnchor: '#percentage', anchorText: 'Weight Loss Percentage Calculator' },
-      { targetAnchor: '#newborn', anchorText: 'Newborn Weight Loss Calculator' }
+      { targetAnchor: '#water-fasting', anchorText: 'Water Fasting & OMAD Calculator' },
+      { targetAnchor: '#bmr', anchorText: 'BMR & TDEE Calculator' }
     ]
   },
   {
@@ -381,18 +579,18 @@ export const SILOS_DATA: SiloMetadata[] = [
     anchor: '#gastric-bypass',
     hubKeyword: 'Gastric Bypass Surgery Weight Loss Calculator',
     type: 'tool',
-    keywordsCount: 12,
-    impressions: 262,
-    avgPos: 70.5,
+    keywordsCount: 21,
+    impressions: 1212,
+    avgPos: 14.5,
     subtopics: [
-      { title: 'Sleeve', keywords: ['Weight Loss Calculator gastric sleeve', 'gastric sleeve calculator', 'gastric sleeve Weight Loss Calculator', 'gastric sleeve weight loss timeline', 'Weight Loss Calculator after gastric sleeve'] },
-      { title: 'Surgery', keywords: ['gastric bypass surgery Weight Loss Calculator', 'gastric surgery calculator', 'gastric bypass surgery weight loss timeline'] },
-      { title: 'General', keywords: ['gastric bypass weight loss chart', 'gastric bypass calculator', 'gastric bypass weight loss timeline', 'gastric bypass Weight Loss Calculator'] }
+      { title: 'Sleeve (VSG)', keywords: ['Weight Loss Calculator gastric sleeve', 'gastric sleeve calculator', 'gastric sleeve Weight Loss Calculator', 'gastric sleeve weight loss timeline', 'Weight Loss Calculator after gastric sleeve', 'vsg weight loss calculator'] },
+      { title: 'RNY Bypass & Duodenal Switch', keywords: ['gastric bypass surgery Weight Loss Calculator', 'gastric surgery calculator', 'gastric bypass surgery weight loss timeline', 'rny weight loss calculator', 'duodenal switch weight loss calculator'] },
+      { title: 'Monthly Post-Op Chart', keywords: ['gastric bypass weight loss chart', 'gastric bypass calculator', 'gastric bypass weight loss timeline', 'gastric bypass Weight Loss Calculator', 'bariatric weight loss calculator by month'] }
     ],
     linksTo: [
       { targetAnchor: '#', anchorText: 'Weight Loss Calculator' },
-      { targetAnchor: '#percentage', anchorText: 'Weight Loss Percentage Calculator' },
-      { targetAnchor: '#newborn', anchorText: 'Newborn Weight Loss Calculator' }
+      { targetAnchor: '#bariatric-surgery', anchorText: 'Bariatric %EWL vs %TBWL Calculator' },
+      { targetAnchor: '#glp1-calculator', anchorText: 'GLP-1 & Semaglutide Weight Loss Calculator' }
     ]
   },
   {
@@ -417,11 +615,11 @@ export const SILOS_DATA: SiloMetadata[] = [
     anchor: '#per-month',
     hubKeyword: 'Healthy Weight Loss Per Month',
     type: 'informational',
-    keywordsCount: 36,
-    impressions: 218,
-    avgPos: 52.2,
+    keywordsCount: 42,
+    impressions: 618,
+    avgPos: 22.2,
     subtopics: [
-      { title: 'Lose', keywords: ['how many pounds can you lose in a month', 'healthy amount of weight to lose per month', 'lose 10 pounds in a month calculator', 'how to lose 15 pounds in a month calculator', 'lose 5 pounds in a month calculator'] },
+      { title: 'Lose & Timeline By Date', keywords: ['how many pounds can you lose in a month', 'healthy amount of weight to lose per month', 'lose 10 pounds in a month calculator', 'how to lose 15 pounds in a month calculator', 'lose 5 pounds in a month calculator', 'weight loss calculator by date', 'weekly weight loss calculator'] },
       { title: 'Healthy', keywords: ['healthy weight loss per month', 'what is a healthy weight loss per month', 'healthy loss of weight per month', 'healthy weight loss amount per month', 'what is healthy weight loss per month'] },
       { title: 'Normal', keywords: ['normal weight loss per month', 'normal weight loss per month kg', 'what is the normal weight loss per month', 'what is normal weight loss per month'] },
       { title: 'Average', keywords: ['average weight loss per month', 'average weight loss in a month'] },
@@ -429,8 +627,8 @@ export const SILOS_DATA: SiloMetadata[] = [
     ],
     linksTo: [
       { targetAnchor: '#', anchorText: 'Weight Loss Calculator' },
-      { targetAnchor: '#lbs', anchorText: "5'2\" 105 lbs" },
-      { targetAnchor: '#percent', anchorText: 'Percent Weight Loss Calculator' }
+      { targetAnchor: '#glp1-calculator', anchorText: 'GLP-1 Monthly Weight Loss Calculator' },
+      { targetAnchor: '#bmr', anchorText: 'Losertown-Style Weekly Projection Calculator' }
     ]
   },
   {
@@ -438,18 +636,18 @@ export const SILOS_DATA: SiloMetadata[] = [
     anchor: '#bmr',
     hubKeyword: 'BMR Calculator',
     type: 'tool',
-    keywordsCount: 14,
-    impressions: 204,
-    avgPos: 43.2,
+    keywordsCount: 24,
+    impressions: 924,
+    avgPos: 19.2,
     subtopics: [
-      { title: 'Tdee', keywords: ['bmr vs tdee', 'tdee vs bmr'] },
-      { title: 'Rest', keywords: ['bmr at rest calculator', 'bmr at rest'] },
+      { title: 'Tdee & Weekly Forecast', keywords: ['bmr vs tdee', 'tdee vs bmr', 'losertown weight loss calculator', 'daves weight loss calculator', 'calorie deficit weight loss calculator'] },
+      { title: 'Rest & Activity Burn', keywords: ['bmr at rest calculator', 'bmr at rest', 'treadmill weight loss calculator', 'sauna weight loss calculator'] },
       { title: 'General', keywords: ['bmr calculator', 'bmr', 'calculate bmr', 'bmr calculator for men', 'bmr calculator free', 'bmr calculator to lose weight', 'find bmr calculator', 'bmr rate calculator'] }
     ],
     linksTo: [
       { targetAnchor: '#', anchorText: 'Weight Loss Calculator' },
-      { targetAnchor: '#percentage', anchorText: 'Weight Loss Percentage Calculator' },
-      { targetAnchor: '#newborn', anchorText: 'Newborn Weight Loss Calculator' }
+      { targetAnchor: '#water-fasting', anchorText: 'Water Fasting & OMAD Weight Loss Calculator' },
+      { targetAnchor: '#tdee', anchorText: 'TDEE Calorie Deficit Calculator' }
     ]
   },
   {
@@ -465,7 +663,7 @@ export const SILOS_DATA: SiloMetadata[] = [
     ],
     linksTo: [
       { targetAnchor: '#', anchorText: 'Weight Loss Calculator' },
-      { targetAnchor: '#lbs', anchorText: "5'2\" 105 lbs" },
+      { targetAnchor: '#newborn', anchorText: 'Newborn Weight Loss Calculator' },
       { targetAnchor: '#percent', anchorText: 'Percent Weight Loss Calculator' }
     ]
   },
@@ -508,16 +706,16 @@ export const SILOS_DATA: SiloMetadata[] = [
     anchor: '#bariatric-surgery',
     hubKeyword: 'Bariatric Calculator',
     type: 'tool',
-    keywordsCount: 8,
-    impressions: 103,
-    avgPos: 58.4,
+    keywordsCount: 16,
+    impressions: 603,
+    avgPos: 18.4,
     subtopics: [
-      { title: 'Timeline & Expectations', keywords: ['bariatric calculator', 'bariatric surgery weight loss percentage', 'excess body Weight Loss Calculator'] }
+      { title: 'Timeline & Expectations', keywords: ['bariatric calculator', 'bariatric weight loss calculator', 'bariatric surgery weight loss calculator', 'bariatric surgery weight loss percentage', 'excess body Weight Loss Calculator', 'bariatric weight loss calculator by month', 'liposuction weight loss calculator'] }
     ],
     linksTo: [
       { targetAnchor: '#', anchorText: 'Weight Loss Calculator' },
-      { targetAnchor: '#percentage', anchorText: 'Weight Loss Percentage Calculator' },
-      { targetAnchor: '#newborn', anchorText: 'Newborn Weight Loss Calculator' }
+      { targetAnchor: '#gastric-bypass', anchorText: 'Gastric Bypass & Sleeve Calculator' },
+      { targetAnchor: '#glp1-calculator', anchorText: 'GLP-1 Weight Loss Calculator' }
     ]
   },
   {
@@ -593,16 +791,16 @@ export const SILOS_DATA: SiloMetadata[] = [
     anchor: '#tdee',
     hubKeyword: 'TDEE Calculator',
     type: 'tool',
-    keywordsCount: 8,
-    impressions: 56,
-    avgPos: 63.2,
+    keywordsCount: 12,
+    impressions: 256,
+    avgPos: 23.2,
     subtopics: [
-      { title: 'Total Daily Energy Expenditure', keywords: ['tdee calculator', 'total daily energy expenditure', 'tdee breastfeeding'] }
+      { title: 'Total Daily Energy Expenditure', keywords: ['tdee calculator', 'total daily energy expenditure', 'tdee breastfeeding', 'weight loss while breastfeeding calculator', 'calorie deficit weight loss calculator'] }
     ],
     linksTo: [
       { targetAnchor: '#', anchorText: 'Weight Loss Calculator' },
-      { targetAnchor: '#percentage', anchorText: 'Weight Loss Percentage Calculator' },
-      { targetAnchor: '#newborn', anchorText: 'Newborn Weight Loss Calculator' }
+      { targetAnchor: '#bmr', anchorText: 'BMR & Weekly Weight Forecast Calculator' },
+      { targetAnchor: '#water-fasting', anchorText: 'Water Fasting & OMAD Weight Loss Calculator' }
     ]
   }
 ];

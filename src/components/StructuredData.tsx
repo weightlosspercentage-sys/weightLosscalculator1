@@ -1,24 +1,38 @@
 import React, { useEffect } from 'react';
-import { FAQ_DATA } from './FAQWithLabels';
 import { LOCALE_TRANSLATIONS } from '../data/localeStrings';
+import { EXTENDED_LOCALE_PARITY } from '../data/multilingualParity';
 
 interface StructuredDataProps {
   locale?: string;
+  canonicalPath?: string;
+  customTitle?: string;
+  customDescription?: string;
 }
 
-export const StructuredData: React.FC<StructuredDataProps> = ({ locale = 'en' }) => {
+export const StructuredData: React.FC<StructuredDataProps> = ({
+  locale = 'en',
+  canonicalPath,
+  customTitle,
+  customDescription
+}) => {
   useEffect(() => {
     const t = LOCALE_TRANSLATIONS[locale] || LOCALE_TRANSLATIONS.en;
-    const localizedFaqs = t.faqs && t.faqs.length > 0 ? t.faqs : FAQ_DATA;
+    const p = EXTENDED_LOCALE_PARITY[locale] || EXTENDED_LOCALE_PARITY.en;
+    const localizedFaqs = t.faqs && t.faqs.length > 0 ? t.faqs : LOCALE_TRANSLATIONS.en.faqs;
+
+    const effectivePath = canonicalPath || t.canonicalPath;
+    const effectiveTitle = customTitle || t.heroTitle;
+    const effectiveDesc = customDescription || t.metaDescription;
+    const fullUrl = `https://www.weightlosspercentage.com${effectivePath}`;
 
     // 1. WebApplication Schema with Medical Reviewer, Author Attribution & inLanguage
     const webAppSchema = {
       '@context': 'https://schema.org',
       '@type': 'WebApplication',
-      name: t.heroTitle,
-      url: `https://www.weightlosspercentage.com${t.canonicalPath}`,
+      name: effectiveTitle,
+      url: fullUrl,
       inLanguage: t.htmlLang,
-      description: t.metaDescription,
+      description: effectiveDesc,
       applicationCategory: 'HealthApplication',
       operatingSystem: 'All',
       offers: {
@@ -70,30 +84,36 @@ export const StructuredData: React.FC<StructuredDataProps> = ({ locale = 'en' })
       ]
     };
 
-    // 3. BreadcrumbList Schema
+    // 3. BreadcrumbList Schema (dynamically includes active calculator subroute when not on root)
+    const breadcrumbItems = [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: t.heroTitle,
+        item: `https://www.weightlosspercentage.com${t.canonicalPath}`
+      }
+    ];
+
+    if (effectivePath !== t.canonicalPath && effectivePath !== '/') {
+      breadcrumbItems.push({
+        '@type': 'ListItem',
+        position: 2,
+        name: effectiveTitle,
+        item: fullUrl
+      });
+    }
+
+    breadcrumbItems.push({
+      '@type': 'ListItem',
+      position: breadcrumbItems.length + 1,
+      name: 'Dr. Rekha Kumar, M.D., M.S. (Medical Reviewer)',
+      item: 'https://www.weightlosspercentage.com/authors/dr-rekha-kumar/'
+    });
+
     const breadcrumbSchema = {
       '@context': 'https://schema.org',
       '@type': 'BreadcrumbList',
-      itemListElement: [
-        {
-          '@type': 'ListItem',
-          position: 1,
-          name: t.heroTitle,
-          item: `https://www.weightlosspercentage.com${t.canonicalPath}`
-        },
-        {
-          '@type': 'ListItem',
-          position: 2,
-          name: 'Dr. Rekha Kumar, M.D., M.S. (Medical Reviewer)',
-          item: 'https://www.weightlosspercentage.com/authors/dr-rekha-kumar/'
-        },
-        {
-          '@type': 'ListItem',
-          position: 3,
-          name: t.navNewborn,
-          item: 'https://www.weightlosspercentage.com/calculators/newborn-weight-loss/'
-        }
-      ]
+      itemListElement: breadcrumbItems
     };
 
     // 4. FAQPage Schema (dynamically localized per Triple-to-Triple parity)
@@ -108,6 +128,21 @@ export const StructuredData: React.FC<StructuredDataProps> = ({ locale = 'en' })
           '@type': 'Answer',
           text: faq.answer
         }
+      }))
+    };
+
+    // 5. HowTo Schema (localized 3-step formula guide for Google rich results)
+    const howToSchema = {
+      '@context': 'https://schema.org',
+      '@type': 'HowTo',
+      name: p.howToTitle,
+      inLanguage: t.htmlLang,
+      totalTime: 'PT10S',
+      step: p.howToSteps.map((stepItem, idx) => ({
+        '@type': 'HowToStep',
+        position: idx + 1,
+        name: stepItem.name,
+        text: stepItem.text
       }))
     };
 
@@ -126,7 +161,9 @@ export const StructuredData: React.FC<StructuredDataProps> = ({ locale = 'en' })
     injectScript('schema-org', orgSchema);
     injectScript('schema-breadcrumb', breadcrumbSchema);
     injectScript('schema-faq', faqSchema);
-  }, [locale]);
+    injectScript('schema-howto', howToSchema);
+  }, [locale, canonicalPath, customTitle, customDescription]);
 
   return null;
 };
+

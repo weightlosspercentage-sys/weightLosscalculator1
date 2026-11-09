@@ -2,18 +2,25 @@ import React, { useMemo } from 'react';
 import { SILOS_DATA } from '../data/keywordMatrix';
 import { searchTools } from '../utils/toolSearch';
 import { ToolMode } from './HeroToolBox';
+import { ClinicalFocus } from '../utils/seoIntentRouter';
 import { LOCALE_TRANSLATIONS } from '../data/localeStrings';
+import { EXTENDED_LOCALE_PARITY } from '../data/multilingualParity';
+import { AdSlot } from './AdSlot';
+import { AD_SLOT_IN_ARTICLE } from '../config/adsense';
 import {
   ChevronRight,
   Calculator,
   Baby,
-  Scale
+  Scale,
+  Flame,
+  Stethoscope
 } from 'lucide-react';
 
 interface SiloContentSectionsProps {
   searchQuery?: string;
   onClearSearch?: () => void;
   onSelectToolMode?: (mode: ToolMode) => void;
+  onSelectClinicalFocus?: (focus: ClinicalFocus) => void;
   locale?: string;
 }
 
@@ -21,9 +28,11 @@ export const SiloContentSections: React.FC<SiloContentSectionsProps> = ({
   searchQuery = '',
   onClearSearch,
   onSelectToolMode,
+  onSelectClinicalFocus,
   locale = 'en'
 }) => {
   const t = LOCALE_TRANSLATIONS[locale] || LOCALE_TRANSLATIONS.en;
+  const p = EXTENDED_LOCALE_PARITY[locale] || EXTENDED_LOCALE_PARITY.en;
   const filteredSilos = useMemo(() => {
     const trimmed = searchQuery.trim();
     if (!trimmed) return SILOS_DATA;
@@ -46,6 +55,16 @@ export const SiloContentSections: React.FC<SiloContentSectionsProps> = ({
         onSelectToolMode('subway');
       } else {
         onSelectToolMode('adult');
+      }
+    }
+
+    if (onSelectClinicalFocus) {
+      if (href === '#water-fasting') {
+        onSelectClinicalFocus('fasting');
+      } else if (href === '#glp1-calculator') {
+        onSelectClinicalFocus('glp1');
+      } else if (href === '#gastric-bypass' || href === '#bariatric-surgery') {
+        onSelectClinicalFocus('bariatric');
       }
     }
 
@@ -94,7 +113,7 @@ export const SiloContentSections: React.FC<SiloContentSectionsProps> = ({
                 href={silo.anchor}
                 className="min-h-[44px] px-3 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/80 hover:bg-indigo-50/80 dark:hover:bg-indigo-950/60 active:bg-indigo-100 border border-slate-200/60 dark:border-slate-700/80 text-slate-700 dark:text-slate-200 hover:text-[#7334fd] dark:hover:text-indigo-300 font-semibold transition-colors flex items-center justify-between group"
               >
-                <span className="truncate">{silo.hubKeyword}</span>
+                <span className="truncate">{p.siloHubTitles[silo.id] || silo.hubKeyword}</span>
                 <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-[#7334fd] dark:group-hover:text-indigo-300 shrink-0" />
               </a>
             ))}
@@ -108,7 +127,7 @@ export const SiloContentSections: React.FC<SiloContentSectionsProps> = ({
                 onClick={onClearSearch}
                 className="font-bold text-[#7334fd] dark:text-indigo-400 hover:underline cursor-pointer"
               >
-                Show all 24 guides
+                Show all {SILOS_DATA.length} guides
               </button>
             )}
           </div>
@@ -133,7 +152,7 @@ export const SiloContentSections: React.FC<SiloContentSectionsProps> = ({
               How the Formula Works
             </h3>
             <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-              To find your weight loss percentage, subtract your current weight from your starting weight, divide that difference by your starting weight, and multiply by 100. Because the formula compares your change against your own starting point, it works the exact same way in pounds, kilograms, or grams.
+              To find your weight loss percentage, subtract your current weight from your starting weight, divide that difference by your starting weight, and multiply by 100. Because the formula compares your change against your own starting point, it works the exact same way in pounds, kilograms, stones, or grams.
             </p>
             <div className="p-3 bg-slate-50 dark:bg-slate-800 rounded-xl font-mono text-xs text-slate-800 dark:text-slate-100 border border-slate-200 dark:border-slate-700">
               Weight Loss % = ((Starting Weight − Current Weight) ÷ Starting Weight) × 100
@@ -170,7 +189,7 @@ export const SiloContentSections: React.FC<SiloContentSectionsProps> = ({
           <div className="p-4 bg-slate-50 dark:bg-slate-800/70 rounded-xl border border-transparent dark:border-slate-700/70">
             <h3 className="font-bold text-slate-900 dark:text-white mb-1">One Formula for Any Unit</h3>
             <p className="text-slate-600 dark:text-slate-300">
-              As long as your starting weight and current weight use the same unit, whether pounds, kilograms, or grams, the percentage result is identical.
+              As long as your starting weight and current weight use the same unit, whether pounds, kilograms, stones, or grams, the percentage result is identical.
             </p>
           </div>
         </div>
@@ -181,7 +200,9 @@ export const SiloContentSections: React.FC<SiloContentSectionsProps> = ({
           <span>•</span>
           <a href="#newborn" className="text-[#ca3500] dark:text-orange-400 hover:underline">Newborn Weight Loss Calculator</a>
           <span>•</span>
-          <a href="#calorie" className="text-[#4950fc] dark:text-sky-400 hover:underline">Subway Calorie Calculator</a>
+          <a href="#water-fasting" className="text-[#4950fc] dark:text-sky-400 hover:underline">Water Fasting &amp; OMAD Calculator</a>
+          <span>•</span>
+          <a href="#glp1-calculator" className="text-emerald-700 dark:text-emerald-400 hover:underline">GLP-1 &amp; Semaglutide Calculator</a>
         </div>
       </section>
 
@@ -257,7 +278,161 @@ export const SiloContentSections: React.FC<SiloContentSectionsProps> = ({
           <span>•</span>
           <a href="#percentage" className="text-[#ca3500] dark:text-orange-400 hover:underline">Weight Loss Percentage Calculator</a>
           <span>•</span>
-          <a href="#calorie" className="text-[#4950fc] dark:text-sky-400 hover:underline">Subway Calorie Calculator</a>
+          <a href="#baby" className="text-[#4950fc] dark:text-sky-400 hover:underline">Baby Weight Loss Calculator</a>
+        </div>
+      </section>
+
+      {/* ================= SILO 2B: WATER FASTING & OMAD ================= */}
+      <section id="water-fasting" className="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-10 border border-slate-200 dark:border-slate-800 shadow-sm space-y-6 scroll-mt-20 transition-colors">
+        <div className="border-b border-slate-100 dark:border-slate-800 pb-4 flex flex-wrap items-center justify-between gap-3">
+          <div>
+            <h2 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">
+              Water Fasting &amp; OMAD Weight Loss Calculator
+            </h2>
+            <p className="text-slate-600 dark:text-slate-300 text-sm mt-1">
+              Separating glycogen-bound water drop (Days 1 to 3) from true adipose fat oxidation across 24-hour, 48-hour, 72-hour, 5-day, 7-day, and OMAD protocols.
+            </p>
+          </div>
+          <a
+            href="#"
+            onClick={() => {
+              onSelectToolMode?.('adult');
+              onSelectClinicalFocus?.('fasting');
+            }}
+            className="px-3.5 py-2 rounded-xl bg-[#7334fd] text-white font-bold text-xs shadow-xs hover:opacity-95"
+          >
+            Open Water Fast &amp; OMAD Mode Above
+          </a>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="space-y-3">
+            <h3 className="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
+              <Flame className="w-4 h-4 text-[#ca3500] dark:text-orange-400" />
+              Why Early Fasting Scale Drops Are Mostly Glycogen &amp; Water
+            </h3>
+            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+              Your liver and skeletal muscles store roughly 400g to 500g of carbohydrate as glycogen, and each gram of glycogen binds 3g to 4g of intracellular water. During the first 24 to 72 hours of a water fast, your body depletes this glycogen reserve first, releasing 2.5 to 5.0 lbs (1.1 to 2.3 kg) of water weight that naturally returns when you refeed.
+            </p>
+          </div>
+
+          <div className="space-y-3">
+            <h3 className="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
+              <Calculator className="w-4 h-4 text-[#7334fd] dark:text-indigo-400" />
+              True Fat Burn Formula (TDEE ÷ 3,500 kcal)
+            </h3>
+            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+              True adipose fat loss during a water fast or OMAD (One Meal a Day, 23:1) schedule is governed by your Total Daily Energy Expenditure. An adult burning 2,100 kcal/day oxidizes approximately <strong className="text-slate-900 dark:text-white">0.60 lbs (0.27 kg) of pure body fat per 24 hours</strong> of zero-calorie fasting.
+            </p>
+          </div>
+        </div>
+
+        <div className="overflow-x-auto">
+          <table className="w-full text-left text-xs border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden">
+            <thead className="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 font-bold">
+              <tr>
+                <th className="p-3">Fasting Protocol</th>
+                <th className="p-3">Total Scale Drop (200 lb Adult)</th>
+                <th className="p-3">Glycogen + Water (Refeed)</th>
+                <th className="p-3">True Fat Loss Kept</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-slate-100 dark:divide-slate-800 text-slate-800 dark:text-slate-200 tabular-nums">
+              <tr>
+                <td className="p-3 font-semibold">24-Hour Water Fast (1 Day)</td>
+                <td className="p-3">-2.8 lbs (-1.4%)</td>
+                <td className="p-3 text-sky-700 dark:text-sky-300">-2.2 lbs water</td>
+                <td className="p-3 font-bold text-emerald-700 dark:text-emerald-400">-0.6 lbs (-0.30%)</td>
+              </tr>
+              <tr>
+                <td className="p-3 font-semibold">48-Hour Water Fast (2 Days)</td>
+                <td className="p-3">-5.0 lbs (-2.5%)</td>
+                <td className="p-3 text-sky-700 dark:text-sky-300">-3.8 lbs water</td>
+                <td className="p-3 font-bold text-emerald-700 dark:text-emerald-400">-1.2 lbs (-0.60%)</td>
+              </tr>
+              <tr>
+                <td className="p-3 font-semibold">72-Hour Water Fast (3 Days)</td>
+                <td className="p-3">-6.8 lbs (-3.4%)</td>
+                <td className="p-3 text-sky-700 dark:text-sky-300">-5.0 lbs water</td>
+                <td className="p-3 font-bold text-emerald-700 dark:text-emerald-400">-1.8 lbs (-0.90%)</td>
+              </tr>
+              <tr>
+                <td className="p-3 font-semibold">5-Day Water Fast (Physician-Monitored)</td>
+                <td className="p-3">-8.8 lbs (-4.4%)</td>
+                <td className="p-3 text-sky-700 dark:text-sky-300">-5.8 lbs water</td>
+                <td className="p-3 font-bold text-emerald-700 dark:text-emerald-400">-3.0 lbs (-1.50%)</td>
+              </tr>
+              <tr>
+                <td className="p-3 font-semibold">OMAD 23:1 (30 Days @ -750 kcal/d)</td>
+                <td className="p-3">-8.9 lbs (-4.5%)</td>
+                <td className="p-3 text-sky-700 dark:text-sky-300">-2.5 lbs water</td>
+                <td className="p-3 font-bold text-emerald-700 dark:text-emerald-400">-6.4 lbs (-3.21%)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div className="pt-4 border-t border-slate-100 dark:border-slate-800 flex flex-wrap items-center gap-3 text-xs font-semibold text-slate-500 dark:text-slate-400">
+          <span>Related Calculators:</span>
+          <a href="#" className="text-[#7334fd] dark:text-indigo-400 hover:underline">Weight Loss Calculator</a>
+          <span>•</span>
+          <a href="#bmr" className="text-[#ca3500] dark:text-orange-400 hover:underline">BMR &amp; Weekly Forecast Calculator</a>
+          <span>•</span>
+          <a href="#keto" className="text-[#4950fc] dark:text-sky-400 hover:underline">Keto Diet Calculator</a>
+        </div>
+      </section>
+
+      {/* ================= SILO 2C: GLP-1, SEMAGLUTIDE & TIRZEPATIDE ================= */}
+      <section id="glp1-calculator" className="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-10 border border-slate-200 dark:border-slate-800 shadow-sm space-y-6 scroll-mt-20 transition-colors">
+        <div className="border-b border-slate-100 dark:border-slate-800 pb-4 flex flex-wrap items-center justify-between gap-3">
+          <div>
+            <h2 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">
+              GLP-1, Semaglutide &amp; Tirzepatide Weight Loss Calculator
+            </h2>
+            <p className="text-slate-600 dark:text-slate-300 text-sm mt-1">
+              Expected Total Body Weight Loss (%TBWL) timelines for Ozempic®, Wegovy®, Mounjaro®, Zepbound®, and Phase 2/3 clinical trial benchmarks.
+            </p>
+          </div>
+          <a
+            href="#"
+            onClick={() => {
+              onSelectToolMode?.('adult');
+              onSelectClinicalFocus?.('glp1');
+            }}
+            className="px-3.5 py-2 rounded-xl bg-emerald-600 text-white font-bold text-xs shadow-xs hover:opacity-95"
+          >
+            Open GLP-1 Medication Mode Above
+          </a>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="space-y-3">
+            <h3 className="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
+              <Stethoscope className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+              STEP-1 (Semaglutide) vs. SURMOUNT-1 (Tirzepatide)
+            </h3>
+            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+              In the landmark NEJM STEP-1 trial, adults treated with once-weekly 2.4 mg semaglutide (Wegovy® / Ozempic®) achieved a mean <strong className="text-slate-900 dark:text-white">14.9% Total Body Weight Loss</strong> at 68 weeks. In SURMOUNT-1, dual GIP/GLP-1 agonist tirzepatide (Mounjaro® / Zepbound® 15 mg) achieved a mean <strong className="text-slate-900 dark:text-white">20.9% TBWL</strong> at 72 weeks.
+            </p>
+          </div>
+
+          <div className="space-y-3">
+            <h3 className="text-base font-bold text-slate-900 dark:text-white">
+              Clinical Safety &amp; Pre-Filled Pen Dosing Notice
+            </h3>
+            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+              Investigational triple-agonists (such as retatrutide, 24.2% Phase 2 benchmark) and research peptides (MOTS-c, AOD-9604, Lipo-C) are not FDA-approved for retail compounding. Always use licensed pharmacy pre-filled pens and never attempt home bacteriostatic water reconstitution or non-standard syringe unit mixing.
+            </p>
+          </div>
+        </div>
+
+        <div className="pt-4 border-t border-slate-100 dark:border-slate-800 flex flex-wrap items-center gap-3 text-xs font-semibold text-slate-500 dark:text-slate-400">
+          <span>Related Calculators:</span>
+          <a href="#" className="text-[#7334fd] dark:text-indigo-400 hover:underline">Weight Loss Calculator</a>
+          <span>•</span>
+          <a href="#gastric-bypass" className="text-[#ca3500] dark:text-orange-400 hover:underline">Gastric Bypass &amp; Sleeve Calculator</a>
+          <span>•</span>
+          <a href="#per-month" className="text-[#4950fc] dark:text-sky-400 hover:underline">Healthy Weight Loss Per Month</a>
         </div>
       </section>
 
@@ -541,6 +716,9 @@ export const SiloContentSections: React.FC<SiloContentSectionsProps> = ({
           <a href="#newborn" className="text-[#4950fc] dark:text-sky-400 hover:underline">Newborn Weight Loss Calculator</a>
         </div>
       </section>
+
+      {/* Mid-Page In-Article Advertisement Unit (24px spacing from surrounding content cards) */}
+      <AdSlot slot={AD_SLOT_IN_ARTICLE} variant="in-article" />
 
       {/* ================= SILO 13: CALCULATE BIRTH ================= */}
       <section id="calculate-birth" className="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-10 border border-slate-200 dark:border-slate-800 shadow-sm space-y-6 scroll-mt-20 transition-colors">

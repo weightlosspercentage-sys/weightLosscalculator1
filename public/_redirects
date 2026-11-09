@@ -1,0 +1,68 @@
+# Consolidate legacy & programmatic URLs to authoritative homepage / hubs (301 Permanent Redirect)
+/calculator/newborn/index.html /calculators/newborn-weight-loss/ 301
+/calculator/newborn/* /calculators/newborn-weight-loss/ 301
+/calculators/weight-loss/from-* / 301
+/ca/calculators/weight-loss/from-* /ca/ 301
+/uk/calculators/weight-loss/from-* /uk/ 301
+/au/calculators/weight-loss/from-* /au/ 301
+/nz/calculators/weight-loss/from-* /au/ 301
+/calculators/bmi/height-weight/* / 301
+/ca/calculators/bmi/height-weight/* /ca/ 301
+/uk/calculators/bmi/height-weight/* /uk/ 301
+/au/calculators/bmi/height-weight/* /au/ 301
+/weight-loss-5-percent-180-lbs.html / 301
+/weight-loss-10-percent-200-lbs.html / 301
+
+# Bing Newborn & Infant Keyword Variants -> Authoritative Newborn Hub (301)
+/calculating-weight-loss-in-newborns* /calculators/newborn-weight-loss/ 301
+/infant-weight-loss-calculator* /calculators/newborn-weight-loss/ 301
+/infant-weight-loss-percentage-calculator* /calculators/newborn-weight-loss/ 301
+/newborn-weight-loss-calculation* /calculators/newborn-weight-loss/ 301
+/how-to-calculate-newborn-weight-loss* /calculators/newborn-weight-loss/ 301
+/how-to-calculate-weight-loss-in-newborn* /calculators/newborn-weight-loss/ 301
+/how-to-calculate-infant-weight-loss* /calculators/newborn-weight-loss/ 301
+
+# Bing Water Fasting & OMAD Variants -> Authoritative Water Fasting & OMAD Hub (301)
+/water-fast-weight-loss-calculator* /calculators/water-fasting-weight-loss/ 301
+/water-fasting-weight-loss-calculator* /calculators/water-fasting-weight-loss/ 301
+/weight-loss-from-fasting-calculator* /calculators/water-fasting-weight-loss/ 301
+/omad-weight-loss-calculator* /calculators/omad-weight-loss/ 301
+
+# Bing Unapproved Research Peptides & Vial Reconstitution Queries -> Safe Clinical GLP-1 Hub (301)
+/retatrutide* /calculators/glp1-weight-loss/ 301
+/tesamorelin* /calculators/glp1-weight-loss/ 301
+/lipo-c* /calculators/glp1-weight-loss/ 301
+/mots-c* /calculators/glp1-weight-loss/ 301
+/sermorelin* /calculators/glp1-weight-loss/ 301
+/aod-9604* /calculators/glp1-weight-loss/ 301
+/semaglutide-mixing* /calculators/glp1-weight-loss/ 301
+/semaglutide-reconstitution* /calculators/glp1-weight-loss/ 301
+/tirzepatide-reconstitution* /calculators/glp1-weight-loss/ 301
+/ozempic-weight-loss-calculator* /calculators/glp1-weight-loss/ 301
+/wegovy-weight-loss-calculator* /calculators/glp1-weight-loss/ 301
+/mounjaro-weight-loss-calculator* /calculators/glp1-weight-loss/ 301
+/tirzepatide-dosage-calculator* /calculators/glp1-weight-loss/ 301
+/phentermine-weight-loss-calculator* /calculators/glp1-weight-loss/ 301
+
+# Bing Bariatric Procedure & Monthly Variants -> Authoritative Bariatric Hub (301)
+/rny-weight-loss-calculator* /calculators/bariatric-surgery-weight-loss/ 301
+/duodenal-switch-weight-loss-calculator* /calculators/bariatric-surgery-weight-loss/ 301
+/bariatric-weight-loss-calculator-by-month* /calculators/bariatric-surgery-weight-loss/ 301
+/percentage-of-excess-weight-loss-calculator* /calculators/bariatric-surgery-weight-loss/ 301
+/gastric-bypass-weight-loss-calculator* /calculators/bariatric-surgery-weight-loss/ 301
+
+# Bing Breastfeeding & Postpartum Variants -> Authoritative Postpartum Hub (301)
+/breastfeeding-calorie-calculator* /calculators/postpartum-weight-loss/ 301
+/breastfeeding-weight-loss* /calculators/postpartum-weight-loss/ 301
+
+# Bing Competitor-Branded & Single-Activity Queries -> Homepage / Calorie Deficit Hub (301)
+/losertown* / 301
+/weight-loss-calculator-losertown* / 301
+/daves-weight-loss-calculator* / 301
+/sauna-weight-loss-calculator* / 301
+/treadmill-weight-loss-calculator* / 301
+/liposuction-weight-loss-calculator* / 301
+
+# SPA Fallback for all authoritative routes
+/* /index.html 200
+

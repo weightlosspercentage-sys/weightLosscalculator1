@@ -1,102 +1,153 @@
-import { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { AD_CLIENT } from '../config/adsense';
-
-interface AdSlotProps {
-  /** AdSense ad unit id (data-ad-slot). */
-  slot: string;
-  format?: 'auto' | 'fluid' | 'rectangle';
-  layoutKey?: string;
-  className?: string;
-  /** Reserved height in px so the ad never shifts the page (CLS). */
-  minHeight?: number;
-  label?: string;
-}
 
 declare global {
   interface Window {
-    adsbygoogle?: unknown[];
+    adsbygoogle?: Record<string, unknown>[];
+    __loadAdSenseLazy?: () => void;
   }
 }
 
-/** Only these hosts serve ads. Previews, localhost and staging render nothing. */
-const ALLOWED_HOSTS = ['weightlosspercentage.com', 'weightlosspercentage.pages.dev'];
+export type AdSlotVariant = 'display' | 'in-article';
 
-const isAdServingHost = (): boolean => {
-  if (typeof window === 'undefined') return false;
-  const host = window.location.hostname.toLowerCase();
-  return ALLOWED_HOSTS.some((allowed) => host === allowed || host.endsWith(`.${allowed}`));
-};
+export interface AdSlotProps {
+  slot: string;
+  variant?: AdSlotVariant;
+  className?: string;
+}
 
 /**
- * Lazy, responsive AdSense unit.
- * - Pushes to adsbygoogle exactly once, when the slot scrolls into view
- * - Reserves vertical space to prevent layout shift
- * - Renders nothing outside production domains
+ * Checks whether the current browser hostname is an approved production domain
+ * (ends with weightlosspercentage.com or pages.dev), skipping localhost and preview iframes.
  */
-export const AdSlot = ({
+export function isProductionAdDomain(): boolean {
+  if (typeof window === 'undefined' || !window.location) {
+    return false;
+  }
+  const hostname = window.location.hostname.toLowerCase();
+  return (
+    hostname.endsWith('weightlosspercentage.com') ||
+    hostname.endsWith('pages.dev')
+  );
+}
+
+/**
+ * Ensures the external AdSense script is injected lazily on demand when an ad unit
+ * enters or approaches the viewport, avoiding render-blocking requests during FCP/LCP.
+ */
+export function ensureAdSenseScriptLoaded(): void {
+  if (typeof window === 'undefined' || !isProductionAdDomain()) return;
+  if (typeof window.__loadAdSenseLazy === 'function') {
+    window.__loadAdSenseLazy();
+    return;
+  }
+  const existing = document.querySelector(
+    `script[src*="pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"]`
+  );
+  if (!existing) {
+    const script = document.createElement('script');
+    script.async = true;
+    script.crossOrigin = 'anonymous';
+    script.src = `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${AD_CLIENT}`;
+    document.head.appendChild(script);
+  }
+}
+
+export const AdSlot: React.FC<AdSlotProps> = ({
   slot,
-  format = 'auto',
-  layoutKey,
-  className = '',
-  minHeight = 280,
-  label = 'Advertisement',
-}: AdSlotProps) => {
+  variant = 'display',
+  className = ''
+}) => {
+  const [isProdDomain] = useState<boolean>(() => isProductionAdDomain());
+  const containerRef = useRef<HTMLDivElement | null>(null);
   const insRef = useRef<HTMLModElement | null>(null);
-  const pushed = useRef(false);
+  const hasPushedRef = useRef<boolean>(false);
 
   useEffect(() => {
-    if (!isAdServingHost()) return;
-    const el = insRef.current;
-    if (!el) return;
+    if (!isProdDomain) return;
+    const containerEl = containerRef.current;
+    const insEl = insRef.current;
+    if (!containerEl || !insEl) return;
 
-    const push = () => {
-      if (pushed.current) return;
-      pushed.current = true;
-      try {
-        (window.adsbygoogle = window.adsbygoogle || []).push({});
-      } catch {
-        /* AdSense script not ready yet */
-      }
-    };
+    // Guard against duplicate pushes and React StrictMode double-mount
+    if (
+      hasPushedRef.current ||
+      insEl.dataset.adPushed === 'true' ||
+      insEl.getAttribute('data-adsbygoogle-status')
+    ) {
+      return;
+    }
 
     if (typeof IntersectionObserver === 'undefined') {
-      push();
       return;
     }
 
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            push();
-            observer.disconnect();
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+
+          observer.disconnect();
+
+          if (
+            hasPushedRef.current ||
+            insEl.dataset.adPushed === 'true' ||
+            insEl.getAttribute('data-adsbygoogle-status')
+          ) {
+            return;
           }
-        });
+
+          hasPushedRef.current = true;
+          insEl.dataset.adPushed = 'true';
+
+          try {
+            ensureAdSenseScriptLoaded();
+            (window.adsbygoogle = window.adsbygoogle || []).push({});
+          } catch {
+            // Suppress errors if an ad blocker prevents adsbygoogle initialization
+          }
+          break;
+        }
       },
-      { rootMargin: '200px 0px' }
+      {
+        rootMargin: '200px 0px',
+        threshold: 0.01
+      }
     );
 
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
+    observer.observe(containerEl);
 
-  if (!isAdServingHost()) return null;
+    return () => {
+      observer.disconnect();
+    };
+  }, [isProdDomain, slot]);
+
+  if (!isProdDomain) {
+    return null;
+  }
 
   return (
-    <div className={`w-full ${className}`}>
-      <p className="mb-1 text-center text-[10px] uppercase tracking-wider text-slate-400 dark:text-slate-500">
-        {label}
-      </p>
-      <ins
-        ref={insRef}
-        className="adsbygoogle block w-full"
-        style={{ display: 'block', minHeight: `${minHeight}px` }}
-        data-ad-client={AD_CLIENT}
-        data-ad-slot={slot}
-        data-ad-format={format}
-        data-full-width-responsive="true"
-        {...(layoutKey ? { 'data-ad-layout-key': layoutKey } : {})}
-      />
-    </div>
+    <aside
+      ref={containerRef}
+      aria-label="Advertisement"
+      className={`my-6 w-full max-w-7xl mx-auto clear-both ${className}`.trim()}
+    >
+      <div className="text-[10px] uppercase tracking-widest text-slate-400 dark:text-slate-500 text-center mb-1.5 select-none font-medium">
+        Advertisement
+      </div>
+      <div className="w-full min-h-[280px] md:min-h-[250px] flex items-center justify-center overflow-hidden rounded-xl bg-slate-100/40 dark:bg-slate-900/40">
+        <ins
+          ref={insRef}
+          className="adsbygoogle block w-full"
+          data-ad-client={AD_CLIENT}
+          data-ad-slot={slot}
+          data-ad-format="auto"
+          data-full-width-responsive="true"
+          {...(variant === 'in-article' ? { 'data-ad-layout': 'in-article' } : {})}
+        />
+      </div>
+    </aside>
   );
 };
+
+export default AdSlot;

@@ -20,11 +20,11 @@ interface TopToolSearchBarProps {
 
 const QUICK_FILTERS = [
   { label: 'Newborn', query: 'Newborn' },
+  { label: 'Water Fast & OMAD', query: 'Water Fast' },
+  { label: 'GLP-1 / Ozempic', query: 'GLP-1' },
   { label: 'BMR & TDEE', query: 'BMR' },
-  { label: 'Keto', query: 'Keto' },
   { label: 'Bariatric & Sleeve', query: 'Gastric' },
-  { label: 'Subway Calories', query: 'Subway' },
-  { label: 'BMI & Lbs', query: 'BMI' }
+  { label: 'Subway & McDonald’s', query: 'Subway' }
 ];
 
 export const TopToolSearchBar: React.FC<TopToolSearchBarProps> = ({
@@ -166,7 +166,7 @@ export const TopToolSearchBar: React.FC<TopToolSearchBarProps> = ({
           aria-expanded={isOpen}
           aria-controls="calculator-search-results"
           aria-autocomplete="list"
-          aria-label="Search 24 calculators and clinical guides"
+          aria-label="Search 26 calculators and clinical guides"
           value={query}
           onFocus={() => setIsOpen(true)}
           onChange={(e) => {
@@ -300,14 +300,14 @@ export const TopToolSearchBar: React.FC<TopToolSearchBarProps> = ({
                 No calculator or guide matched “{query}”
               </p>
               <p className="text-xs text-slate-500 dark:text-slate-400">
-                Try searching for Newborn, BMR, TDEE, Keto, Gastric Bypass, Subway, or BMI.
+                Try searching for Newborn, Water Fast, GLP-1, BMR, TDEE, Keto, Gastric Bypass, or Subway.
               </p>
               <button
                 type="button"
                 onClick={() => setQuery('')}
                 className="mt-1 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold bg-[#7334fd] text-white hover:bg-[#5f23e6] transition-colors cursor-pointer"
               >
-                Show All 24 Calculators &amp; Guides
+                Show All 26 Calculators &amp; Guides
               </button>
             </div>
           )}

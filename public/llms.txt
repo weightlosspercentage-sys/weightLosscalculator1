@@ -34,22 +34,30 @@
 - [Weight Loss Percentage Calculator](https://www.weightlosspercentage.com/calculators/weight-loss/): Dedicated adult total body weight loss percentage analyzer.
 - [Newborn Weight Loss Calculator](https://www.weightlosspercentage.com/calculators/newborn-weight-loss/): Postnatal weight tracking in pounds/ounces and grams against AAP 5%, 7%, and 10% thresholds.
 - [Baby Weight Loss & Growth Tracker](https://www.weightlosspercentage.com/calculators/baby-weight-loss/): Infant weight recovery and birth-weight regain verification (days 10–14).
-- [BMR & TDEE Calculator](https://www.weightlosspercentage.com/calculators/bmr/): Resting energy expenditure and daily caloric deficit planning.
+- [Infant Weight Loss Calculator](https://www.weightlosspercentage.com/calculators/infant-weight-loss/): Pediatric infant weight change and hydration threshold analyzer.
+- [Water Fasting Weight Loss Calculator](https://www.weightlosspercentage.com/calculators/water-fasting-weight-loss/): 24h, 48h, 72h, 5-day, and 7-day water fast modeling separating glycogen water drop from true fat oxidation.
+- [OMAD & Intermittent Fasting Weight Loss Calculator](https://www.weightlosspercentage.com/calculators/omad-weight-loss/): 23:1 OMAD and 16:8 intermittent fasting net fat loss and scale weight projections.
+- [GLP-1, Semaglutide & Tirzepatide Weight Loss Calculator](https://www.weightlosspercentage.com/calculators/glp1-weight-loss/): STEP-1 (14.9%), SURMOUNT-1 (20.9%), and Phase 2 clinical trial benchmarks with official FDA titration schedules.
+- [Bariatric Surgery Weight Loss Calculator](https://www.weightlosspercentage.com/calculators/bariatric-surgery-weight-loss/): Excess Body Weight Loss (%EWL), Total Body Weight Loss (%TBWL), and 1M/3M/6M/12M/18M timeline for VSG, RNY, and Duodenal Switch.
+- [Postpartum & Breastfeeding Weight Loss Calculator](https://www.weightlosspercentage.com/calculators/postpartum-weight-loss/): Safe postnatal caloric deficit and lactation-adjusted (+450 kcal/day) timeline planner.
+- [BMR & 12-Week Projection Calculator](https://www.weightlosspercentage.com/calculators/bmr/): Mifflin-St Jeor resting energy expenditure and 12-week Losertown-style weight forecast table.
+- [TDEE Calculator](https://www.weightlosspercentage.com/calculators/tdee/): Total Daily Energy Expenditure across activity levels.
+- [Calorie Deficit Weight Loss Calculator](https://www.weightlosspercentage.com/calculators/calorie-deficit/): Daily calorie deficit and weekly fat loss projection planner.
 - [Body Fat Percentage Calculator](https://www.weightlosspercentage.com/calculators/body-fat-percentage/): US Navy method and lean mass preservation modeling.
-- [Bariatric Surgery Weight Loss Calculator](https://www.weightlosspercentage.com/calculators/bariatric-surgery-weight-loss/): Excess Body Weight Loss (EWL) and Total Body Weight Loss (TBWL) projections.
 - [Keto Macro & Weight Loss Calculator](https://www.weightlosspercentage.com/calculators/keto/): Ketogenic macronutrient ratios and fat-loss projection.
+- [Biggest Loser Percentage Calculator](https://www.weightlosspercentage.com/calculators/biggest-loser/): Fair group weight loss challenge ranking by percentage of starting body weight lost.
 - [Cycling Calorie & Weight Loss Calculator](https://www.weightlosspercentage.com/calculators/cycling/): MET-based cycling energy expenditure and weight loss estimator.
-- [Postpartum Weight Loss Calculator](https://www.weightlosspercentage.com/calculators/postpartum-weight-loss/): Safe postnatal caloric deficit and lactation-adjusted timeline planner.
 - [Subway Calorie & Nutrition Calculator](https://www.weightlosspercentage.com/restaurants/subway/): Restaurant meal calorie and macronutrient planner.
 - [McDonald's Calorie & Nutrition Calculator](https://www.weightlosspercentage.com/restaurants/mcdonalds/): Fast-food meal calorie and sodium tracker.
 
-## Medical Reviewer, Methodology & Policy Pages
+## Medical Reviewer, Methodology, Sitemap & Policy Pages
 - [Dr. Rekha Kumar, M.D., M.S. — Clinical Medical Reviewer](https://www.weightlosspercentage.com/authors/dr-rekha-kumar/): Credentials, education, board certifications, and four-pillar medical review commitment.
 - [About Us](https://www.weightlosspercentage.com/about/): Platform mission, clinical editorial independence, and privacy-first architecture.
 - [Medical Review & Methodology](https://www.weightlosspercentage.com/methodology/): Peer-reviewed mathematical formulas, clinical literature citations, and verification standards.
 - [Privacy Policy](https://www.weightlosspercentage.com/privacy-policy/): Zero server-side data storage guarantee and browser-only calculation policy.
 - [Terms of Service](https://www.weightlosspercentage.com/terms-of-service/): Medical disclaimer and educational terms of use.
 - [Contact](https://www.weightlosspercentage.com/contact/): Editorial and clinical review contact information.
+- [XML Sitemap](https://www.weightlosspercentage.com/sitemap.xml): Complete index of all 108 canonical pages across 8 locales.
 - [Full LLM Documentation](https://www.weightlosspercentage.com/llms-full.txt): Complete reference equations, tables, and clinical methodology.
 
 ## Official Social Profiles

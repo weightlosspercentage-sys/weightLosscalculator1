@@ -40,3 +40,10 @@
   padding-bottom: env(safe-area-inset-bottom, 0.75rem);
 }
 
+/* Defer offscreen layout and paint work for below-the-fold sections */
+.cv-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 520px;
+}
+
+

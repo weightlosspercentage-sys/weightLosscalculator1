@@ -1,6 +1,4 @@
-import React, { useState } from 'react';
-import confetti from 'canvas-confetti';
-import { jsPDF } from 'jspdf';
+import React, { useState, useEffect } from 'react';
 import {
   Download,
   FileText,
@@ -19,6 +17,9 @@ import {
 } from 'lucide-react';
 
 import { LOCALE_TRANSLATIONS } from '../data/localeStrings';
+import { EXTENDED_LOCALE_PARITY } from '../data/multilingualParity';
+import { ClinicalFocus, RestaurantBrand } from '../utils/seoIntentRouter';
+import { lbsToStonesAndPounds, LBS_PER_KG } from '../utils/calculations';
 
 export type ToolMode = 'adult' | 'newborn' | 'bmr' | 'subway';
 
@@ -26,14 +27,27 @@ interface HeroToolBoxProps {
   externalMode?: ToolMode;
   onModeChange?: (m: ToolMode) => void;
   locale?: string;
+  clinicalFocus?: ClinicalFocus;
+  onClinicalFocusChange?: (f: ClinicalFocus) => void;
+  restaurantBrand?: RestaurantBrand;
+  onRestaurantBrandChange?: (b: RestaurantBrand) => void;
+  defaultWeightUnit?: 'lbs' | 'kg';
+  defaultBabyUnit?: 'lbs_oz' | 'grams';
 }
 
 export const HeroToolBox: React.FC<HeroToolBoxProps> = ({
   externalMode,
   onModeChange,
-  locale = 'en'
+  locale = 'en',
+  clinicalFocus = 'standard',
+  onClinicalFocusChange,
+  restaurantBrand = 'subway',
+  onRestaurantBrandChange,
+  defaultWeightUnit = 'lbs',
+  defaultBabyUnit = 'lbs_oz'
 }) => {
   const t = LOCALE_TRANSLATIONS[locale] || LOCALE_TRANSLATIONS.en;
+  const p = EXTENDED_LOCALE_PARITY[locale] || EXTENDED_LOCALE_PARITY.en;
   const [internalMode, setInternalMode] = useState<ToolMode>('adult');
   const mode = externalMode ?? internalMode;
 
@@ -42,7 +56,9 @@ export const HeroToolBox: React.FC<HeroToolBoxProps> = ({
     if (onModeChange) onModeChange(m);
   };
 
-  const [unit, setUnit] = useState<'lbs' | 'kg'>('lbs');
+  const [unit, setUnit] = useState<'lbs' | 'kg'>(defaultWeightUnit);
+  const [activeFocus, setActiveFocus] = useState<ClinicalFocus>(clinicalFocus);
+  const [activeBrand, setActiveBrand] = useState<RestaurantBrand>(restaurantBrand);
 
   // Adult inputs
   const [adultStart, setAdultStart] = useState<string>('215');
@@ -50,7 +66,7 @@ export const HeroToolBox: React.FC<HeroToolBoxProps> = ({
   const [adultGoal, setAdultGoal] = useState<string>('175');
 
   // Newborn inputs
-  const [babyUnit, setBabyUnit] = useState<'lbs_oz' | 'grams'>('lbs_oz');
+  const [babyUnit, setBabyUnit] = useState<'lbs_oz' | 'grams'>(defaultBabyUnit);
   const [birthLbs, setBirthLbs] = useState<string>('8');
   const [birthOz, setBirthOz] = useState<string>('4');
   const [currentLbs, setCurrentLbs] = useState<string>('7');
@@ -65,15 +81,54 @@ export const HeroToolBox: React.FC<HeroToolBoxProps> = ({
   const [heightInches, setHeightInches] = useState<string>('66');
   const [activityFactor, setActivityFactor] = useState<string>('1.375');
 
-  // Fast food / Subway macro quick inputs
+  // Fast food / Subway & McDonald's macro quick inputs
   const [subwaySize, setSubwaySize] = useState<'six_inch' | 'footlong'>('six_inch');
   const [subwayBread, setSubwayBread] = useState<number>(200);
   const [subwayMeat, setSubwayMeat] = useState<number>(180);
   const [subwayCheese, setSubwayCheese] = useState<number>(50);
   const [subwaySauce, setSubwaySauce] = useState<number>(100);
 
+  // McDonald's meal builder inputs
+  const [mcdMain, setMcdMain] = useState<number>(590);
+  const [mcdFries, setMcdFries] = useState<number>(320);
+  const [mcdDrink, setMcdDrink] = useState<number>(0);
+  const [mcdSauce, setMcdSauce] = useState<number>(45);
+
   const [copied, setCopied] = useState<boolean>(false);
   const [pdfDownloaded, setPdfDownloaded] = useState<boolean>(false);
+
+  // Sub-selectors for Clinical Focus & BMR Forecast
+  const [fastingProtocol, setFastingProtocol] = useState<'24h' | '48h' | '72h' | '5d' | '7d' | 'omad30' | 'if16_8'>('72h');
+  const [bariatricProcedure, setBariatricProcedure] = useState<'vsg' | 'rny' | 'ds'>('vsg');
+  const [glp1Medication, setGlp1Medication] = useState<'semaglutide' | 'tirzepatide' | 'retatrutide' | 'phentermine'>('semaglutide');
+  const [lactationStatus, setLactationStatus] = useState<'exclusive' | 'combo' | 'none'>('exclusive');
+  const [customDailyIntake, setCustomDailyIntake] = useState<string>('1550');
+
+  useEffect(() => {
+    setActiveFocus(clinicalFocus);
+  }, [clinicalFocus]);
+
+  useEffect(() => {
+    setActiveBrand(restaurantBrand);
+  }, [restaurantBrand]);
+
+  useEffect(() => {
+    setUnit(defaultWeightUnit);
+  }, [defaultWeightUnit]);
+
+  useEffect(() => {
+    setBabyUnit(defaultBabyUnit);
+  }, [defaultBabyUnit]);
+
+  const handleFocusSelect = (f: ClinicalFocus) => {
+    setActiveFocus(f);
+    if (onClinicalFocusChange) onClinicalFocusChange(f);
+  };
+
+  const handleBrandSelect = (b: RestaurantBrand) => {
+    setActiveBrand(b);
+    if (onRestaurantBrandChange) onRestaurantBrandChange(b);
+  };
 
   // Stepper helper for mobile touch convenience
   const stepValue = (
@@ -94,6 +149,17 @@ export const HeroToolBox: React.FC<HeroToolBoxProps> = ({
   const adultLost = sWeight > 0 ? sWeight - cWeight : 0;
   const adultPct = sWeight > 0 ? +((adultLost / sWeight) * 100).toFixed(2) : 0;
   const isLoss = adultLost > 0;
+
+  // Bariatric Excess Weight Loss (%EWL) using Goal/Ideal Weight
+  const excessWeightTotal = gWeight > 0 && sWeight > gWeight ? sWeight - gWeight : sWeight * 0.35;
+  const excessWeightLostPct =
+    excessWeightTotal > 0 ? Math.max(0, Math.min(150, +((adultLost / excessWeightTotal) * 100).toFixed(1))) : 0;
+
+  // UK / Imperial Stone & Pounds equivalent for lost weight and current weight
+  const lostInLbs = unit === 'kg' ? Math.abs(adultLost) * LBS_PER_KG : Math.abs(adultLost);
+  const currentInLbs = unit === 'kg' ? cWeight * LBS_PER_KG : cWeight;
+  const lostStoneAndLbs = lbsToStonesAndPounds(lostInLbs);
+  const currentStoneAndLbs = lbsToStonesAndPounds(currentInLbs);
 
   // Newborn calculation
   let newbornLossPct = 0;
@@ -131,11 +197,92 @@ export const HeroToolBox: React.FC<HeroToolBoxProps> = ({
   }
   const calculatedTdee = Math.round(calculatedBmr * (parseFloat(activityFactor) || 1.2));
 
-  // Subway calculation
+  // Water Fasting & OMAD Metabolic Model (Glycogen + Bound Water vs True Adipose Oxidation)
+  const kcalPerUnit = unit === 'kg' ? 7700 : 3500;
+  const estimatedDailyBurn = sWeight > 0 ? Math.max(1400, Math.round((unit === 'kg' ? sWeight * 24 : sWeight * 11) * 1.2)) : calculatedTdee;
+  const fastingConfig: Record<
+    typeof fastingProtocol,
+    { label: string; days: number; dailyDeficit: number; waterDropLbs: number }
+  > = {
+    '24h': { label: '24-Hour Water Fast (1 Day)', days: 1, dailyDeficit: estimatedDailyBurn, waterDropLbs: 2.2 },
+    '48h': { label: '48-Hour Water Fast (2 Days)', days: 2, dailyDeficit: estimatedDailyBurn, waterDropLbs: 3.8 },
+    '72h': { label: '72-Hour Water Fast (3 Days)', days: 3, dailyDeficit: estimatedDailyBurn, waterDropLbs: 5.0 },
+    '5d': { label: '5-Day Extended Water Fast', days: 5, dailyDeficit: estimatedDailyBurn, waterDropLbs: 5.8 },
+    '7d': { label: '7-Day Extended Water Fast', days: 7, dailyDeficit: estimatedDailyBurn, waterDropLbs: 6.4 },
+    omad30: { label: 'OMAD 23:1 Protocol (30 Days)', days: 30, dailyDeficit: 750, waterDropLbs: 2.5 },
+    if16_8: { label: '16:8 Intermittent Fasting (30 Days)', days: 30, dailyDeficit: 500, waterDropLbs: 1.8 }
+  };
+  const activeFasting = fastingConfig[fastingProtocol];
+  const fastingTrueFatLoss = +((activeFasting.dailyDeficit * activeFasting.days) / kcalPerUnit).toFixed(1);
+  const fastingWaterLoss = +(unit === 'kg' ? activeFasting.waterDropLbs / LBS_PER_KG : activeFasting.waterDropLbs).toFixed(1);
+  const fastingTotalDrop = +(fastingTrueFatLoss + fastingWaterLoss).toFixed(1);
+  const fastingNetPct = sWeight > 0 ? +((fastingTrueFatLoss / sWeight) * 100).toFixed(2) : 0;
+
+  // Bariatric Procedure Timeline Model (Months 1, 3, 6, 12, 18 %EWL curves)
+  const bariatricProcedures: Record<
+    typeof bariatricProcedure,
+    { name: string; peakTbwlPct: number; ewlMonths: [number, number, number, number, number] }
+  > = {
+    vsg: { name: 'Vertical Sleeve Gastrectomy (VSG)', peakTbwlPct: 25, ewlMonths: [18, 35, 50, 62, 65] },
+    rny: { name: 'Roux-en-Y Gastric Bypass (RNY)', peakTbwlPct: 30, ewlMonths: [20, 40, 58, 70, 74] },
+    ds: { name: 'Duodenal Switch (BPD/DS)', peakTbwlPct: 38, ewlMonths: [22, 45, 65, 78, 82] }
+  };
+  const activeBariatric = bariatricProcedures[bariatricProcedure];
+
+  // GLP-1 & Clinical Trial Benchmark Model
+  const glp1Medications: Record<
+    typeof glp1Medication,
+    { name: string; trialName: string; meanTbwlPct: number; titrationSchedule: string }
+  > = {
+    semaglutide: {
+      name: 'Semaglutide (Ozempic® / Wegovy®)',
+      trialName: 'STEP-1 NEJM Trial (68 Weeks)',
+      meanTbwlPct: 14.9,
+      titrationSchedule: '0.25 mg (Wks 1–4) → 0.5 mg (Wks 5–8) → 1.0 mg (Wks 9–12) → 1.7 mg (Wks 13–16) → 2.4 mg Maintenance'
+    },
+    tirzepatide: {
+      name: 'Tirzepatide (Mounjaro® / Zepbound®)',
+      trialName: 'SURMOUNT-1 NEJM Trial (72 Weeks)',
+      meanTbwlPct: 20.9,
+      titrationSchedule: '2.5 mg (Wks 1–4) → 5.0 mg (Wks 5–8) → 7.5 mg (Wks 9–12) → 10–15 mg Maintenance'
+    },
+    retatrutide: {
+      name: 'Retatrutide (Phase 2 Triple-Agonist)',
+      trialName: 'NEJM Phase 2 Trial Benchmark (48 Weeks)',
+      meanTbwlPct: 24.2,
+      titrationSchedule: 'Investigational Clinical Trial Protocol Only (Not FDA-approved for retail compounding)'
+    },
+    phentermine: {
+      name: 'Phentermine / Tesamorelin Reference',
+      trialName: 'Short-Term Adrenergic / Metabolic Benchmark (12–24 Weeks)',
+      meanTbwlPct: 7.5,
+      titrationSchedule: '15 mg – 37.5 mg oral daily (Physician-monitored short-term protocol)'
+    }
+  };
+  const activeGlp1 = glp1Medications[glp1Medication];
+
+  // Postpartum & Breastfeeding Lactation Adder
+  const lactationAdders: Record<typeof lactationStatus, { label: string; kcalAdder: number; minFloor: number }> = {
+    exclusive: { label: 'Exclusive Breastfeeding (+450 kcal/day milk synthesis)', kcalAdder: 450, minFloor: 1800 },
+    combo: { label: 'Combination Breast + Formula (+250 kcal/day)', kcalAdder: 250, minFloor: 1650 },
+    none: { label: 'Non-Lactating / Formula Feeding (+0 kcal/day)', kcalAdder: 0, minFloor: 1350 }
+  };
+  const activeLactation = lactationAdders[lactationStatus];
+  const postpartumSafeDailyKcal = Math.max(activeLactation.minFloor, calculatedTdee + activeLactation.kcalAdder - 500);
+
+  // Losertown-style 12-Week Forecast (for BMR/TDEE mode)
+  const intakeVal = parseFloat(customDailyIntake) || Math.max(1200, calculatedTdee - 500);
+  const dailyNetDeficit = calculatedTdee - intakeVal;
+  const weeklyWeightChange = +(dailyNetDeficit * 7 / kcalPerUnit).toFixed(2);
+
+  // Restaurant (Subway & McDonald's) calculation
   const multiplier = subwaySize === 'footlong' ? 2 : 1;
   const subwayTotalCalories = (subwayBread + subwayMeat + subwayCheese + subwaySauce) * multiplier;
+  const mcdTotalCalories = mcdMain + mcdFries + mcdDrink + mcdSauce;
+  const activeRestaurantCalories = activeBrand === 'mcdonalds' ? mcdTotalCalories : subwayTotalCalories;
 
-  const triggerCelebration = () => {
+  const triggerCelebration = async () => {
+    const { default: confetti } = await import('canvas-confetti');
     confetti({
       particleCount: 90,
       spread: 75,
@@ -144,7 +291,8 @@ export const HeroToolBox: React.FC<HeroToolBoxProps> = ({
     });
   };
 
-  const downloadResult = () => {
+  const downloadResult = async () => {
+    const { jsPDF } = await import('jspdf');
     const dateStr = new Date().toISOString().split('T')[0];
     const doc = new jsPDF({
       orientation: 'portrait',
@@ -251,9 +399,10 @@ export const HeroToolBox: React.FC<HeroToolBoxProps> = ({
 
       const rows: [string, string][] = [
         ['Initial Starting Weight', `${sWeight.toFixed(1)} ${unit}`],
-        ['Current Scale Weight', `${cWeight.toFixed(1)} ${unit}`],
-        ['Net Weight Difference', `${isLoss ? `-${adultLost.toFixed(1)}` : `+${Math.abs(adultLost).toFixed(1)}`} ${unit}`],
+        ['Current Scale Weight', `${cWeight.toFixed(1)} ${unit} (${currentStoneAndLbs.stones} st ${currentStoneAndLbs.pounds} lbs)`],
+        ['Net Weight Difference', `${isLoss ? `-${adultLost.toFixed(1)}` : `+${Math.abs(adultLost).toFixed(1)}`} ${unit} (${lostStoneAndLbs.stones} st ${lostStoneAndLbs.pounds} lbs)`],
         ['Percentage of Baseline Body Weight', `${isLoss ? `-${adultPct}%` : `+${adultPct}%`}`],
+        ['Bariatric Excess Weight Loss (%EWL)', `${excessWeightLostPct}% EWL`],
         ['Target Goal Weight', gWeight > 0 ? `${gWeight.toFixed(1)} ${unit}` : 'Not specified'],
         [
           'Remaining Weight to Goal',
@@ -400,12 +549,20 @@ export const HeroToolBox: React.FC<HeroToolBoxProps> = ({
       doc.setFont('helvetica', 'bold');
       doc.setFontSize(13);
       doc.setTextColor(15, 23, 42);
-      doc.text('1. Subway Meal Nutrition & Calorie Summary', 14, y);
+      doc.text(
+        activeBrand === 'mcdonalds'
+          ? '1. McDonald’s Meal Nutrition & Calorie Summary'
+          : '1. Subway Meal Nutrition & Calorie Summary',
+        14,
+        y
+      );
       y += 8;
       doc.setFont('helvetica', 'normal');
       doc.setFontSize(10);
       doc.text(
-        `Sandwich Portion: ${subwaySize === 'footlong' ? '12-Inch Footlong' : '6-Inch Sub'}   |   Total Meal Energy: ${subwayTotalCalories} kcal`,
+        activeBrand === 'mcdonalds'
+          ? `Entrée (${mcdMain} kcal) + Side (${mcdFries} kcal) + Beverage (${mcdDrink} kcal) + Sauce (${mcdSauce} kcal) = ${mcdTotalCalories} kcal`
+          : `Sandwich Portion: ${subwaySize === 'footlong' ? '12-Inch Footlong' : '6-Inch Sub'}   |   Total Meal Energy: ${subwayTotalCalories} kcal`,
         14,
         y
       );
@@ -585,7 +742,7 @@ export const HeroToolBox: React.FC<HeroToolBoxProps> = ({
                   </>
                 )}
                 {mode === 'subway' && (
-                  <span className="text-2xl font-black text-[#ca5983] dark:text-pink-400">{subwayTotalCalories} kcal</span>
+                  <span className="text-2xl font-black text-[#ca5983] dark:text-pink-400">{activeRestaurantCalories} kcal</span>
                 )}
               </div>
             </div>
@@ -600,12 +757,39 @@ export const HeroToolBox: React.FC<HeroToolBoxProps> = ({
             </button>
           </div>
 
-          {/* Quick-Win Preset Buttons */}
-          <div className="space-y-1.5">
+          {/* Quick-Win Preset Buttons & Clinical Focus Selector */}
+          <div className="space-y-2">
+            {mode === 'adult' && (
+              <div className="flex flex-wrap items-center gap-1.5 pb-1">
+                {(
+                  [
+                    { id: 'standard', label: p.focusStandard },
+                    { id: 'fasting', label: p.focusFasting },
+                    { id: 'bariatric', label: p.focusBariatric },
+                    { id: 'glp1', label: p.focusGlp1 },
+                    { id: 'postpartum', label: p.focusPostpartum }
+                  ] as { id: ClinicalFocus; label: string }[]
+                ).map((item) => (
+                  <button
+                    key={item.id}
+                    type="button"
+                    onClick={() => handleFocusSelect(item.id)}
+                    className={`min-h-[34px] px-2.5 py-1 rounded-lg text-[11px] font-extrabold transition-all border cursor-pointer ${
+                      activeFocus === item.id
+                        ? 'bg-[#7334fd] text-white border-[#7334fd] shadow-2xs'
+                        : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border-slate-200 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700'
+                    }`}
+                  >
+                    {item.label}
+                  </button>
+                ))}
+              </div>
+            )}
+
             <span className="text-[11px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider block">
               {t.presetHeading}
             </span>
-            <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-0.5">
+            <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 pb-0.5">
               {mode === 'adult' && (
                 <>
                   <button
@@ -656,6 +840,97 @@ export const HeroToolBox: React.FC<HeroToolBoxProps> = ({
           {/* MODE 1: ADULT WEIGHT LOSS PERCENTAGE */}
           {mode === 'adult' && (
             <div className="space-y-4">
+              {/* Specialized Clinical Protocol Selector (when Fasting, Bariatric, GLP-1, or Postpartum is active) */}
+              {activeFocus === 'fasting' && (
+                <div className="bg-sky-50/80 dark:bg-sky-950/50 p-3.5 rounded-2xl border border-sky-200/90 dark:border-sky-500/40 space-y-2">
+                  <div className="flex items-center justify-between gap-2">
+                    <label htmlFor="fasting-protocol-select" className="text-xs font-extrabold text-sky-950 dark:text-sky-100 uppercase tracking-wider">
+                      Water Fast / OMAD Protocol Duration
+                    </label>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        if (sWeight > 0) {
+                          setAdultCurrent(Math.max(1, +(sWeight - fastingTotalDrop).toFixed(1)).toString());
+                        }
+                      }}
+                      className="px-2.5 py-1 rounded-lg bg-[#7334fd] text-white text-[11px] font-bold hover:opacity-95 cursor-pointer"
+                    >
+                      Apply Projected Fast Weight (-{fastingTotalDrop} {unit})
+                    </button>
+                  </div>
+                  <select
+                    id="fasting-protocol-select"
+                    value={fastingProtocol}
+                    onChange={(e) => setFastingProtocol(e.target.value as typeof fastingProtocol)}
+                    className="w-full h-11 px-3 bg-white dark:bg-slate-900 border border-sky-300 dark:border-sky-600 rounded-xl text-xs sm:text-sm font-bold text-slate-900 dark:text-white"
+                  >
+                    <option value="24h">24-Hour Water Fast (1 Day • Glycogen Initiation)</option>
+                    <option value="48h">48-Hour Water Fast (2 Days • Deep Ketosis Transition)</option>
+                    <option value="72h">72-Hour Water Fast (3 Days • Full Glycogen Depletion)</option>
+                    <option value="5d">5-Day Extended Water Fast (Physician-Monitored)</option>
+                    <option value="7d">7-Day Extended Water Fast (Clinical Supervision Required)</option>
+                    <option value="omad30">OMAD 23:1 (One Meal a Day • 30-Day Projection)</option>
+                    <option value="if16_8">16:8 Intermittent Fasting (30-Day Projection)</option>
+                  </select>
+                </div>
+              )}
+
+              {activeFocus === 'bariatric' && (
+                <div className="bg-purple-50/80 dark:bg-purple-950/50 p-3.5 rounded-2xl border border-purple-200/90 dark:border-purple-500/40 space-y-2">
+                  <label htmlFor="bariatric-procedure-select" className="block text-xs font-extrabold text-purple-950 dark:text-purple-100 uppercase tracking-wider">
+                    Bariatric Surgical Procedure (ASMBS %EWL Curve)
+                  </label>
+                  <select
+                    id="bariatric-procedure-select"
+                    value={bariatricProcedure}
+                    onChange={(e) => setBariatricProcedure(e.target.value as typeof bariatricProcedure)}
+                    className="w-full h-11 px-3 bg-white dark:bg-slate-900 border border-purple-300 dark:border-purple-600 rounded-xl text-xs sm:text-sm font-bold text-slate-900 dark:text-white"
+                  >
+                    <option value="vsg">Vertical Sleeve Gastrectomy (VSG — ~62% EWL / ~25% TBWL)</option>
+                    <option value="rny">Roux-en-Y Gastric Bypass (RNY — ~70% EWL / ~30% TBWL)</option>
+                    <option value="ds">Biliopancreatic Diversion w/ Duodenal Switch (BPD/DS — ~80% EWL)</option>
+                  </select>
+                </div>
+              )}
+
+              {activeFocus === 'glp1' && (
+                <div className="bg-emerald-50/80 dark:bg-emerald-950/50 p-3.5 rounded-2xl border border-emerald-200/90 dark:border-emerald-500/40 space-y-2">
+                  <label htmlFor="glp1-medication-select" className="block text-xs font-extrabold text-emerald-950 dark:text-emerald-100 uppercase tracking-wider">
+                    GLP-1 / GIP Medication & Clinical Trial Benchmark
+                  </label>
+                  <select
+                    id="glp1-medication-select"
+                    value={glp1Medication}
+                    onChange={(e) => setGlp1Medication(e.target.value as typeof glp1Medication)}
+                    className="w-full h-11 px-3 bg-white dark:bg-slate-900 border border-emerald-300 dark:border-emerald-600 rounded-xl text-xs sm:text-sm font-bold text-slate-900 dark:text-white"
+                  >
+                    <option value="semaglutide">Semaglutide (Ozempic® / Wegovy® — STEP-1 Trial: 14.9% TBWL)</option>
+                    <option value="tirzepatide">Tirzepatide (Mounjaro® / Zepbound® — SURMOUNT-1 Trial: 20.9% TBWL)</option>
+                    <option value="retatrutide">Retatrutide Phase 2 Benchmark (Triple-Agonist: 24.2% TBWL)</option>
+                    <option value="phentermine">Phentermine / Tesamorelin Reference (Short-Term 7.5% TBWL)</option>
+                  </select>
+                </div>
+              )}
+
+              {activeFocus === 'postpartum' && (
+                <div className="bg-amber-50/80 dark:bg-amber-950/50 p-3.5 rounded-2xl border border-amber-200/90 dark:border-amber-500/40 space-y-2">
+                  <label htmlFor="lactation-status-select" className="block text-xs font-extrabold text-amber-950 dark:text-amber-100 uppercase tracking-wider">
+                    Postpartum Lactation & Breastfeeding Energy Output
+                  </label>
+                  <select
+                    id="lactation-status-select"
+                    value={lactationStatus}
+                    onChange={(e) => setLactationStatus(e.target.value as typeof lactationStatus)}
+                    className="w-full h-11 px-3 bg-white dark:bg-slate-900 border border-amber-300 dark:border-amber-600 rounded-xl text-xs sm:text-sm font-bold text-slate-900 dark:text-white"
+                  >
+                    <option value="exclusive">Exclusive Breastfeeding (+450 kcal/day milk synthesis • Min 1,800 kcal)</option>
+                    <option value="combo">Combination Breast + Formula Feeding (+250 kcal/day • Min 1,650 kcal)</option>
+                    <option value="none">Formula Feeding / Non-Lactating (+0 kcal/day • Standard Deficit)</option>
+                  </select>
+                </div>
+              )}
+
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {/* Starting Weight with Touch Stepper */}
                 <div className="bg-white dark:bg-slate-800/90 p-3.5 rounded-2xl border border-slate-200/90 dark:border-slate-700 shadow-2xs">
@@ -1020,104 +1295,220 @@ export const HeroToolBox: React.FC<HeroToolBoxProps> = ({
                 </div>
               </div>
 
-              <div className="bg-white dark:bg-slate-800/90 p-3.5 rounded-2xl border border-slate-200 dark:border-slate-700">
-                <label htmlFor="bmr-activity-select" className="block text-xs font-bold text-slate-700 dark:text-slate-200 mb-1.5">{t.activityLabel}</label>
-                <select
-                  id="bmr-activity-select"
-                  value={activityFactor}
-                  onChange={(e) => setActivityFactor(e.target.value)}
-                  className="w-full h-11 px-3 bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-xl text-sm font-semibold text-slate-900 dark:text-white"
-                >
-                  <option value="1.2">Sedentary (Desk work, minimal exercise)</option>
-                  <option value="1.375">Light Activity (1-3 days/week exercise)</option>
-                  <option value="1.55">Moderate Activity (3-5 days/week cycling/gym)</option>
-                  <option value="1.725">Very Active (6-7 days intense training)</option>
-                </select>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div className="bg-white dark:bg-slate-800/90 p-3.5 rounded-2xl border border-slate-200 dark:border-slate-700">
+                  <label htmlFor="bmr-activity-select" className="block text-xs font-bold text-slate-700 dark:text-slate-200 mb-1.5">{t.activityLabel}</label>
+                  <select
+                    id="bmr-activity-select"
+                    value={activityFactor}
+                    onChange={(e) => setActivityFactor(e.target.value)}
+                    className="w-full h-11 px-3 bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-xl text-xs sm:text-sm font-semibold text-slate-900 dark:text-white"
+                  >
+                    <option value="1.2">Sedentary (Desk work, minimal exercise)</option>
+                    <option value="1.375">Light Activity (1-3 days/week exercise)</option>
+                    <option value="1.55">Moderate Activity (3-5 days/week cycling/gym)</option>
+                    <option value="1.725">Very Active (6-7 days intense training)</option>
+                  </select>
+                </div>
+
+                <div className="bg-white dark:bg-slate-800/90 p-3.5 rounded-2xl border border-slate-200 dark:border-slate-700">
+                  <label htmlFor="bmr-daily-intake-input" className="block text-xs font-bold text-slate-700 dark:text-slate-200 mb-1.5">
+                    Daily Calorie Intake Target (kcal/day)
+                  </label>
+                  <input
+                    id="bmr-daily-intake-input"
+                    type="number"
+                    inputMode="numeric"
+                    value={customDailyIntake}
+                    onChange={(e) => setCustomDailyIntake(e.target.value)}
+                    placeholder="1550"
+                    className="w-full h-11 px-3 bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-xl font-bold text-base text-slate-900 dark:text-white tabular-nums"
+                  />
+                </div>
               </div>
             </div>
           )}
 
-          {/* MODE 4: SUBWAY MACRO */}
+          {/* MODE 4: RESTAURANT NUTRITION (SUBWAY & MCDONALD'S) */}
           {mode === 'subway' && (
             <div className="space-y-4">
+              {/* Brand Switcher: McDonald's vs Subway */}
               <div className="grid grid-cols-2 gap-2 text-xs">
                 <button
                   type="button"
-                  onClick={() => setSubwaySize('six_inch')}
-                  className={`min-h-[44px] px-3 py-2 rounded-xl font-bold transition-colors ${
-                    subwaySize === 'six_inch' ? 'bg-[#ca5983] text-white shadow-xs' : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200'
+                  onClick={() => handleBrandSelect('mcdonalds')}
+                  className={`min-h-[44px] px-3 py-2 rounded-xl font-extrabold transition-colors cursor-pointer ${
+                    activeBrand === 'mcdonalds'
+                      ? 'bg-[#ca3500] text-white shadow-xs'
+                      : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-700'
                   }`}
                 >
-                  6-Inch Sub
+                  {p.mcdBuilderBtn}
                 </button>
                 <button
                   type="button"
-                  onClick={() => setSubwaySize('footlong')}
-                  className={`min-h-[44px] px-3 py-2 rounded-xl font-bold transition-colors ${
-                    subwaySize === 'footlong' ? 'bg-[#ca5983] text-white shadow-xs' : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200'
+                  onClick={() => handleBrandSelect('subway')}
+                  className={`min-h-[44px] px-3 py-2 rounded-xl font-extrabold transition-colors cursor-pointer ${
+                    activeBrand === 'subway'
+                      ? 'bg-[#ca5983] text-white shadow-xs'
+                      : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-700'
                   }`}
                 >
-                  Footlong (12-Inch)
+                  {p.subwayBuilderBtn}
                 </button>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-                <div className="bg-white dark:bg-slate-800/90 p-3 rounded-2xl border border-slate-200 dark:border-slate-700">
-                  <label htmlFor="subway-bread-select" className="block font-bold text-slate-700 dark:text-slate-200 mb-1.5">Bread Choice</label>
-                  <select
-                    id="subway-bread-select"
-                    value={subwayBread}
-                    onChange={(e) => setSubwayBread(Number(e.target.value))}
-                    className="w-full h-11 px-3 bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-xl text-sm font-semibold text-slate-900 dark:text-white"
-                  >
-                    <option value={200}>9-Grain Wheat (200 kcal)</option>
-                    <option value={190}>Artisan Italian White (190 kcal)</option>
-                    <option value={230}>Italian Herbs & Cheese (230 kcal)</option>
-                  </select>
+              {activeBrand === 'mcdonalds' ? (
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                  <div className="bg-white dark:bg-slate-800/90 p-3 rounded-2xl border border-slate-200 dark:border-slate-700">
+                    <label htmlFor="mcd-main-select" className="block font-bold text-slate-700 dark:text-slate-200 mb-1.5">
+                      Burger / Main Entrée
+                    </label>
+                    <select
+                      id="mcd-main-select"
+                      value={mcdMain}
+                      onChange={(e) => setMcdMain(Number(e.target.value))}
+                      className="w-full h-11 px-3 bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-xl text-sm font-semibold text-slate-900 dark:text-white"
+                    >
+                      <option value={590}>Big Mac (590 kcal • 25g protein)</option>
+                      <option value={520}>Quarter Pounder w/ Cheese (520 kcal • 30g protein)</option>
+                      <option value={410}>10 pc Chicken McNuggets (410 kcal • 23g protein)</option>
+                      <option value={400}>McChicken Sandwich (400 kcal • 14g protein)</option>
+                      <option value={390}>Filet-O-Fish (390 kcal • 16g protein)</option>
+                      <option value={300}>Cheeseburger (300 kcal • 15g protein)</option>
+                    </select>
+                  </div>
+                  <div className="bg-white dark:bg-slate-800/90 p-3 rounded-2xl border border-slate-200 dark:border-slate-700">
+                    <label htmlFor="mcd-fries-select" className="block font-bold text-slate-700 dark:text-slate-200 mb-1.5">
+                      Fries / Side Portion
+                    </label>
+                    <select
+                      id="mcd-fries-select"
+                      value={mcdFries}
+                      onChange={(e) => setMcdFries(Number(e.target.value))}
+                      className="w-full h-11 px-3 bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-xl text-sm font-semibold text-slate-900 dark:text-white"
+                    >
+                      <option value={0}>No Fries / Apple Slices (15 kcal)</option>
+                      <option value={230}>Small World Famous Fries (230 kcal)</option>
+                      <option value={320}>Medium World Famous Fries (320 kcal)</option>
+                      <option value={480}>Large World Famous Fries (480 kcal)</option>
+                    </select>
+                  </div>
+                  <div className="bg-white dark:bg-slate-800/90 p-3 rounded-2xl border border-slate-200 dark:border-slate-700">
+                    <label htmlFor="mcd-drink-select" className="block font-bold text-slate-700 dark:text-slate-200 mb-1.5">
+                      Beverage Choice
+                    </label>
+                    <select
+                      id="mcd-drink-select"
+                      value={mcdDrink}
+                      onChange={(e) => setMcdDrink(Number(e.target.value))}
+                      className="w-full h-11 px-3 bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-xl text-sm font-semibold text-slate-900 dark:text-white"
+                    >
+                      <option value={0}>Diet Coke / Coke Zero / Water (0 kcal)</option>
+                      <option value={140}>Iced Coffee Sugar-Free Vanilla (140 kcal)</option>
+                      <option value={210}>Medium Coca-Cola Classic (210 kcal)</option>
+                      <option value={530}>Medium Oreo McFlurry (530 kcal)</option>
+                    </select>
+                  </div>
+                  <div className="bg-white dark:bg-slate-800/90 p-3 rounded-2xl border border-slate-200 dark:border-slate-700">
+                    <label htmlFor="mcd-sauce-select" className="block font-bold text-slate-700 dark:text-slate-200 mb-1.5">
+                      Dipping Sauce Packet
+                    </label>
+                    <select
+                      id="mcd-sauce-select"
+                      value={mcdSauce}
+                      onChange={(e) => setMcdSauce(Number(e.target.value))}
+                      className="w-full h-11 px-3 bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-xl text-sm font-semibold text-slate-900 dark:text-white"
+                    >
+                      <option value={0}>No Dipping Sauce (0 kcal)</option>
+                      <option value={45}>Tangy Barbeque Sauce (45 kcal)</option>
+                      <option value={50}>Sweet ‘N Sour Sauce (50 kcal)</option>
+                      <option value={110}>Creamy Ranch Sauce (110 kcal)</option>
+                    </select>
+                  </div>
                 </div>
-                <div className="bg-white dark:bg-slate-800/90 p-3 rounded-2xl border border-slate-200 dark:border-slate-700">
-                  <label htmlFor="subway-meat-select" className="block font-bold text-slate-700 dark:text-slate-200 mb-1.5">Protein Filling</label>
-                  <select
-                    id="subway-meat-select"
-                    value={subwayMeat}
-                    onChange={(e) => setSubwayMeat(Number(e.target.value))}
-                    className="w-full h-11 px-3 bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-xl text-sm font-semibold text-slate-900 dark:text-white"
-                  >
-                    <option value={110}>Oven Roasted Turkey (110 kcal)</option>
-                    <option value={160}>Rotisserie Style Chicken (160 kcal)</option>
-                    <option value={250}>Philly Steak (250 kcal)</option>
-                    <option value={290}>Italian B.M.T. (290 kcal)</option>
-                  </select>
-                </div>
-                <div className="bg-white dark:bg-slate-800/90 p-3 rounded-2xl border border-slate-200 dark:border-slate-700">
-                  <label htmlFor="subway-cheese-select" className="block font-bold text-slate-700 dark:text-slate-200 mb-1.5">Cheese Option</label>
-                  <select
-                    id="subway-cheese-select"
-                    value={subwayCheese}
-                    onChange={(e) => setSubwayCheese(Number(e.target.value))}
-                    className="w-full h-11 px-3 bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-xl text-sm font-semibold text-slate-900 dark:text-white"
-                  >
-                    <option value={0}>No Cheese (0 kcal)</option>
-                    <option value={40}>American Cheese (40 kcal)</option>
-                    <option value={50}>Provolone (50 kcal)</option>
-                    <option value={60}>Pepper Jack (60 kcal)</option>
-                  </select>
-                </div>
-                <div className="bg-white dark:bg-slate-800/90 p-3 rounded-2xl border border-slate-200 dark:border-slate-700">
-                  <label htmlFor="subway-sauce-select" className="block font-bold text-slate-700 dark:text-slate-200 mb-1.5">Sauce / Dressing</label>
-                  <select
-                    id="subway-sauce-select"
-                    value={subwaySauce}
-                    onChange={(e) => setSubwaySauce(Number(e.target.value))}
-                    className="w-full h-11 px-3 bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-xl text-sm font-semibold text-slate-900 dark:text-white"
-                  >
-                    <option value={5}>Yellow Mustard (5 kcal)</option>
-                    <option value={30}>Sweet Onion Teriyaki (30 kcal)</option>
-                    <option value={60}>Honey Mustard (60 kcal)</option>
-                    <option value={100}>Regular Mayonnaise (100 kcal)</option>
-                  </select>
-                </div>
-              </div>
+              ) : (
+                <>
+                  <div className="grid grid-cols-2 gap-2 text-xs">
+                    <button
+                      type="button"
+                      onClick={() => setSubwaySize('six_inch')}
+                      className={`min-h-[40px] px-3 py-1.5 rounded-xl font-bold transition-colors ${
+                        subwaySize === 'six_inch' ? 'bg-slate-900 dark:bg-slate-700 text-white shadow-xs' : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200'
+                      }`}
+                    >
+                      6-Inch Sub
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setSubwaySize('footlong')}
+                      className={`min-h-[40px] px-3 py-1.5 rounded-xl font-bold transition-colors ${
+                        subwaySize === 'footlong' ? 'bg-slate-900 dark:bg-slate-700 text-white shadow-xs' : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200'
+                      }`}
+                    >
+                      Footlong (12-Inch)
+                    </button>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                    <div className="bg-white dark:bg-slate-800/90 p-3 rounded-2xl border border-slate-200 dark:border-slate-700">
+                      <label htmlFor="subway-bread-select" className="block font-bold text-slate-700 dark:text-slate-200 mb-1.5">Bread Choice</label>
+                      <select
+                        id="subway-bread-select"
+                        value={subwayBread}
+                        onChange={(e) => setSubwayBread(Number(e.target.value))}
+                        className="w-full h-11 px-3 bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-xl text-sm font-semibold text-slate-900 dark:text-white"
+                      >
+                        <option value={200}>9-Grain Wheat (200 kcal)</option>
+                        <option value={190}>Artisan Italian White (190 kcal)</option>
+                        <option value={230}>Italian Herbs & Cheese (230 kcal)</option>
+                      </select>
+                    </div>
+                    <div className="bg-white dark:bg-slate-800/90 p-3 rounded-2xl border border-slate-200 dark:border-slate-700">
+                      <label htmlFor="subway-meat-select" className="block font-bold text-slate-700 dark:text-slate-200 mb-1.5">Protein Filling</label>
+                      <select
+                        id="subway-meat-select"
+                        value={subwayMeat}
+                        onChange={(e) => setSubwayMeat(Number(e.target.value))}
+                        className="w-full h-11 px-3 bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-xl text-sm font-semibold text-slate-900 dark:text-white"
+                      >
+                        <option value={110}>Oven Roasted Turkey (110 kcal)</option>
+                        <option value={160}>Rotisserie Style Chicken (160 kcal)</option>
+                        <option value={250}>Philly Steak (250 kcal)</option>
+                        <option value={290}>Italian B.M.T. (290 kcal)</option>
+                      </select>
+                    </div>
+                    <div className="bg-white dark:bg-slate-800/90 p-3 rounded-2xl border border-slate-200 dark:border-slate-700">
+                      <label htmlFor="subway-cheese-select" className="block font-bold text-slate-700 dark:text-slate-200 mb-1.5">Cheese Option</label>
+                      <select
+                        id="subway-cheese-select"
+                        value={subwayCheese}
+                        onChange={(e) => setSubwayCheese(Number(e.target.value))}
+                        className="w-full h-11 px-3 bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-xl text-sm font-semibold text-slate-900 dark:text-white"
+                      >
+                        <option value={0}>No Cheese (0 kcal)</option>
+                        <option value={40}>American Cheese (40 kcal)</option>
+                        <option value={50}>Provolone (50 kcal)</option>
+                        <option value={60}>Pepper Jack (60 kcal)</option>
+                      </select>
+                    </div>
+                    <div className="bg-white dark:bg-slate-800/90 p-3 rounded-2xl border border-slate-200 dark:border-slate-700">
+                      <label htmlFor="subway-sauce-select" className="block font-bold text-slate-700 dark:text-slate-200 mb-1.5">Sauce / Dressing</label>
+                      <select
+                        id="subway-sauce-select"
+                        value={subwaySauce}
+                        onChange={(e) => setSubwaySauce(Number(e.target.value))}
+                        className="w-full h-11 px-3 bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-xl text-sm font-semibold text-slate-900 dark:text-white"
+                      >
+                        <option value={5}>Yellow Mustard (5 kcal)</option>
+                        <option value={30}>Sweet Onion Teriyaki (30 kcal)</option>
+                        <option value={60}>Honey Mustard (60 kcal)</option>
+                        <option value={100}>Regular Mayonnaise (100 kcal)</option>
+                      </select>
+                    </div>
+                  </div>
+                </>
+              )}
             </div>
           )}
         </div>
@@ -1160,6 +1551,109 @@ export const HeroToolBox: React.FC<HeroToolBoxProps> = ({
                   ({isLoss ? `-${adultLost.toFixed(1)}` : `+${Math.abs(adultLost).toFixed(1)}`} {unit})
                 </span>
               </div>
+
+              {/* UK / Imperial Stone & Pounds Equivalent Badge */}
+              <div className="mt-1.5 inline-flex flex-wrap items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-100/90 dark:bg-slate-800/80 border border-slate-200/80 dark:border-slate-700 text-[11px] font-bold text-slate-600 dark:text-slate-300 tabular-nums">
+                <span className="text-slate-500 dark:text-slate-400">{p.stoneEquivalentLabel}</span>
+                <span className="text-slate-800 dark:text-slate-100">
+                  {isLoss ? '-' : '+'}{lostStoneAndLbs.stones} st {lostStoneAndLbs.pounds} lbs
+                </span>
+                <span className="text-slate-400">•</span>
+                <span>
+                  {currentStoneAndLbs.stones} st {currentStoneAndLbs.pounds} lbs
+                </span>
+              </div>
+
+              {/* Clinical Sub-Focus Card (Fasting/OMAD, Bariatric %EWL, GLP-1 Trajectory, or Postpartum) */}
+              {activeFocus === 'fasting' && (
+                <div className="mt-3 p-3 rounded-xl bg-sky-50/90 dark:bg-sky-950/60 border border-sky-200 dark:border-sky-500/40 text-xs text-sky-950 dark:text-sky-100 space-y-2">
+                  <div className="flex items-center justify-between font-extrabold">
+                    <span>{p.fastingLabel}</span>
+                    <span className="text-sm text-[#7334fd] dark:text-indigo-300 tabular-nums">
+                      -{fastingTotalDrop} {unit} Total Scale
+                    </span>
+                  </div>
+                  <div className="grid grid-cols-2 gap-2 pt-1 border-t border-sky-200/70 dark:border-sky-700/60 tabular-nums">
+                    <div className="bg-white/80 dark:bg-slate-900/70 p-2 rounded-lg border border-sky-200/60 dark:border-sky-800">
+                      <span className="block text-[10px] text-slate-500 dark:text-slate-400 uppercase font-bold">True Fat Loss (Kept)</span>
+                      <span className="text-sm font-black text-emerald-700 dark:text-emerald-400">
+                        -{fastingTrueFatLoss} {unit} (-{fastingNetPct}%)
+                      </span>
+                    </div>
+                    <div className="bg-white/80 dark:bg-slate-900/70 p-2 rounded-lg border border-sky-200/60 dark:border-sky-800">
+                      <span className="block text-[10px] text-slate-500 dark:text-slate-400 uppercase font-bold">Glycogen + Water</span>
+                      <span className="text-sm font-black text-sky-700 dark:text-sky-300">
+                        -{fastingWaterLoss} {unit} (Refeed)
+                      </span>
+                    </div>
+                  </div>
+                  <p className="text-[11px] text-sky-800 dark:text-sky-200 leading-snug">
+                    {p.fastingDesc}
+                  </p>
+                </div>
+              )}
+
+              {activeFocus === 'bariatric' && (
+                <div className="mt-3 p-3 rounded-xl bg-purple-50/90 dark:bg-purple-950/60 border border-purple-200 dark:border-purple-500/40 text-xs text-purple-950 dark:text-purple-100 space-y-2">
+                  <div className="flex items-center justify-between font-extrabold">
+                    <span>{p.ewlLabel}</span>
+                    <span className="text-base text-[#7334fd] dark:text-indigo-300 tabular-nums">{excessWeightLostPct}% EWL</span>
+                  </div>
+                  {/* Month-by-Month Post-Op Timeline Table (1M, 3M, 6M, 12M, 18M) */}
+                  <div className="grid grid-cols-5 gap-1 pt-1 border-t border-purple-200/70 dark:border-purple-700/60 text-center tabular-nums">
+                    {[
+                      { m: '1M', ewl: activeBariatric.ewlMonths[0] },
+                      { m: '3M', ewl: activeBariatric.ewlMonths[1] },
+                      { m: '6M', ewl: activeBariatric.ewlMonths[2] },
+                      { m: '12M', ewl: activeBariatric.ewlMonths[3] },
+                      { m: '18M', ewl: activeBariatric.ewlMonths[4] }
+                    ].map((pt) => {
+                      const projWeight = Math.max(gWeight || sWeight * 0.65, +(sWeight - (excessWeightTotal * pt.ewl) / 100).toFixed(0));
+                      return (
+                        <div key={pt.m} className="bg-white/80 dark:bg-slate-900/70 p-1.5 rounded-lg border border-purple-200/60 dark:border-purple-800">
+                          <span className="block text-[10px] font-bold text-purple-700 dark:text-purple-300">{pt.m} ({pt.ewl}%)</span>
+                          <span className="text-[11px] font-black text-slate-900 dark:text-white">{projWeight} {unit}</span>
+                        </div>
+                      );
+                    })}
+                  </div>
+                  <p className="text-[11px] text-purple-800 dark:text-purple-200 leading-snug">
+                    {p.ewlDesc}
+                  </p>
+                </div>
+              )}
+
+              {activeFocus === 'glp1' && (
+                <div className="mt-3 p-3 rounded-xl bg-emerald-50/90 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-500/40 text-xs text-emerald-950 dark:text-emerald-100 space-y-2">
+                  <div className="flex items-center justify-between font-extrabold">
+                    <span>{activeGlp1.name}</span>
+                    <span className="text-emerald-700 dark:text-emerald-300 tabular-nums">
+                      {(sWeight * (1 - activeGlp1.meanTbwlPct / 100)).toFixed(1)} {unit} (-{activeGlp1.meanTbwlPct}%)
+                    </span>
+                  </div>
+                  <div className="p-2 rounded-lg bg-white/80 dark:bg-slate-900/70 border border-emerald-200/70 dark:border-emerald-800 text-[11px]">
+                    <span className="font-bold text-emerald-900 dark:text-emerald-200 block mb-0.5">
+                      {activeGlp1.trialName} Escalation:
+                    </span>
+                    <span className="text-slate-700 dark:text-slate-300">{activeGlp1.titrationSchedule}</span>
+                  </div>
+                  <p className="text-[10.5px] text-emerald-800 dark:text-emerald-200 leading-snug">
+                    <strong>Clinical Safety Note:</strong> FDA-approved GLP-1/GIP therapies are dispensed in calibrated pre-filled pens. Avoid unapproved research peptides or DIY syringe reconstitution.
+                  </p>
+                </div>
+              )}
+
+              {activeFocus === 'postpartum' && (
+                <div className="mt-3 p-3 rounded-xl bg-amber-50/90 dark:bg-amber-950/60 border border-amber-200 dark:border-amber-500/40 text-xs text-amber-950 dark:text-amber-100 space-y-1.5">
+                  <div className="flex items-center justify-between font-extrabold">
+                    <span>{p.postpartumLabel}</span>
+                    <span className="text-amber-800 dark:text-amber-300 tabular-nums">{postpartumSafeDailyKcal} kcal/day Safe Goal</span>
+                  </div>
+                  <p className="text-[11px] text-amber-800 dark:text-amber-200 leading-snug">
+                    Includes <strong>+{activeLactation.kcalAdder} kcal/day</strong> lactation synthesis allowance ({p.postpartumPace}) to protect maternal milk supply.
+                  </p>
+                </div>
+              )}
 
               {/* Progress to Goal */}
               {gWeight > 0 && sWeight !== gWeight && (
@@ -1250,18 +1744,41 @@ export const HeroToolBox: React.FC<HeroToolBoxProps> = ({
               <span className="text-[11px] font-bold tracking-wider uppercase text-slate-500 dark:text-slate-400 block mb-2 pr-28">
                 {t.resultHeadingBmr}
               </span>
-              <div className="space-y-3 tabular-nums">
-                <div className="flex justify-between items-baseline border-b border-slate-200 dark:border-slate-700 pb-2">
-                  <span className="text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-200">{t.restingBurnLabel}</span>
-                  <span className="text-xl sm:text-2xl font-black text-[#4950fc] dark:text-indigo-400">{calculatedBmr} <span className="text-xs text-slate-500 dark:text-slate-400">kcal/day</span></span>
+              <div className="space-y-2.5 tabular-nums">
+                <div className="flex justify-between items-baseline border-b border-slate-200 dark:border-slate-700 pb-1.5">
+                  <span className="text-xs font-semibold text-slate-700 dark:text-slate-200">{t.restingBurnLabel}</span>
+                  <span className="text-lg sm:text-xl font-black text-[#4950fc] dark:text-indigo-400">{calculatedBmr} <span className="text-xs text-slate-500 dark:text-slate-400">kcal/day</span></span>
                 </div>
-                <div className="flex justify-between items-baseline border-b border-slate-200 dark:border-slate-700 pb-2">
-                  <span className="text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-200">{t.maintenanceLabel}</span>
-                  <span className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white">{calculatedTdee} <span className="text-xs text-slate-500 dark:text-slate-400">kcal/day</span></span>
+                <div className="flex justify-between items-baseline border-b border-slate-200 dark:border-slate-700 pb-1.5">
+                  <span className="text-xs font-semibold text-slate-700 dark:text-slate-200">{t.maintenanceLabel}</span>
+                  <span className="text-lg sm:text-xl font-black text-slate-900 dark:text-white">{calculatedTdee} <span className="text-xs text-slate-500 dark:text-slate-400">kcal/day</span></span>
                 </div>
                 <div className="flex justify-between items-baseline">
-                  <span className="text-xs sm:text-sm font-semibold text-emerald-700 dark:text-emerald-400">{t.steadyLossLabel}</span>
-                  <span className="text-xl sm:text-2xl font-black text-emerald-600 dark:text-emerald-400">{Math.max(1200, calculatedTdee - 500)} <span className="text-xs text-slate-500 dark:text-slate-400">kcal/day</span></span>
+                  <span className="text-xs font-semibold text-emerald-700 dark:text-emerald-400">{t.steadyLossLabel}</span>
+                  <span className="text-lg sm:text-xl font-black text-emerald-600 dark:text-emerald-400">{Math.max(1200, calculatedTdee - 500)} <span className="text-xs text-slate-500 dark:text-slate-400">kcal/day</span></span>
+                </div>
+
+                {/* Losertown-Style 12-Week Weight & Date Forecast Table */}
+                <div className="mt-3 pt-2.5 border-t border-slate-200 dark:border-slate-700">
+                  <div className="flex items-center justify-between text-[11px] font-extrabold text-slate-800 dark:text-slate-100 mb-1.5">
+                    <span>12-Week Weight Forecast ({intakeVal} kcal/d)</span>
+                    <span className="text-[#4950fc] dark:text-indigo-300">
+                      {weeklyWeightChange >= 0 ? `-${weeklyWeightChange}` : `+${Math.abs(weeklyWeightChange)}`} {unit}/wk
+                    </span>
+                  </div>
+                  <div className="grid grid-cols-4 gap-1 text-center text-[11px]">
+                    {[2, 4, 8, 12].map((wk) => {
+                      const projW = Math.max(40, +(cWeight - weeklyWeightChange * wk).toFixed(1));
+                      const pctChange = cWeight > 0 ? +(((cWeight - projW) / cWeight) * 100).toFixed(1) : 0;
+                      return (
+                        <div key={wk} className="bg-white/90 dark:bg-slate-900/80 p-1.5 rounded-lg border border-slate-200 dark:border-slate-700">
+                          <span className="block text-[10px] font-bold text-slate-500 dark:text-slate-400">Wk {wk}</span>
+                          <span className="block font-black text-slate-900 dark:text-white">{projW} {unit}</span>
+                          <span className="block text-[10px] font-bold text-emerald-600 dark:text-emerald-400">-{pctChange}%</span>
+                        </div>
+                      );
+                    })}
+                  </div>
                 </div>
               </div>
             </div>
@@ -1270,13 +1787,15 @@ export const HeroToolBox: React.FC<HeroToolBoxProps> = ({
           {mode === 'subway' && (
             <div>
               <span className="text-[11px] font-bold tracking-wider uppercase text-slate-500 dark:text-slate-400 block mb-1 pr-28">
-                {t.resultHeadingSubway}
+                {activeBrand === 'mcdonalds' ? p.mcdResultHeading : t.resultHeadingSubway}
               </span>
               <div className="text-4xl sm:text-5xl font-black text-[#ca5983] dark:text-pink-400 tabular-nums">
-                {subwayTotalCalories} <span className="text-base font-semibold text-slate-500 dark:text-slate-400">kcal</span>
+                {activeRestaurantCalories} <span className="text-base font-semibold text-slate-500 dark:text-slate-400">kcal</span>
               </div>
               <p className="text-xs text-slate-500 dark:text-slate-300 mt-2 leading-relaxed">
-                Estimated for a {subwaySize === 'footlong' ? '12-Inch Footlong' : '6-Inch Sub'} based on standard menu nutrition guides.
+                {activeBrand === 'mcdonalds'
+                  ? `Represents ${Math.round((activeRestaurantCalories / Math.max(1200, calculatedTdee - 500)) * 100)}% of a ${Math.max(1200, calculatedTdee - 500)} kcal daily weight-loss budget.`
+                  : `Estimated for a ${subwaySize === 'footlong' ? '12-Inch Footlong' : '6-Inch Sub'} based on official restaurant nutrition guides.`}
               </p>
             </div>
           )}

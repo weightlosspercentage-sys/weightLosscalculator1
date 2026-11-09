@@ -1,5 +1,6 @@
 import { SILOS_DATA, SiloMetadata } from '../data/keywordMatrix';
 import type { ToolMode } from '../components/HeroToolBox';
+import type { ClinicalFocus } from './seoIntentRouter';
 
 export interface SearchableToolItem {
   id: string;
@@ -8,6 +9,7 @@ export interface SearchableToolItem {
   category: 'Calculator' | 'Clinical Guide' | 'FAQ & Reference';
   summary: string;
   calculatorMode?: ToolMode;
+  clinicalFocus?: ClinicalFocus;
   keywords: string[];
   matchedKeyword?: string;
 }
@@ -18,17 +20,31 @@ const TOOL_SUMMARIES: Record<
     summary: string;
     category: 'Calculator' | 'Clinical Guide' | 'FAQ & Reference';
     calculatorMode?: ToolMode;
+    clinicalFocus?: ClinicalFocus;
   }
 > = {
   percentage: {
     summary: 'Calculate body weight loss percentage from starting and current weight in lbs or kg.',
     category: 'Calculator',
-    calculatorMode: 'adult'
+    calculatorMode: 'adult',
+    clinicalFocus: 'standard'
   },
   newborn: {
     summary: 'Check newborn weight change in the first week after birth using AAP clinical guidelines.',
     category: 'Calculator',
     calculatorMode: 'newborn'
+  },
+  'water-fasting': {
+    summary: 'Estimate 24h to 7-day water fast, OMAD, and intermittent fasting weight loss separating glycogen water drop from true fat burn.',
+    category: 'Calculator',
+    calculatorMode: 'adult',
+    clinicalFocus: 'fasting'
+  },
+  'glp1-calculator': {
+    summary: 'Compare Semaglutide (Ozempic/Wegovy 14.9%), Tirzepatide (Mounjaro/Zepbound 20.9%), and Retatrutide clinical trial %TBWL timelines.',
+    category: 'Calculator',
+    calculatorMode: 'adult',
+    clinicalFocus: 'glp1'
   },
   calorie: {
     summary: 'Compare everyday sandwich calories, cycling burn, and breastfeeding calorie needs.',
@@ -76,9 +92,10 @@ const TOOL_SUMMARIES: Record<
     calculatorMode: 'bmr'
   },
   'gastric-bypass': {
-    summary: 'Expected weight loss timeline at 3, 6, 12, and 18 months after gastric sleeve or bypass.',
+    summary: 'Expected weight loss timeline at 1, 3, 6, 12, and 18 months after RNY bypass, gastric sleeve, or duodenal switch.',
     category: 'Calculator',
-    calculatorMode: 'adult'
+    calculatorMode: 'adult',
+    clinicalFocus: 'bariatric'
   },
   'calculate-birth': {
     summary: 'Compare newborn birth weight against current weight to monitor early fluid loss.',
@@ -86,12 +103,12 @@ const TOOL_SUMMARIES: Record<
     calculatorMode: 'newborn'
   },
   'per-month': {
-    summary: 'Safe, sustainable monthly weight loss rates (4 to 8 lbs per month) recommended by doctors.',
+    summary: 'Safe, sustainable monthly weight loss rates (4 to 8 lbs per month) and weekly goal projections.',
     category: 'Clinical Guide',
     calculatorMode: 'adult'
   },
   bmr: {
-    summary: 'Calculate resting calorie burn and compare BMR against Total Daily Energy Expenditure.',
+    summary: 'Calculate resting calorie burn, TDEE, and a 12-week Losertown-style weight forecast table.',
     category: 'Calculator',
     calculatorMode: 'bmr'
   },
@@ -111,9 +128,10 @@ const TOOL_SUMMARIES: Record<
     calculatorMode: 'subway'
   },
   'bariatric-surgery': {
-    summary: 'Compare Excess Weight Loss (EWL) and Total Body Weight Loss (TBWL) after surgery.',
+    summary: 'Compare Excess Weight Loss (%EWL) and Total Body Weight Loss (%TBWL) after RNY, VSG, or Duodenal Switch.',
     category: 'Calculator',
-    calculatorMode: 'adult'
+    calculatorMode: 'adult',
+    clinicalFocus: 'bariatric'
   },
   'biggest-loser': {
     summary: 'Fair percentage-based scoring for office, family, and group fitness weight loss challenges.',
@@ -162,6 +180,7 @@ export const ALL_SEARCHABLE_TOOLS: SearchableToolItem[] = SILOS_DATA.map((silo: 
     category: meta.category,
     summary: meta.summary,
     calculatorMode: meta.calculatorMode,
+    clinicalFocus: meta.clinicalFocus,
     keywords: allKeywords
   };
 });

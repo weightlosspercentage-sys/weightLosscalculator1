@@ -34,21 +34,26 @@ export const MedicalReviewerProfile: React.FC<MedicalReviewerProfileProps> = ({
 
       {/* Top Profile Identity Card (Matches Screenshot 2) */}
       <div className="bg-white dark:bg-slate-800/80 rounded-2xl p-5 sm:p-7 border border-slate-200/90 dark:border-slate-700 shadow-xs flex flex-col sm:flex-row items-start sm:items-center gap-5 sm:gap-6">
-        {/* Circular Portrait from Screenshot 2 */}
+        {/* Circular Portrait using Responsive WebP (<picture> with 96w & 192w srcset, lazy-loaded) */}
         <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full border-[3px] border-slate-900 dark:border-indigo-400 shadow-md ring-4 ring-blue-500/20 overflow-hidden shrink-0 bg-slate-900">
-          <svg
-            viewBox="28 29 61 61"
-            className="w-full h-full block"
-            role="img"
-            aria-label="Dr. Rekha Kumar, M.D., M.S. - Lead Medical Reviewer"
-          >
-            <image
-              href="/assets/aistudio/image_54629f3a.png"
-              width="453"
-              height="744"
-              preserveAspectRatio="xMidYMid slice"
+          <picture>
+            <source
+              type="image/webp"
+              srcSet="/assets/dr-rekha-kumar-96w.webp 96w, /assets/dr-rekha-kumar-192w.webp 192w"
+              sizes="(min-width: 640px) 96px, 80px"
             />
-          </svg>
+            <img
+              src="/assets/dr-rekha-kumar-96w.png"
+              srcSet="/assets/dr-rekha-kumar-96w.png 96w"
+              sizes="(min-width: 640px) 96px, 80px"
+              width={96}
+              height={96}
+              loading="lazy"
+              decoding="async"
+              alt="Dr. Rekha Kumar, M.D., M.S. - Lead Medical Reviewer"
+              className="w-full h-full object-cover block"
+            />
+          </picture>
         </div>
 
         <div className="space-y-2.5 flex-1 min-w-0">

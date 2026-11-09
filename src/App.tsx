@@ -1,15 +1,34 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense, lazy } from 'react';
 import { HeroToolBox, ToolMode } from './components/HeroToolBox';
-import { FAQWithLabels } from './components/FAQWithLabels';
-import { SiloContentSections } from './components/SiloContentSections';
-import { EEATFooter } from './components/EEATFooter';
 import { StructuredData } from './components/StructuredData';
-import { MedicalReviewerProfile } from './components/MedicalReviewerProfile';
-import { SiteInfoPages, SitePageKey } from './components/SiteInfoPages';
-import { AdSlot } from './components/AdSlot';
-import { AD_SLOT_HERO_BELOW, AD_SLOT_IN_ARTICLE, AD_SLOT_ABOVE_FAQ } from './config/adsense';
+import type { SitePageKey } from './components/SiteInfoPages';
 import { TopToolSearchBar } from './components/TopToolSearchBar';
+import { AdSlot } from './components/AdSlot';
+import { AD_SLOT_HERO_BELOW, AD_SLOT_ABOVE_FAQ } from './config/adsense';
+
+// Lazy-load below-the-fold content sections & secondary routes to minimize initial TBT and improve interaction readiness
+const SiloContentSections = lazy(() =>
+  import('./components/SiloContentSections').then((m) => ({ default: m.SiloContentSections }))
+);
+const FAQWithLabels = lazy(() =>
+  import('./components/FAQWithLabels').then((m) => ({ default: m.FAQWithLabels }))
+);
+const EEATFooter = lazy(() =>
+  import('./components/EEATFooter').then((m) => ({ default: m.EEATFooter }))
+);
+const MedicalReviewerProfile = lazy(() =>
+  import('./components/MedicalReviewerProfile').then((m) => ({ default: m.MedicalReviewerProfile }))
+);
+const SiteInfoPages = lazy(() =>
+  import('./components/SiteInfoPages').then((m) => ({ default: m.SiteInfoPages }))
+);
 import { SearchableToolItem } from './utils/toolSearch';
+import {
+  resolveSearchIntentFromPath,
+  ClinicalFocus,
+  RestaurantBrand,
+  RouteIntentResolution
+} from './utils/seoIntentRouter';
 import { LOCALES } from './data/keywordMatrix';
 import { LOCALE_TRANSLATIONS } from './data/localeStrings';
 import {
@@ -32,10 +51,17 @@ type ActiveView = 'home' | 'reviewer' | 'info';
 type NavTarget = 'adult' | 'newborn' | 'bmr' | 'subway' | 'faq' | 'silos';
 
 export const App: React.FC = () => {
-  const [selectedLocale, setSelectedLocale] = useState<string>('en');
+  const initialResolution = resolveSearchIntentFromPath(
+    typeof window !== 'undefined' ? window.location.pathname : '/'
+  );
+
+  const [selectedLocale, setSelectedLocale] = useState<string>(initialResolution.locale);
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
-  const [activeToolMode, setActiveToolMode] = useState<ToolMode>('adult');
-  const [activeBottomNav, setActiveBottomNav] = useState<NavTarget>('adult');
+  const [activeToolMode, setActiveToolMode] = useState<ToolMode>(initialResolution.toolMode);
+  const [activeBottomNav, setActiveBottomNav] = useState<NavTarget>(initialResolution.toolMode);
+  const [clinicalFocus, setClinicalFocus] = useState<ClinicalFocus>(initialResolution.clinicalFocus);
+  const [restaurantBrand, setRestaurantBrand] = useState<RestaurantBrand>(initialResolution.restaurantBrand);
+  const [routeIntent, setRouteIntent] = useState<RouteIntentResolution>(initialResolution);
   const [activeView, setActiveView] = useState<ActiveView>('home');
   const [activeSitePage, setActiveSitePage] = useState<SitePageKey>('about');
   const [searchQuery, setSearchQuery] = useState<string>('');
@@ -66,19 +92,33 @@ export const App: React.FC = () => {
 
   const t = LOCALE_TRANSLATIONS[selectedLocale] || LOCALE_TRANSLATIONS.en;
 
-  // Sync <html lang>, <title>, <meta name="description">, and <link rel="canonical"> whenever locale or active view changes
+  // Sync <html lang>, <title>, <meta name="description">, OpenGraph/Twitter cards, and self-referencing <link rel="canonical">
   useEffect(() => {
     document.documentElement.lang = t.htmlLang;
+    const effectiveTitle =
+      activeView === 'home' ? routeIntent.customMetaTitle || t.metaTitle : document.title;
+    const effectiveDesc =
+      activeView === 'home' ? routeIntent.customMetaDescription || t.metaDescription : t.metaDescription;
+
     if (activeView === 'home') {
-      document.title = t.metaTitle;
+      document.title = effectiveTitle;
       const metaDesc = document.querySelector('meta[name="description"]') as HTMLMetaElement | null;
       if (metaDesc) {
-        metaDesc.content = t.metaDescription;
+        metaDesc.content = effectiveDesc;
       }
+      const ogTitle = document.querySelector('meta[property="og:title"]') as HTMLMetaElement | null;
+      if (ogTitle) ogTitle.content = effectiveTitle;
+      const ogDesc = document.querySelector('meta[property="og:description"]') as HTMLMetaElement | null;
+      if (ogDesc) ogDesc.content = effectiveDesc;
+      const twTitle = document.querySelector('meta[name="twitter:title"]') as HTMLMetaElement | null;
+      if (twTitle) twTitle.content = effectiveTitle;
+      const twDesc = document.querySelector('meta[name="twitter:description"]') as HTMLMetaElement | null;
+      if (twDesc) twDesc.content = effectiveDesc;
     }
+
     const canonicalEl = document.querySelector('link[rel="canonical"]') as HTMLLinkElement | null;
     if (canonicalEl) {
-      let path = t.canonicalPath;
+      let path = routeIntent.canonicalPath || t.canonicalPath;
       if (activeView === 'reviewer') {
         path = '/authors/dr-rekha-kumar/';
       } else if (activeView === 'info') {
@@ -91,39 +131,69 @@ export const App: React.FC = () => {
         };
         path = routeMap[activeSitePage];
       }
-      canonicalEl.href = `https://www.weightlosspercentage.com${path}`;
+      const fullCanonical = `https://www.weightlosspercentage.com${path}`;
+      canonicalEl.href = fullCanonical;
+      const ogUrl = document.querySelector('meta[property="og:url"]') as HTMLMetaElement | null;
+      if (ogUrl) ogUrl.content = fullCanonical;
     }
-  }, [selectedLocale, activeView, activeSitePage, t.htmlLang, t.canonicalPath, t.metaTitle, t.metaDescription]);
+  }, [
+    selectedLocale,
+    activeView,
+    activeSitePage,
+    routeIntent,
+    t.htmlLang,
+    t.canonicalPath,
+    t.metaTitle,
+    t.metaDescription
+  ]);
 
-  // Sync URL pathname on initial load and popstate for /authors/dr-rekha-kumar/, locales, and site pages
+  // Sync URL pathname on initial load and popstate for search intent satisfaction, programmatic redirects, locales, and site pages
   useEffect(() => {
     const syncPath = () => {
-      const path = window.location.pathname.toLowerCase();
-      if (path.startsWith('/de')) setSelectedLocale('de');
-      else if (path.startsWith('/it')) setSelectedLocale('it');
-      else if (path.startsWith('/ru')) setSelectedLocale('ru');
-      else if (path.startsWith('/zh')) setSelectedLocale('zh');
-      else if (path.startsWith('/ca')) setSelectedLocale('ca');
-      else if (path.startsWith('/uk')) setSelectedLocale('uk');
+      const rawPath = window.location.pathname;
+      const path = rawPath.toLowerCase();
 
       if (path.includes('/authors/dr-rekha-kumar')) {
         setActiveView('reviewer');
+        return;
       } else if (path.includes('/about')) {
         setActiveView('info');
         setActiveSitePage('about');
+        return;
       } else if (path.includes('/methodology')) {
         setActiveView('info');
         setActiveSitePage('methodology');
+        return;
       } else if (path.includes('/privacy')) {
         setActiveView('info');
         setActiveSitePage('privacy');
+        return;
       } else if (path.includes('/terms')) {
         setActiveView('info');
         setActiveSitePage('terms');
+        return;
       } else if (path.includes('/contact')) {
         setActiveView('info');
         setActiveSitePage('contact');
+        return;
       }
+
+      const resolved = resolveSearchIntentFromPath(rawPath);
+      if (resolved.shouldRedirectToHome) {
+        try {
+          window.history.replaceState({}, '', resolved.redirectTarget);
+        } catch {
+          // ignore in sandboxed frames
+        }
+      }
+
+      setActiveView('home');
+      setSelectedLocale(resolved.locale);
+      setActiveToolMode(resolved.toolMode);
+      setActiveBottomNav(resolved.toolMode);
+      setClinicalFocus(resolved.clinicalFocus);
+      setRestaurantBrand(resolved.restaurantBrand);
+      setRouteIntent(resolved);
     };
     syncPath();
     window.addEventListener('popstate', syncPath);
@@ -142,11 +212,13 @@ export const App: React.FC = () => {
   }, [mobileMenuOpen]);
 
   const navigateHome = () => {
+    const homeResolved = resolveSearchIntentFromPath(t.canonicalPath);
     setActiveView('home');
+    setRouteIntent(homeResolved);
     setActiveBottomNav(activeToolMode);
     setMobileMenuOpen(false);
     try {
-      window.history.pushState({}, '', '/');
+      window.history.pushState({}, '', t.canonicalPath);
     } catch {
       // ignore in sandboxed frames
     }
@@ -179,6 +251,24 @@ export const App: React.FC = () => {
       window.history.pushState({}, '', routeMap[page]);
     } catch {
       // ignore
+    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const navigateCanonicalHub = (path: string) => {
+    const resolved = resolveSearchIntentFromPath(path);
+    setActiveView('home');
+    setSelectedLocale(resolved.locale);
+    setActiveToolMode(resolved.toolMode);
+    setActiveBottomNav(resolved.toolMode);
+    setClinicalFocus(resolved.clinicalFocus);
+    setRestaurantBrand(resolved.restaurantBrand);
+    setRouteIntent(resolved);
+    setMobileMenuOpen(false);
+    try {
+      window.history.pushState({}, '', path);
+    } catch {
+      // ignore in sandboxed frames
     }
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -235,6 +325,9 @@ export const App: React.FC = () => {
       setActiveBottomNav(tool.calculatorMode);
     } else {
       setActiveBottomNav('silos');
+    }
+    if (tool.clinicalFocus) {
+      setClinicalFocus(tool.clinicalFocus);
     }
 
     setTimeout(() => {
@@ -304,8 +397,8 @@ export const App: React.FC = () => {
     },
     {
       id: 'silos',
-      label: 'All 24 Calculators & Guides',
-      subtitle: 'Formulas, newborn charts, BMI & nutrition guides',
+      label: 'All 26 Calculators & Guides',
+      subtitle: 'Formulas, newborn charts, fasting, GLP-1 & BMI guides',
       href: '#percentage',
       icon: <BookOpen className="w-4 h-4 shrink-0" />,
       activeClass: 'bg-indigo-50/90 dark:bg-indigo-950/70 text-[#7334fd] dark:text-indigo-300 border-indigo-200/90 dark:border-indigo-800/80 shadow-2xs',
@@ -316,12 +409,17 @@ export const App: React.FC = () => {
   return (
     <div className="min-h-screen bg-[#fbfbfd] dark:bg-slate-950 text-slate-900 dark:text-slate-100 flex flex-col font-sans selection:bg-[#ca3500] selection:text-white pb-20 lg:pb-0 transition-colors duration-200">
       {/* Inject Structured Data (JSON-LD) into DOM head */}
-      <StructuredData locale={selectedLocale} />
+      <StructuredData
+        locale={selectedLocale}
+        canonicalPath={routeIntent.canonicalPath}
+        customTitle={routeIntent.customHeroTitle}
+        customDescription={routeIntent.customMetaDescription}
+      />
 
       {/* Top Navigation Bar (Compact 48px on Mobile, 54px on Desktop) */}
       <header className="sticky top-0 z-40 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-200/80 dark:border-slate-800 transition-colors duration-200">
         <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between gap-2 h-12 sm:h-13">
+          <div className="flex items-center justify-between gap-1.5 sm:gap-2 h-12 sm:h-13">
             {/* Zone 1: Brand Logo matching Screenshot 1 ([%] Weight Loss Percentage) */}
             <a
               href="/"
@@ -329,12 +427,12 @@ export const App: React.FC = () => {
                 e.preventDefault();
                 navigateHome();
               }}
-              className="flex items-center gap-2 sm:gap-2.5 group min-w-0 shrink"
+              className="flex items-center gap-1.5 sm:gap-2.5 group min-w-0 shrink"
             >
-              <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-[10px] bg-gradient-to-b from-[#5856f6] via-[#7c3aed] to-[#c94b38] flex items-center justify-center text-white shadow-xs shrink-0 font-black text-base sm:text-lg leading-none select-none">
+              <div className="w-7 h-7 sm:w-9 sm:h-9 rounded-[9px] sm:rounded-[10px] bg-gradient-to-b from-[#5856f6] via-[#7c3aed] to-[#c94b38] flex items-center justify-center text-white shadow-xs shrink-0 font-black text-sm sm:text-lg leading-none select-none">
                 %
               </div>
-              <span className="font-extrabold text-slate-900 dark:text-white text-sm sm:text-xl tracking-tight truncate">
+              <span className="font-extrabold text-slate-900 dark:text-white text-[13.5px] sm:text-xl tracking-tight whitespace-nowrap">
                 Weight Loss <span className="text-[#ca3500] dark:text-orange-400">Percentage</span>
               </span>
             </a>
@@ -488,7 +586,7 @@ export const App: React.FC = () => {
             </div>
           </div>
 
-          {/* Top Search Bar for Quickly Finding Any of the 24 Calculators & Guides */}
+          {/* Top Search Bar for Quickly Finding Any of the 26 Calculators & Guides */}
           <div className="pb-1.5 pt-0">
             <TopToolSearchBar
               query={searchQuery}
@@ -737,7 +835,7 @@ export const App: React.FC = () => {
       {/* Main Content Area */}
       <main className="flex-1 max-w-7xl w-full mx-auto px-3 sm:px-6 lg:px-8 py-2.5 sm:py-4 space-y-5 sm:space-y-12">
         {activeView === 'reviewer' ? (
-          <>
+          <Suspense fallback={<div className="min-h-[480px] rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 p-8" />}>
             <MedicalReviewerProfile
               isStandalonePage={true}
               onBackToCalculator={navigateHome}
@@ -751,15 +849,16 @@ export const App: React.FC = () => {
               hideReviewerCard={true}
               onOpenReviewerProfile={navigateReviewerProfile}
               onOpenSitePage={navigateSitePage}
+              onNavigateCanonicalHub={navigateCanonicalHub}
               onSelectCalculatorMode={(mode) => {
                 setActiveToolMode(mode);
                 setActiveBottomNav(mode);
                 navigateHome();
               }}
             />
-          </>
+          </Suspense>
         ) : activeView === 'info' ? (
-          <>
+          <Suspense fallback={<div className="min-h-[480px] rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 p-8" />}>
             <SiteInfoPages
               activePage={activeSitePage}
               onSelectPage={navigateSitePage}
@@ -769,18 +868,19 @@ export const App: React.FC = () => {
             <EEATFooter
               onOpenReviewerProfile={navigateReviewerProfile}
               onOpenSitePage={navigateSitePage}
+              onNavigateCanonicalHub={navigateCanonicalHub}
               onSelectCalculatorMode={(mode) => {
                 setActiveToolMode(mode);
                 setActiveBottomNav(mode);
                 navigateHome();
               }}
             />
-          </>
+          </Suspense>
         ) : (
           <>
             {/* Above-The-Fold: Main Heading, Concise Intro & Clinical Reviewer Byline */}
             <section className="space-y-1 sm:space-y-1.5 max-w-4xl">
-              <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5 text-[11px] sm:text-xs text-slate-600 dark:text-slate-300 font-medium">
+              <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[11px] sm:text-xs text-slate-600 dark:text-slate-300 font-medium">
                 <button
                   type="button"
                   onClick={navigateReviewerProfile}
@@ -792,15 +892,23 @@ export const App: React.FC = () => {
                 <span>{t.bylinePrivate}</span>
                 <span aria-hidden="true" className="text-slate-300 dark:text-slate-600">·</span>
                 <span>{t.bylinePdf}</span>
+                {routeIntent.intentBadge && (
+                  <>
+                    <span aria-hidden="true" className="text-slate-300 dark:text-slate-600">·</span>
+                    <span className="inline-flex items-center px-2 py-0.5 rounded-md bg-indigo-50 dark:bg-indigo-950/80 text-[#7334fd] dark:text-indigo-300 font-extrabold text-[10px] sm:text-[11px]">
+                      {routeIntent.intentBadge}
+                    </span>
+                  </>
+                )}
               </div>
 
               <h1 className="text-2xl sm:text-4xl font-black text-slate-900 dark:text-white tracking-tight leading-tight">
-                {t.heroTitle}
+                {routeIntent.customHeroTitle || t.heroTitle}
               </h1>
 
-              {/* Intro text strictly under 45 words (37 words), warm and human-friendly with zero em dashes */}
+              {/* Intro text strictly under 45 words, warm and human-friendly with zero em dashes */}
               <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-snug font-normal">
-                {t.heroIntro}
+                {routeIntent.customHeroIntro || t.heroIntro}
               </p>
             </section>
 
@@ -809,6 +917,12 @@ export const App: React.FC = () => {
               <HeroToolBox
                 externalMode={activeToolMode}
                 locale={selectedLocale}
+                clinicalFocus={clinicalFocus}
+                onClinicalFocusChange={setClinicalFocus}
+                restaurantBrand={restaurantBrand}
+                onRestaurantBrandChange={setRestaurantBrand}
+                defaultWeightUnit={routeIntent.defaultWeightUnit}
+                defaultBabyUnit={routeIntent.defaultBabyUnit}
                 onModeChange={(m) => {
                   setActiveToolMode(m);
                   setActiveBottomNav(m);
@@ -816,38 +930,48 @@ export const App: React.FC = () => {
               />
             </section>
 
-            {/* AdSense: display unit below the calculator results */}
-            <AdSlot slot={AD_SLOT_HERO_BELOW} minHeight={280} />
+            {/* Policy-Safe Display Ad Unit 1: Directly below the hero calculator results block (24px+ margin) */}
+            <AdSlot slot={AD_SLOT_HERO_BELOW} variant="display" />
 
-            {/* Frequently Answered Clinical & Calculation Questions */}
-            <FAQWithLabels locale={selectedLocale} />
+            {/* Below-the-Fold Deferred Content with Content-Visibility Optimization */}
+            <Suspense fallback={<div className="min-h-[600px] cv-auto" />}>
+              <div className="cv-auto">
+                {/* Comprehensive 26 Calculators & Clinical Reference Guides (includes mid-page In-article Ad Unit 2) */}
+                <SiloContentSections
+                  searchQuery={searchQuery}
+                  onClearSearch={() => setSearchQuery('')}
+                  locale={selectedLocale}
+                  onSelectToolMode={(mode) => {
+                    setActiveToolMode(mode);
+                    setActiveBottomNav(mode);
+                  }}
+                  onSelectClinicalFocus={(focus) => {
+                    setClinicalFocus(focus);
+                  }}
+                />
+              </div>
 
-            {/* AdSense: in-article unit between content sections */}
-            <AdSlot slot={AD_SLOT_IN_ARTICLE} minHeight={300} />
+              {/* Policy-Safe Display Ad Unit 3: Just above the FAQ, before the footer (24px+ margin) */}
+              <AdSlot slot={AD_SLOT_ABOVE_FAQ} variant="display" />
 
-            {/* Comprehensive 24 Calculators & Clinical Reference Guides */}
-            <SiloContentSections
-              searchQuery={searchQuery}
-              onClearSearch={() => setSearchQuery('')}
-              locale={selectedLocale}
-              onSelectToolMode={(mode) => {
-                setActiveToolMode(mode);
-                setActiveBottomNav(mode);
-              }}
-            />
+              <div className="cv-auto">
+                {/* Frequently Answered Clinical & Calculation Questions */}
+                <FAQWithLabels locale={selectedLocale} />
+              </div>
 
-            {/* AdSense: display unit above the trust footer */}
-            <AdSlot slot={AD_SLOT_ABOVE_FAQ} minHeight={250} />
-
-            {/* Complete Medical Review & Trust Footer */}
-            <EEATFooter
-              onOpenReviewerProfile={navigateReviewerProfile}
-              onOpenSitePage={navigateSitePage}
-              onSelectCalculatorMode={(mode) => {
-                setActiveToolMode(mode);
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-              }}
-            />
+              <div className="cv-auto">
+                {/* Complete Medical Review & Trust Footer */}
+                <EEATFooter
+                  onOpenReviewerProfile={navigateReviewerProfile}
+                  onOpenSitePage={navigateSitePage}
+                  onNavigateCanonicalHub={navigateCanonicalHub}
+                  onSelectCalculatorMode={(mode) => {
+                    setActiveToolMode(mode);
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                  }}
+                />
+              </div>
+            </Suspense>
           </>
         )}
       </main>

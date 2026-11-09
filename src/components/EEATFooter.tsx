@@ -13,13 +13,41 @@ interface EEATFooterProps {
   onOpenReviewerProfile?: () => void;
   onOpenSitePage?: (page: SitePageKey) => void;
   onSelectCalculatorMode?: (mode: 'adult' | 'newborn' | 'bmr') => void;
+  onNavigateCanonicalHub?: (path: string) => void;
   hideReviewerCard?: boolean;
 }
+
+const CANONICAL_HUB_LINKS = [
+  { href: '/calculators/newborn-weight-loss/', label: 'Newborn Weight Loss Calculator' },
+  { href: '/calculators/water-fasting-weight-loss/', label: 'Water Fasting Weight Loss Calculator' },
+  { href: '/calculators/omad-weight-loss/', label: 'OMAD & Intermittent Fasting Calculator' },
+  { href: '/calculators/glp1-weight-loss/', label: 'GLP-1, Semaglutide & Tirzepatide Calculator' },
+  { href: '/calculators/bariatric-surgery-weight-loss/', label: 'Bariatric Surgery (%EWL) Calculator' },
+  { href: '/calculators/postpartum-weight-loss/', label: 'Postpartum & Breastfeeding Calculator' },
+  { href: '/calculators/bmr/', label: 'BMR & 12-Week Projection Calculator' },
+  { href: '/calculators/calorie-deficit/', label: 'Calorie Deficit Calculator' },
+  { href: '/calculators/keto/', label: 'Keto Macro Calculator' },
+  { href: '/calculators/biggest-loser/', label: 'Biggest Loser % Calculator' },
+  { href: '/restaurants/subway/', label: 'Subway Calorie Calculator' },
+  { href: '/restaurants/mcdonalds/', label: "McDonald's Calorie Calculator" }
+];
+
+const REGIONAL_EDITION_LINKS = [
+  { href: '/', label: 'United States (EN)' },
+  { href: '/uk/', label: 'United Kingdom (EN-GB)' },
+  { href: '/ca/', label: 'Canada (EN-CA)' },
+  { href: '/au/', label: 'Australia (EN-AU)' },
+  { href: '/de/', label: 'Deutschland (DE)' },
+  { href: '/it/', label: 'Italia (IT)' },
+  { href: '/ru/', label: 'Россия (RU)' },
+  { href: '/zh/', label: '中文 (ZH)' }
+];
 
 export const EEATFooter: React.FC<EEATFooterProps> = ({
   onOpenReviewerProfile,
   onOpenSitePage,
   onSelectCalculatorMode,
+  onNavigateCanonicalHub,
   hideReviewerCard = false
 }) => {
   return (
@@ -138,6 +166,55 @@ export const EEATFooter: React.FC<EEATFooterProps> = ({
           </div>
         </div>
 
+        {/* Direct Canonical Calculator Hubs & Regional Editions (Semantic Crawl Mesh) */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2 border-t border-slate-800/80 text-xs">
+          <div>
+            <h4 className="font-bold uppercase tracking-wider text-slate-400 mb-2.5">
+              Clinical Calculator Hubs
+            </h4>
+            <div className="flex flex-wrap gap-1.5">
+              {CANONICAL_HUB_LINKS.map((hub) => (
+                <a
+                  key={hub.href}
+                  href={hub.href}
+                  onClick={(e) => {
+                    if (onNavigateCanonicalHub) {
+                      e.preventDefault();
+                      onNavigateCanonicalHub(hub.href);
+                    }
+                  }}
+                  className="px-2.5 py-1 rounded-lg bg-slate-800/90 hover:bg-[#7334fd] text-slate-300 hover:text-white border border-slate-700/80 transition-colors font-medium"
+                >
+                  {hub.label}
+                </a>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <h4 className="font-bold uppercase tracking-wider text-slate-400 mb-2.5">
+              International &amp; Regional Editions
+            </h4>
+            <div className="flex flex-wrap gap-1.5">
+              {REGIONAL_EDITION_LINKS.map((reg) => (
+                <a
+                  key={reg.href}
+                  href={reg.href}
+                  onClick={(e) => {
+                    if (onNavigateCanonicalHub) {
+                      e.preventDefault();
+                      onNavigateCanonicalHub(reg.href);
+                    }
+                  }}
+                  className="px-2.5 py-1 rounded-lg bg-slate-800/90 hover:bg-[#4950fc] text-slate-300 hover:text-white border border-slate-700/80 transition-colors font-medium"
+                >
+                  {reg.label}
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+
         {/* Footer Navigation Links & Social Media Interlinks */}
         <div className="pt-2 space-y-4 border-t border-slate-800/80">
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 text-xs text-slate-300">
@@ -189,6 +266,13 @@ export const EEATFooter: React.FC<EEATFooterProps> = ({
               >
                 Contact
               </button>
+              <span className="text-slate-600">•</span>
+              <a
+                href="/sitemap.xml"
+                className="hover:text-white transition-colors"
+              >
+                XML Sitemap
+              </a>
             </div>
 
             {/* Follow Us Social Media Icons */}
