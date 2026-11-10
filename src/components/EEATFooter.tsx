@@ -25,11 +25,16 @@ const CANONICAL_HUB_LINKS = [
   { href: '/calculators/bariatric-surgery-weight-loss/', label: 'Bariatric Surgery (%EWL) Calculator' },
   { href: '/calculators/postpartum-weight-loss/', label: 'Postpartum & Breastfeeding Calculator' },
   { href: '/calculators/bmr/', label: 'BMR & 12-Week Projection Calculator' },
+  { href: '/calculators/tdee/', label: 'TDEE Calculator' },
   { href: '/calculators/calorie-deficit/', label: 'Calorie Deficit Calculator' },
+  { href: '/calculators/how-much-weight-can-i-lose-in-a-month/', label: 'How Much Weight Can I Lose in a Month Calculator' },
   { href: '/calculators/keto/', label: 'Keto Macro Calculator' },
+  { href: '/calculators/fat-loss/', label: 'Fat Loss Percentage Calculator' },
+  { href: '/calculators/water-intake/', label: 'Water Intake Calculator' },
   { href: '/calculators/biggest-loser/', label: 'Biggest Loser % Calculator' },
   { href: '/restaurants/subway/', label: 'Subway Calorie Calculator' },
-  { href: '/restaurants/mcdonalds/', label: "McDonald's Calorie Calculator" }
+  { href: '/restaurants/mcdonalds/', label: "McDonald's Calorie Calculator" },
+  { href: '/restaurants/five-guys/', label: 'Five Guys Calorie Calculator' }
 ];
 
 const REGIONAL_EDITION_LINKS = [

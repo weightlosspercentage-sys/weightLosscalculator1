@@ -166,7 +166,7 @@ export const TopToolSearchBar: React.FC<TopToolSearchBarProps> = ({
           aria-expanded={isOpen}
           aria-controls="calculator-search-results"
           aria-autocomplete="list"
-          aria-label="Search 26 calculators and clinical guides"
+          aria-label={`Search ${ALL_SEARCHABLE_TOOLS.length} calculators and clinical guides`}
           value={query}
           onFocus={() => setIsOpen(true)}
           onChange={(e) => {
@@ -307,7 +307,7 @@ export const TopToolSearchBar: React.FC<TopToolSearchBarProps> = ({
                 onClick={() => setQuery('')}
                 className="mt-1 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold bg-[#7334fd] text-white hover:bg-[#5f23e6] transition-colors cursor-pointer"
               >
-                Show All 26 Calculators &amp; Guides
+                Show All {ALL_SEARCHABLE_TOOLS.length} Calculators &amp; Guides
               </button>
             </div>
           )}

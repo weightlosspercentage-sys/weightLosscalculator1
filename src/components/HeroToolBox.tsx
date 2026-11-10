@@ -94,6 +94,11 @@ export const HeroToolBox: React.FC<HeroToolBoxProps> = ({
   const [mcdDrink, setMcdDrink] = useState<number>(0);
   const [mcdSauce, setMcdSauce] = useState<number>(45);
 
+  // Five Guys meal builder inputs (official Five Guys nutrition guide, Sept 2026)
+  const [fgBurger, setFgBurger] = useState<number>(980);
+  const [fgFries, setFgFries] = useState<number>(526);
+  const [fgDrink, setFgDrink] = useState<number>(0);
+
   const [copied, setCopied] = useState<boolean>(false);
   const [pdfDownloaded, setPdfDownloaded] = useState<boolean>(false);
 
@@ -275,11 +280,19 @@ export const HeroToolBox: React.FC<HeroToolBoxProps> = ({
   const dailyNetDeficit = calculatedTdee - intakeVal;
   const weeklyWeightChange = +(dailyNetDeficit * 7 / kcalPerUnit).toFixed(2);
 
+  // Keto Macro Grams (70% Fat / 9 kcal/g, 25% Protein / 4 kcal/g, 5% Net Carbs / 4 kcal/g)
+  const isKeto = typeof window !== 'undefined' && window.location.pathname.toLowerCase().includes('keto');
+  const ketoFatG = Math.round((calculatedTdee * 0.70) / 9);
+  const ketoProteinG = Math.round((calculatedTdee * 0.25) / 4);
+  const ketoCarbsG = Math.round((calculatedTdee * 0.05) / 4);
+
   // Restaurant (Subway & McDonald's) calculation
   const multiplier = subwaySize === 'footlong' ? 2 : 1;
   const subwayTotalCalories = (subwayBread + subwayMeat + subwayCheese + subwaySauce) * multiplier;
   const mcdTotalCalories = mcdMain + mcdFries + mcdDrink + mcdSauce;
-  const activeRestaurantCalories = activeBrand === 'mcdonalds' ? mcdTotalCalories : subwayTotalCalories;
+  const fgTotalCalories = fgBurger + fgFries + fgDrink;
+  const activeRestaurantCalories =
+    activeBrand === 'mcdonalds' ? mcdTotalCalories : activeBrand === 'five-guys' ? fgTotalCalories : subwayTotalCalories;
 
   const triggerCelebration = async () => {
     const { default: confetti } = await import('canvas-confetti');
@@ -552,6 +565,8 @@ export const HeroToolBox: React.FC<HeroToolBoxProps> = ({
       doc.text(
         activeBrand === 'mcdonalds'
           ? '1. McDonald’s Meal Nutrition & Calorie Summary'
+          : activeBrand === 'five-guys'
+          ? '1. Five Guys Meal Nutrition & Calorie Summary'
           : '1. Subway Meal Nutrition & Calorie Summary',
         14,
         y
@@ -562,6 +577,8 @@ export const HeroToolBox: React.FC<HeroToolBoxProps> = ({
       doc.text(
         activeBrand === 'mcdonalds'
           ? `Entrée (${mcdMain} kcal) + Side (${mcdFries} kcal) + Beverage (${mcdDrink} kcal) + Sauce (${mcdSauce} kcal) = ${mcdTotalCalories} kcal`
+          : activeBrand === 'five-guys'
+          ? `Burger (${fgBurger} kcal) + Fries (${fgFries} kcal) + Beverage (${fgDrink} kcal) = ${fgTotalCalories} kcal`
           : `Sandwich Portion: ${subwaySize === 'footlong' ? '12-Inch Footlong' : '6-Inch Sub'}   |   Total Meal Energy: ${subwayTotalCalories} kcal`,
         14,
         y
@@ -716,7 +733,11 @@ export const HeroToolBox: React.FC<HeroToolBoxProps> = ({
                   ? 'Newborn Loss %'
                   : mode === 'bmr'
                   ? 'Daily BMR / TDEE'
-                  : 'Subway Meal Total'}
+                  : activeBrand === 'five-guys'
+                  ? 'Five Guys Meal Total'
+                  : activeBrand === 'mcdonalds'
+                  ? (p.mcdResultHeading || "McDonald's Meal Total")
+                  : (t.resultHeadingSubway || 'Subway Meal Total')}
               </span>
               <div className="flex items-baseline gap-1.5 tabular-nums">
                 {mode === 'adult' && (
@@ -1332,8 +1353,8 @@ export const HeroToolBox: React.FC<HeroToolBoxProps> = ({
           {/* MODE 4: RESTAURANT NUTRITION (SUBWAY & MCDONALD'S) */}
           {mode === 'subway' && (
             <div className="space-y-4">
-              {/* Brand Switcher: McDonald's vs Subway */}
-              <div className="grid grid-cols-2 gap-2 text-xs">
+              {/* Brand Switcher: McDonald's vs Subway vs Five Guys */}
+              <div className="grid grid-cols-3 gap-2 text-xs">
                 <button
                   type="button"
                   onClick={() => handleBrandSelect('mcdonalds')}
@@ -1355,6 +1376,17 @@ export const HeroToolBox: React.FC<HeroToolBoxProps> = ({
                   }`}
                 >
                   {p.subwayBuilderBtn}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleBrandSelect('five-guys')}
+                  className={`min-h-[44px] px-3 py-2 rounded-xl font-extrabold transition-colors cursor-pointer ${
+                    activeBrand === 'five-guys'
+                      ? 'bg-[#b91c1c] text-white shadow-xs'
+                      : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-700'
+                  }`}
+                >
+                  {p.fiveGuysBuilderBtn}
                 </button>
               </div>
 
@@ -1425,6 +1457,64 @@ export const HeroToolBox: React.FC<HeroToolBoxProps> = ({
                       <option value={50}>Sweet ‘N Sour Sauce (50 kcal)</option>
                       <option value={110}>Creamy Ranch Sauce (110 kcal)</option>
                     </select>
+                  </div>
+                </div>
+              ) : activeBrand === 'five-guys' ? (
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                  <div className="bg-white dark:bg-slate-800/90 p-3 rounded-2xl border border-slate-200 dark:border-slate-700">
+                    <label htmlFor="fg-burger-select" className="block font-bold text-slate-700 dark:text-slate-200 mb-1.5">
+                      Burger / Main Entrée
+                    </label>
+                    <select
+                      id="fg-burger-select"
+                      value={fgBurger}
+                      onChange={(e) => setFgBurger(Number(e.target.value))}
+                      className="w-full h-11 px-3 bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-xl text-sm font-semibold text-slate-900 dark:text-white"
+                    >
+                      <option value={840}>Hamburger (840 kcal)</option>
+                      <option value={980}>Cheeseburger (980 kcal)</option>
+                      <option value={920}>Bacon Burger (920 kcal)</option>
+                      <option value={1060}>Bacon Cheeseburger (1,060 kcal)</option>
+                      <option value={540}>Little Hamburger (540 kcal)</option>
+                      <option value={610}>Little Cheeseburger (610 kcal)</option>
+                    </select>
+                  </div>
+                  <div className="bg-white dark:bg-slate-800/90 p-3 rounded-2xl border border-slate-200 dark:border-slate-700">
+                    <label htmlFor="fg-fries-select" className="block font-bold text-slate-700 dark:text-slate-200 mb-1.5">
+                      Fries / Side Portion
+                    </label>
+                    <select
+                      id="fg-fries-select"
+                      value={fgFries}
+                      onChange={(e) => setFgFries(Number(e.target.value))}
+                      className="w-full h-11 px-3 bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-xl text-sm font-semibold text-slate-900 dark:text-white"
+                    >
+                      <option value={0}>No Fries (0 kcal)</option>
+                      <option value={526}>Little Fries (526 kcal)</option>
+                      <option value={953}>Regular Fries (953 kcal)</option>
+                      <option value={1314}>Large Fries (1,314 kcal)</option>
+                    </select>
+                  </div>
+                  <div className="bg-white dark:bg-slate-800/90 p-3 rounded-2xl border border-slate-200 dark:border-slate-700">
+                    <label htmlFor="fg-drink-select" className="block font-bold text-slate-700 dark:text-slate-200 mb-1.5">
+                      Beverage Choice
+                    </label>
+                    <select
+                      id="fg-drink-select"
+                      value={fgDrink}
+                      onChange={(e) => setFgDrink(Number(e.target.value))}
+                      className="w-full h-11 px-3 bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-xl text-sm font-semibold text-slate-900 dark:text-white"
+                    >
+                      <option value={0}>Water / Diet Soda (0 kcal)</option>
+                      <option value={200}>Regular Fountain Soda (200 kcal)</option>
+                      <option value={670}>Five Guys Milkshake Base (670 kcal)</option>
+                    </select>
+                  </div>
+                  <div className="bg-white dark:bg-slate-800/90 p-3 rounded-2xl border border-slate-200 dark:border-slate-700">
+                    <p className="font-bold text-slate-700 dark:text-slate-200 mb-1.5">About Five Guys Portions</p>
+                    <p className="text-slate-600 dark:text-slate-300 leading-relaxed">
+                      Regular burgers carry two patties; Little burgers carry one. Fries are fresh-cut and cooked in peanut oil, and every size is generously filled.
+                    </p>
                   </div>
                 </div>
               ) : (
@@ -1618,7 +1708,7 @@ export const HeroToolBox: React.FC<HeroToolBoxProps> = ({
                     })}
                   </div>
                   <p className="text-[11px] text-purple-800 dark:text-purple-200 leading-snug">
-                    {p.ewlDesc}
+                    {p.ewlDesc(gWeight > 0 ? gWeight.toFixed(1) : (sWeight * 0.65).toFixed(1), unit)}
                   </p>
                 </div>
               )}
@@ -1780,6 +1870,33 @@ export const HeroToolBox: React.FC<HeroToolBoxProps> = ({
                     })}
                   </div>
                 </div>
+
+                {/* Keto Live Macro Grams Split (70% Fat, 25% Protein, 5% Carbs) based on user TDEE */}
+                {isKeto && (
+                  <div className="mt-3 pt-2.5 border-t border-slate-200 dark:border-slate-700">
+                    <div className="flex items-center justify-between text-[11px] font-extrabold text-slate-800 dark:text-slate-100 mb-1.5">
+                      <span>Keto Macro Split ({calculatedTdee} kcal TDEE)</span>
+                      <span className="text-amber-600 dark:text-amber-400 font-black">70 / 25 / 5%</span>
+                    </div>
+                    <div className="grid grid-cols-3 gap-1.5 text-center text-[11px]">
+                      <div className="bg-amber-50/80 dark:bg-amber-950/40 p-2 rounded-xl border border-amber-200/80 dark:border-amber-800/60">
+                        <span className="block text-[10px] font-bold text-amber-700 dark:text-amber-300">Fat (70%)</span>
+                        <span className="block text-sm font-black text-slate-900 dark:text-white">{ketoFatG}g</span>
+                        <span className="block text-[9px] text-slate-500 dark:text-slate-400">9 kcal/g</span>
+                      </div>
+                      <div className="bg-indigo-50/80 dark:bg-indigo-950/40 p-2 rounded-xl border border-indigo-200/80 dark:border-indigo-800/60">
+                        <span className="block text-[10px] font-bold text-indigo-700 dark:text-indigo-300">Protein (25%)</span>
+                        <span className="block text-sm font-black text-slate-900 dark:text-white">{ketoProteinG}g</span>
+                        <span className="block text-[9px] text-slate-500 dark:text-slate-400">4 kcal/g</span>
+                      </div>
+                      <div className="bg-emerald-50/80 dark:bg-emerald-950/40 p-2 rounded-xl border border-emerald-200/80 dark:border-emerald-800/60">
+                        <span className="block text-[10px] font-bold text-emerald-700 dark:text-emerald-300">Net Carbs (5%)</span>
+                        <span className="block text-sm font-black text-slate-900 dark:text-white">{ketoCarbsG}g</span>
+                        <span className="block text-[9px] text-slate-500 dark:text-slate-400">4 kcal/g</span>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           )}
@@ -1787,7 +1904,7 @@ export const HeroToolBox: React.FC<HeroToolBoxProps> = ({
           {mode === 'subway' && (
             <div>
               <span className="text-[11px] font-bold tracking-wider uppercase text-slate-500 dark:text-slate-400 block mb-1 pr-28">
-                {activeBrand === 'mcdonalds' ? p.mcdResultHeading : t.resultHeadingSubway}
+                {activeBrand === 'mcdonalds' ? p.mcdResultHeading : activeBrand === 'five-guys' ? p.fiveGuysResultHeading : t.resultHeadingSubway}
               </span>
               <div className="text-4xl sm:text-5xl font-black text-[#ca5983] dark:text-pink-400 tabular-nums">
                 {activeRestaurantCalories} <span className="text-base font-semibold text-slate-500 dark:text-slate-400">kcal</span>
@@ -1795,6 +1912,8 @@ export const HeroToolBox: React.FC<HeroToolBoxProps> = ({
               <p className="text-xs text-slate-500 dark:text-slate-300 mt-2 leading-relaxed">
                 {activeBrand === 'mcdonalds'
                   ? `Represents ${Math.round((activeRestaurantCalories / Math.max(1200, calculatedTdee - 500)) * 100)}% of a ${Math.max(1200, calculatedTdee - 500)} kcal daily weight-loss budget.`
+                  : activeBrand === 'five-guys'
+                  ? 'Estimated from the official Five Guys nutrition guide; toppings and customizations change the total.'
                   : `Estimated for a ${subwaySize === 'footlong' ? '12-Inch Footlong' : '6-Inch Sub'} based on official restaurant nutrition guides.`}
               </p>
             </div>

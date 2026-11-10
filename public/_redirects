@@ -63,6 +63,11 @@
 /treadmill-weight-loss-calculator* / 301
 /liposuction-weight-loss-calculator* / 301
 
+# GSC 28-day topical map (2026-11-10): canonical consolidation
+/calculator/female/ /calculators/weight-loss/ 301
+/reviewer/dr-rekha-kumar/ /authors/dr-rekha-kumar/ 301
+/calculators/body-fat/ /calculators/body-fat-percentage/ 301
+
 # SPA Fallback for all authoritative routes
 /* /index.html 200
 

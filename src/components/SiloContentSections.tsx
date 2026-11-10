@@ -49,7 +49,16 @@ export const SiloContentSections: React.FC<SiloContentSectionsProps> = ({
     if (onSelectToolMode) {
       if (href === '#newborn' || href === '#baby' || href === '#infant' || href === '#calculate-birth' || href === '#pounds') {
         onSelectToolMode('newborn');
-      } else if (href === '#bmr' || href === '#tdee' || href === '#metabolic-rate' || href === '#keto') {
+      } else if (
+        href === '#bmr' ||
+        href === '#tdee' ||
+        href === '#metabolic-rate' ||
+        href === '#keto' ||
+        href === '#walking' ||
+        href === '#running' ||
+        href === '#cycling' ||
+        href === '#rowing'
+      ) {
         onSelectToolMode('bmr');
       } else if (href === '#calorie' || href === '#calories' || href === '#nutrition' || href === '#subway') {
         onSelectToolMode('subway');
@@ -278,7 +287,7 @@ export const SiloContentSections: React.FC<SiloContentSectionsProps> = ({
           <span>•</span>
           <a href="#percentage" className="text-[#ca3500] dark:text-orange-400 hover:underline">Weight Loss Percentage Calculator</a>
           <span>•</span>
-          <a href="#baby" className="text-[#4950fc] dark:text-sky-400 hover:underline">Baby Weight Loss Calculator</a>
+          <a href="/calculators/baby-weight-loss/" className="text-[#4950fc] dark:text-sky-400 hover:underline">Baby Weight Loss Calculator</a>
         </div>
       </section>
 
@@ -496,6 +505,46 @@ export const SiloContentSections: React.FC<SiloContentSectionsProps> = ({
           </p>
         </div>
 
+        <div className="space-y-3">
+          <h3 className="font-bold text-slate-900 dark:text-white text-base">Subway Nutrition Calculator: Example 6-Inch Builds</h3>
+          <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+            Totals below come from this page’s own Subway builder. A footlong doubles the 6-inch total. Turkey and chicken builds carry roughly 18 to 25 grams of protein per 6-inch sub; totals vary with bread and sauce.
+          </p>
+          <div className="overflow-x-auto">
+            <table className="w-full text-left text-xs border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden">
+              <thead className="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 font-bold">
+                <tr>
+                  <th className="p-3">6-Inch Build</th>
+                  <th className="p-3">Calories</th>
+                  <th className="p-3">Protein</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-100 dark:divide-slate-800 text-slate-800 dark:text-slate-200">
+                <tr>
+                  <td className="p-3 font-semibold">Turkey, 9-grain wheat, mustard, no cheese</td>
+                  <td className="p-3">315 kcal</td>
+                  <td className="p-3">~18 g</td>
+                </tr>
+                <tr>
+                  <td className="p-3 font-semibold">Rotisserie chicken, 9-grain wheat, provolone, mustard</td>
+                  <td className="p-3">415 kcal</td>
+                  <td className="p-3">~25 g</td>
+                </tr>
+                <tr>
+                  <td className="p-3 font-semibold">Philly steak, Italian herbs &amp; cheese, provolone, mayo</td>
+                  <td className="p-3">630 kcal</td>
+                  <td className="p-3">~25 g</td>
+                </tr>
+                <tr>
+                  <td className="p-3 font-semibold">Italian B.M.T., artisan Italian white, pepper jack, honey mustard</td>
+                  <td className="p-3">600 kcal</td>
+                  <td className="p-3">~20 g</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
         <div className="pt-4 border-t border-slate-100 dark:border-slate-800 flex flex-wrap items-center gap-3 text-xs font-semibold text-slate-500 dark:text-slate-400">
           <span>Related Calculators:</span>
           <a href="#" className="text-[#7334fd] dark:text-indigo-400 hover:underline">Weight Loss Calculator</a>
@@ -556,7 +605,7 @@ export const SiloContentSections: React.FC<SiloContentSectionsProps> = ({
         <div className="space-y-3 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
           <h3 className="font-bold text-slate-900 dark:text-white text-base">Seeing the Bigger Picture</h3>
           <p>
-            When you are working toward a long-term goal, it is easy to feel stuck if the scale only moves half a pound in a week. Checking your total pounds and percentage lost from day one reminds you how far you have already come. For most adults, losing about 0.5% to 1% of body weight per week adds up to lasting progress over a few months.
+            When you are working toward a long-term goal, it is easy to feel stuck if the scale only moves half a pound in a week. Checking your total pounds and percentage lost from day one reminds you how far you have already come. For most adults, losing about 0.5% to 1% of body weight per week adds up to lasting progress over a few months. Use the <a href="/calculators/how-much-weight-can-i-lose-in-a-month/" className="text-[#7334fd] dark:text-indigo-400 hover:underline font-semibold">how much weight can I lose in a month calculator</a> to turn a daily calorie deficit into a date: pick your deficit, and the tool projects your loss week by week.
           </p>
         </div>
 
@@ -565,6 +614,8 @@ export const SiloContentSections: React.FC<SiloContentSectionsProps> = ({
           <a href="#" className="text-[#7334fd] dark:text-indigo-400 hover:underline">Weight Loss Calculator</a>
           <span>•</span>
           <a href="#percentage" className="text-[#ca3500] dark:text-orange-400 hover:underline">Weight Loss Percentage Calculator</a>
+          <span>•</span>
+          <a href="/calculators/how-much-weight-can-i-lose-in-a-month/" className="text-[#4950fc] dark:text-sky-400 hover:underline">How Much Weight Can I Lose in a Month Calculator</a>
         </div>
       </section>
 
@@ -659,7 +710,7 @@ export const SiloContentSections: React.FC<SiloContentSectionsProps> = ({
           </p>
         </div>
         <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-          When you cut carbohydrates sharply on a keto plan, your body uses up stored glycogen and releases the water bound to it. That often causes a fast 3 to 6 lb drop in the first week, after which weight loss settles into a steadier pace driven by your overall calorie balance.
+          When you cut carbohydrates sharply on a keto plan, your body uses up stored glycogen and releases the water bound to it. That often causes a fast 3 to 6 lb drop in the first week, after which weight loss settles into a steadier pace driven by your overall calorie balance. A standard keto split is about 70% fat, 25% protein, and 5% carbs. Start from your TDEE: the <a href="/calculators/tdee/" className="text-[#7334fd] dark:text-indigo-400 hover:underline font-semibold">TDEE calculator</a> sets your daily calories, then the split divides them into fat, protein, and carbs.
         </p>
         <div className="pt-4 border-t border-slate-100 dark:border-slate-800 flex flex-wrap items-center gap-3 text-xs font-semibold text-slate-500 dark:text-slate-400">
           <span>Related Calculators:</span>
@@ -668,6 +719,8 @@ export const SiloContentSections: React.FC<SiloContentSectionsProps> = ({
           <a href="#percentage" className="text-[#ca3500] dark:text-orange-400 hover:underline">Weight Loss Percentage Calculator</a>
           <span>•</span>
           <a href="#newborn" className="text-[#4950fc] dark:text-sky-400 hover:underline">Newborn Weight Loss Calculator</a>
+          <span>•</span>
+          <a href="/calculators/tdee/" className="text-[#7334fd] dark:text-indigo-400 hover:underline">TDEE Calculator</a>
         </div>
       </section>
 
@@ -755,7 +808,7 @@ export const SiloContentSections: React.FC<SiloContentSectionsProps> = ({
         </div>
         <div className="space-y-3 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
           <p>
-            Losing 4 to 8 pounds a month (about 1 to 2 pounds a week) lets you eat satisfying meals, keep your workout strength up, and hold onto lean muscle. Crash diets that promise 15+ pounds in a month mostly drain water and muscle, making weight rebound much more likely.
+            Losing 4 to 8 pounds a month (about 1 to 2 pounds a week) lets you eat satisfying meals, keep your workout strength up, and hold onto lean muscle. Crash diets that promise 15+ pounds in a month mostly drain water and muscle, making weight rebound much more likely. Project your own timeline with the <a href="/calculators/how-much-weight-can-i-lose-in-a-month/" className="text-[#7334fd] dark:text-indigo-400 hover:underline font-semibold">how much weight can I lose in a month calculator</a>.
           </p>
         </div>
         <div className="pt-4 border-t border-slate-100 dark:border-slate-800 flex flex-wrap items-center gap-3 text-xs font-semibold text-slate-500 dark:text-slate-400">
@@ -765,6 +818,8 @@ export const SiloContentSections: React.FC<SiloContentSectionsProps> = ({
           <a href="#lbs" className="text-[#ca3500] dark:text-orange-400 hover:underline">5'2" 105 lbs</a>
           <span>•</span>
           <a href="#percent" className="text-[#4950fc] dark:text-sky-400 hover:underline">Percent Weight Loss Calculator</a>
+          <span>•</span>
+          <a href="/calculators/how-much-weight-can-i-lose-in-a-month/" className="text-[#7334fd] dark:text-indigo-400 hover:underline">How Much Weight Can I Lose in a Month Calculator</a>
         </div>
       </section>
 
@@ -781,6 +836,14 @@ export const SiloContentSections: React.FC<SiloContentSectionsProps> = ({
         <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
           Think of <strong className="text-slate-900 dark:text-white">BMR</strong> as your body’s idle burn at rest, and <strong className="text-slate-900 dark:text-white">TDEE</strong> as your true daily burn once you include walking, working, chores, and exercise. To lose about 1 pound per week, aim for roughly 500 calories below your TDEE rather than eating below your BMR.
         </p>
+        <div className="space-y-3">
+          <h3 className="text-base font-bold text-slate-900 dark:text-white">
+            Katch-McArdle Formula and Resting Metabolic Rate (RMR)
+          </h3>
+          <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+            The Katch-McArdle formula estimates BMR from lean body mass instead of total weight: BMR = 370 + (21.6 × lean mass in kg). It suits people who know their body fat percentage. Resting metabolic rate (RMR) is the same resting burn measured under slightly less strict conditions, so for weight loss planning RMR and BMR are interchangeable. Once you have your BMR, the <a href="/calculators/tdee/" className="text-[#7334fd] dark:text-indigo-400 hover:underline font-semibold">TDEE calculator</a> multiplies it by your activity level to set your daily calorie target.
+          </p>
+        </div>
         <div className="pt-4 border-t border-slate-100 dark:border-slate-800 flex flex-wrap items-center gap-3 text-xs font-semibold text-slate-500 dark:text-slate-400">
           <span>Related Calculators:</span>
           <a href="#" className="text-[#7334fd] dark:text-indigo-400 hover:underline">Weight Loss Calculator</a>
@@ -788,6 +851,8 @@ export const SiloContentSections: React.FC<SiloContentSectionsProps> = ({
           <a href="#percentage" className="text-[#ca3500] dark:text-orange-400 hover:underline">Weight Loss Percentage Calculator</a>
           <span>•</span>
           <a href="#newborn" className="text-[#4950fc] dark:text-sky-400 hover:underline">Newborn Weight Loss Calculator</a>
+          <span>•</span>
+          <a href="/calculators/tdee/" className="text-[#7334fd] dark:text-indigo-400 hover:underline">TDEE Calculator</a>
         </div>
       </section>
 
@@ -894,7 +959,7 @@ export const SiloContentSections: React.FC<SiloContentSectionsProps> = ({
           </p>
         </div>
         <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-          In a group weight loss challenge, scoring by percentage lost rather than raw pounds keeps the contest fair for everyone. For example, a 160 lb participant who loses 16 lbs (<strong className="text-slate-900 dark:text-white">10.0%</strong>) ranks ahead of a 260 lb participant who loses 20 lbs (<strong className="text-slate-900 dark:text-white">7.69%</strong>).
+          In a group weight loss challenge, scoring by percentage lost rather than raw pounds keeps the contest fair for everyone. For example, a 160 lb participant who loses 16 lbs (<strong className="text-slate-900 dark:text-white">10.0%</strong>) ranks ahead of a 260 lb participant who loses 20 lbs (<strong className="text-slate-900 dark:text-white">7.69%</strong>). Plan your challenge pace with the <a href="/calculators/how-much-weight-can-i-lose-in-a-month/" className="text-[#7334fd] dark:text-indigo-400 hover:underline font-semibold">how much weight can I lose in a month calculator</a>, and set the daily target with the <a href="/calculators/calorie-deficit/" className="text-[#7334fd] dark:text-indigo-400 hover:underline font-semibold">calorie deficit calculator</a>.
         </p>
         <div className="pt-4 border-t border-slate-100 dark:border-slate-800 flex flex-wrap items-center gap-3 text-xs font-semibold text-slate-500 dark:text-slate-400">
           <span>Related Calculators:</span>
@@ -903,6 +968,10 @@ export const SiloContentSections: React.FC<SiloContentSectionsProps> = ({
           <a href="#percentage" className="text-[#ca3500] dark:text-orange-400 hover:underline">Weight Loss Percentage Calculator</a>
           <span>•</span>
           <a href="#newborn" className="text-[#4950fc] dark:text-sky-400 hover:underline">Newborn Weight Loss Calculator</a>
+          <span>•</span>
+          <a href="/calculators/how-much-weight-can-i-lose-in-a-month/" className="text-[#7334fd] dark:text-indigo-400 hover:underline">How Much Weight Can I Lose in a Month Calculator</a>
+          <span>•</span>
+          <a href="/calculators/calorie-deficit/" className="text-[#7334fd] dark:text-indigo-400 hover:underline">Calorie Deficit Calculator</a>
         </div>
       </section>
 

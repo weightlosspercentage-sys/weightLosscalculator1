@@ -19,6 +19,8 @@ export interface ExtendedLocaleParity {
   mcdBuilderBtn: string;
   subwayBuilderBtn: string;
   mcdResultHeading: string;
+  fiveGuysBuilderBtn: string;
+  fiveGuysResultHeading: string;
   stoneEquivalentLabel: string;
   relatedCalculatorsLabel: string;
   howToTitle: string;
@@ -80,6 +82,8 @@ const EN_BASE: ExtendedLocaleParity = {
   mcdBuilderBtn: 'McDonald’s Meal Builder',
   subwayBuilderBtn: 'Subway Sub Builder',
   mcdResultHeading: 'McDonald’s Meal Total',
+  fiveGuysBuilderBtn: 'Five Guys Burger Builder',
+  fiveGuysResultHeading: 'Five Guys Meal Total',
   stoneEquivalentLabel: 'UK Stone Equivalent:',
   relatedCalculatorsLabel: 'Related Calculators:',
   howToTitle: 'How to Calculate Weight Loss Percentage',
@@ -130,6 +134,8 @@ export const EXTENDED_LOCALE_PARITY: Record<string, ExtendedLocaleParity> = {
     mcdBuilderBtn: 'McDonald’s Kalorien-Rechner',
     subwayBuilderBtn: 'Subway Sandwich-Rechner',
     mcdResultHeading: 'McDonald’s Mahlzeit Gesamt',
+    fiveGuysBuilderBtn: 'Five Guys Burger-Rechner',
+    fiveGuysResultHeading: 'Five Guys Mahlzeit Gesamt',
     stoneEquivalentLabel: 'Stone & Pfund (st/lbs):',
     relatedCalculatorsLabel: 'Passende Rechner:',
     howToTitle: 'Wie man den prozentualen Gewichtsverlust berechnet',
@@ -201,6 +207,8 @@ export const EXTENDED_LOCALE_PARITY: Record<string, ExtendedLocaleParity> = {
     mcdBuilderBtn: 'Calcolatore Pasto McDonald’s',
     subwayBuilderBtn: 'Calcolatore Panino Subway',
     mcdResultHeading: 'Totale Pasto McDonald’s',
+    fiveGuysBuilderBtn: 'Calcolatore Five Guys',
+    fiveGuysResultHeading: 'Totale Pasto Five Guys',
     stoneEquivalentLabel: 'Equivalente Stone & Libbre:',
     relatedCalculatorsLabel: 'Calcolatori Correlati:',
     howToTitle: 'Come Calcolare la Percentuale di Perdita di Peso',
@@ -272,6 +280,8 @@ export const EXTENDED_LOCALE_PARITY: Record<string, ExtendedLocaleParity> = {
     mcdBuilderBtn: 'Калькулятор калорий McDonald’s',
     subwayBuilderBtn: 'Калькулятор сэндвичей Subway',
     mcdResultHeading: 'Итого калорий (McDonald’s)',
+    fiveGuysBuilderBtn: 'Калькулятор Five Guys',
+    fiveGuysResultHeading: 'Итого калорий (Five Guys)',
     stoneEquivalentLabel: 'В стоунах и фунтах (st/lbs):',
     relatedCalculatorsLabel: 'Связанные калькуляторы:',
     howToTitle: 'Как рассчитать процент потери веса',
@@ -343,6 +353,8 @@ export const EXTENDED_LOCALE_PARITY: Record<string, ExtendedLocaleParity> = {
     mcdBuilderBtn: '麦当劳餐食热量计算器',
     subwayBuilderBtn: '赛百味三明治热量计算',
     mcdResultHeading: '麦当劳餐食预估总热量',
+    fiveGuysBuilderBtn: 'Five Guys 汉堡热量计算器',
+    fiveGuysResultHeading: 'Five Guys 餐食预估总热量',
     stoneEquivalentLabel: '英石与磅换算 (st/lbs)：',
     relatedCalculatorsLabel: '相关计算工具：',
     howToTitle: '如何计算减重百分比',

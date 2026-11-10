@@ -47,8 +47,17 @@
 - [Keto Macro & Weight Loss Calculator](https://www.weightlosspercentage.com/calculators/keto/): Ketogenic macronutrient ratios and fat-loss projection.
 - [Biggest Loser Percentage Calculator](https://www.weightlosspercentage.com/calculators/biggest-loser/): Fair group weight loss challenge ranking by percentage of starting body weight lost.
 - [Cycling Calorie & Weight Loss Calculator](https://www.weightlosspercentage.com/calculators/cycling/): MET-based cycling energy expenditure and weight loss estimator.
+- [Walking Calorie & Weight Loss Calculator](https://www.weightlosspercentage.com/calculators/walking/): Walking energy expenditure based on pace, incline, and body weight.
+- [Running Calorie & Weight Loss Calculator](https://www.weightlosspercentage.com/calculators/running/): Running caloric burn based on pace, distance, and body weight.
+- [Rowing Machine Calorie & Weight Loss Calculator](https://www.weightlosspercentage.com/calculators/rowing/): Full-body rowing ergometer caloric burn by split and stroke rate.
+- [How Much Weight Can I Lose in a Month Calculator](https://www.weightlosspercentage.com/calculators/how-much-weight-can-i-lose-in-a-month/): Monthly weight loss projection tool modeling daily calorie deficit at a safe 1–2 lbs/week pace.
+- [Water Intake Calculator for Weight Loss](https://www.weightlosspercentage.com/calculators/water-intake/): Daily water intake targets based on 30–35 ml per kg of body weight.
 - [Subway Calorie & Nutrition Calculator](https://www.weightlosspercentage.com/restaurants/subway/): Restaurant meal calorie and macronutrient planner.
 - [McDonald's Calorie & Nutrition Calculator](https://www.weightlosspercentage.com/restaurants/mcdonalds/): Fast-food meal calorie and sodium tracker.
+- [Five Guys Calorie Calculator](https://www.weightlosspercentage.com/restaurants/five-guys/): Five Guys burger, fresh-cut peanut oil fries, and shake nutrition builder.
+- [Weight Loss Calculators Hub](https://www.weightlosspercentage.com/calculators/): Complete directory of all clinical, metabolic, and nutrition calculators.
+- [Calculator Comparison Tool](https://www.weightlosspercentage.com/compare/): Side-by-side comparison of weight loss equations and methodologies.
+- [Clinical Health Glossary](https://www.weightlosspercentage.com/glossary/): Evidence-based glossary of metabolic, bariatric, pediatric, and pharmacological terms.
 
 ## Medical Reviewer, Methodology, Sitemap & Policy Pages
 - [Dr. Rekha Kumar, M.D., M.S. — Clinical Medical Reviewer](https://www.weightlosspercentage.com/authors/dr-rekha-kumar/): Credentials, education, board certifications, and four-pillar medical review commitment.
@@ -57,7 +66,7 @@
 - [Privacy Policy](https://www.weightlosspercentage.com/privacy-policy/): Zero server-side data storage guarantee and browser-only calculation policy.
 - [Terms of Service](https://www.weightlosspercentage.com/terms-of-service/): Medical disclaimer and educational terms of use.
 - [Contact](https://www.weightlosspercentage.com/contact/): Editorial and clinical review contact information.
-- [XML Sitemap](https://www.weightlosspercentage.com/sitemap.xml): Complete index of all 108 canonical pages across 8 locales.
+- [XML Sitemap](https://www.weightlosspercentage.com/sitemap.xml): Complete index of all 141 canonical pages across 8 locales.
 - [Full LLM Documentation](https://www.weightlosspercentage.com/llms-full.txt): Complete reference equations, tables, and clinical methodology.
 
 ## Official Social Profiles

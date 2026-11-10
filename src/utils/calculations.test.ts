@@ -65,9 +65,9 @@ test('clinical milestone progress flags 5% and 10% landmarks accurately', () => 
   assert.equal(milestones[2].isAchieved, false);
 });
 
-test('toolSearch indexes all 26 calculators and guides and ranks Bing keyword clusters accurately', () => {
-  assert.equal(ALL_SEARCHABLE_TOOLS.length, 26);
-  assert.equal(searchTools('').length, 26);
+test('toolSearch indexes all 38 calculators and guides and ranks Bing keyword clusters accurately', () => {
+  assert.equal(ALL_SEARCHABLE_TOOLS.length, 38);
+  assert.equal(searchTools('').length, 38);
 
   const newbornMatches = searchTools('newborn');
   assert.ok(newbornMatches.length >= 2);
@@ -88,6 +88,19 @@ test('toolSearch indexes all 26 calculators and guides and ranks Bing keyword cl
 
   const ketoMatches = searchTools('keto');
   assert.equal(ketoMatches[0].id, 'keto');
+
+  const fiveGuysMatches = searchTools('five guys calorie calculator');
+  assert.ok(fiveGuysMatches.length >= 1);
+  assert.equal(fiveGuysMatches[0].id, 'five-guys');
+  assert.equal(fiveGuysMatches[0].restaurantBrand, 'five-guys');
+
+  const runningMatches = searchTools('running calorie calculator');
+  assert.ok(runningMatches.length >= 1);
+  assert.equal(runningMatches[0].id, 'running');
+
+  const paceMatches = searchTools('pace calculator');
+  assert.ok(paceMatches.length >= 1);
+  assert.equal(paceMatches[0].id, 'how-much-weight-can-i-lose-in-a-month');
 });
 
 test('programmatic URLs and unapproved peptide reconstitution URLs are flagged for safe canonical redirects', () => {
@@ -167,6 +180,57 @@ test('Triple-to-Triple multilingual parity covers all 8 locales and all 26 direc
       );
     }
   }
+});
+
+test('GSC 28-day topical-map optimizations P1-P6 routes resolve accurately', () => {
+  // P1: how much weight can I lose in a month
+  const p1 = resolveSearchIntentFromPath('/calculators/how-much-weight-can-i-lose-in-a-month/');
+  assert.equal(p1.toolMode, 'bmr');
+  assert.equal(p1.customMetaTitle, 'How Much Weight Can I Lose in a Month Calculator (Safe Pace + Timeline)');
+  assert.equal(p1.canonicalPath, '/calculators/how-much-weight-can-i-lose-in-a-month/');
+  assert.equal(p1.intentBadge, 'Safe Pace • 1–2 lbs per Week • 500 kcal/day ≈ 1 lb/week');
+
+  // P2: fat loss
+  const p2 = resolveSearchIntentFromPath('/calculators/fat-loss/');
+  assert.equal(p2.toolMode, 'adult');
+  assert.equal(p2.canonicalPath, '/calculators/fat-loss/');
+  assert.equal(p2.customHeroTitle, 'Fat Loss Percentage Calculator');
+
+  // P3: water intake
+  const p3 = resolveSearchIntentFromPath('/calculators/water-intake/');
+  assert.equal(p3.toolMode, 'adult');
+  assert.equal(p3.canonicalPath, '/calculators/water-intake/');
+  assert.equal(p3.intentBadge, 'Hydration • 30–35 ml per kg of Body Weight');
+
+  // P4: keto
+  const p4 = resolveSearchIntentFromPath('/calculators/keto/');
+  assert.equal(p4.toolMode, 'bmr');
+  assert.equal(p4.customMetaTitle, 'Keto Diet Calculator (Macros + Expected Weight Loss)');
+
+  // P5: five guys
+  const p5 = resolveSearchIntentFromPath('/restaurants/five-guys/');
+  assert.equal(p5.toolMode, 'subway');
+  assert.equal(p5.restaurantBrand, 'five-guys');
+  assert.equal(p5.customMetaTitle, 'Five Guys Calorie & Nutrition Calculator (Burgers & Fries)');
+
+  // P6: baby title split vs newborn
+  const baby = resolveSearchIntentFromPath('/calculators/baby-weight-loss/');
+  const newborn = resolveSearchIntentFromPath('/calculators/newborn-weight-loss/');
+  assert.equal(baby.customMetaTitle, 'Baby Weight Loss Calculator (lbs/oz & Grams)');
+  assert.equal(baby.customHeroTitle, 'Baby Weight Loss Calculator');
+  assert.equal(newborn.customHeroTitle, 'Newborn & Infant Weight Loss Percentage Calculator');
+
+  // P6: TDEE specific title
+  const tdee = resolveSearchIntentFromPath('/calculators/tdee/');
+  assert.equal(tdee.customMetaTitle, 'TDEE Calculator — Total Daily Energy Expenditure (BMR × Activity)');
+
+  // P6: Activity titles
+  const walking = resolveSearchIntentFromPath('/calculators/walking/');
+  assert.equal(walking.customMetaTitle, 'Walking Calorie & Weight Loss Calculator (Speed, Incline & Distance)');
+
+  // P6 & P8: Distinct calculators hub title
+  const hub = resolveSearchIntentFromPath('/calculators/');
+  assert.equal(hub.customMetaTitle, 'Weight Loss & Clinical Health Calculators Hub (All Tools)');
 });
 
 

@@ -1,7 +1,7 @@
 import { ToolMode } from '../components/HeroToolBox';
 
 export type ClinicalFocus = 'standard' | 'bariatric' | 'glp1' | 'postpartum' | 'fasting';
-export type RestaurantBrand = 'subway' | 'mcdonalds';
+export type RestaurantBrand = 'subway' | 'mcdonalds' | 'five-guys';
 
 export interface RouteIntentResolution {
   locale: string;
@@ -149,10 +149,40 @@ export function resolveSearchIntentFromPath(rawPathname: string): RouteIntentRes
       ? cleanPath
       : `${cleanPath}/`;
 
-  // 3. Newborn / Baby / Infant Weight Loss Intent (#1 Google & Bing Traffic Driver)
+  // 3A. Baby Weight Loss Intent — own title so "baby weight loss percentage calculator"
+  // (pos 5.39, 0 clicks) gets a title match instead of sharing the newborn title.
+  if (cleanPath.includes('baby-weight-loss')) {
+    const isUk = locale === 'uk';
+    const isAu = locale === 'au';
+    const regionLabel = isUk ? 'UK (NHS / NICE)' : isAu ? 'Australia' : 'AAP Clinical';
+
+    return {
+      locale,
+      shouldRedirectToHome: false,
+      redirectTarget: normalizedCanonical,
+      canonicalPath: normalizedCanonical,
+      toolMode: 'newborn',
+      clinicalFocus: 'standard',
+      restaurantBrand: 'subway',
+      defaultWeightUnit,
+      defaultBabyUnit,
+      customMetaTitle: isUk
+        ? 'Baby Weight Loss Calculator UK (lbs/oz & Grams)'
+        : 'Baby Weight Loss Calculator (lbs/oz & Grams)',
+      customMetaDescription:
+        'Calculate baby weight loss percentage after birth in lbs/oz or grams: ((Birth Weight - Current Weight) ÷ Birth Weight) × 100. Check the 7% normal and 10% alert thresholds.',
+      customHeroTitle: isUk
+        ? 'Baby Weight Loss Calculator (UK)'
+        : 'Baby Weight Loss Calculator',
+      customHeroIntro:
+        'Enter your baby’s birth weight and current weight in pounds and ounces (lbs/oz) or grams to calculate exact weight loss percentage and check AAP clinical thresholds.',
+      intentBadge: `${regionLabel} Baby Weight Check • Under 7% Normal / 10% Alert`
+    };
+  }
+
+  // 3. Newborn / Infant Weight Loss Intent (#1 Google & Bing Traffic Driver)
   if (
     cleanPath.includes('newborn-weight-loss') ||
-    cleanPath.includes('baby-weight-loss') ||
     cleanPath.includes('infant-weight-loss') ||
     cleanPath.includes('calculating-weight-loss-in-newborns') ||
     cleanPath.includes('calculate-newborn-weight-loss')
@@ -315,7 +345,122 @@ export function resolveSearchIntentFromPath(rawPathname: string): RouteIntentRes
     };
   }
 
-  // 8. Restaurant Nutrition Intent (McDonald's & Subway)
+  // 7B. Pace: "How much weight can I lose in a month" calculator (P1 — new tool page).
+  // Reuses the BMR/TDEE mode: its 12-week projection answers the monthly pace question.
+  if (
+    cleanPath.includes('how-much-weight-can-i-lose-in-a-month') ||
+    cleanPath.includes('how-much-weight-can-you-lose-in-a-month')
+  ) {
+    return {
+      locale,
+      shouldRedirectToHome: false,
+      redirectTarget: normalizedCanonical,
+      canonicalPath: normalizedCanonical,
+      toolMode: 'bmr',
+      clinicalFocus: 'standard',
+      restaurantBrand: 'subway',
+      defaultWeightUnit: isMetricLocale ? 'kg' : 'lbs',
+      defaultBabyUnit,
+      customMetaTitle: 'How Much Weight Can I Lose in a Month Calculator (Safe Pace + Timeline)',
+      customMetaDescription:
+        'Project how much weight you can lose in a month from your daily calorie deficit. A 500 kcal/day deficit loses about 1 lb per week; the safe pace is 1 to 2 lbs per week.',
+      customHeroTitle: 'How Much Weight Can I Lose in a Month Calculator',
+      customHeroIntro:
+        'A how-much-weight-can-I-lose calculator is a projection tool that converts a daily calorie deficit and a target date into expected weight loss. Enter your stats and daily intake to see your monthly projection.',
+      intentBadge: 'Safe Pace • 1–2 lbs per Week • 500 kcal/day ≈ 1 lb/week'
+    };
+  }
+
+  // 7C. Fat-loss intent (P2): /calculators/fat-loss/ — own title on the adult % tool.
+  if (cleanPath.includes('/calculators/fat-loss')) {
+    return {
+      locale,
+      shouldRedirectToHome: false,
+      redirectTarget: normalizedCanonical,
+      canonicalPath: normalizedCanonical,
+      toolMode: 'adult',
+      clinicalFocus: 'standard',
+      restaurantBrand: 'subway',
+      defaultWeightUnit,
+      defaultBabyUnit,
+      customMetaTitle: 'Fat Loss Percentage Calculator (Track Fat vs. Scale Weight)',
+      customMetaDescription:
+        'Calculate fat loss percentage from your starting and current weight: ((Start - Current) ÷ Start) × 100. Track progress toward your goal and keep the loss mostly fat.',
+      customHeroTitle: 'Fat Loss Percentage Calculator',
+      customHeroIntro:
+        'A fat loss percentage calculator is a tracking tool that converts your starting weight and current weight into the percentage of weight lost. Pair it with enough protein and strength training so the loss comes mostly from fat.',
+      intentBadge: 'Fat Loss % • Track Progress vs. Your Goal'
+    };
+  }
+
+  // 7D. Water-intake intent (P3): /calculators/water-intake/ — own title on the adult % tool.
+  // No dedicated water widget exists yet; the hero states the 30–35 ml/kg rule directly.
+  if (cleanPath.includes('/calculators/water-intake')) {
+    return {
+      locale,
+      shouldRedirectToHome: false,
+      redirectTarget: normalizedCanonical,
+      canonicalPath: normalizedCanonical,
+      toolMode: 'adult',
+      clinicalFocus: 'standard',
+      restaurantBrand: 'subway',
+      defaultWeightUnit,
+      defaultBabyUnit,
+      customMetaTitle: 'Water Intake Calculator for Weight Loss (Daily ml by Body Weight)',
+      customMetaDescription:
+        'Calculate daily water intake by body weight: about 30 to 35 ml of water per kilogram of body weight each day. Track the weight change that follows with the percentage calculator below.',
+      customHeroTitle: 'Water Intake Calculator for Weight Loss',
+      customHeroIntro:
+        'A water intake calculator is a hydration tool that converts body weight into a daily water target. Adults need about 30 to 35 ml of water per kilogram of body weight each day.',
+      intentBadge: 'Hydration • 30–35 ml per kg of Body Weight'
+    };
+  }
+
+  // 7E. Keto intent (P4): /calculators/keto/ — own title on the BMR/TDEE mode (TDEE is the keto starting point).
+  if (cleanPath.includes('/calculators/keto')) {
+    return {
+      locale,
+      shouldRedirectToHome: false,
+      redirectTarget: normalizedCanonical,
+      canonicalPath: normalizedCanonical,
+      toolMode: 'bmr',
+      clinicalFocus: 'standard',
+      restaurantBrand: 'subway',
+      defaultWeightUnit: isMetricLocale ? 'kg' : 'lbs',
+      defaultBabyUnit,
+      customMetaTitle: 'Keto Diet Calculator (Macros + Expected Weight Loss)',
+      customMetaDescription:
+        'Calculate keto diet macros and expected weight loss from your TDEE. A standard keto split is about 70% fat, 25% protein, and 5% carbs.',
+      customHeroTitle: 'Keto Diet Calculator',
+      customHeroIntro:
+        'A keto diet calculator is a macro tool that converts your daily calories into a ketogenic split of about 70% fat, 25% protein, and 5% carbs. Enter your stats below to get your TDEE and your expected monthly loss.',
+      intentBadge: 'Keto Macros • 70% Fat / 25% Protein / 5% Carbs'
+    };
+  }
+
+  // 8. Restaurant Nutrition Intent (McDonald's, Subway & Five Guys)
+  // 8A. Five Guys intent (P5): /restaurants/five-guys/ — own brand in the restaurant tool.
+  if (cleanPath.includes('/restaurants/five-guys') || cleanPath.includes('five-guys')) {
+    return {
+      locale,
+      shouldRedirectToHome: false,
+      redirectTarget: normalizedCanonical,
+      canonicalPath: normalizedCanonical,
+      toolMode: 'subway',
+      clinicalFocus: 'standard',
+      restaurantBrand: 'five-guys',
+      defaultWeightUnit,
+      defaultBabyUnit,
+      customMetaTitle: 'Five Guys Calorie & Nutrition Calculator (Burgers & Fries)',
+      customMetaDescription:
+        'Calculate total calories for Five Guys burgers and fries. Build your burger and fries below from official Five Guys nutrition values.',
+      customHeroTitle: 'Five Guys Calorie & Nutrition Calculator',
+      customHeroIntro:
+        'Build your Five Guys burger and fries below to calculate total calories and see how the meal fits your daily weight loss calorie target.',
+      intentBadge: 'Five Guys Meal Builder • Burgers & Fries'
+    };
+  }
+
   if (cleanPath.includes('/restaurants/mcdonalds') || cleanPath.includes('mcdonalds')) {
     return {
       locale,
@@ -358,16 +503,141 @@ export function resolveSearchIntentFromPath(rawPathname: string): RouteIntentRes
     };
   }
 
-  // 9. BMR / TDEE / Calorie Deficit / 12-Week Forecast / Activity Calorie Calculators
+  // 9A. Compare / glossary / category hub pages — default tool with self-canonical.
+  // (Placed before the BMR branch so /compare/bmr-vs-tdee/ does not borrow the BMR title.)
+  if (
+    cleanPath.includes('/compare/') ||
+    cleanPath.includes('/glossary/') ||
+    cleanPath.includes('/category/')
+  ) {
+    return {
+      locale,
+      shouldRedirectToHome: false,
+      redirectTarget: normalizedCanonical,
+      canonicalPath: normalizedCanonical,
+      toolMode: 'adult',
+      clinicalFocus: 'standard',
+      restaurantBrand: 'subway',
+      defaultWeightUnit,
+      defaultBabyUnit
+    };
+  }
+
+  // 9B. TDEE — own title (was sharing the BMR title verbatim).
+  if (cleanPath.includes('/calculators/tdee')) {
+    return {
+      locale,
+      shouldRedirectToHome: false,
+      redirectTarget: normalizedCanonical,
+      canonicalPath: normalizedCanonical,
+      toolMode: 'bmr',
+      clinicalFocus: 'standard',
+      restaurantBrand: 'subway',
+      defaultWeightUnit: isMetricLocale ? 'kg' : 'lbs',
+      defaultBabyUnit,
+      customMetaTitle: 'TDEE Calculator — Total Daily Energy Expenditure (BMR × Activity)',
+      customMetaDescription:
+        'Calculate Total Daily Energy Expenditure (TDEE): your BMR multiplied by an activity factor. Use your TDEE to set a 300 to 500 kcal daily deficit.',
+      customHeroTitle: 'TDEE Calculator — Total Daily Energy Expenditure',
+      customHeroIntro:
+        'A TDEE calculator is an energy tool that multiplies your Basal Metabolic Rate (BMR) by an activity factor to estimate the calories you burn in a full day.',
+      intentBadge: 'TDEE • BMR × Activity Factor'
+    };
+  }
+
+  if (cleanPath.includes('/calculators/walking')) {
+    return {
+      locale,
+      shouldRedirectToHome: false,
+      redirectTarget: normalizedCanonical,
+      canonicalPath: normalizedCanonical,
+      toolMode: 'bmr',
+      clinicalFocus: 'standard',
+      restaurantBrand: 'subway',
+      defaultWeightUnit: isMetricLocale ? 'kg' : 'lbs',
+      defaultBabyUnit,
+      customMetaTitle: 'Walking Calorie & Weight Loss Calculator (Speed, Incline & Distance)',
+      customMetaDescription:
+        'Calculate calories burned walking based on body weight, pace, incline, and duration. Track progress toward your weekly deficit and weight loss goal.',
+      customHeroTitle: 'Walking Calorie & Weight Loss Calculator',
+      customHeroIntro:
+        'Calculate calories burned walking by entering your body weight, walking pace, and duration. See your net caloric expenditure and weekly progress below.',
+      intentBadge: 'Walking Calories • MET Expenditure & Deficit Tracker',
+      scrollSectionId: 'walking'
+    };
+  }
+
+  if (cleanPath.includes('/calculators/running')) {
+    return {
+      locale,
+      shouldRedirectToHome: false,
+      redirectTarget: normalizedCanonical,
+      canonicalPath: normalizedCanonical,
+      toolMode: 'bmr',
+      clinicalFocus: 'standard',
+      restaurantBrand: 'subway',
+      defaultWeightUnit: isMetricLocale ? 'kg' : 'lbs',
+      defaultBabyUnit,
+      customMetaTitle: 'Running Calorie & Weight Loss Calculator (Pace, Distance & Burn)',
+      customMetaDescription:
+        'Calculate running calories burned by pace, distance, and body weight. Project net caloric deficit and weekly weight loss timeline.',
+      customHeroTitle: 'Running Calorie & Weight Loss Calculator',
+      customHeroIntro:
+        'Calculate calories burned running across different speeds and distances to determine your net caloric deficit and weekly weight loss progress.',
+      intentBadge: 'Running Calories • Pace & Distance Caloric Burn',
+      scrollSectionId: 'running'
+    };
+  }
+
+  if (cleanPath.includes('/calculators/cycling')) {
+    return {
+      locale,
+      shouldRedirectToHome: false,
+      redirectTarget: normalizedCanonical,
+      canonicalPath: normalizedCanonical,
+      toolMode: 'bmr',
+      clinicalFocus: 'standard',
+      restaurantBrand: 'subway',
+      defaultWeightUnit: isMetricLocale ? 'kg' : 'lbs',
+      defaultBabyUnit,
+      customMetaTitle: 'Cycling Calorie & Weight Loss Calculator (Speed, Power & Duration)',
+      customMetaDescription:
+        'Calculate cycling calories burned by speed, body weight, and duration. Convert your outdoor rides or stationary cycling into net fat loss.',
+      customHeroTitle: 'Cycling Calorie & Weight Loss Calculator',
+      customHeroIntro:
+        'Calculate calories burned cycling indoors or outdoors based on speed and duration. Estimate your weekly deficit and body fat reduction.',
+      intentBadge: 'Cycling Calories • Speed & Power Energy Expenditure',
+      scrollSectionId: 'cycling'
+    };
+  }
+
+  if (cleanPath.includes('/calculators/rowing')) {
+    return {
+      locale,
+      shouldRedirectToHome: false,
+      redirectTarget: normalizedCanonical,
+      canonicalPath: normalizedCanonical,
+      toolMode: 'bmr',
+      clinicalFocus: 'standard',
+      restaurantBrand: 'subway',
+      defaultWeightUnit: isMetricLocale ? 'kg' : 'lbs',
+      defaultBabyUnit,
+      customMetaTitle: 'Rowing Machine Calorie & Weight Loss Calculator (Split & Intensity)',
+      customMetaDescription:
+        'Calculate rowing machine calories burned by split pace, intensity, and duration. See full-body energy burn and weight loss impact.',
+      customHeroTitle: 'Rowing Machine Calorie & Weight Loss Calculator',
+      customHeroIntro:
+        'Calculate rowing calories burned per session based on stroke rate and intensity to project your weekly deficit and weight loss trajectory.',
+      intentBadge: 'Rowing Calories • Full-Body Ergometer Burn',
+      scrollSectionId: 'rowing'
+    };
+  }
+
+  // 9D. BMR / Calorie Deficit / 12-Week Forecast Calculators
   if (
     cleanPath.includes('/bmr') ||
-    cleanPath.includes('/tdee') ||
     cleanPath.includes('calorie-deficit') ||
-    cleanPath.includes('/calculators/calorie') ||
-    cleanPath.includes('/walking') ||
-    cleanPath.includes('/rowing') ||
-    cleanPath.includes('/running') ||
-    cleanPath.includes('/cycling')
+    cleanPath.includes('/calculators/calorie')
   ) {
     const isDeficit = cleanPath.includes('deficit');
     return {
@@ -394,6 +664,61 @@ export function resolveSearchIntentFromPath(rawPathname: string): RouteIntentRes
     };
   }
 
+  // 9E. High-impression blog posts — own titles (were sharing one generic blog title).
+  if (cleanPath.includes('/blog/healthy-weight-loss-per-month')) {
+    return {
+      locale,
+      shouldRedirectToHome: false,
+      redirectTarget: normalizedCanonical,
+      canonicalPath: normalizedCanonical,
+      toolMode: 'adult',
+      clinicalFocus: 'standard',
+      restaurantBrand: 'subway',
+      defaultWeightUnit,
+      defaultBabyUnit,
+      customMetaTitle: 'How Much Weight Can You Lose in a Month? Healthy Pace Guide',
+      customMetaDescription:
+        'A healthy pace is 4 to 8 pounds per month, or 1 to 2 pounds per week. See what a 500 kcal daily deficit loses in a month and how to project your timeline.',
+      intentBadge: 'Interactive Calculator + Clinical Reference Guide'
+    };
+  }
+
+  if (cleanPath.includes('/blog/5-percent-weight-loss')) {
+    return {
+      locale,
+      shouldRedirectToHome: false,
+      redirectTarget: normalizedCanonical,
+      canonicalPath: normalizedCanonical,
+      toolMode: 'adult',
+      clinicalFocus: 'standard',
+      restaurantBrand: 'subway',
+      defaultWeightUnit,
+      defaultBabyUnit,
+      customMetaTitle: '5% Weight Loss: What It Means and How to Calculate It',
+      customMetaDescription:
+        'A 5% weight loss is the first clinical milestone doctors track for blood pressure, blood sugar, and joint health. Learn the formula and find 5% of your weight.',
+      intentBadge: 'Interactive Calculator + Clinical Reference Guide'
+    };
+  }
+
+  if (cleanPath.includes('/blog/how-to-calculate-weight-loss-percentage')) {
+    return {
+      locale,
+      shouldRedirectToHome: false,
+      redirectTarget: normalizedCanonical,
+      canonicalPath: normalizedCanonical,
+      toolMode: 'adult',
+      clinicalFocus: 'standard',
+      restaurantBrand: 'subway',
+      defaultWeightUnit,
+      defaultBabyUnit,
+      customMetaTitle: 'How to Calculate Weight Loss Percentage (Formula + Examples)',
+      customMetaDescription:
+        'Step-by-step weight loss percentage formula ((Start - Current) ÷ Start) × 100, with worked examples in pounds and kilograms.',
+      intentBadge: 'Interactive Calculator + Clinical Reference Guide'
+    };
+  }
+
   // 9. High-Impression Blog & Percentage Chart Guides
   if (cleanPath.includes('/blog/')) {
     return {
@@ -413,16 +738,53 @@ export function resolveSearchIntentFromPath(rawPathname: string): RouteIntentRes
     };
   }
 
+  // P6 & P8: Distinct Hub Title for /calculators/ directory root
+  if (
+    cleanPath === '/calculators' ||
+    cleanPath === '/calculators/' ||
+    cleanPath === `${localePrefix}/calculators` ||
+    cleanPath === `${localePrefix}/calculators/`
+  ) {
+    return {
+      locale,
+      shouldRedirectToHome: false,
+      redirectTarget: normalizedCanonical,
+      canonicalPath: normalizedCanonical,
+      toolMode: 'adult',
+      clinicalFocus: 'standard',
+      restaurantBrand: 'subway',
+      defaultWeightUnit,
+      defaultBabyUnit,
+      customMetaTitle: 'Weight Loss & Clinical Health Calculators Hub (All Tools)',
+      customMetaDescription:
+        'Explore all free, medically reviewed weight loss calculators: percentage lost, calorie deficit, BMR, TDEE, newborn, fasting, bariatric, and GLP-1 tracking tools.',
+      customHeroTitle: 'Weight Loss & Clinical Health Calculators Hub',
+      customHeroIntro:
+        'Browse all evidence-based calculators, from body weight percentage loss and BMR projections to newborn feeding tracking and GLP-1 clinical benchmarks.',
+      intentBadge: 'Evidence-Based Health Calculators Hub • 100% Free & Medically Reviewed'
+    };
+  }
+
   // 10. Default Homepage / Regional Adult Weight Loss Percentage Calculator
   return {
     locale,
     shouldRedirectToHome: false,
     redirectTarget: normalizedCanonical,
-    canonicalPath: cleanPath.includes('/calculators/') ? normalizedCanonical : localeHome,
+    canonicalPath: isSelfCanonicalPath(cleanPath) ? normalizedCanonical : localeHome,
     toolMode: 'adult',
     clinicalFocus: 'standard',
     restaurantBrand: 'subway',
     defaultWeightUnit,
     defaultBabyUnit
   };
+}
+
+function isSelfCanonicalPath(cleanPath: string): boolean {
+  return (
+    cleanPath.includes('/calculators/') ||
+    cleanPath.includes('/restaurants/') ||
+    cleanPath.includes('/compare/') ||
+    cleanPath.includes('/glossary/') ||
+    cleanPath.includes('/category/')
+  );
 }

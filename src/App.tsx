@@ -329,6 +329,18 @@ export const App: React.FC = () => {
     if (tool.clinicalFocus) {
       setClinicalFocus(tool.clinicalFocus);
     }
+    if (tool.restaurantBrand) {
+      setRestaurantBrand(tool.restaurantBrand);
+    }
+    if (tool.routePath) {
+      const resolved = resolveSearchIntentFromPath(tool.routePath);
+      setRouteIntent(resolved);
+      try {
+        window.history.pushState({}, '', tool.routePath);
+      } catch {
+        // ignore
+      }
+    }
 
     setTimeout(() => {
       const targetId = tool.id;
@@ -397,7 +409,7 @@ export const App: React.FC = () => {
     },
     {
       id: 'silos',
-      label: 'All 26 Calculators & Guides',
+      label: 'All 38 Calculators & Guides',
       subtitle: 'Formulas, newborn charts, fasting, GLP-1 & BMI guides',
       href: '#percentage',
       icon: <BookOpen className="w-4 h-4 shrink-0" />,

@@ -153,7 +153,7 @@ export const LOCALE_TRANSLATIONS: Record<string, LocaleTranslation> = {
     metaTitle: 'Weight Loss Percentage Calculator (lbs, kg & Newborn Formula)',
     metaDescription:
       'Calculate weight loss percentage instantly: ((Start - Current) ÷ Start) × 100. Free clinical tool for adult lbs/kg, newborn birth weight, and BMR.',
-    searchPlaceholder: 'Search 26 calculators & guides (e.g., Newborn, BMR, Keto, GLP-1, McDonald’s)...',
+    searchPlaceholder: 'Search 38 calculators & guides (e.g., Newborn, BMR, Keto, GLP-1, McDonald’s)...',
     navPercentage: 'Percentage Calculator',
     navNewborn: 'Newborn Calculator',
     navBmr: 'BMR & TDEE',
@@ -225,7 +225,7 @@ export const LOCALE_TRANSLATIONS: Record<string, LocaleTranslation> = {
     celebrate: 'Celebrate',
     faqTitle: 'Common Questions About Weight Loss Percentage',
     faqSubtitle: 'Clear, practical answers reviewed by Dr. Rekha Kumar, M.D., M.S.',
-    directoryTitle: 'All 26 Calculators & Reference Guides',
+    directoryTitle: 'All 38 Calculators & Reference Guides',
     directorySubtitle:
       'Jump directly to any topic, from adult weight loss math and newborn weight checks to daily calorie needs, BMI examples, and nutrition guides:',
     faqs: EN_FAQS
@@ -237,7 +237,7 @@ export const LOCALE_TRANSLATIONS: Record<string, LocaleTranslation> = {
     metaTitle: 'Weight Loss Percentage Calculator Canada (lbs, kg & Newborn)',
     metaDescription:
       'Free Canadian Weight Loss Percentage Calculator in lbs and kg: ((Start - Current) ÷ Start) × 100. Includes newborn weight change and BMR calorie tools.',
-    searchPlaceholder: 'Search 26 calculators & guides (e.g., Newborn, BMR, Kilograms, GLP-1)...',
+    searchPlaceholder: 'Search 38 calculators & guides (e.g., Newborn, BMR, Kilograms, GLP-1)...',
     navPercentage: 'Percentage Calculator',
     navNewborn: 'Newborn Calculator',
     navBmr: 'BMR & TDEE',
@@ -309,7 +309,7 @@ export const LOCALE_TRANSLATIONS: Record<string, LocaleTranslation> = {
     celebrate: 'Celebrate',
     faqTitle: 'Common Questions About Weight Loss Percentage',
     faqSubtitle: 'Clear, practical answers reviewed by Dr. Rekha Kumar, M.D., M.S.',
-    directoryTitle: 'All 26 Calculators & Reference Guides',
+    directoryTitle: 'All 38 Calculators & Reference Guides',
     directorySubtitle:
       'Jump directly to any topic, from adult weight loss math and newborn weight checks to daily calorie needs, BMI examples, and nutrition guides:',
     faqs: EN_FAQS
@@ -321,7 +321,7 @@ export const LOCALE_TRANSLATIONS: Record<string, LocaleTranslation> = {
     metaTitle: 'Weight Loss Percentage Calculator UK (kg, lbs & Baby Weight)',
     metaDescription:
       'Free UK Weight Loss Percentage Calculator in kg and lbs: ((Start - Current) ÷ Start) × 100. Check adult weight loss, baby birth weight change, and BMR.',
-    searchPlaceholder: 'Search 26 calculators & guides (e.g., Baby Weight, BMR, Kilograms, McDonald’s)...',
+    searchPlaceholder: 'Search 38 calculators & guides (e.g., Baby Weight, BMR, Kilograms, McDonald’s)...',
     navPercentage: 'Percentage Calculator',
     navNewborn: 'Baby Weight Calculator',
     navBmr: 'BMR & TDEE',
@@ -393,7 +393,7 @@ export const LOCALE_TRANSLATIONS: Record<string, LocaleTranslation> = {
     celebrate: 'Celebrate',
     faqTitle: 'Common Questions About Weight Loss Percentage',
     faqSubtitle: 'Clear, practical answers reviewed by Dr. Rekha Kumar, M.D., M.S.',
-    directoryTitle: 'All 26 Calculators & Reference Guides',
+    directoryTitle: 'All 38 Calculators & Reference Guides',
     directorySubtitle:
       'Jump directly to any topic, from adult weight loss math and newborn weight checks to daily calorie needs, BMI examples, and nutrition guides:',
     faqs: EN_FAQS
@@ -405,7 +405,7 @@ export const LOCALE_TRANSLATIONS: Record<string, LocaleTranslation> = {
     metaTitle: 'Weight Loss Percentage Calculator Australia (kg, lbs & Baby)',
     metaDescription:
       'Free Australian Weight Loss Percentage Calculator in kg and lbs: ((Start - Current) ÷ Start) × 100. Includes newborn weight change, calorie deficit, and BMR.',
-    searchPlaceholder: 'Search 26 calculators & guides (e.g., Newborn, Calorie Deficit, BMR, Kilograms)...',
+    searchPlaceholder: 'Search 38 calculators & guides (e.g., Newborn, Calorie Deficit, BMR, Kilograms)...',
     navPercentage: 'Percentage Calculator',
     navNewborn: 'Newborn Calculator',
     navBmr: 'Calorie & BMR',
@@ -477,7 +477,7 @@ export const LOCALE_TRANSLATIONS: Record<string, LocaleTranslation> = {
     celebrate: 'Celebrate',
     faqTitle: 'Common Questions About Weight Loss Percentage',
     faqSubtitle: 'Clear, practical answers reviewed by Dr. Rekha Kumar, M.D., M.S.',
-    directoryTitle: 'All 26 Calculators & Reference Guides',
+    directoryTitle: 'All 38 Calculators & Reference Guides',
     directorySubtitle:
       'Jump directly to any topic, from adult weight loss math and newborn weight checks to daily calorie needs, BMI examples, and nutrition guides:',
     faqs: EN_FAQS
@@ -489,7 +489,7 @@ export const LOCALE_TRANSLATIONS: Record<string, LocaleTranslation> = {
     metaTitle: 'Gewichtsverlust-Rechner (Weight Loss Calculator) | Prozent, Neugeborene & BMR',
     metaDescription:
       'Kostenloser, medizinisch geprüfter Gewichtsverlust-Rechner. Berechnen Sie Ihren prozentualen Gewichtsverlust, die Gewichtsabnahme bei Neugeborenen und Ihren Grundumsatz (BMR).',
-    searchPlaceholder: 'Alle 26 Rechner & Ratgeber durchsuchen (z. B. Neugeborene, BMR, Keto, BMI)...',
+    searchPlaceholder: 'Alle 38 Rechner & Ratgeber durchsuchen (z. B. Neugeborene, BMR, Keto, BMI)...',
     navPercentage: 'Gewichtsverlust %',
     navNewborn: 'Neugeborenen-Rechner',
     navBmr: 'Grundumsatz (BMR)',
@@ -561,7 +561,7 @@ export const LOCALE_TRANSLATIONS: Record<string, LocaleTranslation> = {
     celebrate: 'Feiern',
     faqTitle: 'Häufige Fragen zum prozentualen Gewichtsverlust',
     faqSubtitle: 'Klare, praxisnahe Antworten, geprüft von Dr. Rekha Kumar, M.D., M.S.',
-    directoryTitle: 'Alle 26 Rechner & Klinischen Fachratgeber',
+    directoryTitle: 'Alle 38 Rechner & Klinischen Fachratgeber',
     directorySubtitle:
       'Wählen Sie direkt einen passenden Rechner oder Leitfaden, von der Prozentformel über Neugeborenen-Gewicht bis hin zu Grundumsatz und BMI:',
     faqs: [
@@ -634,7 +634,7 @@ export const LOCALE_TRANSLATIONS: Record<string, LocaleTranslation> = {
     metaTitle: 'Calcolatore Perdita di Peso (Weight Loss Calculator) | Percentuale, Neonato & BMR',
     metaDescription:
       'Calcolatore gratuito e validato medicamente per la percentuale di perdita di peso negli adulti, il calo ponderale del neonato e il metabolismo basale (BMR).',
-    searchPlaceholder: 'Cerca tra i 26 calcolatori e guide (es. Neonato, BMR, Keto, BMI)...',
+    searchPlaceholder: 'Cerca tra i 38 calcolatori e guide (es. Neonato, BMR, Keto, BMI)...',
     navPercentage: 'Calcolo Percentuale',
     navNewborn: 'Peso Neonato',
     navBmr: 'Metabolismo (BMR)',
@@ -706,7 +706,7 @@ export const LOCALE_TRANSLATIONS: Record<string, LocaleTranslation> = {
     celebrate: 'Festeggia',
     faqTitle: 'Domande Frequenti sulla Percentuale di Perdita di Peso',
     faqSubtitle: 'Risposte pratiche revisionate dalla Dott.ssa Rekha Kumar, M.D., M.S.',
-    directoryTitle: 'Tutti i 26 Calcolatori e Guide Cliniche',
+    directoryTitle: 'Tutti i 38 Calcolatori e Guide Cliniche',
     directorySubtitle:
       'Accedi rapidamente a qualsiasi argomento, dal calcolo percentuale per adulti e il calo ponderale del neonato fino a BMR, BMI e nutrizione:',
     faqs: [
@@ -779,7 +779,7 @@ export const LOCALE_TRANSLATIONS: Record<string, LocaleTranslation> = {
     metaTitle: 'Калькулятор потери веса (Weight Loss Calculator) | Процент, Новорожденные и BMR',
     metaDescription:
       'Бесплатный медицинский калькулятор процента потери веса для взрослых, контроля потери веса у новорожденных и расчета базового метаболизма (BMR).',
-    searchPlaceholder: 'Поиск по 26 калькуляторам и руководствам (например: Новорожденный, BMR, Кето, ИМТ)...',
+    searchPlaceholder: 'Поиск по 38 калькуляторам и руководствам (например: Новорожденный, BMR, Кето, ИМТ)...',
     navPercentage: 'Калькулятор % веса',
     navNewborn: 'Вес новорожденного',
     navBmr: 'Калории (BMR)',
@@ -851,7 +851,7 @@ export const LOCALE_TRANSLATIONS: Record<string, LocaleTranslation> = {
     celebrate: 'Отметить',
     faqTitle: 'Частые вопросы о проценте потери веса',
     faqSubtitle: 'Понятные практические ответы под редакцией д-ра Рекхи Кумар, M.D., M.S.',
-    directoryTitle: 'Все 26 калькулятора и клинических руководства',
+    directoryTitle: 'Все 38 калькулятора и клинических руководства',
     directorySubtitle:
       'Переходите к нужному разделу: от формулы процента потери веса и таблиц для новорожденных до расчета калорий BMR и ИМТ:',
     faqs: [
@@ -924,7 +924,7 @@ export const LOCALE_TRANSLATIONS: Record<string, LocaleTranslation> = {
     metaTitle: '减重百分比计算器 (Weight Loss Calculator) | 成人、新生儿体重与基础代谢 BMR',
     metaDescription:
       '免费且经医学审阅的减重百分比计算器。支持成人减重百分比计算、新生儿出生后生理性体重下降评估以及每日基础代谢率 (BMR) 与热量估算。',
-    searchPlaceholder: '搜索全部 26 个计算器与临床指南（如：新生儿、BMR、生酮、BMI）...',
+    searchPlaceholder: '搜索全部 38 个计算器与临床指南（如：新生儿、BMR、生酮、BMI）...',
     navPercentage: '减重百分比计算器',
     navNewborn: '新生儿体重计算',
     navBmr: '基础代谢 (BMR)',
@@ -996,7 +996,7 @@ export const LOCALE_TRANSLATIONS: Record<string, LocaleTranslation> = {
     celebrate: '庆祝达成',
     faqTitle: '关于减重百分比的常见问题',
     faqSubtitle: '由 Rekha Kumar 医学博士审阅的清晰实用解答',
-    directoryTitle: '全部 26 个计算器与临床参考指南',
+    directoryTitle: '全部 38 个计算器与临床参考指南',
     directorySubtitle:
       '快速跳转至任一专题，涵盖成人减重百分比公式、新生儿体重核对、每日热量需求、BMI 实例与营养指南：',
     faqs: [
