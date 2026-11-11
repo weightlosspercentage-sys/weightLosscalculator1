@@ -503,6 +503,241 @@ export function resolveSearchIntentFromPath(rawPathname: string): RouteIntentRes
     };
   }
 
+  // 8B. Authors & Medical Reviewer (Ahrefs fix 2026-11-11 — explicit self-canonical + titles)
+  if (cleanPath.includes('/authors/dr-rekha-kumar')) {
+    return {
+      locale,
+      shouldRedirectToHome: false,
+      redirectTarget: normalizedCanonical,
+      canonicalPath: normalizedCanonical,
+      toolMode: 'adult',
+      clinicalFocus: 'standard',
+      restaurantBrand: 'subway',
+      defaultWeightUnit,
+      defaultBabyUnit,
+      customMetaTitle: 'Dr. Rekha Kumar, M.D., M.S. | Lead Medical Reviewer & Obesity Medicine Specialist',
+      customMetaDescription:
+        'Medical credentials, clinical publications, and editorial review standards for Dr. Rekha Kumar, Board-Certified Endocrinologist and Associate Professor of Clinical Medicine at Weill Cornell Medicine.',
+      customHeroTitle: 'Dr. Rekha Kumar, M.D., M.S. — Medical Reviewer',
+      customHeroIntro:
+        'Board-Certified Endocrinologist, Diplomate of the American Board of Obesity Medicine (ABOM), and Associate Professor of Clinical Medicine at Weill Cornell Medicine.',
+      intentBadge: 'Lead Medical Reviewer • Weill Cornell Medicine'
+    };
+  }
+
+  // 8C. Site Info & Legal Pages (Ahrefs fix 2026-11-11 — explicit self-canonical + titles)
+  if (cleanPath === '/about' || cleanPath === '/about/') {
+    return {
+      locale,
+      shouldRedirectToHome: false,
+      redirectTarget: normalizedCanonical,
+      canonicalPath: normalizedCanonical,
+      toolMode: 'adult',
+      clinicalFocus: 'standard',
+      restaurantBrand: 'subway',
+      defaultWeightUnit,
+      defaultBabyUnit,
+      customMetaTitle: 'About Us | Clinically Validated Weight Loss Calculators',
+      customMetaDescription:
+        'Learn about Weight Loss Percentage (weightlosspercentage.com), our clinical medical leadership, zero-data storage architecture, and mission to provide free, peer-reviewed health calculators.',
+      customHeroTitle: 'About Weight Loss Percentage',
+      customHeroIntro:
+        'Free, peer-reviewed clinical health calculators for adults, parents, and healthcare professionals. 100% private in-browser calculations with zero tracking.',
+      intentBadge: 'About Us • Clinical Leadership & Privacy'
+    };
+  }
+
+  if (cleanPath === '/methodology' || cleanPath === '/methodology/') {
+    return {
+      locale,
+      shouldRedirectToHome: false,
+      redirectTarget: normalizedCanonical,
+      canonicalPath: normalizedCanonical,
+      toolMode: 'adult',
+      clinicalFocus: 'standard',
+      restaurantBrand: 'subway',
+      defaultWeightUnit,
+      defaultBabyUnit,
+      customMetaTitle: 'Medical Review & Methodology | Editorial Standards',
+      customMetaDescription:
+        'Our editorial standards, clinical review process, and scientific formulas (Mifflin-St Jeor, AAP guidelines, NIH DPP benchmarks) behind every calculator on Weight Loss Percentage.',
+      customHeroTitle: 'Medical Review & Methodology',
+      customHeroIntro:
+        'Every calculator is built on published medical formulas, validated against clinical guidelines, and reviewed for accuracy by board-certified physicians.',
+      intentBadge: 'Editorial Standards • Peer-Reviewed Formulas'
+    };
+  }
+
+  if (cleanPath === '/privacy-policy' || cleanPath === '/privacy-policy/') {
+    return {
+      locale,
+      shouldRedirectToHome: false,
+      redirectTarget: normalizedCanonical,
+      canonicalPath: normalizedCanonical,
+      toolMode: 'adult',
+      clinicalFocus: 'standard',
+      restaurantBrand: 'subway',
+      defaultWeightUnit,
+      defaultBabyUnit,
+      customMetaTitle: 'Privacy Policy | 100% Private Client-Side Health Calculations',
+      customMetaDescription:
+        'Read our privacy policy and zero-data storage guarantee. All biometric calculations run 100% client-side in your local browser with no server logging or personal data collection.',
+      customHeroTitle: 'Privacy Policy & Zero-Data Guarantee',
+      customHeroIntro:
+        'We believe personal health data belongs exclusively to you. Every calculation executes in your browser with no account required and no remote data storage.',
+      intentBadge: 'Zero Data Storage • 100% Private In-Browser'
+    };
+  }
+
+  if (cleanPath === '/terms-of-service' || cleanPath === '/terms-of-service/') {
+    return {
+      locale,
+      shouldRedirectToHome: false,
+      redirectTarget: normalizedCanonical,
+      canonicalPath: normalizedCanonical,
+      toolMode: 'adult',
+      clinicalFocus: 'standard',
+      restaurantBrand: 'subway',
+      defaultWeightUnit,
+      defaultBabyUnit,
+      customMetaTitle: 'Terms of Service & Clinical Disclaimer | Weight Loss Percentage',
+      customMetaDescription:
+        'Terms of service and clinical disclaimer for Weight Loss Percentage. Our tools and content provide educational health estimates and do not replace professional medical advice.',
+      customHeroTitle: 'Terms of Service & Clinical Disclaimer',
+      customHeroIntro:
+        'Terms governing use of Weight Loss Percentage calculators and educational guides. Always consult a qualified physician for individual medical guidance.',
+      intentBadge: 'Terms of Service • Educational Health Use'
+    };
+  }
+
+  if (cleanPath === '/contact' || cleanPath === '/contact/') {
+    return {
+      locale,
+      shouldRedirectToHome: false,
+      redirectTarget: normalizedCanonical,
+      canonicalPath: normalizedCanonical,
+      toolMode: 'adult',
+      clinicalFocus: 'standard',
+      restaurantBrand: 'subway',
+      defaultWeightUnit,
+      defaultBabyUnit,
+      customMetaTitle: 'Contact Us | Editorial & Engineering Team | Weight Loss Percentage',
+      customMetaDescription:
+        'Contact the editorial, clinical, and development teams at Weight Loss Percentage with questions, formula citations, or feature feedback.',
+      customHeroTitle: 'Contact Editorial & Technical Support',
+      customHeroIntro:
+        'Reach our medical review board, clinical editorial staff, or engineering team with inquiries, formula citations, or feedback.',
+      intentBadge: 'Contact Us • Clinical & Engineering Teams'
+    };
+  }
+
+  // 8D. Comparison & Glossary Hubs (Ahrefs fix 2026-11-11 — explicit titles; exact-match hubs only)
+  if (cleanPath === '/compare' || cleanPath === '/compare/') {
+    return {
+      locale,
+      shouldRedirectToHome: false,
+      redirectTarget: normalizedCanonical,
+      canonicalPath: normalizedCanonical,
+      toolMode: 'adult',
+      clinicalFocus: 'standard',
+      restaurantBrand: 'subway',
+      defaultWeightUnit,
+      defaultBabyUnit,
+      customMetaTitle: 'Compare Weight Loss Methods, Diets & Clinical Interventions',
+      customMetaDescription:
+        'Compare calorie deficit, fasting, bariatric surgery, keto, and GLP-1 medications side-by-side with verified clinical trial benchmarks and percentage loss projections.',
+      customHeroTitle: 'Compare Weight Loss Methods & Medical Calculations',
+      customHeroIntro:
+        'Compare the biological mechanisms, expected percentage reduction, and clinical trial evidence across calorie deficits, intermittent fasting, bariatric surgery, and GLP-1 therapy.',
+      intentBadge: 'Method Comparison • Evidence-Based Benchmarks'
+    };
+  }
+
+  if (cleanPath === '/glossary' || cleanPath === '/glossary/') {
+    return {
+      locale,
+      shouldRedirectToHome: false,
+      redirectTarget: normalizedCanonical,
+      canonicalPath: normalizedCanonical,
+      toolMode: 'adult',
+      clinicalFocus: 'standard',
+      restaurantBrand: 'subway',
+      defaultWeightUnit,
+      defaultBabyUnit,
+      customMetaTitle: 'Weight Loss & Clinical Health Glossary (Key Terms & Formulas)',
+      customMetaDescription:
+        'Definitions and clinical explanations of key weight loss and metabolic terms: BMR, TDEE, %EWL, %TBWL, calorie deficit, neonatal weight loss, and GLP-1 benchmarks.',
+      customHeroTitle: 'Clinical Weight Loss & Metabolic Health Glossary',
+      customHeroIntro:
+        'Search clear definitions and clinical formulas for BMR, TDEE, %EWL, neonatal fluid loss thresholds, and metabolic terms.',
+      intentBadge: 'Clinical Glossary • Medical Definitions & Formulas'
+    };
+  }
+
+  // 8E. Taxonomy Categories (Ahrefs fix 2026-11-11 — explicit titles; exact-match hubs only)
+  if (cleanPath === '/category/clinical-calculators' || cleanPath === '/category/clinical-calculators/') {
+    return {
+      locale,
+      shouldRedirectToHome: false,
+      redirectTarget: normalizedCanonical,
+      canonicalPath: normalizedCanonical,
+      toolMode: 'adult',
+      clinicalFocus: 'standard',
+      restaurantBrand: 'subway',
+      defaultWeightUnit,
+      defaultBabyUnit,
+      customMetaTitle: 'Clinical Weight Loss Calculators & Medical Formulas',
+      customMetaDescription:
+        'Medically reviewed clinical calculators including newborn weight loss, bariatric %EWL, GLP-1 trial trajectories, and postpartum deficit planners.',
+      customHeroTitle: 'Clinical Weight Loss Calculators',
+      customHeroIntro:
+        'Peer-reviewed clinical calculators developed for medical milestones, neonatal hydration tracking, bariatric recovery, and pharmacological weight management.',
+      intentBadge: 'Clinical Calculators • Peer-Reviewed Formulas'
+    };
+  }
+
+  if (cleanPath === '/category/nutrition-calculators' || cleanPath === '/category/nutrition-calculators/') {
+    return {
+      locale,
+      shouldRedirectToHome: false,
+      redirectTarget: normalizedCanonical,
+      canonicalPath: normalizedCanonical,
+      toolMode: 'adult',
+      clinicalFocus: 'standard',
+      restaurantBrand: 'subway',
+      defaultWeightUnit,
+      defaultBabyUnit,
+      customMetaTitle: 'Nutrition & Restaurant Calorie Calculators',
+      customMetaDescription:
+        "Calculate calories, macros, and deficits for restaurant meals including Five Guys, McDonald's, and Subway alongside daily TDEE targets.",
+      customHeroTitle: 'Nutrition & Meal Calorie Calculators',
+      customHeroIntro:
+        'Meal-building and calorie-tracking tools designed to help you calculate energy intake from whole foods and major restaurants into your daily deficit.',
+      intentBadge: 'Nutrition & Macros • Meal Calorie Builders'
+    };
+  }
+
+  if (cleanPath === '/category/guides' || cleanPath === '/category/guides/') {
+    return {
+      locale,
+      shouldRedirectToHome: false,
+      redirectTarget: normalizedCanonical,
+      canonicalPath: normalizedCanonical,
+      toolMode: 'adult',
+      clinicalFocus: 'standard',
+      restaurantBrand: 'subway',
+      defaultWeightUnit,
+      defaultBabyUnit,
+      customMetaTitle: 'Weight Loss Guides, Formulas & Milestone Charts',
+      customMetaDescription:
+        'Evidence-based guides, mathematical formulas, and milestone charts covering healthy monthly weight loss rates, 5% clinical benefits, and deficit planning.',
+      customHeroTitle: 'Clinical Reference Guides & Educational Articles',
+      customHeroIntro:
+        'In-depth reference guides on the mathematics of weight loss percentage, cardiometabolic health milestones, and sustainable fat loss timelines.',
+      intentBadge: 'Educational Guides • Clinical Reference Standards'
+    };
+  }
+
   // 9A. Compare / glossary / category hub pages — default tool with self-canonical.
   // (Placed before the BMR branch so /compare/bmr-vs-tdee/ does not borrow the BMR title.)
   if (

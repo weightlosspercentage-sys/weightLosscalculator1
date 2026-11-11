@@ -21,12 +21,6 @@ export default defineConfig({
           if (id.includes('node_modules/lucide-react')) {
             return 'lucide-icons';
           }
-          if (id.includes('node_modules/jspdf')) {
-            return 'pdf-generator';
-          }
-          if (id.includes('node_modules/canvas-confetti')) {
-            return 'confetti-fx';
-          }
         },
       },
     },
