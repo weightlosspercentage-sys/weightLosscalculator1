@@ -4,7 +4,7 @@ import { StructuredData } from './components/StructuredData';
 import type { SitePageKey } from './components/SiteInfoPages';
 import { TopToolSearchBar } from './components/TopToolSearchBar';
 import { AdSlot } from './components/AdSlot';
-import { AD_SLOT_HERO_BELOW, AD_SLOT_ABOVE_FAQ } from './config/adsense';
+import { AD_SLOT_HERO_BELOW } from './config/adsense';
 
 // Lazy-load below-the-fold content sections & secondary routes to minimize initial TBT and improve interaction readiness
 const SiloContentSections = lazy(() =>
@@ -962,9 +962,6 @@ export const App: React.FC = () => {
                   }}
                 />
               </div>
-
-              {/* Policy-Safe Display Ad Unit 3: Just above the FAQ, before the footer (24px+ margin) */}
-              <AdSlot slot={AD_SLOT_ABOVE_FAQ} variant="display" />
 
               <div className="cv-auto">
                 {/* Frequently Answered Clinical & Calculation Questions */}
