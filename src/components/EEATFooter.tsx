@@ -232,45 +232,40 @@ export const EEATFooter: React.FC<EEATFooterProps> = ({
                 Dr. Rekha Kumar, M.D., M.S.
               </button>
               <span className="text-slate-600">•</span>
-              <button
-                type="button"
-                onClick={() => onOpenSitePage?.('about')}
+              <a
+                href="/about/"
                 className="hover:text-white transition-colors"
               >
                 About Us
-              </button>
+              </a>
               <span className="text-slate-600">•</span>
-              <button
-                type="button"
-                onClick={() => onOpenSitePage?.('methodology')}
+              <a
+                href="/methodology/"
                 className="hover:text-white transition-colors"
               >
                 Review Methodology
-              </button>
+              </a>
               <span className="text-slate-600">•</span>
-              <button
-                type="button"
-                onClick={() => onOpenSitePage?.('privacy')}
+              <a
+                href="/privacy-policy/"
                 className="hover:text-white transition-colors"
               >
                 Privacy Policy
-              </button>
+              </a>
               <span className="text-slate-600">•</span>
-              <button
-                type="button"
-                onClick={() => onOpenSitePage?.('terms')}
+              <a
+                href="/terms-of-service/"
                 className="hover:text-white transition-colors"
               >
                 Terms of Service
-              </button>
+              </a>
               <span className="text-slate-600">•</span>
-              <button
-                type="button"
-                onClick={() => onOpenSitePage?.('contact')}
+              <a
+                href="/contact/"
                 className="hover:text-white transition-colors"
               >
                 Contact
-              </button>
+              </a>
               <span className="text-slate-600">•</span>
               <a
                 href="/sitemap.xml"

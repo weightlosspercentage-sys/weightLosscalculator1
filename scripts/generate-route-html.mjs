@@ -103,8 +103,32 @@ for (const loc of locMatches) {
     pageTitle = meta.customMetaTitle || meta.fallbackTitle || 'Weight Loss Percentage Calculator';
   }
 
-  // Description
-  const pageDesc = meta.customMetaDescription || meta.fallbackDescription || 'Calculate weight loss percentage instantly.';
+  // Description: Fix 5 sets explicit homepage meta description; other routes use route metadata
+  let pageDesc = isRootHome
+    ? 'Free weight loss percentage calculators for adults, newborns and babies — plus BMR, TDEE, BMI and calorie tools. Private in your browser, with a free PDF report.'
+    : meta.customMetaDescription || meta.fallbackDescription || 'Calculate weight loss percentage instantly.';
+
+  // Fix 2: For every non-homepage route whose locale is not English, append region label when not already present
+  const REGION_LABELS = {
+    ca: 'Canada',
+    uk: 'UK',
+    au: 'Australia',
+    de: 'Germany',
+    it: 'Italy',
+    ru: 'Russia',
+    zh: 'China'
+  };
+  if (!isRootHome && meta.locale && meta.locale !== 'en') {
+    const regionLabel = REGION_LABELS[meta.locale];
+    if (regionLabel) {
+      if (!pageTitle.toLowerCase().includes(regionLabel.toLowerCase())) {
+        pageTitle = `${pageTitle} | ${regionLabel}`;
+      }
+      if (!pageDesc.toLowerCase().includes(regionLabel.toLowerCase())) {
+        pageDesc = `${pageDesc} | ${regionLabel}`;
+      }
+    }
+  }
 
   // Canonical full URL
   const canonicalUrl = `https://www.weightlosspercentage.com${routePath}`;

@@ -954,6 +954,313 @@ export function resolveSearchIntentFromPath(rawPathname: string): RouteIntentRes
     };
   }
 
+  // 9E. Individual Blog Post Metadata (17 Slugs)
+  if (cleanPath.includes('/blog/weight-loss-formulas-explained')) {
+    return {
+      locale,
+      shouldRedirectToHome: false,
+      redirectTarget: normalizedCanonical,
+      canonicalPath: normalizedCanonical,
+      toolMode: 'adult',
+      clinicalFocus: 'standard',
+      restaurantBrand: 'subway',
+      defaultWeightUnit,
+      defaultBabyUnit,
+      customMetaTitle: 'Weight Loss Formulas Explained: Percentage, BMR & Calorie Deficit',
+      customMetaDescription:
+        'The three formulas that matter for weight loss: percentage lost ((Start - Current) ÷ Start) × 100, BMR (Mifflin-St Jeor), and daily calorie deficit.',
+      intentBadge: 'Interactive Calculator + Clinical Reference Guide'
+    };
+  }
+
+  if (cleanPath.includes('/blog/signs-body-burning-fat')) {
+    return {
+      locale,
+      shouldRedirectToHome: false,
+      redirectTarget: normalizedCanonical,
+      canonicalPath: normalizedCanonical,
+      toolMode: 'adult',
+      clinicalFocus: 'standard',
+      restaurantBrand: 'subway',
+      defaultWeightUnit,
+      defaultBabyUnit,
+      customMetaTitle: "Signs Your Body Is Burning Fat (and How to Tell It's Working)",
+      customMetaDescription:
+        'How to tell your body is burning fat: a steady downward scale trend, looser clothes, a shrinking waist measurement, and more stable energy.',
+      intentBadge: 'Interactive Calculator + Clinical Reference Guide'
+    };
+  }
+
+  if (cleanPath.includes('/blog/weight-tracking-guide')) {
+    return {
+      locale,
+      shouldRedirectToHome: false,
+      redirectTarget: normalizedCanonical,
+      canonicalPath: normalizedCanonical,
+      toolMode: 'adult',
+      clinicalFocus: 'standard',
+      restaurantBrand: 'subway',
+      defaultWeightUnit,
+      defaultBabyUnit,
+      customMetaTitle: 'Weight Tracking Guide: How to Weigh Yourself and Read the Trend',
+      customMetaDescription:
+        'Weigh yourself the same way each morning, record it daily, and read the weekly average — not a single day — to see real fat loss.',
+      intentBadge: 'Interactive Calculator + Clinical Reference Guide'
+    };
+  }
+
+  if (cleanPath.includes('/blog/how-to-calculate-body-fat')) {
+    return {
+      locale,
+      shouldRedirectToHome: false,
+      redirectTarget: normalizedCanonical,
+      canonicalPath: normalizedCanonical,
+      toolMode: 'adult',
+      clinicalFocus: 'standard',
+      restaurantBrand: 'subway',
+      defaultWeightUnit,
+      defaultBabyUnit,
+      customMetaTitle: 'How to Calculate Body Fat Percentage (Methods + Formula)',
+      customMetaDescription:
+        'Body fat percentage from measurements, scales, and calipers: the formulas, what each method actually measures, and which is most reliable.',
+      intentBadge: 'Interactive Calculator + Clinical Reference Guide'
+    };
+  }
+
+  if (cleanPath.includes('/blog/exercise-for-weight-loss')) {
+    return {
+      locale,
+      shouldRedirectToHome: false,
+      redirectTarget: normalizedCanonical,
+      canonicalPath: normalizedCanonical,
+      toolMode: 'adult',
+      clinicalFocus: 'standard',
+      restaurantBrand: 'subway',
+      defaultWeightUnit,
+      defaultBabyUnit,
+      customMetaTitle: 'Exercise for Weight Loss: What Burns the Most Fat',
+      customMetaDescription:
+        'Walking, strength training, and cardio compared for weight loss: how many calories each burns and how to combine them for steady fat loss.',
+      intentBadge: 'Interactive Calculator + Clinical Reference Guide'
+    };
+  }
+
+  if (cleanPath.includes('/blog/biggest-loser-formula')) {
+    return {
+      locale,
+      shouldRedirectToHome: false,
+      redirectTarget: normalizedCanonical,
+      canonicalPath: normalizedCanonical,
+      toolMode: 'adult',
+      clinicalFocus: 'standard',
+      restaurantBrand: 'subway',
+      defaultWeightUnit,
+      defaultBabyUnit,
+      customMetaTitle: "Biggest Loser Formula: How the Show's Weight Loss Percentages Work",
+      customMetaDescription:
+        "How The Biggest Loser calculates weight loss percentage: ((Start - Current) ÷ Start) × 100, and why the show's weekly numbers look so extreme.",
+      intentBadge: 'Interactive Calculator + Clinical Reference Guide'
+    };
+  }
+
+  if (cleanPath.includes('/blog/weight-loss-percentage-at-300-to-400-lbs')) {
+    return {
+      locale,
+      shouldRedirectToHome: false,
+      redirectTarget: normalizedCanonical,
+      canonicalPath: normalizedCanonical,
+      toolMode: 'adult',
+      clinicalFocus: 'standard',
+      restaurantBrand: 'subway',
+      defaultWeightUnit,
+      defaultBabyUnit,
+      customMetaTitle: 'Weight Loss Percentage at 300 to 400 lbs: Chart & Examples',
+      customMetaDescription:
+        'What 5%, 10%, and 20% weight loss looks like from 300 to 400 lbs: pounds lost at each milestone, with the percentage formula worked out.',
+      intentBadge: 'Interactive Calculator + Clinical Reference Guide'
+    };
+  }
+
+  if (cleanPath.includes('/blog/weight-loss-percentage-at-170-to-230-lbs')) {
+    return {
+      locale,
+      shouldRedirectToHome: false,
+      redirectTarget: normalizedCanonical,
+      canonicalPath: normalizedCanonical,
+      toolMode: 'adult',
+      clinicalFocus: 'standard',
+      restaurantBrand: 'subway',
+      defaultWeightUnit,
+      defaultBabyUnit,
+      customMetaTitle: 'Weight Loss Percentage at 170 to 230 lbs: Chart & Examples',
+      customMetaDescription:
+        'What 5%, 10%, and 20% weight loss looks like from 170 to 230 lbs: pounds lost at each milestone, with the percentage formula worked out.',
+      intentBadge: 'Interactive Calculator + Clinical Reference Guide'
+    };
+  }
+
+  if (cleanPath.includes('/blog/calculate-bmr-to-lose-weight')) {
+    return {
+      locale,
+      shouldRedirectToHome: false,
+      redirectTarget: normalizedCanonical,
+      canonicalPath: normalizedCanonical,
+      toolMode: 'adult',
+      clinicalFocus: 'standard',
+      restaurantBrand: 'subway',
+      defaultWeightUnit,
+      defaultBabyUnit,
+      customMetaTitle: 'Calculate BMR to Lose Weight (Mifflin-St Jeor + Deficit)',
+      customMetaDescription:
+        'Find your BMR with the Mifflin-St Jeor equation, multiply by activity for TDEE, then subtract 500 kcal a day for about a pound a week.',
+      intentBadge: 'Interactive Calculator + Clinical Reference Guide'
+    };
+  }
+
+  if (cleanPath.includes('/blog/fat-loss-vs-weight-loss')) {
+    return {
+      locale,
+      shouldRedirectToHome: false,
+      redirectTarget: normalizedCanonical,
+      canonicalPath: normalizedCanonical,
+      toolMode: 'adult',
+      clinicalFocus: 'standard',
+      restaurantBrand: 'subway',
+      defaultWeightUnit,
+      defaultBabyUnit,
+      customMetaTitle: 'Fat Loss vs Weight Loss: Two Different Numbers',
+      customMetaDescription:
+        'Fat loss and weight loss are not the same number: scale weight includes water and muscle, so track body fat percentage alongside the scale.',
+      intentBadge: 'Interactive Calculator + Clinical Reference Guide'
+    };
+  }
+
+  if (cleanPath.includes('/blog/calories-vs-weight-loss')) {
+    return {
+      locale,
+      shouldRedirectToHome: false,
+      redirectTarget: normalizedCanonical,
+      canonicalPath: normalizedCanonical,
+      toolMode: 'adult',
+      clinicalFocus: 'standard',
+      restaurantBrand: 'subway',
+      defaultWeightUnit,
+      defaultBabyUnit,
+      customMetaTitle: 'Calories vs Weight Loss: How the Deficit Translates to Pounds',
+      customMetaDescription:
+        'One pound of fat is about 3,500 kcal: how a daily calorie deficit adds up to pounds lost per week, and why the math slows as you get lighter.',
+      intentBadge: 'Interactive Calculator + Clinical Reference Guide'
+    };
+  }
+
+  if (cleanPath.includes('/blog/walking-for-weight-loss')) {
+    return {
+      locale,
+      shouldRedirectToHome: false,
+      redirectTarget: normalizedCanonical,
+      canonicalPath: normalizedCanonical,
+      toolMode: 'adult',
+      clinicalFocus: 'standard',
+      restaurantBrand: 'subway',
+      defaultWeightUnit,
+      defaultBabyUnit,
+      customMetaTitle: 'Walking for Weight Loss: Calories, Pace & Weekly Plan',
+      customMetaDescription:
+        'How many calories walking burns by body weight and pace, how many steps a day actually move the scale, and a simple weekly walking plan.',
+      intentBadge: 'Interactive Calculator + Clinical Reference Guide'
+    };
+  }
+
+  if (cleanPath.includes('/blog/anti-gravity-exercises-weight-loss')) {
+    return {
+      locale,
+      shouldRedirectToHome: false,
+      redirectTarget: normalizedCanonical,
+      canonicalPath: normalizedCanonical,
+      toolMode: 'adult',
+      clinicalFocus: 'standard',
+      restaurantBrand: 'subway',
+      defaultWeightUnit,
+      defaultBabyUnit,
+      customMetaTitle: 'Anti-Gravity Exercises for Weight Loss: Low-Impact Ways to Move More',
+      customMetaDescription:
+        'Anti-gravity and low-impact exercise options for weight loss when joints or weight make regular exercise hard — and how they burn calories.',
+      intentBadge: 'Interactive Calculator + Clinical Reference Guide'
+    };
+  }
+
+  if (cleanPath.includes('/blog/weight-loss-percentage-at-230-to-300-lbs')) {
+    return {
+      locale,
+      shouldRedirectToHome: false,
+      redirectTarget: normalizedCanonical,
+      canonicalPath: normalizedCanonical,
+      toolMode: 'adult',
+      clinicalFocus: 'standard',
+      restaurantBrand: 'subway',
+      defaultWeightUnit,
+      defaultBabyUnit,
+      customMetaTitle: 'Weight Loss Percentage at 230 to 300 lbs: Chart & Examples',
+      customMetaDescription:
+        'What 5%, 10%, and 20% weight loss looks like from 230 to 300 lbs: pounds lost at each milestone, with the percentage formula worked out.',
+      intentBadge: 'Interactive Calculator + Clinical Reference Guide'
+    };
+  }
+
+  if (cleanPath.includes('/blog/weight-loss-percentage-at-130-to-170-lbs')) {
+    return {
+      locale,
+      shouldRedirectToHome: false,
+      redirectTarget: normalizedCanonical,
+      canonicalPath: normalizedCanonical,
+      toolMode: 'adult',
+      clinicalFocus: 'standard',
+      restaurantBrand: 'subway',
+      defaultWeightUnit,
+      defaultBabyUnit,
+      customMetaTitle: 'Weight Loss Percentage at 130 to 170 lbs: Chart & Examples',
+      customMetaDescription:
+        'What 5%, 10%, and 20% weight loss looks like from 130 to 170 lbs: pounds lost at each milestone, with the percentage formula worked out.',
+      intentBadge: 'Interactive Calculator + Clinical Reference Guide'
+    };
+  }
+
+  if (cleanPath.includes('/blog/keto-diet-weight-loss')) {
+    return {
+      locale,
+      shouldRedirectToHome: false,
+      redirectTarget: normalizedCanonical,
+      canonicalPath: normalizedCanonical,
+      toolMode: 'adult',
+      clinicalFocus: 'standard',
+      restaurantBrand: 'subway',
+      defaultWeightUnit,
+      defaultBabyUnit,
+      customMetaTitle: 'Keto Diet Weight Loss: Macros, Timeline & What to Expect',
+      customMetaDescription:
+        'What to expect from keto weight loss: the fast early water-weight drop, then steady fat loss — plus the macros that define a ketogenic diet.',
+      intentBadge: 'Interactive Calculator + Clinical Reference Guide'
+    };
+  }
+
+  if (cleanPath.includes('/blog/weight-loss-percentage-by-starting-weight')) {
+    return {
+      locale,
+      shouldRedirectToHome: false,
+      redirectTarget: normalizedCanonical,
+      canonicalPath: normalizedCanonical,
+      toolMode: 'adult',
+      clinicalFocus: 'standard',
+      restaurantBrand: 'subway',
+      defaultWeightUnit,
+      defaultBabyUnit,
+      customMetaTitle: 'Weight Loss Percentage by Starting Weight: Chart & Calculator',
+      customMetaDescription:
+        'What 5% and 10% weight loss means at your starting weight: pounds lost at each milestone, from 130 to 400 lbs, with the percentage formula.',
+      intentBadge: 'Interactive Calculator + Clinical Reference Guide'
+    };
+  }
+
   // 9. High-Impression Blog & Percentage Chart Guides
   if (cleanPath.includes('/blog/')) {
     return {

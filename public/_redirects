@@ -12,6 +12,31 @@
 /au/calculators/bmi/height-weight/* /au/ 301
 /weight-loss-5-percent-180-lbs.html / 301
 /weight-loss-10-percent-200-lbs.html / 301
+/de/calculators/weight-loss/from-* /de/ 301
+/it/calculators/weight-loss/from-* /it/ 301
+/ru/calculators/weight-loss/from-* /ru/ 301
+/zh/calculators/weight-loss/from-* /zh/ 301
+/nz/calculators/bmi/height-weight/* /au/ 301
+/de/calculators/bmi/height-weight/* /de/ 301
+/it/calculators/bmi/height-weight/* /it/ 301
+/ru/calculators/bmi/height-weight/* /ru/ 301
+/zh/calculators/bmi/height-weight/* /zh/ 301
+/ca/calculator/newborn/* /ca/calculators/newborn-weight-loss/ 301
+/uk/calculator/newborn/* /uk/calculators/newborn-weight-loss/ 301
+/au/calculator/newborn/* /au/calculators/newborn-weight-loss/ 301
+/nz/calculator/newborn/* /au/calculators/newborn-weight-loss/ 301
+/de/calculator/newborn/* /de/ 301
+/it/calculator/newborn/* /it/ 301
+/ru/calculator/newborn/* /ru/ 301
+/zh/calculator/newborn/* /zh/ 301
+/de/weight-loss-5-percent-180-lbs.html /de/ 301
+/it/weight-loss-5-percent-180-lbs.html /it/ 301
+/ru/weight-loss-5-percent-180-lbs.html /ru/ 301
+/zh/weight-loss-5-percent-180-lbs.html /zh/ 301
+/de/weight-loss-10-percent-200-lbs.html /de/ 301
+/it/weight-loss-10-percent-200-lbs.html /it/ 301
+/ru/weight-loss-10-percent-200-lbs.html /ru/ 301
+/zh/weight-loss-10-percent-200-lbs.html /zh/ 301
 
 # Bing Newborn & Infant Keyword Variants -> Authoritative Newborn Hub (301)
 /calculating-weight-loss-in-newborns* /calculators/newborn-weight-loss/ 301
@@ -63,7 +88,7 @@
 /treadmill-weight-loss-calculator* / 301
 /liposuction-weight-loss-calculator* / 301
 
-# GSC 28-day topical map (2026-11-10): canonical consolidation
+# Consolidate legacy reviewer and calculator variants (301)
 /calculator/female/ /calculators/weight-loss/ 301
 /reviewer/dr-rekha-kumar/ /authors/dr-rekha-kumar/ 301
 /calculators/body-fat/ /calculators/body-fat-percentage/ 301
