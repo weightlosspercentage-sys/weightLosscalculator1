@@ -1,6 +1,7 @@
 import React, { useState, useEffect, Suspense, lazy } from 'react';
 import { HeroToolBox, ToolMode } from './components/HeroToolBox';
 import { BmiTopicalPages, BmiTopicalRoute } from './components/BmiTopicalPages';
+import { BlogArticleContent } from './components/BlogArticleContent';
 import { StructuredData } from './components/StructuredData';
 import type { SitePageKey } from './components/SiteInfoPages';
 import { TopToolSearchBar } from './components/TopToolSearchBar';
@@ -958,19 +959,25 @@ export const App: React.FC = () => {
             {/* Below-the-Fold Deferred Content with Content-Visibility Optimization */}
             <Suspense fallback={<div className="min-h-[600px] cv-auto" />}>
               <div className="cv-auto">
-                {/* Comprehensive 26 Calculators & Clinical Reference Guides (includes mid-page In-article Ad Unit 2) */}
-                <SiloContentSections
-                  searchQuery={searchQuery}
-                  onClearSearch={() => setSearchQuery('')}
-                  locale={selectedLocale}
-                  onSelectToolMode={(mode) => {
-                    setActiveToolMode(mode);
-                    setActiveBottomNav(mode);
-                  }}
-                  onSelectClinicalFocus={(focus) => {
-                    setClinicalFocus(focus);
-                  }}
-                />
+                {routeIntent.canonicalPath.endsWith('/blog/fat-loss-vs-weight-loss/') ? (
+                  <BlogArticleContent slug="fat-loss-vs-weight-loss" />
+                ) : routeIntent.canonicalPath.endsWith('/blog/weight-tracking-guide/') ? (
+                  <BlogArticleContent slug="weight-tracking-guide" />
+                ) : (
+                  /* Comprehensive 26 Calculators & Clinical Reference Guides (includes mid-page In-article Ad Unit 2) */
+                  <SiloContentSections
+                    searchQuery={searchQuery}
+                    onClearSearch={() => setSearchQuery('')}
+                    locale={selectedLocale}
+                    onSelectToolMode={(mode) => {
+                      setActiveToolMode(mode);
+                      setActiveBottomNav(mode);
+                    }}
+                    onSelectClinicalFocus={(focus) => {
+                      setClinicalFocus(focus);
+                    }}
+                  />
+                )}
               </div>
 
               <div className="cv-auto">

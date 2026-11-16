@@ -170,7 +170,7 @@ export function resolveSearchIntentFromPath(rawPathname: string): RouteIntentRes
         ? 'Baby Weight Loss Calculator UK (lbs/oz & Grams)'
         : 'Baby Weight Loss Calculator (lbs/oz & Grams)',
       customMetaDescription:
-        'Calculate baby weight loss percentage after birth in lbs/oz or grams: ((Birth Weight - Current Weight) ÷ Birth Weight) × 100. Check the 7% normal and 10% alert thresholds.',
+        "Find out if your baby's weight loss after birth is normal. Check the 7% normal and 10% alert thresholds in seconds with our free calculator.",
       customHeroTitle: isUk
         ? 'Baby Weight Loss Calculator (UK)'
         : 'Baby Weight Loss Calculator',
@@ -205,7 +205,7 @@ export function resolveSearchIntentFromPath(rawPathname: string): RouteIntentRes
         ? 'Baby & Newborn Weight Loss Calculator UK (lbs/oz & Grams)'
         : 'Newborn & Infant Weight Loss Percentage Calculator (lbs/oz & Grams)',
       customMetaDescription:
-        'Calculate newborn and infant weight loss percentage after birth in lbs/oz or grams: ((Birth Weight - Current Weight) ÷ Birth Weight) × 100. Instant AAP 5%, 7%, and 10% check.',
+        'Learn how to calculate newborn weight loss after birth and see if it is in the normal range. Free calculator with 7% normal and 10% alert thresholds.',
       customHeroTitle: isUk
         ? 'Baby & Newborn Weight Loss Percentage Calculator (UK)'
         : 'Newborn & Infant Weight Loss Percentage Calculator',
