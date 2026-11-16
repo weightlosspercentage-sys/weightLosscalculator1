@@ -160,7 +160,10 @@ export const PRESERVED_ROUTES = [
   '/compare/bmr-vs-tdee/',
   '/glossary/',
   '/category/pregnancy/',
-  '/category/weight-loss/'
+  '/category/weight-loss/',
+  '/calculators/bmi/',
+  '/calculators/bmi-chart/',
+  '/calculators/ideal-weight/'
 ];
 
 export const SILOS_DATA: SiloMetadata[] = [

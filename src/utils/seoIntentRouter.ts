@@ -780,6 +780,90 @@ export function resolveSearchIntentFromPath(rawPathname: string): RouteIntentRes
     };
   }
 
+// NEW PAGE 2: /calculators/bmi-chart/ (BMI Chart for Women and Men)
+  if (
+    cleanPath === '/calculators/bmi-chart' ||
+    cleanPath === '/calculators/bmi-chart/' ||
+    cleanPath.endsWith('/calculators/bmi-chart') ||
+    cleanPath.endsWith('/calculators/bmi-chart/')
+  ) {
+    return {
+      locale,
+      shouldRedirectToHome: false,
+      redirectTarget: normalizedCanonical,
+      canonicalPath: normalizedCanonical,
+      toolMode: 'adult',
+      clinicalFocus: 'standard',
+      restaurantBrand: 'subway',
+      defaultWeightUnit,
+      defaultBabyUnit,
+      customMetaTitle: 'BMI Chart for Women and Men: BMI by Age and Category',
+      customMetaDescription:
+        'See the BMI chart for women and men, BMI by age, and the underweight, normal, overweight and obese categories in one height and weight table.',
+      customHeroTitle: 'BMI Chart for Women and Men: BMI by Age and Category',
+      customHeroIntro:
+        'A BMI chart is a height-and-weight reference table that maps adult stature and body weight to World Health Organization BMI categories: Underweight below 18.5, Normal 18.5 to 24.9, Overweight 25 to 29.9, and Obese 30 and above.',
+      intentBadge: 'WHO BMI Categories • Women, Men & Age Reference Table',
+      scrollSectionId: 'bmi-chart-page'
+    };
+  }
+
+  // NEW PAGE 1: /calculators/bmi/ (BMI Calculator & Reverse BMI)
+  if (
+    cleanPath === '/calculators/bmi' ||
+    cleanPath === '/calculators/bmi/' ||
+    cleanPath.endsWith('/calculators/bmi') ||
+    cleanPath.endsWith('/calculators/bmi/')
+  ) {
+    return {
+      locale,
+      shouldRedirectToHome: false,
+      redirectTarget: normalizedCanonical,
+      canonicalPath: normalizedCanonical,
+      toolMode: 'adult',
+      clinicalFocus: 'standard',
+      restaurantBrand: 'subway',
+      defaultWeightUnit,
+      defaultBabyUnit,
+      customMetaTitle: 'BMI Calculator: Check Your BMI Online in kg/cm or lbs/inches',
+      customMetaDescription:
+        'Free BMI calculator: check your BMI online in kg/cm or lbs/inches. Enter height, weight, age and gender to see your BMI and category, or use reverse BMI.',
+      customHeroTitle: 'BMI Calculator: Check Your BMI Online in kg/cm or lbs/inches',
+      customHeroIntro:
+        'A BMI calculator is an online measurement tool that divides body weight in kilograms by height in metres squared to find your Body Mass Index and adult weight category in metric or imperial units.',
+      intentBadge: 'BMI & Reverse BMI Calculator • Metric (kg/cm) & Imperial (lbs/inches)',
+      scrollSectionId: 'bmi-calculator-page'
+    };
+  }
+
+  // NEW PAGE 3: /calculators/ideal-weight/ (Ideal Weight by Height)
+  if (
+    cleanPath === '/calculators/ideal-weight' ||
+    cleanPath === '/calculators/ideal-weight/' ||
+    cleanPath.endsWith('/calculators/ideal-weight') ||
+    cleanPath.endsWith('/calculators/ideal-weight/')
+  ) {
+    return {
+      locale,
+      shouldRedirectToHome: false,
+      redirectTarget: normalizedCanonical,
+      canonicalPath: normalizedCanonical,
+      toolMode: 'adult',
+      clinicalFocus: 'standard',
+      restaurantBrand: 'subway',
+      defaultWeightUnit,
+      defaultBabyUnit,
+      customMetaTitle: 'Ideal Weight by Height: Healthy Weight Range and Table',
+      customMetaDescription:
+        'Find your ideal weight by height. Enter your height to see your healthy weight range, plus a weight table by height with the suggested weight for each height.',
+      customHeroTitle: 'Ideal Weight by Height: Healthy Weight Range and Table',
+      customHeroIntro:
+        'An ideal weight by height calculator is a formula tool that computes the healthy body weight range corresponding to a normal BMI of 18.5 to 24.9 for your exact height in centimetres or inches.',
+      intentBadge: 'Healthy Weight Range (BMI 18.5 to 24.9) • Height & Weight Table',
+      scrollSectionId: 'ideal-weight-page'
+    };
+  }
+
   if (cleanPath.includes('/calculators/walking')) {
     return {
       locale,

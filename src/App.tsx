@@ -1,5 +1,6 @@
 import React, { useState, useEffect, Suspense, lazy } from 'react';
 import { HeroToolBox, ToolMode } from './components/HeroToolBox';
+import { BmiTopicalPages, BmiTopicalRoute } from './components/BmiTopicalPages';
 import { StructuredData } from './components/StructuredData';
 import type { SitePageKey } from './components/SiteInfoPages';
 import { TopToolSearchBar } from './components/TopToolSearchBar';
@@ -926,20 +927,29 @@ export const App: React.FC = () => {
 
             {/* Visually Dominant Hero Tool Box */}
             <section id="calculator-hero" className="scroll-mt-20" aria-label="Interactive Weight Loss Percentage Calculator Tool">
-              <HeroToolBox
-                externalMode={activeToolMode}
-                locale={selectedLocale}
-                clinicalFocus={clinicalFocus}
-                onClinicalFocusChange={setClinicalFocus}
-                restaurantBrand={restaurantBrand}
-                onRestaurantBrandChange={setRestaurantBrand}
-                defaultWeightUnit={routeIntent.defaultWeightUnit}
-                defaultBabyUnit={routeIntent.defaultBabyUnit}
-                onModeChange={(m) => {
-                  setActiveToolMode(m);
-                  setActiveBottomNav(m);
-                }}
-              />
+              {routeIntent.canonicalPath === '/calculators/bmi/' ||
+              routeIntent.canonicalPath === '/calculators/bmi-chart/' ||
+              routeIntent.canonicalPath === '/calculators/ideal-weight/' ? (
+                <BmiTopicalPages
+                  activeRoute={routeIntent.canonicalPath as BmiTopicalRoute}
+                  onNavigate={navigateCanonicalHub}
+                />
+              ) : (
+                <HeroToolBox
+                  externalMode={activeToolMode}
+                  locale={selectedLocale}
+                  clinicalFocus={clinicalFocus}
+                  onClinicalFocusChange={setClinicalFocus}
+                  restaurantBrand={restaurantBrand}
+                  onRestaurantBrandChange={setRestaurantBrand}
+                  defaultWeightUnit={routeIntent.defaultWeightUnit}
+                  defaultBabyUnit={routeIntent.defaultBabyUnit}
+                  onModeChange={(m) => {
+                    setActiveToolMode(m);
+                    setActiveBottomNav(m);
+                  }}
+                />
+              )}
             </section>
 
             {/* Policy-Safe Display Ad Unit 1: Directly below the hero calculator results block (24px+ margin) */}

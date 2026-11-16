@@ -16,6 +16,12 @@ export const FAQ_DATA: FAQItem[] = [
       'Subtract your current weight from your starting weight, divide that number by your starting weight, and multiply by 100. For example, if you started at 200 lbs and now weigh 180 lbs, you lost 20 lbs: (20 ÷ 200) × 100 = 10%. The exact same math works whether you weigh yourself in pounds, kilograms, or grams.'
   },
   {
+    question: 'How much weight do newborns lose after birth, and when should baby be back to birth weight?',
+    topic: 'Neonatal Weight Timeline',
+    answer:
+      'Normal newborn weight loss and typical newborn weight loss in the first 48 to 72 hours is 5% to 7% of birth weight for breastfed babies and 3% to 5% for formula-fed babies. This normal neonatal weight loss reaches its lowest point around day 3 or day 4, after which healthy babies gain 15 to 30 grams per day and regain their birth weight by 10 to 14 days of age.'
+  },
+  {
     question: 'How do I interpret my weight loss percentage results?',
     topic: 'Health Milestones',
     answer:

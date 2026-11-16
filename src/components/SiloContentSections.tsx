@@ -141,7 +141,50 @@ export const SiloContentSections: React.FC<SiloContentSectionsProps> = ({
             )}
           </div>
         )}
-      </section>
+              {/* Dedicated Calculators Navigation List for BMI, BMI Chart, Ideal Weight, Newborn & Baby Tools */}
+        <div className="mt-4 pt-4 border-t border-slate-100 dark:border-slate-800">
+          <h3 className="text-xs font-extrabold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-2.5">
+            BMI, Ideal Weight &amp; Pediatric Calculators Navigation
+          </h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2 text-xs">
+            <a
+              href="/calculators/bmi/"
+              className="min-h-[42px] px-3 py-2 rounded-xl bg-indigo-50/70 dark:bg-indigo-950/50 hover:bg-indigo-100 dark:hover:bg-indigo-900/60 border border-indigo-200/80 dark:border-indigo-800/80 text-[#7334fd] dark:text-indigo-300 font-bold flex items-center justify-between transition-colors"
+            >
+              <span className="truncate">BMI Calculator (kg/cm &amp; lbs/in)</span>
+              <ChevronRight className="w-4 h-4 shrink-0" />
+            </a>
+            <a
+              href="/calculators/bmi-chart/"
+              className="min-h-[42px] px-3 py-2 rounded-xl bg-indigo-50/70 dark:bg-indigo-950/50 hover:bg-indigo-100 dark:hover:bg-indigo-900/60 border border-indigo-200/80 dark:border-indigo-800/80 text-[#7334fd] dark:text-indigo-300 font-bold flex items-center justify-between transition-colors"
+            >
+              <span className="truncate">BMI Chart (Women &amp; Men)</span>
+              <ChevronRight className="w-4 h-4 shrink-0" />
+            </a>
+            <a
+              href="/calculators/ideal-weight/"
+              className="min-h-[42px] px-3 py-2 rounded-xl bg-indigo-50/70 dark:bg-indigo-950/50 hover:bg-indigo-100 dark:hover:bg-indigo-900/60 border border-indigo-200/80 dark:border-indigo-800/80 text-[#7334fd] dark:text-indigo-300 font-bold flex items-center justify-between transition-colors"
+            >
+              <span className="truncate">Ideal Weight by Height</span>
+              <ChevronRight className="w-4 h-4 shrink-0" />
+            </a>
+            <a
+              href="/calculators/newborn-weight-loss/"
+              className="min-h-[42px] px-3 py-2 rounded-xl bg-orange-50/70 dark:bg-orange-950/50 hover:bg-orange-100 dark:hover:bg-orange-900/60 border border-orange-200/80 dark:border-orange-800/80 text-[#ca3500] dark:text-orange-300 font-bold flex items-center justify-between transition-colors"
+            >
+              <span className="truncate">Newborn Weight Loss Calculator</span>
+              <ChevronRight className="w-4 h-4 shrink-0" />
+            </a>
+            <a
+              href="/calculators/baby-weight-loss/"
+              className="min-h-[42px] px-3 py-2 rounded-xl bg-sky-50/70 dark:bg-sky-950/50 hover:bg-sky-100 dark:hover:bg-sky-900/60 border border-sky-200/80 dark:border-sky-800/80 text-[#4950fc] dark:text-sky-300 font-bold flex items-center justify-between transition-colors"
+            >
+              <span className="truncate">Baby Weight Loss Calculator</span>
+              <ChevronRight className="w-4 h-4 shrink-0" />
+            </a>
+          </div>
+        </div>
+</section>
 
       {/* ================= SILO 1: PERCENTAGE ================= */}
       <section id="percentage" className="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-10 border border-slate-200 dark:border-slate-800 shadow-sm space-y-6 scroll-mt-20 transition-colors">
@@ -229,19 +272,37 @@ export const SiloContentSections: React.FC<SiloContentSectionsProps> = ({
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="space-y-3">
             <h3 className="text-base font-bold text-slate-900 dark:text-white">
-              Why Newborns Lose Weight at First
+              Normal Newborn Weight Loss and Why Newborns Lose Weight at First
             </h3>
             <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-              Babies are born with extra fluid to help them through the first couple of days before full milk volume comes in. Because of this, healthy full-term newborns commonly lose 5% to 7% of their birth weight in the first 48 to 72 hours. If weight loss reaches 8% to 10%, your pediatrician or lactation consultant will usually check latch and feeding more closely.
+              Newborn weight loss is the expected physiological shedding of extracellular fluid during the first days of life. Because infants are born with extra fluid reserves to sustain them until maternal colostrum transitions into mature milk, birth weight loss in newborns occurs in almost every healthy delivery. Under American Academy of Pediatrics (AAP) clinical guidelines, normal neonatal weight loss and typical newborn weight loss range from 5% to 7% of birth weight for breastfed infants and 3% to 5% for formula-fed infants over the first 48 to 72 hours.
+            </p>
+            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+              When evaluating a baby's weight loss on the hospital discharge chart, clinicians calculate the exact percentage using the formula ((Birth Weight minus Current Weight) divided by Birth Weight) multiplied by 100. If a newborn lost weight reaching 8% to 10% of birth weight, a pediatrician or lactation consultant evaluates latch, milk transfer, and feeding frequency.
             </p>
           </div>
 
           <div className="space-y-3">
             <h3 className="text-base font-bold text-slate-900 dark:text-white">
-              Working With Pounds, Ounces, or Grams
+              Working With Pounds, Ounces, or Grams and Tracking Regain
             </h3>
             <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-              Hospitals often record birth weight in grams on the discharge chart and tell parents the weight in pounds and ounces. To calculate by hand in pounds and ounces, convert both weights to total ounces first (pounds × 16 + ounces) so you aren’t mixing whole pounds with sixteenths.
+              Hospitals often record birth weight in grams on the discharge chart and tell parents the weight in pounds and ounces. To calculate weight loss in newborns after birth by hand in pounds and ounces, convert both weights to total ounces first (pounds × 16 + ounces) so you are not mixing whole pounds with sixteenths.
+            </p>
+            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+              A newborn losing weight usually reaches their lowest weight nadir between day 3 and day 4 after delivery. Once mature milk volume increases, healthy infants stop losing and begin gaining 15 to 30 grams (0.5 to 1.0 ounce) per day so the newborn regain birth weight milestone is reached by 10 to 14 days of age. You can also track ongoing recovery on our{' '}
+              <a href="/calculators/baby-weight-loss/" className="text-[#4950fc] dark:text-sky-400 font-bold hover:underline">
+                baby weight loss calculator
+              </a>, or check adult postpartum and family health metrics with our{' '}
+              <a href="/calculators/bmi/" className="text-[#7334fd] dark:text-indigo-400 font-bold hover:underline">
+                BMI calculator
+              </a>,{' '}
+              <a href="/calculators/bmi-chart/" className="text-[#ca3500] dark:text-orange-400 font-bold hover:underline">
+                BMI chart
+              </a>, and{' '}
+              <a href="/calculators/ideal-weight/" className="text-emerald-700 dark:text-emerald-400 font-bold hover:underline">
+                ideal weight by height calculator
+              </a>.
             </p>
           </div>
         </div>
@@ -281,13 +342,50 @@ export const SiloContentSections: React.FC<SiloContentSectionsProps> = ({
           </table>
         </div>
 
+        {/* Dedicated Newborn Weight Loss Questions & Answers */}
+        <div className="p-4 sm:p-6 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/80 space-y-4">
+          <h3 className="text-base sm:text-lg font-extrabold text-slate-900 dark:text-white">
+            Newborn Weight Loss Frequently Asked Questions
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+            <div className="p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-200/70 dark:border-slate-800 space-y-1.5">
+              <h4 className="font-bold text-slate-900 dark:text-white">
+                How much weight do newborns lose, and how much weight does a newborn lose after birth?
+              </h4>
+              <p>
+                When parents ask how much weight do babies lose after birth, the standard clinical answer is that healthy full-term breastfed newborns typically lose 5% to 7% of their birth weight in the first 48 to 72 hours, while formula-fed newborns typically lose 3% to 5%. A loss of 10% or more requires prompt medical evaluation.
+              </p>
+            </div>
+            <div className="p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-200/70 dark:border-slate-800 space-y-1.5">
+              <h4 className="font-bold text-slate-900 dark:text-white">
+                What is normal newborn weight loss versus when to call the pediatrician?
+              </h4>
+              <p>
+                Normal newborn weight loss is a drop that stays below 7% to 8% of birth weight during the first 72 hours alongside regular wet and dirty diapers. If a newborn losing weight approaches or exceeds 10% below birth weight, or continues losing weight after day 4, contact your pediatrician for a feeding check.
+              </p>
+            </div>
+            <div className="p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-200/70 dark:border-slate-800 space-y-1.5">
+              <h4 className="font-bold text-slate-900 dark:text-white">
+                When should baby be back to birth weight?
+              </h4>
+              <p>
+                Most healthy full-term newborns regain their original birth weight by 10 to 14 days after delivery. After the weight nadir around day 3 to day 4, steady daily feeding produces a consistent weight gain until the newborn is back at or above birth weight by the two-week pediatric visit.
+              </p>
+            </div>
+          </div>
+        </div>
+
         <div className="pt-4 border-t border-slate-100 dark:border-slate-800 flex flex-wrap items-center gap-3 text-xs font-semibold text-slate-500 dark:text-slate-400">
           <span>Related Calculators:</span>
           <a href="#" className="text-[#7334fd] dark:text-indigo-400 hover:underline">Weight Loss Calculator</a>
           <span>•</span>
-          <a href="#percentage" className="text-[#ca3500] dark:text-orange-400 hover:underline">Weight Loss Percentage Calculator</a>
-          <span>•</span>
           <a href="/calculators/baby-weight-loss/" className="text-[#4950fc] dark:text-sky-400 hover:underline">Baby Weight Loss Calculator</a>
+          <span>•</span>
+          <a href="/calculators/bmi/" className="text-[#7334fd] dark:text-indigo-400 hover:underline">BMI Calculator</a>
+          <span>•</span>
+          <a href="/calculators/bmi-chart/" className="text-[#ca3500] dark:text-orange-400 hover:underline">BMI Chart</a>
+          <span>•</span>
+          <a href="/calculators/ideal-weight/" className="text-emerald-700 dark:text-emerald-400 hover:underline">Ideal Weight by Height</a>
         </div>
       </section>
 

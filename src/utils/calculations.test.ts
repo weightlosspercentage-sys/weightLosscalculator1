@@ -231,6 +231,34 @@ test('GSC 28-day topical-map optimizations P1-P6 routes resolve accurately', () 
   // P6 & P8: Distinct calculators hub title
   const hub = resolveSearchIntentFromPath('/calculators/');
   assert.equal(hub.customMetaTitle, 'Weight Loss & Clinical Health Calculators Hub (All Tools)');
+
+  // BMI Calculator, BMI Chart, and Ideal Weight by Height topical-map routes
+  const bmiCalc = resolveSearchIntentFromPath('/calculators/bmi/');
+  assert.equal(bmiCalc.shouldRedirectToHome, false);
+  assert.equal(bmiCalc.canonicalPath, '/calculators/bmi/');
+  assert.equal(bmiCalc.customMetaTitle, 'BMI Calculator: Check Your BMI Online in kg/cm or lbs/inches');
+  assert.equal(
+    bmiCalc.customMetaDescription,
+    'Free BMI calculator: check your BMI online in kg/cm or lbs/inches. Enter height, weight, age and gender to see your BMI and category, or use reverse BMI.'
+  );
+
+  const bmiChart = resolveSearchIntentFromPath('/calculators/bmi-chart/');
+  assert.equal(bmiChart.shouldRedirectToHome, false);
+  assert.equal(bmiChart.canonicalPath, '/calculators/bmi-chart/');
+  assert.equal(bmiChart.customMetaTitle, 'BMI Chart for Women and Men: BMI by Age and Category');
+  assert.equal(
+    bmiChart.customMetaDescription,
+    'See the BMI chart for women and men, BMI by age, and the underweight, normal, overweight and obese categories in one height and weight table.'
+  );
+
+  const idealWeight = resolveSearchIntentFromPath('/calculators/ideal-weight/');
+  assert.equal(idealWeight.shouldRedirectToHome, false);
+  assert.equal(idealWeight.canonicalPath, '/calculators/ideal-weight/');
+  assert.equal(idealWeight.customMetaTitle, 'Ideal Weight by Height: Healthy Weight Range and Table');
+  assert.equal(
+    idealWeight.customMetaDescription,
+    'Find your ideal weight by height. Enter your height to see your healthy weight range, plus a weight table by height with the suggested weight for each height.'
+  );
 });
 
 

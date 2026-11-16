@@ -66,7 +66,7 @@
 - [Privacy Policy](https://www.weightlosspercentage.com/privacy-policy/): Zero server-side data storage guarantee and browser-only calculation policy.
 - [Terms of Service](https://www.weightlosspercentage.com/terms-of-service/): Medical disclaimer and educational terms of use.
 - [Contact](https://www.weightlosspercentage.com/contact/): Editorial and clinical review contact information.
-- [XML Sitemap](https://www.weightlosspercentage.com/sitemap.xml): Complete index of all 141 canonical pages across 8 locales.
+- [XML Sitemap](https://www.weightlosspercentage.com/sitemap.xml): Complete index of all 144 canonical pages across 8 locales.
 - [Full LLM Documentation](https://www.weightlosspercentage.com/llms-full.txt): Complete reference equations, tables, and clinical methodology.
 
 ## Official Social Profiles
