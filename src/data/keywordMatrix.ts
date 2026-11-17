@@ -118,6 +118,7 @@ export const PRESERVED_ROUTES = [
   '/blog/how-to-calculate-weight-loss-percentage/',
   '/uk/blog/how-to-calculate-weight-loss-percentage/',
   '/ca/blog/how-to-calculate-weight-loss-percentage/',
+  '/blog/how-much-weight-have-i-lost/',
   '/blog/healthy-weight-loss-per-month/',
   '/uk/blog/healthy-weight-loss-per-month/',
   '/ca/blog/healthy-weight-loss-per-month/',

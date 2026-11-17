@@ -1153,6 +1153,27 @@ export function resolveSearchIntentFromPath(rawPathname: string): RouteIntentRes
     };
   }
 
+  if (cleanPath.includes('/blog/how-much-weight-have-i-lost')) {
+    return {
+      locale,
+      shouldRedirectToHome: false,
+      redirectTarget: normalizedCanonical,
+      canonicalPath: normalizedCanonical,
+      toolMode: 'adult',
+      clinicalFocus: 'standard',
+      restaurantBrand: 'subway',
+      defaultWeightUnit,
+      defaultBabyUnit,
+      customMetaTitle: 'How Much Weight Have I Lost? Calculator, Formula & Monthly Pace',
+      customMetaDescription:
+        'Enter your starting weight and current weight to see how much you have lost as a percentage. Formula, worked examples in pounds and kilograms, and the safe monthly pace (4 to 8 pounds).',
+      customHeroTitle: 'How Much Weight Have I Lost?',
+      customHeroIntro:
+        'How much weight you have lost is one number: the percentage of your starting weight that is gone. Enter your starting weight and current weight below to see the exact percentage and pounds lost.',
+      intentBadge: 'Interactive Calculator + Clinical Reference Guide'
+    };
+  }
+
   // 9E. Individual Blog Post Metadata (17 Slugs)
   if (cleanPath.includes('/blog/weight-loss-formulas-explained')) {
     return {

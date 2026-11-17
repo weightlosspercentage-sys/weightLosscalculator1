@@ -310,6 +310,142 @@ for (const loc of locMatches) {
           <p>Clinical evidence suggests a safe and sustainable rate of fat loss is 1 to 2 pounds per week (0.5% to 1.0% of total body weight). Rapid weight reduction can cause metabolic adaptation, lean muscle loss and nutritional deficiencies.</p>
           <p>BMR, TDEE and calorie deficit models estimate energy expenditure from baseline physiological variables. Actual metabolic rates vary with lean body mass distribution, hormonal health, activity levels and individual adaptation. Adjust caloric targets gradually and prioritise nutrient-dense whole foods.</p>
         </section>`;
+  } else if (routePath.endsWith('/blog/how-much-weight-have-i-lost/')) {
+    routeHtml = routeHtml.replace(
+      /<h1 class="cp-h1">[^<]*<\/h1>/,
+      '<h1 class="cp-h1">How Much Weight Have I Lost?</h1>'
+    );
+    preRenderedSectionHtml = `
+        <article id="blog-article-how-much-weight-have-i-lost" style="margin-top: 1.5rem; padding: 1.5rem; background: var(--cp-surface); border: 1px solid var(--cp-border); border-radius: 1.25rem;">
+          <h2>How Much Weight Have I Lost?</h2>
+          <p>How much weight you have lost is one number: the percentage of your starting weight that is gone. Enter your starting weight and current weight in <a href="/">the weight loss percentage calculator</a> to see your total weight loss as both a percentage and a pound or kilogram total.</p>
+          <p>When you ask how much weight have I lost, how much weight did I lose, or how much have I lost in weight, two numbers answer the question together. First, total pounds or kilograms lost measures the raw mass removed from the scale. Second, weight loss percentage expresses that loss as a share of your starting body weight. Whether you need a free how much weight have I lost calculator or a how many lbs have I lost calculator, the formula below computes both figures.</p>
+          <h3>1. How to Calculate Your Weight Loss Percentage (The Formula)</h3>
+          <p>To calculate weight loss percentage, subtract your current weight from your starting weight, divide the difference by your starting weight, and multiply the result by 100. This equation answers how to calculate weight loss percentage, how to calculate percentage of weight loss, and how do you calculate percentage of weight loss across pounds and kilograms.</p>
+          <p><code>Weight Loss Percentage = ((Starting Weight − Current Weight) ÷ Starting Weight) × 100</code></p>
+          <p><strong>The denominator rule: always divide by starting weight, never current weight.</strong> The most common mistake when people ask how to figure out your percentage of weight loss or how to figure percent of weight loss is dividing by the new, lighter weight. Dividing by current weight inflates the result. Dropping from 200 lb to 180 lb is a 20 lb loss: dividing 20 by the starting weight of 200 gives the true 10.0% loss, whereas dividing 20 by the current weight of 180 gives a false 11.1%.</p>
+          <h4>Do It in 30 Seconds: Three-Step Calculation</h4>
+          <p>To answer how to figure out percentage of weight loss, how to find percentage of weight loss, or how to measure weight loss percentage on any calculator, follow three steps:</p>
+          <ol>
+            <li><strong>First, subtract current weight from starting weight</strong> to get total pounds or kilograms lost.</li>
+            <li><strong>Second, divide weight lost by starting weight</strong> to get the decimal fraction of starting mass lost.</li>
+            <li><strong>Third, multiply by 100</strong> to state the result as a percentage, rounded to one decimal place.</li>
+          </ol>
+          <h4>Worked Examples in Pounds and Kilograms</h4>
+          <p>Whether you search how to calculate percentage weight loss, how do you calculate your weight loss percentage, or how to calculate percent weight loss, the math is identical in pounds (lb) and kilograms (kg):</p>
+          <table>
+            <thead>
+              <tr><th>Example</th><th>Starting Weight</th><th>Current Weight</th><th>Weight Lost</th><th>Calculation</th><th>Percentage Lost</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Example 1 (Pounds)</td><td>200 lb</td><td>180 lb</td><td>20 lb</td><td>(200 − 180) ÷ 200 × 100</td><td>10.0%</td></tr>
+              <tr><td>Example 2 (Kilograms)</td><td>90 kg</td><td>81 kg</td><td>9 kg</td><td>(90 − 81) ÷ 90 × 100</td><td>10.0%</td></tr>
+              <tr><td>Example 3 (Decimal Pounds)</td><td>185 lb</td><td>172.5 lb</td><td>12.5 lb</td><td>(185 − 172.5) ÷ 185 × 100</td><td>6.8%</td></tr>
+            </tbody>
+          </table>
+          <p>Going from 200 lb to 180 lb removes 20 lb, and (20 ÷ 200) × 100 = 10%. Going from 90 kg to 81 kg removes 9 kg, and (9 ÷ 90) × 100 = 10%. Going from 185 lb to 172.5 lb removes 12.5 lb, and (12.5 ÷ 185) × 100 = 6.8%. For spreadsheet formulas, see <a href="/blog/how-to-calculate-weight-loss-percentage/">the guide to calculating weight loss percentage</a>.</p>
+          <h3>2. What Your Weight Loss Percentage Means (Reference Table)</h3>
+          <p>Weight loss percentage normalizes progress across body sizes. Raw pounds hide that context: losing 10 lb at 180 lb is 5.6% of starting weight (10 ÷ 180 × 100 = 5.6%), whereas losing 10 lb at 300 lb is 3.3% (10 ÷ 300 × 100 = 3.3%). Both people lost 10 lb, but the 180 lb person crossed the 5% clinical milestone while the 300 lb person is two-thirds of the way there.</p>
+          <table>
+            <thead>
+              <tr><th>Percentage Lost</th><th>At 180 lb Start</th><th>At 300 lb Start</th><th>What It Means</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>1% to 3%</td><td>1.8 to 5.4 lb</td><td>3 to 9 lb</td><td>Initial downward trend beyond day-to-day water fluctuations.</td></tr>
+              <tr><td>5%</td><td>9 lb</td><td>15 lb</td><td>First clinical milestone: blood pressure, blood sugar, and cholesterol improve (Look AHEAD 2011, Diabetes Care; CDC).</td></tr>
+              <tr><td>10%</td><td>18 lb</td><td>30 lb</td><td>Larger health gains across glycemic control, triglycerides, and joint load.</td></tr>
+              <tr><td>15% to 20%</td><td>27 to 36 lb</td><td>45 to 60 lb</td><td>The total weight loss range that clinical GLP-1 trials report.</td></tr>
+            </tbody>
+          </table>
+          <p>In the Look AHEAD study (<em>Diabetes Care</em>, 2011) and CDC guidance, a 5% loss is the first clinical milestone where blood pressure, blood sugar, and cholesterol improve measurably. Read more on <a href="/blog/5-percent-weight-loss/">what a 5% weight loss means</a> or check your starting weight on <a href="/blog/weight-loss-percentage-chart/">the weight loss percentage chart</a>.</p>
+          <h3>3. How Much Weight Can You Lose in a Month? (Safe Pace)</h3>
+          <p>A safe monthly weight loss pace for adults is <strong>4 to 8 pounds per month</strong>, matching the CDC guideline of <strong>1 to 2 pounds per week</strong>. Whether you ask how much weight can I lose in a month, how much weight can you lose in a month, or how many pounds can you lose in a month, 4 to 8 pounds is the benchmark that protects lean muscle. Because <strong>1 pound of fat equals approximately 3,500 kcal</strong>, your daily calorie deficit sets your monthly loss:</p>
+          <table>
+            <thead>
+              <tr><th>Daily Deficit</th><th>Weekly Deficit</th><th>Weekly Loss</th><th>Monthly Loss (4 Weeks)</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>500 kcal / day</td><td>3,500 kcal / week</td><td>~1.0 lb / week</td><td>~4 lb / month</td></tr>
+              <tr><td>750 kcal / day</td><td>5,250 kcal / week</td><td>~1.5 lb / week</td><td>~6 lb / month</td></tr>
+              <tr><td>1,000 kcal / day</td><td>7,000 kcal / week</td><td>~2.0 lb / week</td><td>~8 lb / month</td></tr>
+            </tbody>
+          </table>
+          <p>First, the first month is often higher because glycogen depletion releases bound water, which is why people using a how to lose 15 pounds in a month calculator, a how much weight can you lose in a month calculator, or a how much weight can i lose in a month calculator often see a larger drop in month one that includes water weight. Second, the pace slows as you get lighter because a smaller body burns fewer calories. Third, a bigger starting weight loses more pounds at the same deficit. See <a href="/blog/healthy-weight-loss-per-month/">the healthy monthly pace guide</a> and find your resting baseline with <a href="/calculators/bmr/">the BMR calculator</a>.</p>
+          <h3>4. How to Track It Without Fooling Yourself</h3>
+          <ol>
+            <li><strong>First, weigh at the same time of day:</strong> Step on the scale each morning after using the restroom and before eating or drinking.</li>
+            <li><strong>Second, use the weekly average:</strong> Daily scale weight swings 1 to 2 kg with water, salt, and glycogen. Compare 7-day weekly averages rather than single days.</li>
+            <li><strong>Third, remember percentage is scale weight, not fat:</strong> The formula cannot tell fat from muscle or water on a single reading.</li>
+          </ol>
+          <p>Read our protocol on <a href="/blog/weight-tracking-guide/">how to track your weight</a> and our comparison of <a href="/blog/fat-loss-vs-weight-loss/">fat loss vs weight loss</a>. All figures on this page are general information, not medical advice.</p>
+          <h3>5. Frequently Asked Questions</h3>
+          <h4>How much weight have I lost?</h4>
+          <p>To find how much weight you have lost, subtract your current weight from your starting weight to get your total pounds or kilograms lost, divide that number by your starting weight, and multiply by 100 to get your weight loss percentage. You can also enter your starting weight and current weight in the calculator at the top of this page to see both numbers at once.</p>
+          <h4>How do you calculate percentage of weight loss?</h4>
+          <p>Use the formula (Starting Weight − Current Weight) ÷ Starting Weight × 100. Always divide by your starting weight and never by your current weight. For example, starting at 200 lb and weighing 180 lb today equals 20 lb lost, and (20 ÷ 200) × 100 = 10% weight loss. In kilograms, dropping from 90 kg to 81 kg equals 9 kg lost, and (9 ÷ 90) × 100 = 10%.</p>
+          <h4>How much weight can I lose in a month?</h4>
+          <p>A safe and sustainable monthly loss for adults is 4 to 8 pounds per month, based on the CDC recommendation of 1 to 2 pounds per week. Your first month can show a larger drop on the scale when stored glycogen and water release, and the pace gradually slows as your body weight gets lighter. This range is general information, not medical advice.</p>
+          <h4>How much weight can you lose in a month with a 500-calorie deficit?</h4>
+          <p>Because 1 pound of body fat stores approximately 3,500 kcal, a consistent 500-calorie daily deficit creates a 3,500-calorie weekly deficit. That equals about 1 pound of weight loss per week, or roughly 4 pounds lost across a 4-week month.</p>
+          <h4>How do I figure out my percentage of weight loss?</h4>
+          <p>Follow three steps in order: first, subtract your current weight from your starting weight to find total weight lost; second, divide that difference by your starting weight; third, multiply the decimal by 100. For example, going from 185 lb to 172.5 lb removes 12.5 lb, and (12.5 ÷ 185) × 100 = 6.8%.</p>
+          <h4>Is 5% weight loss good?</h4>
+          <p>Yes. Losing 5% of your starting body weight is the first clinical milestone recognized by the CDC and the Look AHEAD study (2011, Diabetes Care), where blood pressure, blood sugar, and cholesterol improve measurably.</p>
+        </article>`;
+  } else if (isRootHome || routePath.endsWith('/calculators/weight-loss/')) {
+    preRenderedSectionHtml = `
+        <section id="percentage" style="margin-top: 1.5rem; padding: 1.5rem; background: var(--cp-surface); border: 1px solid var(--cp-border); border-radius: 1.25rem;">
+          <h2>Weight Loss Percentage Calculator</h2>
+          <p>Weight loss percentage is a metric that expresses weight lost as a proportion of starting weight. The formula divides weight lost by starting weight and multiplies by 100. A 200-pound person who loses 15 pounds has lost 7.5 percent. Doctors and clinical researchers use this metric because it normalises progress across body sizes.</p>
+          <h3>How the calculation works</h3>
+          <p>The formula is one subtraction, one division and one multiplication.</p>
+          <p><code>Weight Loss % = ((Starting Weight − Current Weight) ÷ Starting Weight) × 100</code></p>
+          <p>The calculator takes two inputs: starting weight and current weight. It returns one number: the percentage. Firstly, it subtracts current weight from starting weight to find total pounds lost. Secondly, it divides that loss by the starting weight. Finally, it multiplies by 100 to express the result as a percentage.</p>
+          <p>A worked example makes the arithmetic concrete. Starting weight is 200 lbs and current weight is 185 lbs. Weight lost equals 200 − 185 = 15 lbs. Then (15 ÷ 200) × 100 = 7.5% total weight loss, which crosses the 5% clinical health milestone.</p>
+          <h3>Quick reference table</h3>
+          <p>The table shows what 5%, 10%, 15% and 20% weight loss equals for common starting weights.</p>
+          <table>
+            <thead>
+              <tr><th>Starting Weight</th><th>5% Weight Loss</th><th>10% Weight Loss</th><th>15% Weight Loss</th><th>20% Weight Loss</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>150 lbs</td><td>7.5 lbs (142.5 lbs)</td><td>15 lbs (135 lbs)</td><td>22.5 lbs (127.5 lbs)</td><td>30 lbs (120 lbs)</td></tr>
+              <tr><td>180 lbs</td><td>9 lbs (171 lbs)</td><td>18 lbs (162 lbs)</td><td>27 lbs (153 lbs)</td><td>36 lbs (144 lbs)</td></tr>
+              <tr><td>200 lbs</td><td>10 lbs (190 lbs)</td><td>20 lbs (180 lbs)</td><td>30 lbs (170 lbs)</td><td>40 lbs (160 lbs)</td></tr>
+              <tr><td>250 lbs</td><td>12.5 lbs (237.5 lbs)</td><td>25 lbs (225 lbs)</td><td>37.5 lbs (212.5 lbs)</td><td>50 lbs (200 lbs)</td></tr>
+              <tr><td>300 lbs</td><td>15 lbs (285 lbs)</td><td>30 lbs (270 lbs)</td><td>45 lbs (255 lbs)</td><td>60 lbs (240 lbs)</td></tr>
+            </tbody>
+          </table>
+          <h3>The calculator suite</h3>
+          <p>One metric anchors the suite. Each tool below measures a different variable of the same process: energy balance.</p>
+          <p>Newborn tracking starts at birth. Parents tracking the first week of life use the <a href="/calculators/newborn-weight-loss/">newborn weight loss calculator</a>, which compares each day's weight against the normal early-loss range of the first week of life. Tracking continues after week one. For weeks two to four, the <a href="/calculators/baby-weight-loss/">baby weight loss percentage calculator</a> continues the same percentage tracking week by week against expected regain patterns.</p>
+          <p>Metabolism tools set the calorie context. Before setting a target, the <a href="/calculators/bmr/">BMR calculator</a> estimates the calorie floor the body needs at complete rest. The <a href="/calculators/tdee/">TDEE calculator</a> extends that resting estimate with activity level, giving the full daily budget the deficit works against. The <a href="/calculators/calorie-deficit/">calorie deficit calculator</a> then sizes the gap between intake and budget that produces fat loss.</p>
+          <p>Food and composition tools fill in the details. The <a href="/restaurants/subway/">Subway calorie calculator</a> shows how a restaurant meal fits inside the daily budget. The <a href="/calculators/bmi/">BMI calculator</a> classifies body mass against WHO categories. The <a href="/calculators/body-fat-percentage/">body fat percentage calculator</a> estimates composition with the US Navy method. The protein calculator sets daily protein targets that preserve muscle during a deficit. The <a href="/calculators/water-intake/">water intake calculator</a> personalises hydration. The macro calculator splits calories into protein, fat and carbohydrate targets.</p>
+          <p>Stage-specific tools cover special cases. The <a href="/calculators/postpartum-weight-loss/">postpartum weight loss calculator</a> plans safe breastfeeding weight loss. The <a href="/calculators/bariatric-surgery-weight-loss/">bariatric surgery calculator</a> tracks excess weight loss percentage after VSG or bypass procedures. The <a href="/calculators/weight-loss/">weight loss calculator</a> projects the timeline to reach a goal weight. The <a href="/calculators/biggest-loser/">Biggest Loser weight loss calculator</a> applies the same percentage formula to the competition format, where ranking depends on percentage rather than pounds.</p>
+          <h3>Percentage versus pounds: which to trust</h3>
+          <table>
+            <thead>
+              <tr><th>Criterion</th><th>Percentage</th><th>Raw pounds</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Comparability across body sizes</td><td>High. One scale for every frame</td><td>Low. Ten pounds means different things at 150 and 300</td></tr>
+              <tr><td>Clinical thresholds</td><td>Built in. The 5% and 10% milestones are percentage-based</td><td>None. Pounds carry no threshold</td></tr>
+              <tr><td>Goal setting</td><td>Scales to the individual frame automatically</td><td>Needs manual adjustment per person</td></tr>
+              <tr><td>Limitation</td><td>Does not separate fat loss from muscle or water loss</td><td>Same limitation, plus no comparability</td></tr>
+            </tbody>
+          </table>
+          <p>An editorial note on method. Percentage is the better headline metric for almost every purpose. Pounds still matter in the kitchen, where portions are weighed in ounces and grams. Track the percentage for decisions. Track the pounds for cooking. The percentage tells you whether you are succeeding. The scale tells you what to eat.</p>
+          <h3>Evidence and references</h3>
+          <ul>
+            <li>MedlinePlus (NIH): Health topics</li>
+            <li>NIH NIDDK: Weight management</li>
+            <li><a href="/methodology/">Editorial and Methodology Policy</a>: our accuracy standards</li>
+          </ul>
+          <h3>Medical disclaimer</h3>
+          <p>This tool is for educational and informational purposes only and does not replace professional medical advice. Consult a registered dietitian or healthcare professional before starting restrictive dieting or intensive training.</p>
+          <p>Clinical evidence suggests a safe and sustainable rate of fat loss is 1 to 2 pounds per week (0.5% to 1.0% of total body weight). Rapid weight reduction can cause metabolic adaptation, lean muscle loss and nutritional deficiencies.</p>
+          <p>BMR, TDEE and calorie deficit models estimate energy expenditure from baseline physiological variables. Actual metabolic rates vary with lean body mass distribution, hormonal health, activity levels and individual adaptation. Adjust caloric targets gradually and prioritise nutrient-dense whole foods.</p>
+        </section>`;
   } else if (routePath.endsWith('/calculators/newborn-weight-loss/') || routePath.endsWith('/calculators/infant-weight-loss/')) {
     preRenderedSectionHtml = `
         <section id="newborn" style="margin-top: 1.5rem; padding: 1.5rem; background: var(--cp-surface); border: 1px solid var(--cp-border); border-radius: 1.25rem;">

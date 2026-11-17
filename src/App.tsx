@@ -961,6 +961,8 @@ export const App: React.FC = () => {
               <div className="cv-auto">
                 {routeIntent.canonicalPath.endsWith('/blog/fat-loss-vs-weight-loss/') ? (
                   <BlogArticleContent slug="fat-loss-vs-weight-loss" />
+                ) : routeIntent.canonicalPath.endsWith('/blog/how-much-weight-have-i-lost/') ? (
+                  <BlogArticleContent slug="how-much-weight-have-i-lost" />
                 ) : routeIntent.canonicalPath.endsWith('/blog/weight-tracking-guide/') ? (
                   <BlogArticleContent slug="weight-tracking-guide" />
                 ) : (
