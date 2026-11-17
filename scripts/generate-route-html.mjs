@@ -102,6 +102,7 @@ for (const loc of locMatches) {
   if (!isRootHome) {
     pageTitle = meta.customMetaTitle || meta.fallbackTitle || 'Weight Loss Percentage Calculator';
   }
+  const h1Title = isRootHome ? 'Weight Loss Percentage Calculator' : pageTitle;
 
   // Description: Fix 5 sets explicit homepage meta description; other routes use route metadata
   let pageDesc = isRootHome
@@ -215,12 +216,14 @@ for (const loc of locMatches) {
     routeHtml = routeHtml.replace(/\s*<script\s+id="schema-org"[^>]*>[\s\S]*?<\/script>/, '');
   }
 
-  // I. Inject distinct static pre-rendered article body for /blog/fat-loss-vs-weight-loss/ and /blog/weight-tracking-guide/
+  // I. Replace static H1 with route-specific page title (homepage keeps "Weight Loss Percentage Calculator"; locale routes exclude " | Region" suffix)
+  routeHtml = routeHtml.replace(
+    /<h1 class="cp-h1">[^<]*<\/h1>/,
+    `<h1 class="cp-h1">${escapeHtml(h1Title)}</h1>`
+  );
+
+  // J. Inject distinct static pre-rendered article body for /blog/fat-loss-vs-weight-loss/ and /blog/weight-tracking-guide/
   if (routePath.endsWith('/blog/fat-loss-vs-weight-loss/')) {
-    routeHtml = routeHtml.replace(
-      /<h1 class="cp-h1">[^<]*<\/h1>/,
-      '<h1 class="cp-h1">Fat Loss vs Weight Loss: Two Different Numbers</h1>'
-    );
     const fatLossArticleHtml = `
         <article id="blog-article-fat-loss-vs-weight-loss" style="margin-top: 1.5rem; padding: 1.5rem; background: var(--cp-surface); border: 1px solid var(--cp-border); border-radius: 1.25rem;">
           <h2>Fat Loss vs Weight Loss: Why Scale Weight and Body Fat Percentage Are Two Different Numbers</h2>
@@ -241,10 +244,6 @@ for (const loc of locMatches) {
       `</div>${fatLossArticleHtml}\n      </div>\n    </div>\n\n    <noscript>`
     );
   } else if (routePath.endsWith('/blog/weight-tracking-guide/')) {
-    routeHtml = routeHtml.replace(
-      /<h1 class="cp-h1">[^<]*<\/h1>/,
-      '<h1 class="cp-h1">Weight Tracking Guide: How to Weigh Yourself and Read the Trend</h1>'
-    );
     const weightTrackingArticleHtml = `
         <article id="blog-article-weight-tracking-guide" style="margin-top: 1.5rem; padding: 1.5rem; background: var(--cp-surface); border: 1px solid var(--cp-border); border-radius: 1.25rem;">
           <h2>Weight Tracking Guide: How to Weigh Yourself Correctly and Read the Weekly Trend</h2>

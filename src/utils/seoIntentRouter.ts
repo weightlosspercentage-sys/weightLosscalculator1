@@ -205,7 +205,7 @@ export function resolveSearchIntentFromPath(rawPathname: string): RouteIntentRes
         ? 'Baby & Newborn Weight Loss Calculator UK (lbs/oz & Grams)'
         : 'Newborn & Infant Weight Loss Percentage Calculator (lbs/oz & Grams)',
       customMetaDescription:
-        'Learn how to calculate newborn weight loss after birth and see if it is in the normal range. Free calculator with 7% normal and 10% alert thresholds.',
+        'Free newborn weight loss tool: calculate weight loss after birth and see if it is in the normal range. 7% normal, 10% alert thresholds.',
       customHeroTitle: isUk
         ? 'Baby & Newborn Weight Loss Percentage Calculator (UK)'
         : 'Newborn & Infant Weight Loss Percentage Calculator',
@@ -738,6 +738,121 @@ export function resolveSearchIntentFromPath(rawPathname: string): RouteIntentRes
     };
   }
 
+
+  // Bing fix: distinct customMetaDescription for routes sharing the fallback description.
+  // Exact-match branches, placed before the generic /compare/ + /category/ branch (9A).
+  if (cleanPath === '/calculators/weight-loss' || cleanPath === '/calculators/weight-loss/') {
+    return {
+      locale,
+      shouldRedirectToHome: false,
+      redirectTarget: normalizedCanonical,
+      canonicalPath: normalizedCanonical,
+      toolMode: 'adult',
+      clinicalFocus: 'standard',
+      restaurantBrand: 'subway',
+      defaultWeightUnit,
+      defaultBabyUnit,
+      customMetaDescription:
+        'Calculate your weight loss percentage in seconds. Enter your starting and current weight to see your progress and track your results.'
+    };
+  }
+
+  if (cleanPath === '/calculators/body-fat-percentage' || cleanPath === '/calculators/body-fat-percentage/') {
+    return {
+      locale,
+      shouldRedirectToHome: false,
+      redirectTarget: normalizedCanonical,
+      canonicalPath: normalizedCanonical,
+      toolMode: 'adult',
+      clinicalFocus: 'standard',
+      restaurantBrand: 'subway',
+      defaultWeightUnit,
+      defaultBabyUnit,
+      customMetaDescription:
+        'Measure your body fat percentage with a free calculator. Enter your measurements to estimate body fat and track changes over time.'
+    };
+  }
+
+  if (cleanPath === '/calculators/biggest-loser' || cleanPath === '/calculators/biggest-loser/') {
+    return {
+      locale,
+      shouldRedirectToHome: false,
+      redirectTarget: normalizedCanonical,
+      canonicalPath: normalizedCanonical,
+      toolMode: 'adult',
+      clinicalFocus: 'standard',
+      restaurantBrand: 'subway',
+      defaultWeightUnit,
+      defaultBabyUnit,
+      customMetaDescription:
+        'Calculate Biggest Loser weight loss percentage the way the show ranks contestants. Enter starting and current weight to see your percentage.'
+    };
+  }
+
+  if (cleanPath === '/calculators/smoothie' || cleanPath === '/calculators/smoothie/') {
+    return {
+      locale,
+      shouldRedirectToHome: false,
+      redirectTarget: normalizedCanonical,
+      canonicalPath: normalizedCanonical,
+      toolMode: 'adult',
+      clinicalFocus: 'standard',
+      restaurantBrand: 'subway',
+      defaultWeightUnit,
+      defaultBabyUnit,
+      customMetaDescription:
+        'Find smoothie calories and weight loss friendly recipes. Calculate nutrition for your smoothie and plan a lighter breakfast or snack.'
+    };
+  }
+
+  if (cleanPath === '/compare/bmr-vs-tdee' || cleanPath === '/compare/bmr-vs-tdee/') {
+    return {
+      locale,
+      shouldRedirectToHome: false,
+      redirectTarget: normalizedCanonical,
+      canonicalPath: normalizedCanonical,
+      toolMode: 'adult',
+      clinicalFocus: 'standard',
+      restaurantBrand: 'subway',
+      defaultWeightUnit,
+      defaultBabyUnit,
+      customMetaDescription:
+        'Compare BMR vs TDEE and learn the difference. See how basal metabolic rate and total daily energy expenditure shape your daily calorie needs.'
+    };
+  }
+
+  if (cleanPath === '/category/pregnancy' || cleanPath === '/category/pregnancy/') {
+    return {
+      locale,
+      shouldRedirectToHome: false,
+      redirectTarget: normalizedCanonical,
+      canonicalPath: normalizedCanonical,
+      toolMode: 'adult',
+      clinicalFocus: 'standard',
+      restaurantBrand: 'subway',
+      defaultWeightUnit,
+      defaultBabyUnit,
+      customMetaDescription:
+        'Explore pregnancy weight calculators and guides. Track healthy weight gain, baby weight loss after birth, and postpartum progress in one place.'
+    };
+  }
+
+  if (cleanPath === '/category/weight-loss' || cleanPath === '/category/weight-loss/') {
+    return {
+      locale,
+      shouldRedirectToHome: false,
+      redirectTarget: normalizedCanonical,
+      canonicalPath: normalizedCanonical,
+      toolMode: 'adult',
+      clinicalFocus: 'standard',
+      restaurantBrand: 'subway',
+      defaultWeightUnit,
+      defaultBabyUnit,
+      customMetaDescription:
+        'Browse weight loss calculators and guides in one place. Calculate weight loss percentage, BMI, and calories to track your progress.'
+    };
+  }
+
   // 9A. Compare / glossary / category hub pages — default tool with self-canonical.
   // (Placed before the BMR branch so /compare/bmr-vs-tdee/ does not borrow the BMR title.)
   if (
@@ -971,7 +1086,7 @@ export function resolveSearchIntentFromPath(rawPathname: string): RouteIntentRes
       defaultBabyUnit,
       customMetaTitle: isDeficit
         ? 'Calorie Deficit & 12-Week Weight Loss Projection Calculator (BMR + TDEE)'
-        : 'BMR & Daily Calorie Calculator (Mifflin-St Jeor TDEE + Weekly Forecast)',
+        : 'BMR Calculator (Mifflin-St Jeor): Daily Calories & TDEE',
       customMetaDescription:
         'Calculate your Basal Metabolic Rate (BMR), Maintenance Calories (TDEE), 500-calorie daily deficit, and week-by-week weight projection table.',
       customHeroTitle: isDeficit
