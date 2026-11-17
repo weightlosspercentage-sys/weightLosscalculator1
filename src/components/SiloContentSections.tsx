@@ -188,60 +188,233 @@ export const SiloContentSections: React.FC<SiloContentSectionsProps> = ({
 
       {/* ================= SILO 1: PERCENTAGE ================= */}
       <section id="percentage" className="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-10 border border-slate-200 dark:border-slate-800 shadow-sm space-y-6 scroll-mt-20 transition-colors">
-        <div className="border-b border-slate-100 dark:border-slate-800 pb-4">
+        <div className="border-b border-slate-100 dark:border-slate-800 pb-4 space-y-2">
           <h2 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">
             Weight Loss Percentage Calculator
           </h2>
-          <p className="text-slate-600 dark:text-slate-300 text-sm mt-1">
-            How to measure weight change as a percentage of where you started, and why doctors prefer percentages over raw pounds.
+          <p className="text-slate-600 dark:text-slate-300 text-xs sm:text-sm leading-relaxed">
+            Weight loss percentage is a metric that expresses weight lost as a proportion of starting weight. The formula divides weight lost by starting weight and multiplies by 100. A 200-pound person who loses 15 pounds has lost 7.5 percent. Doctors and clinical researchers use this metric because it normalises progress across body sizes.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="space-y-3">
-            <h3 className="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
-              <Calculator className="w-4 h-4 text-[#ca3500] dark:text-orange-400" />
-              How the Formula Works
-            </h3>
-            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-              To find your weight loss percentage, subtract your current weight from your starting weight, divide that difference by your starting weight, and multiply by 100. Because the formula compares your change against your own starting point, it works the exact same way in pounds, kilograms, stones, or grams.
-            </p>
-            <div className="p-3 bg-slate-50 dark:bg-slate-800 rounded-xl font-mono text-xs text-slate-800 dark:text-slate-100 border border-slate-200 dark:border-slate-700">
-              Weight Loss % = ((Starting Weight − Current Weight) ÷ Starting Weight) × 100
-            </div>
+        <div className="space-y-3 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+          <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+            <Calculator className="w-4 h-4 text-[#ca3500] dark:text-orange-400" />
+            <span>How the calculation works</span>
+          </h3>
+          <p>
+            The formula is one subtraction, one division and one multiplication.
+          </p>
+          <div className="p-3 bg-slate-50 dark:bg-slate-800 rounded-xl font-mono text-xs text-slate-800 dark:text-slate-100 border border-slate-200 dark:border-slate-700">
+            Weight Loss % = ((Starting Weight − Current Weight) ÷ Starting Weight) × 100
           </div>
+          <p>
+            The calculator takes two inputs: starting weight and current weight. It returns one number: the percentage. Firstly, it subtracts current weight from starting weight to find total pounds lost. Secondly, it divides that loss by the starting weight. Finally, it multiplies by 100 to express the result as a percentage.
+          </p>
+          <p>
+            A worked example makes the arithmetic concrete. Starting weight is 200 lbs and current weight is 185 lbs. Weight lost equals 200 − 185 = 15 lbs. Then (15 ÷ 200) × 100 = 7.5% total weight loss, which crosses the 5% clinical health milestone.
+          </p>
+        </div>
 
-          <div className="space-y-3">
-            <h3 className="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
-              <Baby className="w-4 h-4 text-[#7334fd] dark:text-indigo-400" />
-              When Checking a Newborn’s Weight
-            </h3>
-            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-              In the first few days after birth, pediatricians and nurses use the exact same percentage formula to see how much fluid a newborn has lost compared to birth weight. A small drop is expected, while a larger drop lets your care team know when to offer extra feeding support.
-            </p>
-            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300">
-              See our <a href="#newborn" className="text-[#ca3500] dark:text-orange-400 font-bold hover:underline">Newborn Weight Loss Calculator</a> guide below for day-by-day expectations.
-            </p>
+        <div className="space-y-3 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+          <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white">
+            Quick reference table
+          </h3>
+          <p>
+            The table shows what 5%, 10%, 15% and 20% weight loss equals for common starting weights.
+          </p>
+          <div className="overflow-x-auto">
+            <table className="w-full text-left text-xs border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden tabular-nums">
+              <thead className="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 font-bold">
+                <tr>
+                  <th className="p-3">Starting Weight</th>
+                  <th className="p-3">5% Weight Loss</th>
+                  <th className="p-3">10% Weight Loss</th>
+                  <th className="p-3">15% Weight Loss</th>
+                  <th className="p-3">20% Weight Loss</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-100 dark:divide-slate-800 text-slate-800 dark:text-slate-200">
+                <tr>
+                  <td className="p-3 font-semibold">150 lbs</td>
+                  <td className="p-3">7.5 lbs (142.5 lbs)</td>
+                  <td className="p-3">15 lbs (135 lbs)</td>
+                  <td className="p-3">22.5 lbs (127.5 lbs)</td>
+                  <td className="p-3">30 lbs (120 lbs)</td>
+                </tr>
+                <tr>
+                  <td className="p-3 font-semibold">180 lbs</td>
+                  <td className="p-3">9 lbs (171 lbs)</td>
+                  <td className="p-3">18 lbs (162 lbs)</td>
+                  <td className="p-3">27 lbs (153 lbs)</td>
+                  <td className="p-3">36 lbs (144 lbs)</td>
+                </tr>
+                <tr>
+                  <td className="p-3 font-semibold">200 lbs</td>
+                  <td className="p-3">10 lbs (190 lbs)</td>
+                  <td className="p-3">20 lbs (180 lbs)</td>
+                  <td className="p-3">30 lbs (170 lbs)</td>
+                  <td className="p-3">40 lbs (160 lbs)</td>
+                </tr>
+                <tr>
+                  <td className="p-3 font-semibold">250 lbs</td>
+                  <td className="p-3">12.5 lbs (237.5 lbs)</td>
+                  <td className="p-3">25 lbs (225 lbs)</td>
+                  <td className="p-3">37.5 lbs (212.5 lbs)</td>
+                  <td className="p-3">50 lbs (200 lbs)</td>
+                </tr>
+                <tr>
+                  <td className="p-3 font-semibold">300 lbs</td>
+                  <td className="p-3">15 lbs (285 lbs)</td>
+                  <td className="p-3">30 lbs (270 lbs)</td>
+                  <td className="p-3">45 lbs (255 lbs)</td>
+                  <td className="p-3">60 lbs (240 lbs)</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4 border-t border-slate-100 dark:border-slate-800 text-xs">
-          <div className="p-4 bg-slate-50 dark:bg-slate-800/70 rounded-xl border border-transparent dark:border-slate-700/70">
-            <h3 className="font-bold text-slate-900 dark:text-white mb-1">Protecting Muscle Mass</h3>
-            <p className="text-slate-600 dark:text-slate-300">
-              Pairing a steady calorie deficit with adequate protein and strength training helps ensure that the percentage you lose comes mostly from body fat rather than lean muscle.
-            </p>
+        <div className="space-y-3 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+          <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+            <Baby className="w-4 h-4 text-[#7334fd] dark:text-indigo-400" />
+            <span>The calculator suite</span>
+          </h3>
+          <p>
+            One metric anchors the suite. Each tool below measures a different variable of the same process: energy balance.
+          </p>
+          <p>
+            Newborn tracking starts at birth. Parents tracking the first week of life use the{' '}
+            <a href="/calculators/newborn-weight-loss/" className="text-[#ca3500] dark:text-orange-400 font-bold hover:underline">
+              newborn weight loss calculator
+            </a>
+            , which compares each day&apos;s weight against the normal early-loss range of the first week of life. Tracking continues after week one. For weeks two to four, the{' '}
+            <a href="/calculators/baby-weight-loss/" className="text-[#4950fc] dark:text-sky-400 font-bold hover:underline">
+              baby weight loss percentage calculator
+            </a>{' '}
+            continues the same percentage tracking week by week against expected regain patterns.
+          </p>
+          <p>
+            Metabolism tools set the calorie context. Before setting a target, the{' '}
+            <a href="/calculators/bmr/" className="text-[#7334fd] dark:text-indigo-400 font-bold hover:underline">
+              BMR calculator
+            </a>{' '}
+            estimates the calorie floor the body needs at complete rest. The{' '}
+            <a href="/calculators/tdee/" className="text-[#4950fc] dark:text-sky-400 font-bold hover:underline">
+              TDEE calculator
+            </a>{' '}
+            extends that resting estimate with activity level, giving the full daily budget the deficit works against. The{' '}
+            <a href="/calculators/calorie-deficit/" className="text-[#ca3500] dark:text-orange-400 font-bold hover:underline">
+              calorie deficit calculator
+            </a>{' '}
+            then sizes the gap between intake and budget that produces fat loss.
+          </p>
+          <p>
+            Food and composition tools fill in the details. The{' '}
+            <a href="/restaurants/subway/" className="text-emerald-700 dark:text-emerald-400 font-bold hover:underline">
+              Subway calorie calculator
+            </a>{' '}
+            shows how a restaurant meal fits inside the daily budget. The{' '}
+            <a href="/calculators/bmi/" className="text-[#7334fd] dark:text-indigo-400 font-bold hover:underline">
+              BMI calculator
+            </a>{' '}
+            classifies body mass against WHO categories. The{' '}
+            <a href="/calculators/body-fat-percentage/" className="text-[#ca3500] dark:text-orange-400 font-bold hover:underline">
+              body fat percentage calculator
+            </a>{' '}
+            estimates composition with the US Navy method. The protein calculator sets daily protein targets that preserve muscle during a deficit. The{' '}
+            <a href="/calculators/water-intake/" className="text-[#4950fc] dark:text-sky-400 font-bold hover:underline">
+              water intake calculator
+            </a>{' '}
+            personalises hydration. The macro calculator splits calories into protein, fat and carbohydrate targets.
+          </p>
+          <p>
+            Stage-specific tools cover special cases. The{' '}
+            <a href="/calculators/postpartum-weight-loss/" className="text-[#7334fd] dark:text-indigo-400 font-bold hover:underline">
+              postpartum weight loss calculator
+            </a>{' '}
+            plans safe breastfeeding weight loss. The{' '}
+            <a href="/calculators/bariatric-surgery-weight-loss/" className="text-[#ca3500] dark:text-orange-400 font-bold hover:underline">
+              bariatric surgery calculator
+            </a>{' '}
+            tracks excess weight loss percentage after VSG or bypass procedures. The{' '}
+            <a href="/calculators/weight-loss/" className="text-[#4950fc] dark:text-sky-400 font-bold hover:underline">
+              weight loss calculator
+            </a>{' '}
+            projects the timeline to reach a goal weight. The{' '}
+            <a href="/calculators/biggest-loser/" className="text-emerald-700 dark:text-emerald-400 font-bold hover:underline">
+              Biggest Loser weight loss calculator
+            </a>{' '}
+            applies the same percentage formula to the competition format, where ranking depends on percentage rather than pounds.
+          </p>
+        </div>
+
+        <div className="space-y-3 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+          <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white">
+            Percentage versus pounds: which to trust
+          </h3>
+          <div className="overflow-x-auto">
+            <table className="w-full text-left text-xs border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden">
+              <thead className="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 font-bold">
+                <tr>
+                  <th className="p-3">Criterion</th>
+                  <th className="p-3">Percentage</th>
+                  <th className="p-3">Raw pounds</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-100 dark:divide-slate-800 text-slate-800 dark:text-slate-200">
+                <tr>
+                  <td className="p-3 font-semibold">Comparability across body sizes</td>
+                  <td className="p-3">High. One scale for every frame</td>
+                  <td className="p-3">Low. Ten pounds means different things at 150 and 300</td>
+                </tr>
+                <tr>
+                  <td className="p-3 font-semibold">Clinical thresholds</td>
+                  <td className="p-3">Built in. The 5% and 10% milestones are percentage-based</td>
+                  <td className="p-3">None. Pounds carry no threshold</td>
+                </tr>
+                <tr>
+                  <td className="p-3 font-semibold">Goal setting</td>
+                  <td className="p-3">Scales to the individual frame automatically</td>
+                  <td className="p-3">Needs manual adjustment per person</td>
+                </tr>
+                <tr>
+                  <td className="p-3 font-semibold">Limitation</td>
+                  <td className="p-3">Does not separate fat loss from muscle or water loss</td>
+                  <td className="p-3">Same limitation, plus no comparability</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
-          <div className="p-4 bg-slate-50 dark:bg-slate-800/70 rounded-xl border border-transparent dark:border-slate-700/70">
-            <h3 className="font-bold text-slate-900 dark:text-white mb-1">Use Weekly Averages</h3>
-            <p className="text-slate-600 dark:text-slate-300">
-              Your scale weight can bounce up or down by 1 to 3 pounds a day from water and meals. Comparing 7-day averages gives a much clearer picture of your real progress.
-            </p>
+          <p>
+            An editorial note on method. Percentage is the better headline metric for almost every purpose. Pounds still matter in the kitchen, where portions are weighed in ounces and grams. Track the percentage for decisions. Track the pounds for cooking. The percentage tells you whether you are succeeding. The scale tells you what to eat.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4 border-t border-slate-100 dark:border-slate-800 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+          <div className="space-y-2">
+            <h3 className="font-bold text-slate-900 dark:text-white text-base">Evidence and references</h3>
+            <ul className="list-disc pl-5 space-y-1">
+              <li>MedlinePlus (NIH): Health topics</li>
+              <li>NIH NIDDK: Weight management</li>
+              <li>
+                <a href="/methodology/" className="text-[#7334fd] dark:text-indigo-400 font-semibold hover:underline">
+                  Editorial and Methodology Policy
+                </a>
+                : our accuracy standards
+              </li>
+            </ul>
           </div>
-          <div className="p-4 bg-slate-50 dark:bg-slate-800/70 rounded-xl border border-transparent dark:border-slate-700/70">
-            <h3 className="font-bold text-slate-900 dark:text-white mb-1">One Formula for Any Unit</h3>
-            <p className="text-slate-600 dark:text-slate-300">
-              As long as your starting weight and current weight use the same unit, whether pounds, kilograms, stones, or grams, the percentage result is identical.
+          <div className="space-y-2">
+            <h3 className="font-bold text-slate-900 dark:text-white text-base">Medical disclaimer</h3>
+            <p>
+              This tool is for educational and informational purposes only and does not replace professional medical advice. Consult a registered dietitian or healthcare professional before starting restrictive dieting or intensive training.
+            </p>
+            <p>
+              Clinical evidence suggests a safe and sustainable rate of fat loss is 1 to 2 pounds per week (0.5% to 1.0% of total body weight). Rapid weight reduction can cause metabolic adaptation, lean muscle loss and nutritional deficiencies.
+            </p>
+            <p>
+              BMR, TDEE and calorie deficit models estimate energy expenditure from baseline physiological variables. Actual metabolic rates vary with lean body mass distribution, hormonal health, activity levels and individual adaptation. Adjust caloric targets gradually and prioritise nutrient-dense whole foods.
             </p>
           </div>
         </div>
@@ -260,118 +433,270 @@ export const SiloContentSections: React.FC<SiloContentSectionsProps> = ({
 
       {/* ================= SILO 2: NEWBORN ================= */}
       <section id="newborn" className="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-10 border border-slate-200 dark:border-slate-800 shadow-sm space-y-6 scroll-mt-20 transition-colors">
-        <div className="border-b border-slate-100 dark:border-slate-800 pb-4">
+        <div className="border-b border-slate-100 dark:border-slate-800 pb-4 space-y-2">
           <h2 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">
             Newborn Weight Loss Calculator
           </h2>
-          <p className="text-slate-600 dark:text-slate-300 text-sm mt-1">
-            What to expect in the first days after birth, based on American Academy of Pediatrics (AAP) guidelines.
+          <p className="text-slate-600 dark:text-slate-300 text-xs sm:text-sm leading-relaxed">
+            A newborn weight loss calculator is a functional tool that measures an infant&apos;s weight change as a percentage of birth weight in the first days of life. It accepts two inputs: birth weight and current weight. It returns one value: the percentage lost.
+          </p>
+          <p className="text-xs font-semibold text-slate-500 dark:text-slate-400">
+            Reviewed by Dr. Rekha Kumar, M.D., M.S. Verified against AAP and WHO guidelines. Last updated August 2026.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="space-y-3">
-            <h3 className="text-base font-bold text-slate-900 dark:text-white">
-              Normal Newborn Weight Loss and Why Newborns Lose Weight at First
-            </h3>
-            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-              Newborn weight loss is the expected physiological shedding of extracellular fluid during the first days of life. Because infants are born with extra fluid reserves to sustain them until maternal colostrum transitions into mature milk, birth weight loss in newborns occurs in almost every healthy delivery. Under American Academy of Pediatrics (AAP) clinical guidelines, normal neonatal weight loss and typical newborn weight loss range from 5% to 7% of birth weight for breastfed infants and 3% to 5% for formula-fed infants over the first 48 to 72 hours.
-            </p>
-            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-              When evaluating a baby's weight loss on the hospital discharge chart, clinicians calculate the exact percentage using the formula ((Birth Weight minus Current Weight) divided by Birth Weight) multiplied by 100. If a newborn lost weight reaching 8% to 10% of birth weight, a pediatrician or lactation consultant evaluates latch, milk transfer, and feeding frequency.
-            </p>
-          </div>
-
-          <div className="space-y-3">
-            <h3 className="text-base font-bold text-slate-900 dark:text-white">
-              Working With Pounds, Ounces, or Grams and Tracking Regain
-            </h3>
-            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-              Hospitals often record birth weight in grams on the discharge chart and tell parents the weight in pounds and ounces. To calculate weight loss in newborns after birth by hand in pounds and ounces, convert both weights to total ounces first (pounds × 16 + ounces) so you are not mixing whole pounds with sixteenths.
-            </p>
-            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-              A newborn losing weight usually reaches their lowest weight nadir between day 3 and day 4 after delivery. Once mature milk volume increases, healthy infants stop losing and begin gaining 15 to 30 grams (0.5 to 1.0 ounce) per day so the newborn regain birth weight milestone is reached by 10 to 14 days of age. You can also track ongoing recovery on our{' '}
-              <a href="/calculators/baby-weight-loss/" className="text-[#4950fc] dark:text-sky-400 font-bold hover:underline">
-                baby weight loss calculator
-              </a>, or check adult postpartum and family health metrics with our{' '}
-              <a href="/calculators/bmi/" className="text-[#7334fd] dark:text-indigo-400 font-bold hover:underline">
-                BMI calculator
-              </a>,{' '}
-              <a href="/calculators/bmi-chart/" className="text-[#ca3500] dark:text-orange-400 font-bold hover:underline">
-                BMI chart
-              </a>, and{' '}
-              <a href="/calculators/ideal-weight/" className="text-emerald-700 dark:text-emerald-400 font-bold hover:underline">
-                ideal weight by height calculator
-              </a>.
-            </p>
-          </div>
-        </div>
-
-        {/* Clinical Newborn Reference Table */}
-        <div className="overflow-x-auto">
-          <table className="w-full text-left text-xs border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden">
-            <thead className="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 font-bold">
-              <tr>
-                <th className="p-3">Baby’s Age</th>
-                <th className="p-3">Typical Weight Change</th>
-                <th className="p-3">What It Means</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-slate-100 dark:divide-slate-800 text-slate-800 dark:text-slate-200">
-              <tr>
-                <td className="p-3 font-semibold">0 to 24 Hours</td>
-                <td className="p-3">2.0% to 4.5% loss</td>
-                <td className="p-3 text-emerald-700 dark:text-emerald-400">Expected early fluid loss; feed on demand (8 to 12 times a day).</td>
-              </tr>
-              <tr>
-                <td className="p-3 font-semibold">24 to 48 Hours</td>
-                <td className="p-3">5.0% to 7.5% loss</td>
-                <td className="p-3 text-slate-700 dark:text-slate-300">Common range; keep tracking wet diapers and comfortable latch.</td>
-              </tr>
-              <tr>
-                <td className="p-3 font-semibold">48 to 72 Hours</td>
-                <td className="p-3">7.0% to 9.0% loss</td>
-                <td className="p-3 text-amber-700 dark:text-amber-400">Weight usually bottoms out here as milk volume increases.</td>
-              </tr>
-              <tr className="bg-rose-50/50 dark:bg-rose-950/40">
-                <td className="p-3 font-semibold text-rose-900 dark:text-rose-200">10% or More Loss</td>
-                <td className="p-3 font-bold text-rose-700 dark:text-rose-400">&gt; 10.0% loss</td>
-                <td className="p-3 font-semibold text-rose-800 dark:text-rose-300">Check with your pediatrician or lactation specialist today.</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        {/* Dedicated Newborn Weight Loss Questions & Answers */}
-        <div className="p-4 sm:p-6 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/80 space-y-4">
-          <h3 className="text-base sm:text-lg font-extrabold text-slate-900 dark:text-white">
-            Newborn Weight Loss Frequently Asked Questions
+        <div className="space-y-3 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+          <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white">
+            Newborn Weight Loss Percentage Formula
           </h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-            <div className="p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-200/70 dark:border-slate-800 space-y-1.5">
-              <h4 className="font-bold text-slate-900 dark:text-white">
-                How much weight do newborns lose, and how much weight does a newborn lose after birth?
-              </h4>
-              <p>
-                When parents ask how much weight do babies lose after birth, the standard clinical answer is that healthy full-term breastfed newborns typically lose 5% to 7% of their birth weight in the first 48 to 72 hours, while formula-fed newborns typically lose 3% to 5%. A loss of 10% or more requires prompt medical evaluation.
-              </p>
-            </div>
-            <div className="p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-200/70 dark:border-slate-800 space-y-1.5">
-              <h4 className="font-bold text-slate-900 dark:text-white">
-                What is normal newborn weight loss versus when to call the pediatrician?
-              </h4>
-              <p>
-                Normal newborn weight loss is a drop that stays below 7% to 8% of birth weight during the first 72 hours alongside regular wet and dirty diapers. If a newborn losing weight approaches or exceeds 10% below birth weight, or continues losing weight after day 4, contact your pediatrician for a feeding check.
-              </p>
-            </div>
-            <div className="p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-200/70 dark:border-slate-800 space-y-1.5">
-              <h4 className="font-bold text-slate-900 dark:text-white">
-                When should baby be back to birth weight?
-              </h4>
-              <p>
-                Most healthy full-term newborns regain their original birth weight by 10 to 14 days after delivery. After the weight nadir around day 3 to day 4, steady daily feeding produces a consistent weight gain until the newborn is back at or above birth weight by the two-week pediatric visit.
-              </p>
-            </div>
+          <div className="p-3 bg-slate-50 dark:bg-slate-800 rounded-xl font-mono text-xs text-slate-800 dark:text-slate-100 border border-slate-200 dark:border-slate-700">
+            The formula is weight loss percentage = (birth weight − current weight) ÷ birth weight × 100.
+          </div>
+          <p>
+            The formula has three variables. The input variables are birth weight and current weight. The output variable is weight loss percentage.
+          </p>
+          <p>
+            Worked example. Firstly, subtract current weight from birth weight: 3,500g − 3,300g = 200g. Secondly, divide the difference by birth weight: 200 ÷ 3,500 = 0.0571. Finally, multiply by 100 to state the result as a percentage: 5.71%.
+          </p>
+          <p>
+            A 5.71% reading sits inside the normal physiological range for a breastfed newborn on day 3.
+          </p>
+        </div>
+
+        <div className="space-y-3 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+          <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white">
+            Safe Ranges vs. Warning Signs
+          </h3>
+          <div className="overflow-x-auto">
+            <table className="w-full text-left text-xs border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden">
+              <thead className="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 font-bold">
+                <tr>
+                  <th className="p-3">Reading</th>
+                  <th className="p-3">Status</th>
+                  <th className="p-3">What it means</th>
+                  <th className="p-3">What to do</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-100 dark:divide-slate-800 text-slate-800 dark:text-slate-200">
+                <tr>
+                  <td className="p-3 font-semibold text-emerald-700 dark:text-emerald-400">Below 7%</td>
+                  <td className="p-3 font-semibold">Normal physiological drop</td>
+                  <td className="p-3">Expected post-birth fluid excretion</td>
+                  <td className="p-3">Continue on-demand nursing or formula feedings 8 to 12 times per 24 hours</td>
+                </tr>
+                <tr>
+                  <td className="p-3 font-semibold text-amber-700 dark:text-amber-400">7% to 10%</td>
+                  <td className="p-3 font-semibold">Borderline, monitor closely</td>
+                  <td className="p-3">Common around the day-3 peak loss</td>
+                  <td className="p-3">Assess latch, count wet diapers (minimum 4 to 6 per day), and consider a lactation consultation</td>
+                </tr>
+                <tr className="bg-rose-50/50 dark:bg-rose-950/40">
+                  <td className="p-3 font-bold text-rose-700 dark:text-rose-400">Above 10%</td>
+                  <td className="p-3 font-bold text-rose-900 dark:text-rose-200">Clinical action required</td>
+                  <td className="p-3">Exceeds the AAP guideline threshold</td>
+                  <td className="p-3 font-semibold text-rose-800 dark:text-rose-300">Contact a pediatrician immediately to assess hydration status and the feeding plan</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div className="space-y-3 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+          <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white">
+            Why Newborns Lose Weight (Physiological Weight Loss)
+          </h3>
+          <p>
+            Newborn weight loss in the first days of life is a normal biological process. Most healthy newborns lose between 5% and 7% of their birth weight within 3 to 5 days after delivery. Babies shed excess extracellular fluid accumulated in the womb. They pass meconium, the first dark stool. They adjust to oral feeding outside the uterus while maternal milk supply is still arriving.
+          </p>
+          <p>
+            Clinical guidelines state the following facts. Weight loss up to 7% is typical for exclusively breastfed babies. Formula-fed babies typically lose 3% to 5% or less. A loss between 7% and 10% calls for close feeding and latch monitoring, and a loss above 10% triggers clinical evaluation to rule out inadequate milk transfer, dehydration, hypernatremia, or latching difficulties.
+          </p>
+        </div>
+
+        <div className="space-y-3 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+          <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white">
+            Hour-by-Hour Clinical Thresholds (Nomogram)
+          </h3>
+          <div className="overflow-x-auto">
+            <table className="w-full text-left text-xs border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden">
+              <thead className="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 font-bold">
+                <tr>
+                  <th className="p-3">Age (Hours / Days)</th>
+                  <th className="p-3">Normal Loss (Breastfed)</th>
+                  <th className="p-3">Normal Loss (Formula)</th>
+                  <th className="p-3">Clinical Action Level</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-100 dark:divide-slate-800 text-slate-800 dark:text-slate-200">
+                <tr>
+                  <td className="p-3 font-semibold">0 to 24 Hours (Day 1)</td>
+                  <td className="p-3">3% to 5%</td>
+                  <td className="p-3">2% to 4%</td>
+                  <td className="p-3">Above 7% loss (assess latch and feedings)</td>
+                </tr>
+                <tr>
+                  <td className="p-3 font-semibold">24 to 48 Hours (Day 2)</td>
+                  <td className="p-3">5% to 7%</td>
+                  <td className="p-3">3% to 5%</td>
+                  <td className="p-3">Above 8% loss (consult lactation or pediatrician)</td>
+                </tr>
+                <tr>
+                  <td className="p-3 font-semibold">48 to 72 Hours (Day 3, peak loss)</td>
+                  <td className="p-3">7% to 8%</td>
+                  <td className="p-3">4% to 5%</td>
+                  <td className="p-3">Above 10% loss (immediate medical assessment)</td>
+                </tr>
+                <tr>
+                  <td className="p-3 font-semibold">Days 4 to 5 (milk arrival)</td>
+                  <td className="p-3">Stabilizing, initial gain</td>
+                  <td className="p-3">Weight gain begins</td>
+                  <td className="p-3">Continued loss after day 5</td>
+                </tr>
+                <tr>
+                  <td className="p-3 font-semibold">Days 10 to 14 (milestone)</td>
+                  <td className="p-3">Regained birth weight</td>
+                  <td className="p-3">Regained birth weight</td>
+                  <td className="p-3">Failure to regain birth weight by day 14</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+          <div className="space-y-3">
+            <h3 className="text-base font-bold text-slate-900 dark:text-white">
+              Impact of Delivery Method (Vaginal vs. C-Section IV Fluids)
+            </h3>
+            <p>
+              Mothers who undergo Cesarean delivery or receive high volumes of intrapartum IV fluids during labor often pass extra fluid to the newborn prior to birth. This temporary fluid expansion can raise initial weight loss readings by 2 to 4 percentage points during the first 48 hours as the infant excretes the excess fluid through diuresis. Pediatricians factor intrapartum IV fluid volume into their assessment of C-section newborn weight trajectories.
+            </p>
+
+            <h3 className="text-base font-bold text-slate-900 dark:text-white pt-2">
+              When to Call Your Pediatrician
+            </h3>
+            <p>Contact your baby&apos;s doctor immediately in any of these cases.</p>
+            <ul className="list-disc pl-5 space-y-1">
+              <li>Weight loss exceeds 10% of birth weight at any point.</li>
+              <li>The baby has not regained birth weight by 14 days of age.</li>
+              <li>The baby shows signs of dehydration: fewer wet diapers, dry mouth, or weakness.</li>
+              <li>The baby appears lethargic or jaundiced, or is difficult to wake for feedings.</li>
+            </ul>
+          </div>
+
+          <div className="space-y-3">
+            <h3 className="text-base font-bold text-slate-900 dark:text-white">
+              Monitoring at Home vs. at the Clinic (Comparison Checklist)
+            </h3>
+            <ul className="list-disc pl-5 space-y-1.5">
+              <li>A home scale suits daily trend checks in the first week. A clinic scale suits the 48 to 72 hour threshold visit and the two-week regain check.</li>
+              <li>One consistent scale used at the same time of day produces comparable numbers. Switching scales between readings breaks the trend line.</li>
+              <li>One consistent unit (grams) removes conversion error. Mixing ounces and grams introduces it.</li>
+              <li>Home readings answer &quot;is today within range.&quot; Clinic readings answer &quot;is the trajectory within the guideline.&quot; Both serve the same decision: whether feeding is adequate.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div className="space-y-3 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+          <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white">
+            Unit Conversion Guide
+          </h3>
+          <div className="overflow-x-auto">
+            <table className="w-full text-left text-xs border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden">
+              <thead className="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 font-bold">
+                <tr>
+                  <th className="p-3">Unit</th>
+                  <th className="p-3">Equals</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-100 dark:divide-slate-800 text-slate-800 dark:text-slate-200">
+                <tr>
+                  <td className="p-3 font-semibold">1 pound (lb)</td>
+                  <td className="p-3">16 ounces (oz), or 453.592 grams (g)</td>
+                </tr>
+                <tr>
+                  <td className="p-3 font-semibold">1 ounce (oz)</td>
+                  <td className="p-3">28.3495 grams (g)</td>
+                </tr>
+                <tr>
+                  <td className="p-3 font-semibold">7 lb 8 oz</td>
+                  <td className="p-3">120 oz, or 3,402 grams</td>
+                </tr>
+                <tr>
+                  <td className="p-3 font-semibold">Average newborn birth weight</td>
+                  <td className="p-3">5.5 to 8.8 lb (2,500 to 4,000 g)</td>
+                </tr>
+                <tr>
+                  <td className="p-3 font-semibold">Normal infant weight percentile range</td>
+                  <td className="p-3">10th to 90th percentile</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            For highest accuracy, measure in grams and use the same unit for both weights.
+          </p>
+        </div>
+
+        <div className="space-y-3 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+          <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white">
+            Why Clinicians Chart Percentage, Not Grams (Expert Perspective)
+          </h3>
+          <p>
+            A 200-gram loss means little without the denominator. On a 3,500-gram infant it equals 5.71%. On a 2,500-gram infant it equals 8.0%. The percentage states both results on one scale, which is why pediatric nomograms and AAP guidance use percentage thresholds instead of gram thresholds. Grams measure the baby. Percentages measure the baby against the guideline. For parents, the percentage also answers the only question that matters at 3 a.m.: is this number within the normal range.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4 border-t border-slate-100 dark:border-slate-800 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+          <div className="space-y-2">
+            <h3 className="font-bold text-slate-900 dark:text-white text-base">
+              Related Pediatric and Postpartum Calculators
+            </h3>
+            <ul className="list-disc pl-5 space-y-1.5">
+              <li>
+                <a href="/calculators/postpartum-weight-loss/" className="text-[#7334fd] dark:text-indigo-400 font-bold hover:underline">
+                  Postpartum Weight Loss Calculator
+                </a>
+                . Track maternal weight recovery while breastfeeding safely.
+              </li>
+              <li>
+                <a href="/calculators/baby-weight-loss/" className="text-[#4950fc] dark:text-sky-400 font-bold hover:underline">
+                  Infant Weight Loss Tracker
+                </a>
+                . Monitor weekly weight percentiles beyond the 14-day newborn window.
+              </li>
+              <li>
+                <a href="/category/pregnancy/" className="text-[#ca3500] dark:text-orange-400 font-bold hover:underline">
+                  Pregnancy Weight Gain Calculator
+                </a>
+                . Trimester-by-trimester gestational weight gain targets.
+              </li>
+              <li>
+                <a href="/" className="text-emerald-700 dark:text-emerald-400 font-bold hover:underline">
+                  Master Weight Loss Percentage Calculator
+                </a>
+                . Standard body weight loss percentage tool for adults.
+              </li>
+            </ul>
+          </div>
+
+          <div className="space-y-2">
+            <h3 className="font-bold text-slate-900 dark:text-white text-base">
+              Scientific References and Clinical Guidelines
+            </h3>
+            <ol className="list-decimal pl-5 space-y-1">
+              <li>American Academy of Pediatrics (AAP). &quot;Management of Hyperbilirubinemia and Physiological Weight Loss in the Newborn Infant.&quot; Pediatric Clinical Practice Guidelines. PubMed ID: 35925414.</li>
+              <li>World Health Organization (WHO). &quot;Infant and Young Child Feeding: Standardized Newborn Weight Loss Curves.&quot; WHO guidelines, approved by the Guidelines Review Committee.</li>
+              <li>Flaherman, V. J., et al. &quot;Early Weight Loss Nomogram for Exclusively Breastfed Newborns.&quot; Pediatrics, 135(1), 16 to 23.</li>
+              <li>Centers for Disease Control and Prevention (CDC). Healthy Weight Guidelines.</li>
+              <li>National Heart, Lung, and Blood Institute (NHLBI). Obesity Guidelines.</li>
+            </ol>
+            <h3 className="font-bold text-slate-900 dark:text-white text-base pt-2">
+              Medical Disclaimer
+            </h3>
+            <p>
+              This calculator and guide are for educational purposes only and do not replace professional medical advice. Always consult a board-certified pediatrician or healthcare provider regarding infant weight loss, feeding concerns, or health evaluation.
+            </p>
           </div>
         </div>
 
@@ -776,24 +1101,200 @@ export const SiloContentSections: React.FC<SiloContentSectionsProps> = ({
 
       {/* ================= SILO 9: BABY ================= */}
       <section id="baby" className="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-10 border border-slate-200 dark:border-slate-800 shadow-sm space-y-6 scroll-mt-20 transition-colors">
-        <div className="border-b border-slate-100 dark:border-slate-800 pb-4">
+        <div className="border-b border-slate-100 dark:border-slate-800 pb-4 space-y-2">
           <h2 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">
-            Baby Weight Loss Calculator
+            Baby Weight Loss Percentage Calculator
           </h2>
-          <p className="text-slate-600 dark:text-slate-300 text-sm mt-1">
-            When babies typically stop losing weight and return to their birth weight.
+          <p className="text-slate-600 dark:text-slate-300 text-xs sm:text-sm leading-relaxed">
+            A baby weight loss percentage calculator is a functional tool that converts weight change into a percentage of birth weight. The metric is ((birth weight minus current weight) divided by birth weight) times 100. It standardizes tracking from birth through the first month.
           </p>
         </div>
-        <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-          After a newborn’s weight reaches its lowest point around day 3 or 4, babies generally start gaining about half an ounce to an ounce (15 to 30 grams) per day. Most healthy full-term babies are back up to their original birth weight by 10 to 14 days old.
-        </p>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+          <div className="space-y-3">
+            <h3 className="text-base font-bold text-slate-900 dark:text-white">
+              What the tool computes
+            </h3>
+            <p>
+              A baby weight loss percentage is ((starting weight minus current weight) divided by starting weight) times 100. The tool&apos;s input is birth weight plus the baby&apos;s current weight. The tool&apos;s output is one percentage. The tool accepts pounds, ounces and grams. The reference weight is birth weight or peak weight.
+            </p>
+          </div>
+
+          <div className="space-y-3">
+            <h3 className="text-base font-bold text-slate-900 dark:text-white">
+              How to use it
+            </h3>
+            <p>
+              Firstly, weigh the baby on the same scale at the same time of day. Secondly, enter the birth weight and the new weight in the calculator above. Finally, read the percentage against the normal-range table below.
+            </p>
+          </div>
+        </div>
+
+        <div className="space-y-3 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+          <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white">
+            Worked examples
+          </h3>
+          <p>
+            The calculator applies one formula to every entry. Two worked examples show the arithmetic.
+          </p>
+          <div className="overflow-x-auto">
+            <table className="w-full text-left text-xs border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden tabular-nums">
+              <thead className="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 font-bold">
+                <tr>
+                  <th className="p-3">Birth weight</th>
+                  <th className="p-3">Current weight</th>
+                  <th className="p-3">Calculation</th>
+                  <th className="p-3">Result</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-100 dark:divide-slate-800 text-slate-800 dark:text-slate-200">
+                <tr>
+                  <td className="p-3 font-semibold">10 lb</td>
+                  <td className="p-3">9.5 lb</td>
+                  <td className="p-3 font-mono">((10 − 9.5) ÷ 10) × 100</td>
+                  <td className="p-3 font-bold text-emerald-700 dark:text-emerald-400">5 percent</td>
+                </tr>
+                <tr>
+                  <td className="p-3 font-semibold">8 lb</td>
+                  <td className="p-3">7.5 lb</td>
+                  <td className="p-3 font-mono">((8 − 7.5) ÷ 8) × 100</td>
+                  <td className="p-3 font-bold text-emerald-700 dark:text-emerald-400">6.25 percent</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div className="space-y-3 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+          <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white">
+            Normal ranges for the first month
+          </h3>
+          <p>
+            The table below states the expected change by stage and the line where a pediatrician takes over.
+          </p>
+          <div className="overflow-x-auto">
+            <table className="w-full text-left text-xs border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden">
+              <thead className="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 font-bold">
+                <tr>
+                  <th className="p-3">Period</th>
+                  <th className="p-3">Expected change</th>
+                  <th className="p-3">Red-flag line</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-100 dark:divide-slate-800 text-slate-800 dark:text-slate-200">
+                <tr>
+                  <td className="p-3 font-semibold">First 72 hours</td>
+                  <td className="p-3">5 to 7 percent of birth weight lost</td>
+                  <td className="p-3 font-semibold text-rose-700 dark:text-rose-400">Above 10 percent</td>
+                </tr>
+                <tr>
+                  <td className="p-3 font-semibold">First 3 to 5 days, breastfed</td>
+                  <td className="p-3">Up to 7 percent of birth weight lost</td>
+                  <td className="p-3 font-semibold text-rose-700 dark:text-rose-400">Above 10 percent</td>
+                </tr>
+                <tr>
+                  <td className="p-3 font-semibold">First 3 to 5 days, formula-fed</td>
+                  <td className="p-3">3 to 5 percent of birth weight lost</td>
+                  <td className="p-3 font-semibold text-rose-700 dark:text-rose-400">Above 10 percent</td>
+                </tr>
+                <tr>
+                  <td className="p-3 font-semibold">Day 10 to day 14</td>
+                  <td className="p-3">Birth weight regained</td>
+                  <td className="p-3 font-semibold text-rose-700 dark:text-rose-400">Birth weight not regained by day 14</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            Weight loss after the first 3 to 4 days is not normal. Later loss, or a failure to gain after that window, requires clinical evaluation. This tracker covers birth through the first month, including the regain curve by day 10 to 14. For day-by-day first-week physiology, see the{' '}
+            <a href="/calculators/newborn-weight-loss/" className="text-[#ca3500] dark:text-orange-400 font-bold hover:underline">
+              newborn weight loss calculator
+            </a>
+            , which examines the earliest feeding checks in finer detail.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+          <div className="space-y-3">
+            <h3 className="text-base font-bold text-slate-900 dark:text-white">
+              Continue tracking or call the pediatrician
+            </h3>
+            <p>
+              The checklist below separates routine home tracking from situations the guidelines assign to a clinician.
+            </p>
+            <p>
+              <strong className="text-slate-900 dark:text-white">Continue tracking at home.</strong> The loss sits inside the expected range in the table above. The baby wets at least 6 diapers daily from day 4 onward. Feeds are regular and the baby wakes easily.
+            </p>
+            <p>
+              <strong className="text-slate-900 dark:text-white">Call the pediatrician.</strong> The loss exceeds 10 percent of birth weight. Birth weight is not regained by day 14. The baby wets fewer than 6 diapers daily from day 4 onward. The baby appears jaundiced or lethargic. The baby is hard to wake for feeds.
+            </p>
+          </div>
+
+          <div className="space-y-3">
+            <h3 className="text-base font-bold text-slate-900 dark:text-white">
+              Why percentage beats ounces
+            </h3>
+            <p>
+              An ounce figure hides severity because birth weights differ. Seven lost ounces on a 6 pound baby is 7.3 percent. The same seven ounces on a 9 pound baby is 4.9 percent. The percentage puts both babies on one scale, so parents and clinicians compare like with like. Raw ounces never standardize across body sizes.
+            </p>
+            <h3 className="text-base font-bold text-slate-900 dark:text-white pt-2">
+              Responsive feeding and logging
+            </h3>
+            <p>
+              Responsive feeding supports healthy growth, whether breastfeeding or formula. A simple log of weight changes, wet diapers and sleep patterns reveals the baby&apos;s trend faster than memory alone.
+            </p>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4 border-t border-slate-100 dark:border-slate-800 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+          <div className="space-y-2">
+            <h3 className="font-bold text-slate-900 dark:text-white text-base">
+              Method, review and sources
+            </h3>
+            <p>
+              The tool&apos;s method is standard physiological formulas with evidence-based guidelines. The medical reviewer is Dr. Rekha Kumar, M.D., M.S., Lead Medical Reviewer. The page&apos;s last update is August 2026. The source guidelines are NIH and CDC. The references are CDC Healthy Weight Guidelines, the NIH National Heart, Lung, and Blood Institute Obesity Guidelines, and PubMed studies on fat mass versus lean mass loss. The tool&apos;s price is 0 USD. The tool&apos;s description is a free baby weight loss calculator, dietitian-reviewed.
+            </p>
+            <h3 className="font-bold text-slate-900 dark:text-white text-base pt-2">
+              Medical disclaimer
+            </h3>
+            <p>
+              This tool is for informational purposes only and does not constitute medical advice. Always consult a healthcare provider. Any concerns about your baby&apos;s weight, feeding, or development belong in a conversation with a medical professional.
+            </p>
+          </div>
+
+          <div className="space-y-2">
+            <h3 className="font-bold text-slate-900 dark:text-white text-base">
+              Related pages
+            </h3>
+            <p>
+              The{' '}
+              <a href="/blog/how-to-calculate-weight-loss-percentage/" className="text-[#7334fd] dark:text-indigo-400 font-bold hover:underline">
+                guide to calculating weight loss percentage
+              </a>{' '}
+              works through the reasoning behind the arithmetic step by step. A printable reference of these ranges lives on the{' '}
+              <a href="/blog/weight-loss-percentage-chart/" className="text-[#ca3500] dark:text-orange-400 font-bold hover:underline">
+                weight loss percentage chart page
+              </a>
+              . Adults tracking their own progress use the{' '}
+              <a href="/" className="text-[#4950fc] dark:text-sky-400 font-bold hover:underline">
+                general weight loss percentage calculator
+              </a>
+              , which applies the same percentage method to any starting weight.
+            </p>
+          </div>
+        </div>
+
         <div className="pt-4 border-t border-slate-100 dark:border-slate-800 flex flex-wrap items-center gap-3 text-xs font-semibold text-slate-500 dark:text-slate-400">
           <span>Related Calculators:</span>
           <a href="#" className="text-[#7334fd] dark:text-indigo-400 hover:underline">Weight Loss Calculator</a>
           <span>•</span>
-          <a href="#lbs" className="text-[#ca3500] dark:text-orange-400 hover:underline">5'2" 105 lbs</a>
+          <a href="/calculators/newborn-weight-loss/" className="text-[#ca3500] dark:text-orange-400 hover:underline">Newborn Weight Loss Calculator</a>
           <span>•</span>
-          <a href="#percent" className="text-[#4950fc] dark:text-sky-400 hover:underline">Percent Weight Loss Calculator</a>
+          <a href="/calculators/bmi/" className="text-[#7334fd] dark:text-indigo-400 hover:underline">BMI Calculator</a>
+          <span>•</span>
+          <a href="/calculators/bmi-chart/" className="text-[#4950fc] dark:text-sky-400 hover:underline">BMI Chart</a>
+          <span>•</span>
+          <a href="/calculators/ideal-weight/" className="text-emerald-700 dark:text-emerald-400 hover:underline">Ideal Weight by Height</a>
         </div>
       </section>
 
@@ -923,34 +1424,220 @@ export const SiloContentSections: React.FC<SiloContentSectionsProps> = ({
 
       {/* ================= SILO 15: BMR ================= */}
       <section id="bmr" className="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-10 border border-slate-200 dark:border-slate-800 shadow-sm space-y-6 scroll-mt-20 transition-colors">
-        <div className="border-b border-slate-100 dark:border-slate-800 pb-4">
+        <div className="border-b border-slate-100 dark:border-slate-800 pb-4 space-y-2">
           <h2 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">
-            BMR Calculator
+            BMR Calculator: Basal Metabolic Rate &amp; Resting Calories
           </h2>
-          <p className="text-slate-600 dark:text-slate-300 text-sm mt-1">
-            The difference between resting calories (BMR) and total daily calories (TDEE).
+          <p className="text-slate-600 dark:text-slate-300 text-xs sm:text-sm leading-relaxed">
+            A basal metabolic rate calculator estimates the minimum calories your body needs at complete rest. BMR is the energy cost of breathing, circulation, cellular maintenance and temperature regulation. This tool computes it with the Mifflin-St Jeor equation, the most widely validated published formula.
           </p>
         </div>
-        <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-          Think of <strong className="text-slate-900 dark:text-white">BMR</strong> as your body’s idle burn at rest, and <strong className="text-slate-900 dark:text-white">TDEE</strong> as your true daily burn once you include walking, working, chores, and exercise. To lose about 1 pound per week, aim for roughly 500 calories below your TDEE rather than eating below your BMR.
-        </p>
-        <div className="space-y-3">
-          <h3 className="text-base font-bold text-slate-900 dark:text-white">
-            Katch-McArdle Formula and Resting Metabolic Rate (RMR)
+
+        <div className="space-y-4 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+          <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white">
+            What this calculator computes
           </h3>
-          <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-            The Katch-McArdle formula estimates BMR from lean body mass instead of total weight: BMR = 370 + (21.6 × lean mass in kg). It suits people who know their body fat percentage. Resting metabolic rate (RMR) is the same resting burn measured under slightly less strict conditions, so for weight loss planning RMR and BMR are interchangeable. Once you have your BMR, the <a href="/calculators/tdee/" className="text-[#7334fd] dark:text-indigo-400 hover:underline font-semibold">TDEE calculator</a> multiplies it by your activity level to set your daily calorie target.
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="overflow-x-auto">
+              <table className="w-full text-left text-xs border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden">
+                <thead className="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 font-bold">
+                  <tr>
+                    <th className="p-3">Input</th>
+                    <th className="p-3">Unit</th>
+                    <th className="p-3">Role in the equation</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-100 dark:divide-slate-800 text-slate-800 dark:text-slate-200">
+                  <tr>
+                    <td className="p-3 font-semibold">Weight</td>
+                    <td className="p-3">Kilograms or pounds</td>
+                    <td className="p-3">Primary driver of the estimate</td>
+                  </tr>
+                  <tr>
+                    <td className="p-3 font-semibold">Height</td>
+                    <td className="p-3">Centimetres or inches</td>
+                    <td className="p-3">Secondary scaling factor</td>
+                  </tr>
+                  <tr>
+                    <td className="p-3 font-semibold">Age</td>
+                    <td className="p-3">Years</td>
+                    <td className="p-3">Reduces the estimate as age rises</td>
+                  </tr>
+                  <tr>
+                    <td className="p-3 font-semibold">Sex</td>
+                    <td className="p-3">Male or female</td>
+                    <td className="p-3">Selects the equation variant</td>
+                  </tr>
+                  <tr>
+                    <td className="p-3 font-semibold">Body fat percentage</td>
+                    <td className="p-3">Optional, for the Katch-McArdle option</td>
+                    <td className="p-3">Derives lean body mass</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div className="space-y-3">
+              <div className="overflow-x-auto">
+                <table className="w-full text-left text-xs border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden">
+                  <thead className="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 font-bold">
+                    <tr>
+                      <th className="p-3">Output</th>
+                      <th className="p-3">Unit</th>
+                      <th className="p-3">Meaning</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-slate-100 dark:divide-slate-800 text-slate-800 dark:text-slate-200">
+                    <tr>
+                      <td className="p-3 font-semibold">BMR</td>
+                      <td className="p-3">Calories per day</td>
+                      <td className="p-3">Minimum energy at complete rest</td>
+                    </tr>
+                    <tr>
+                      <td className="p-3 font-semibold">BMR share</td>
+                      <td className="p-3">Percentage</td>
+                      <td className="p-3">Roughly 60 to 75 percent of total daily burn</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <p>
+                BMR accounts for roughly 60 to 75 percent of total daily calorie burn. The remainder comes from movement, digestion and exercise. A BMR value sets the floor. No sustainable plan sits below it for long.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div className="space-y-3 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+          <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white">
+            The Mifflin-St Jeor equation
+          </h3>
+          <p>
+            The Mifflin-St Jeor equation is the calculation this tool runs by default. Researchers published it in 1990 after validating it against measured resting expenditure. Its standard published forms are below.
+          </p>
+          <div className="overflow-x-auto">
+            <table className="w-full text-left text-xs border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden">
+              <thead className="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 font-bold">
+                <tr>
+                  <th className="p-3">Variant</th>
+                  <th className="p-3">Equation (weight in kg, height in cm, age in years)</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-100 dark:divide-slate-800 text-slate-800 dark:text-slate-200 font-mono">
+                <tr>
+                  <td className="p-3 font-sans font-semibold">Men</td>
+                  <td className="p-3">BMR = 10 × weight + 6.25 × height − 5 × age + 5</td>
+                </tr>
+                <tr>
+                  <td className="p-3 font-sans font-semibold">Women</td>
+                  <td className="p-3">BMR = 10 × weight + 6.25 × height − 5 × age − 161</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            The equation&apos;s subject is basal metabolic rate. Its inputs are weight, height, age and sex. Its output is calories per day at rest. Its key property is that muscle tissue costs more energy than fat tissue at rest, so two people at the same weight can hold different BMR values.
           </p>
         </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+          <div className="space-y-3">
+            <h3 className="text-base font-bold text-slate-900 dark:text-white">
+              How to use the calculator
+            </h3>
+            <p>
+              Firstly, enter your weight, height, age and sex. Secondly, add your body fat percentage if you know it, because that unlocks the Katch-McArdle option. Finally, read your BMR and compare it against your current intake to see your true baseline.
+            </p>
+            <p>
+              Once you know your baseline,{' '}
+              <a href="/" className="text-[#7334fd] dark:text-indigo-400 font-bold hover:underline">
+                the main weight loss percentage tool
+              </a>{' '}
+              turns any two weigh-ins into a single comparable number. For the arithmetic behind converting start and current weight into a percentage, see{' '}
+              <a href="/blog/how-to-calculate-weight-loss-percentage/" className="text-[#ca3500] dark:text-orange-400 font-bold hover:underline">
+                the page that walks through the weight loss percentage formula step by step
+              </a>
+              .
+            </p>
+          </div>
+
+          <div className="space-y-3">
+            <h3 className="text-base font-bold text-slate-900 dark:text-white">
+              The Katch-McArdle option
+            </h3>
+            <p>
+              The Katch-McArdle formula is the alternative this tool offers. Its defining input is lean body mass, which the tool derives from your body fat percentage. It suits athletes and people with measured body composition, because measured lean mass reflects reality better than height-weight proxies. It suits general users less, because few people know their lean mass with precision.
+            </p>
+            <div className="p-3 bg-slate-50 dark:bg-slate-800 rounded-xl font-mono text-xs text-indigo-700 dark:text-indigo-300 border border-slate-200 dark:border-slate-700">
+              BMR = 370 + (21.6 × Lean Body Mass in kg)
+            </div>
+          </div>
+        </div>
+
+        <div className="space-y-3 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+          <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white">
+            Which equation should you use
+          </h3>
+          <ul className="list-disc pl-5 space-y-1.5">
+            <li>
+              <strong className="text-slate-900 dark:text-white">Choose Mifflin-St Jeor</strong> when you know weight, height, age and sex but not body fat percentage. It is the default for general populations and the most widely validated option in published comparisons.
+            </li>
+            <li>
+              <strong className="text-slate-900 dark:text-white">Choose Katch-McArdle</strong> when you have a measured body fat percentage. It replaces height-weight proxies with actual lean body mass, which raises accuracy for lean and athletic builds.
+            </li>
+            <li>
+              <strong className="text-slate-900 dark:text-white">Avoid the original Harris-Benedict equation</strong> for new estimates. Published in 1918, it overestimates resting expenditure for modern populations in most comparison studies. Its 1984 revised coefficients narrowed the gap but did not displace Mifflin-St Jeor as the clinical default.
+            </li>
+            <li>
+              <strong className="text-slate-900 dark:text-white">Match the equation to the data you trust.</strong> An equation is only as accurate as its inputs. A precise body fat measurement beats a proxy-based formula. A guessed body fat percentage does not.
+            </li>
+          </ul>
+          <p>
+            If your goal is structured weekly loss,{' '}
+            <a href="/calculators/biggest-loser/" className="text-emerald-700 dark:text-emerald-400 font-bold hover:underline">
+              the Biggest Loser framework
+            </a>{' '}
+            sets the deficit against this same resting baseline.
+          </p>
+        </div>
+
+        <div className="space-y-3 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+          <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white">
+            The most common mistake: BMR is not TDEE
+          </h3>
+          <p>
+            People read their BMR and treat it as their daily calorie target. It is not. BMR is the floor. Total daily energy expenditure is BMR multiplied by an activity multiplier, so{' '}
+            <a href="/calculators/tdee/" className="text-[#4950fc] dark:text-sky-400 font-bold hover:underline">
+              the TDEE calculator page
+            </a>{' '}
+            extends this resting baseline with your movement level, and that product is the number a weight loss plan works from. Eating below BMR for extended periods invites adaptive thermogenesis, the slowdown where the body conserves energy and burns muscle for fuel. The safe deficit sits between BMR and TDEE, never below the floor for long without medical supervision.
+          </p>
+        </div>
+
+        <div className="pt-4 border-t border-slate-100 dark:border-slate-800 space-y-2 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+          <h3 className="font-bold text-slate-900 dark:text-white text-base">
+            About this calculator
+          </h3>
+          <p>
+            This calculator uses standard physiological formulas and evidence-based guidelines. The National Institutes of Health and the Centers for Disease Control and Prevention guidelines were consulted in its creation. Medical review by Dr. Rekha Kumar, M.D., M.S., Lead Medical Reviewer. Last updated August 2026.
+          </p>
+          <p>
+            <strong className="text-slate-900 dark:text-white">Disclaimer.</strong> This tool is for informational purposes only and does not constitute medical advice. Always consult a healthcare provider before changing your diet or activity.
+          </p>
+          <p>
+            <strong className="text-slate-900 dark:text-white">Scientific references.</strong> CDC Healthy Weight Guidelines. NIH National Heart, Lung, and Blood Institute Obesity Guidelines. PubMed studies on the rate of fat mass versus lean mass loss.
+          </p>
+        </div>
+
         <div className="pt-4 border-t border-slate-100 dark:border-slate-800 flex flex-wrap items-center gap-3 text-xs font-semibold text-slate-500 dark:text-slate-400">
           <span>Related Calculators:</span>
-          <a href="#" className="text-[#7334fd] dark:text-indigo-400 hover:underline">Weight Loss Calculator</a>
+          <a href="/calculators/calorie-deficit/" className="text-[#ca3500] dark:text-orange-400 hover:underline">calorie deficit calculator</a>
           <span>•</span>
-          <a href="#percentage" className="text-[#ca3500] dark:text-orange-400 hover:underline">Weight Loss Percentage Calculator</a>
+          <a href="/calculators/bmr/" className="text-[#7334fd] dark:text-indigo-400 hover:underline">BMR calculator</a>
           <span>•</span>
-          <a href="#newborn" className="text-[#4950fc] dark:text-sky-400 hover:underline">Newborn Weight Loss Calculator</a>
+          <a href="/calculators/tdee/" className="text-[#4950fc] dark:text-sky-400 hover:underline">TDEE</a>
           <span>•</span>
-          <a href="/calculators/tdee/" className="text-[#7334fd] dark:text-indigo-400 hover:underline">TDEE Calculator</a>
+          <a href="/blog/healthy-weight-loss-per-month/" className="text-emerald-600 dark:text-emerald-400 hover:underline">healthy weight loss per month</a>
         </div>
       </section>
 
@@ -1002,24 +1689,178 @@ export const SiloContentSections: React.FC<SiloContentSectionsProps> = ({
 
       {/* ================= SILO 18: SUBWAY ================= */}
       <section id="subway" className="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-10 border border-slate-200 dark:border-slate-800 shadow-sm space-y-6 scroll-mt-20 transition-colors">
-        <div className="border-b border-slate-100 dark:border-slate-800 pb-4">
+        <div className="border-b border-slate-100 dark:border-slate-800 pb-4 space-y-2">
           <h2 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">
-            Subway Macro Calculator
+            Subway Nutrition Calculator &amp; Calorie Counter (2026 Menu)
           </h2>
-          <p className="text-slate-600 dark:text-slate-300 text-sm mt-1">
-            Comparing breads, proteins, cheeses, and sauces when building a sub.
+          <p className="text-slate-600 dark:text-slate-300 text-xs sm:text-sm leading-relaxed">
+            A Subway calorie calculator is a sandwich-builder tool that sums the calories, protein, carbohydrates, fat and sodium of one custom Subway sandwich. It takes the 6-inch or Footlong base, the bread, the protein, the cheese, the vegetables and the sauce, and returns the meal totals.
           </p>
         </div>
-        <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-          A 6-inch turkey or rotisserie chicken sub on whole wheat with plenty of vegetables and a light vinaigrette or mustard gives you a balanced meal under 400 calories, whereas adding double cheese and creamy dressings on a footlong can easily top 900 calories.
-        </p>
+
+        <div className="space-y-3 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+          <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white">
+            Build the sandwich, read the totals
+          </h3>
+          <p>
+            The builder above follows one sequence. Firstly, choose the size: 6-inch or Footlong. Secondly, choose the bread. Thirdly, choose the protein. Finally, add cheese, vegetables and sauce. Each selection adds its official 2026 menu values to the totals card. The calculator sums calories, protein, carbohydrates, fat and sodium for the complete sandwich.
+          </p>
+          <p>
+            Subway publishes one nutrition table per ingredient. The tool reads that table directly. It does not estimate. It does not average.
+          </p>
+        </div>
+
+        <div className="space-y-3 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+          <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white">
+            Fixed reference values
+          </h3>
+          <div className="overflow-x-auto">
+            <table className="w-full text-left text-xs border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden">
+              <thead className="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 font-bold">
+                <tr>
+                  <th className="p-3">Ingredient choice</th>
+                  <th className="p-3">Energy it adds</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-100 dark:divide-slate-800 text-slate-800 dark:text-slate-200">
+                <tr>
+                  <td className="p-3 font-semibold">6-inch 9-Grain Wheat or Sourdough bread</td>
+                  <td className="p-3">190 to 210 calories</td>
+                </tr>
+                <tr>
+                  <td className="p-3 font-semibold">Mayonnaise or Chipotle Southwest sauce</td>
+                  <td className="p-3">100 to 150 calories per serving</td>
+                </tr>
+                <tr>
+                  <td className="p-3 font-semibold">Mustard, vinegar or sweet onion sauce</td>
+                  <td className="p-3">0 to 40 calories per serving</td>
+                </tr>
+                <tr>
+                  <td className="p-3 font-semibold">Standard 6-inch turkey breast on wheat</td>
+                  <td className="p-3">280 to 315 calories for the complete sandwich</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div className="space-y-3 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+          <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white">
+            Why the range matters
+          </h3>
+          <p>
+            Subway is popular for offering healthier fast-food choices. The health claim collapses or holds on four decisions: bread, protein, cheese and sauce. The table above makes the mechanism visible. A 6-inch turkey breast on wheat reads roughly 280 to 315 calories. Add cheese, mayonnaise and Italian herbs and cheese bread and the same sandwich easily doubles its caloric density. The driver is never the turkey. The drivers are the cheese, the sauce and the bread.
+          </p>
+          <p>
+            New Zealand diners use the same builder. The tool covers the official 2026 menu. Subway publishes different nutrition values per region, so the calculator displays the values from the menu data it loads.
+          </p>
+        </div>
+
+        <div className="space-y-3 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+          <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white">
+            Lowest-calorie build order
+          </h3>
+          <p>
+            Opinion: the cheapest calories come from the base, not the extras. Build in this order when calories are the constraint.
+          </p>
+          <div className="overflow-x-auto">
+            <table className="w-full text-left text-xs border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden">
+              <thead className="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 font-bold">
+                <tr>
+                  <th className="p-3">Priority</th>
+                  <th className="p-3">Choice</th>
+                  <th className="p-3">Reason</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-100 dark:divide-slate-800 text-slate-800 dark:text-slate-200">
+                <tr>
+                  <td className="p-3 font-bold">1</td>
+                  <td className="p-3 font-semibold">9-Grain Wheat or Sourdough bread</td>
+                  <td className="p-3">The two lowest-calorie 6-inch breads at 190 to 210 calories</td>
+                </tr>
+                <tr>
+                  <td className="p-3 font-bold">2</td>
+                  <td className="p-3 font-semibold">Turkey breast protein</td>
+                  <td className="p-3">The baseline sandwich reads 280 to 315 calories before extras</td>
+                </tr>
+                <tr>
+                  <td className="p-3 font-bold">3</td>
+                  <td className="p-3 font-semibold">Mustard, vinegar or sweet onion sauce</td>
+                  <td className="p-3">Each adds 0 to 40 calories, against 100 to 150 for mayonnaise or Chipotle Southwest</td>
+                </tr>
+                <tr>
+                  <td className="p-3 font-bold">4</td>
+                  <td className="p-3 font-semibold">Skip or halve the cheese</td>
+                  <td className="p-3">Cheese is a stated density driver alongside sauce and bread</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4 border-t border-slate-100 dark:border-slate-800 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+          <div className="space-y-2">
+            <h3 className="font-bold text-slate-900 dark:text-white text-base">
+              Related calculators
+            </h3>
+            <p>
+              To place one Subway meal inside your daily budget, the{' '}
+              <a href="/calculators/bmr/" className="text-[#7334fd] dark:text-indigo-400 font-bold hover:underline">
+                BMR calculator sets the resting calorie floor
+              </a>{' '}
+              the meal must fit under, and the{' '}
+              <a href="/calculators/calorie-deficit/" className="text-[#4950fc] dark:text-sky-400 font-bold hover:underline">
+                Calorie Deficit Calculator
+              </a>{' '}
+              fits a Subway meal into your daily calorie deficit.
+            </p>
+            <p>
+              For the burger-chain version of this exercise, the{' '}
+              <a href="/restaurants/five-guys/" className="text-[#b91c1c] dark:text-red-400 font-bold hover:underline">
+                Five Guys calorie calculator
+              </a>{' '}
+              breaks a custom burger into the same ingredient-by-ingredient totals, while the{' '}
+              <a href="/restaurants/mcdonalds/" className="text-[#ca3500] dark:text-orange-400 font-bold hover:underline">
+                McDonald&apos;s Nutrition Calculator
+              </a>{' '}
+              covers fast-food burgers, fries and meals.
+            </p>
+            <p>
+              To record the meal as part of a plan, the{' '}
+              <a href="/blog/how-to-calculate-weight-loss-percentage/" className="text-emerald-700 dark:text-emerald-400 font-bold hover:underline">
+                guide on how to calculate weight loss percentage
+              </a>{' '}
+              shows the exact formula the percentage view applies to it. The{' '}
+              <a href="/" className="text-[#7334fd] dark:text-indigo-400 font-bold hover:underline">
+                homepage calculator suite
+              </a>{' '}
+              extends this builder with BMI, TDEE, deficit and macro tools that carry one meal into a full day.
+            </p>
+          </div>
+
+          <div className="space-y-2">
+            <h3 className="font-bold text-slate-900 dark:text-white text-base">
+              Evidence and references
+            </h3>
+            <ul className="list-disc pl-5 space-y-1">
+              <li>HHS: Dietary Guidelines for Americans (health.gov)</li>
+              <li>Dietary Guidelines for Americans (dietaryguidelines.gov)</li>
+            </ul>
+            <p className="pt-2">
+              This tool is for informational purposes only and is not a substitute for professional medical advice.
+            </p>
+          </div>
+        </div>
+
         <div className="pt-4 border-t border-slate-100 dark:border-slate-800 flex flex-wrap items-center gap-3 text-xs font-semibold text-slate-500 dark:text-slate-400">
           <span>Related Calculators:</span>
           <a href="#" className="text-[#7334fd] dark:text-indigo-400 hover:underline">Weight Loss Calculator</a>
           <span>•</span>
           <a href="#percentage" className="text-[#ca3500] dark:text-orange-400 hover:underline">Weight Loss Percentage Calculator</a>
           <span>•</span>
-          <a href="#newborn" className="text-[#4950fc] dark:text-sky-400 hover:underline">Newborn Weight Loss Calculator</a>
+          <a href="/restaurants/five-guys/" className="text-[#b91c1c] dark:text-red-400 hover:underline">Five Guys Calorie Calculator</a>
+          <span>•</span>
+          <a href="/calculators/calorie-deficit/" className="text-[#4950fc] dark:text-sky-400 hover:underline">Calorie Deficit Calculator</a>
         </div>
       </section>
 
@@ -1048,28 +1889,173 @@ export const SiloContentSections: React.FC<SiloContentSectionsProps> = ({
 
       {/* ================= SILO 20: BIGGEST LOSER ================= */}
       <section id="biggest-loser" className="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-10 border border-slate-200 dark:border-slate-800 shadow-sm space-y-6 scroll-mt-20 transition-colors">
-        <div className="border-b border-slate-100 dark:border-slate-800 pb-4">
+        <div className="border-b border-slate-100 dark:border-slate-800 pb-4 space-y-2">
           <h2 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">
-            Biggest Loser Calculator
+            Biggest Loser Weight Loss Calculator
           </h2>
-          <p className="text-slate-600 dark:text-slate-300 text-sm mt-1">
-            Fair scoring for office, family, or group fitness challenges.
+          <p className="text-slate-600 dark:text-slate-300 text-xs sm:text-sm leading-relaxed">
+            The Biggest Loser weight loss calculator computes your loss as a percentage of starting weight with the same ranking formula the show used. Enter starting weight and current weight. The tool returns one percentage. A 300-lb contestant who loses 30 lbs ties a 150-lb contestant who loses 15 lbs at 10.0%.
           </p>
         </div>
-        <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-          In a group weight loss challenge, scoring by percentage lost rather than raw pounds keeps the contest fair for everyone. For example, a 160 lb participant who loses 16 lbs (<strong className="text-slate-900 dark:text-white">10.0%</strong>) ranks ahead of a 260 lb participant who loses 20 lbs (<strong className="text-slate-900 dark:text-white">7.69%</strong>). Plan your challenge pace with the <a href="/calculators/how-much-weight-can-i-lose-in-a-month/" className="text-[#7334fd] dark:text-indigo-400 hover:underline font-semibold">how much weight can I lose in a month calculator</a>, and set the daily target with the <a href="/calculators/calorie-deficit/" className="text-[#7334fd] dark:text-indigo-400 hover:underline font-semibold">calorie deficit calculator</a>.
-        </p>
+
+        <div className="space-y-3 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+          <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white">
+            How the Biggest Loser formula works
+          </h3>
+          <p>
+            The show ranked contestants on percentage of starting weight lost. That single rule defines this calculator. Its input is two numbers: your starting weight and your current weight. Its output is one number: your weight loss percentage. The equation is the following.
+          </p>
+          <div className="p-3 bg-slate-50 dark:bg-slate-800 rounded-xl font-mono text-xs text-slate-800 dark:text-slate-100 border border-slate-200 dark:border-slate-700">
+            Weight Loss % = ((Starting Weight − Current Weight) ÷ Starting Weight) × 100
+          </div>
+          <div className="overflow-x-auto">
+            <table className="w-full text-left text-xs border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden tabular-nums">
+              <thead className="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 font-bold">
+                <tr>
+                  <th className="p-3">Contestant</th>
+                  <th className="p-3">Starting weight</th>
+                  <th className="p-3">Weight lost</th>
+                  <th className="p-3">Result</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-100 dark:divide-slate-800 text-slate-800 dark:text-slate-200">
+                <tr>
+                  <td className="p-3 font-semibold">Contestant A</td>
+                  <td className="p-3">300 lbs</td>
+                  <td className="p-3">30 lbs</td>
+                  <td className="p-3 font-bold text-emerald-700 dark:text-emerald-400">10.0%</td>
+                </tr>
+                <tr>
+                  <td className="p-3 font-semibold">Contestant B</td>
+                  <td className="p-3">150 lbs</td>
+                  <td className="p-3">15 lbs</td>
+                  <td className="p-3 font-bold text-emerald-700 dark:text-emerald-400">10.0%</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            The two rows tie. The percentage states one fact about both bodies. Raw pounds would have declared the 300-lb contestant the winner. The method derives from the{' '}
+            <a href="/blog/how-to-calculate-weight-loss-percentage/" className="text-[#7334fd] dark:text-indigo-400 font-bold hover:underline">
+              standard weight loss percentage formula
+            </a>{' '}
+            used across clinical weight programs. Plot each weekly result on the{' '}
+            <a href="/blog/weight-loss-percentage-chart/" className="text-[#ca3500] dark:text-orange-400 font-bold hover:underline">
+              weight loss percentage chart
+            </a>{' '}
+            to watch the trend.
+          </p>
+        </div>
+
+        <div className="space-y-3 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+          <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white">
+            Why the show ranked by percentage
+          </h3>
+          <p>
+            Pounds reward size. A heavier body burns more at rest because its basal metabolic rate runs higher, and the same calorie deficit removes more pounds per week from a larger frame. Percentage divides the loss by the frame. The result measures effort, not mass.
+          </p>
+          <p>
+            The show&apos;s ranking rule was explicit. The contestant with the highest percentage won the weigh-in. Ties stood as ties. Nobody earned points for pounds.
+          </p>
+        </div>
+
+        <div className="space-y-3 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+          <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white">
+            Percentage ranking versus pounds ranking
+          </h3>
+          <div className="overflow-x-auto">
+            <table className="w-full text-left text-xs border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden">
+              <thead className="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 font-bold">
+                <tr>
+                  <th className="p-3">Criterion</th>
+                  <th className="p-3">Percentage ranking</th>
+                  <th className="p-3">Pounds ranking</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-100 dark:divide-slate-800 text-slate-800 dark:text-slate-200">
+                <tr>
+                  <td className="p-3 font-semibold">What it measures</td>
+                  <td className="p-3">Share of starting weight lost</td>
+                  <td className="p-3">Absolute mass lost</td>
+                </tr>
+                <tr>
+                  <td className="p-3 font-semibold">Fairness across body sizes</td>
+                  <td className="p-3">High: one scale fits all sizes</td>
+                  <td className="p-3">Low: size determines the result</td>
+                </tr>
+                <tr>
+                  <td className="p-3 font-semibold">What a tie means</td>
+                  <td className="p-3">Both bodies changed by the same share</td>
+                  <td className="p-3">Impossible to compare across sizes</td>
+                </tr>
+                <tr>
+                  <td className="p-3 font-semibold">Who it favors</td>
+                  <td className="p-3">Consistent deficit keepers</td>
+                  <td className="p-3">Larger contestants</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            The comparison resolves one question. Percentage answers how much of yourself you lost. Pounds answers how much mass moved. Only the first question compares two people.
+          </p>
+        </div>
+
+        <div className="space-y-3 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+          <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white">
+            Expert perspective: copy the formula, not the pace
+          </h3>
+          <p>
+            The formula is sound. The pace is not. Contestants on the show lost 5 to 10 pounds per week under dangerous calorie deficits and dehydration. Medical research ties that speed to severe muscle wasting and long-term metabolic slowdown. Follow-up studies on contestants revealed the mechanics of adaptive thermogenesis. Their results appear in the reference list below.
+          </p>
+          <p>
+            A sustainable target is 0.5% to 1.0% of body weight per week. That range sits far below show pace. It keeps the loss inside what the body can repeat. Use this calculator to track the share. Set the weekly goal from the medical range, not from television. A safe workflow runs in three steps. Firstly, estimate your baseline burn with the{' '}
+            <a href="/calculators/bmr/" className="text-[#4950fc] dark:text-sky-400 font-bold hover:underline">
+              site&apos;s resting-metabolism tool
+            </a>
+            . Secondly, fix the weekly target inside the 0.5% to 1.0% band. Finally, record the share here each week and compare it with the stated range.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4 border-t border-slate-100 dark:border-slate-800 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+          <div className="space-y-2">
+            <h3 className="font-bold text-slate-900 dark:text-white text-base">
+              About this calculator
+            </h3>
+            <p>
+              This calculator applies standard physiological formulas under evidence-based guidelines. Dr. Rekha Kumar, M.D., M.S., reviewed it as Lead Medical Reviewer. The page last updated in August 2026.
+            </p>
+            <p>
+              The tool serves information only. It does not replace medical advice. Consult a healthcare provider before you change your diet or training. Every calculator in the suite lives on the{' '}
+              <a href="/" className="text-[#7334fd] dark:text-indigo-400 font-bold hover:underline">
+                Weight Loss Percentage home page
+              </a>
+              .
+            </p>
+          </div>
+
+          <div className="space-y-2">
+            <h3 className="font-bold text-slate-900 dark:text-white text-base">
+              Scientific references
+            </h3>
+            <ul className="list-disc pl-5 space-y-1">
+              <li>CDC Healthy Weight Guidelines</li>
+              <li>NIH National Heart, Lung, and Blood Institute obesity guidelines</li>
+              <li>PubMed studies on fat mass versus lean mass loss rates</li>
+              <li>Metabolic adaptation research on weight loss competition cohorts</li>
+            </ul>
+          </div>
+        </div>
+
         <div className="pt-4 border-t border-slate-100 dark:border-slate-800 flex flex-wrap items-center gap-3 text-xs font-semibold text-slate-500 dark:text-slate-400">
           <span>Related Calculators:</span>
           <a href="#" className="text-[#7334fd] dark:text-indigo-400 hover:underline">Weight Loss Calculator</a>
           <span>•</span>
-          <a href="#percentage" className="text-[#ca3500] dark:text-orange-400 hover:underline">Weight Loss Percentage Calculator</a>
+          <a href="/calculators/how-much-weight-can-i-lose-in-a-month/" className="text-[#ca3500] dark:text-orange-400 hover:underline">how much weight can i lose in a month calculator</a>
           <span>•</span>
-          <a href="#newborn" className="text-[#4950fc] dark:text-sky-400 hover:underline">Newborn Weight Loss Calculator</a>
+          <a href="/calculators/calorie-deficit/" className="text-[#4950fc] dark:text-sky-400 hover:underline">calorie deficit calculator</a>
           <span>•</span>
-          <a href="/calculators/how-much-weight-can-i-lose-in-a-month/" className="text-[#7334fd] dark:text-indigo-400 hover:underline">How Much Weight Can I Lose in a Month Calculator</a>
-          <span>•</span>
-          <a href="/calculators/calorie-deficit/" className="text-[#7334fd] dark:text-indigo-400 hover:underline">Calorie Deficit Calculator</a>
+          <a href="#weight-log" className="text-emerald-600 dark:text-emerald-400 hover:underline">biggest loser calorie tracker</a>
         </div>
       </section>
 
