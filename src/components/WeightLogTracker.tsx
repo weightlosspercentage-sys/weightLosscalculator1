@@ -169,11 +169,11 @@ export const WeightLogTracker: React.FC<WeightLogTrackerProps> = ({
       {summary && (
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
           <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-xs">
-            <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider block">
+            <span className="text-[11px] font-semibold text-slate-500 block">
               Total Weight Lost
             </span>
             <div className="mt-1 flex items-baseline gap-1.5">
-              <span className="text-2xl font-extrabold text-emerald-600">
+              <span className="text-2xl font-semibold text-[#c2410c]">
                 {summary.netPercent > 0 ? `-${summary.netPercent}%` : `${summary.netPercent}%`}
               </span>
             </div>
@@ -183,7 +183,7 @@ export const WeightLogTracker: React.FC<WeightLogTrackerProps> = ({
           </div>
 
           <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-xs">
-            <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider block">
+            <span className="text-[11px] font-semibold text-slate-500 block">
               Starting vs Current
             </span>
             <div className="mt-1 flex items-baseline gap-1">
@@ -198,7 +198,7 @@ export const WeightLogTracker: React.FC<WeightLogTrackerProps> = ({
           </div>
 
           <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-xs">
-            <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider block">
+            <span className="text-[11px] font-semibold text-slate-500 block">
               Lowest Recorded
             </span>
             <div className="mt-1 flex items-baseline gap-1">
@@ -207,13 +207,13 @@ export const WeightLogTracker: React.FC<WeightLogTrackerProps> = ({
               </span>
               <span className="text-xs text-slate-500">{unitLabel}</span>
             </div>
-            <span className="text-xs text-emerald-600 mt-0.5 block font-medium">
+            <span className="text-xs text-[#c2410c] mt-0.5 block font-medium">
               Peak historic progress
             </span>
           </div>
 
           <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-xs">
-            <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider block">
+            <span className="text-[11px] font-semibold text-slate-500 block">
               5% & 10% Targets
             </span>
             <div className="mt-1 flex flex-col text-xs text-slate-700">
@@ -229,7 +229,7 @@ export const WeightLogTracker: React.FC<WeightLogTrackerProps> = ({
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 pb-3">
           <div>
             <h2 className="text-lg font-bold text-slate-900 flex items-center gap-2">
-              <ChartIcon className="w-5 h-5 text-emerald-600" />
+              <ChartIcon className="w-5 h-5 text-[#c2410c]" />
               Weight Loss & Percentage Trajectory
             </h2>
             <p className="text-xs text-slate-500">
@@ -277,14 +277,14 @@ export const WeightLogTracker: React.FC<WeightLogTrackerProps> = ({
                       return (
                         <div className="bg-slate-900 text-white p-3 rounded-xl shadow-lg text-xs space-y-1">
                           <p className="font-semibold text-slate-300">{data.date}</p>
-                          <p className="text-sm font-bold text-emerald-400">
+                          <p className="text-sm font-bold text-orange-400">
                             {data.weight} {unitLabel}
                           </p>
                           <p className="text-slate-300">
                             Total % Lost: <strong className="text-white">{data.percentLost}%</strong>
                           </p>
                           {data.delta !== 0 && (
-                            <p className={data.delta < 0 ? 'text-emerald-300' : 'text-rose-300'}>
+                            <p className={data.delta < 0 ? 'text-orange-300' : 'text-rose-300'}>
                               Change: {data.delta > 0 ? `+${data.delta}` : data.delta} {unitLabel}
                             </p>
                           )}
@@ -346,13 +346,13 @@ export const WeightLogTracker: React.FC<WeightLogTrackerProps> = ({
         {/* Form */}
         <div className="lg:col-span-4 bg-white rounded-2xl p-6 border border-slate-200 shadow-xs space-y-4">
           <h3 className="font-bold text-slate-900 text-base flex items-center gap-2">
-            <Plus className="w-4 h-4 text-emerald-600" />
+            <Plus className="w-4 h-4 text-[#c2410c]" />
             Add New Weigh-In
           </h3>
 
           <form onSubmit={handleAddSubmit} className="space-y-3.5">
             <div>
-              <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wide mb-1">
+              <label className="block text-xs font-semibold text-slate-700 mb-1">
                 Date
               </label>
               <div className="relative">
@@ -367,7 +367,7 @@ export const WeightLogTracker: React.FC<WeightLogTrackerProps> = ({
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wide mb-1">
+              <label className="block text-xs font-semibold text-slate-700 mb-1">
                 Weight ({unitLabel})
               </label>
               <div className="relative">
@@ -387,7 +387,7 @@ export const WeightLogTracker: React.FC<WeightLogTrackerProps> = ({
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wide mb-1">
+              <label className="block text-xs font-semibold text-slate-700 mb-1">
                 Notes <span className="text-slate-400 font-normal">(Optional)</span>
               </label>
               <input
@@ -408,7 +408,7 @@ export const WeightLogTracker: React.FC<WeightLogTrackerProps> = ({
 
             <button
               type="submit"
-              className="w-full py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs transition-colors flex items-center justify-center gap-1.5 shadow-xs"
+              className="w-full py-2.5 rounded-xl bg-[#c2410c] hover:bg-[#9a3412] text-white font-semibold text-xs transition-colors flex items-center justify-center gap-1.5 shadow-xs"
             >
               <Plus className="w-4 h-4" />
               Save Weigh-In
@@ -435,7 +435,7 @@ export const WeightLogTracker: React.FC<WeightLogTrackerProps> = ({
 
           <div className="overflow-x-auto max-h-80 overflow-y-auto">
             <table className="w-full text-left text-xs">
-              <thead className="bg-slate-50 text-slate-500 uppercase tracking-wider font-semibold sticky top-0">
+              <thead className="bg-slate-50 text-slate-500 font-semibold sticky top-0">
                 <tr>
                   <th className="py-2.5 px-3">Date</th>
                   <th className="py-2.5 px-3">Weight</th>
@@ -479,14 +479,14 @@ export const WeightLogTracker: React.FC<WeightLogTrackerProps> = ({
                           {index === 0 ? (
                             <span className="text-slate-400">Baseline</span>
                           ) : (
-                            <span className={stepDelta < 0 ? 'text-emerald-600' : stepDelta > 0 ? 'text-rose-600' : 'text-slate-400'}>
+                            <span className={stepDelta < 0 ? 'text-[#c2410c]' : stepDelta > 0 ? 'text-rose-600' : 'text-slate-400'}>
                               {stepDelta > 0 ? `+${stepDelta}` : `${stepDelta}`} {unitLabel}
                             </span>
                           )}
                         </td>
                         <td className="py-2.5 px-3 whitespace-nowrap">
                           {pctFromStart > 0 ? (
-                            <span className="inline-flex items-center px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 font-bold">
+                            <span className="inline-flex items-center px-2 py-0.5 rounded-full bg-orange-50 text-[#c2410c] font-bold">
                               -{pctFromStart}%
                             </span>
                           ) : pctFromStart < 0 ? (

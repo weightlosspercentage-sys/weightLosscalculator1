@@ -172,7 +172,7 @@ export const BmiTopicalPages: React.FC<BmiTopicalPagesProps> = ({ activeRoute, o
         aria-label="BMI and Ideal Weight Calculators Navigation"
         className="flex flex-wrap items-center justify-between gap-2 bg-white dark:bg-slate-900 p-3 sm:p-4 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-xs"
       >
-        <div className="flex items-center gap-2 text-xs font-extrabold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+        <div className="flex items-center gap-2 text-xs font-semibold text-slate-500 dark:text-slate-400">
           <Scale className="w-4 h-4 text-[#7334fd] dark:text-indigo-400" />
           <span>BMI &amp; Healthy Weight Suite:</span>
         </div>
@@ -228,7 +228,7 @@ export const BmiTopicalPages: React.FC<BmiTopicalPagesProps> = ({ activeRoute, o
                 <button
                   type="button"
                   onClick={() => setCalcMode('standard')}
-                  className={`px-3.5 py-2 rounded-xl text-xs font-extrabold transition-all cursor-pointer ${
+                  className={`px-3.5 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
                     calcMode === 'standard'
                       ? 'bg-[#7334fd] text-white shadow-xs'
                       : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-200'
@@ -239,7 +239,7 @@ export const BmiTopicalPages: React.FC<BmiTopicalPagesProps> = ({ activeRoute, o
                 <button
                   type="button"
                   onClick={() => setCalcMode('reverse-weight')}
-                  className={`px-3.5 py-2 rounded-xl text-xs font-extrabold transition-all cursor-pointer ${
+                  className={`px-3.5 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
                     calcMode === 'reverse-weight'
                       ? 'bg-[#ca3500] text-white shadow-xs'
                       : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-200'
@@ -250,7 +250,7 @@ export const BmiTopicalPages: React.FC<BmiTopicalPagesProps> = ({ activeRoute, o
                 <button
                   type="button"
                   onClick={() => setCalcMode('reverse-height')}
-                  className={`px-3.5 py-2 rounded-xl text-xs font-extrabold transition-all cursor-pointer ${
+                  className={`px-3.5 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
                     calcMode === 'reverse-height'
                       ? 'bg-[#4950fc] text-white shadow-xs'
                       : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-200'
@@ -293,7 +293,7 @@ export const BmiTopicalPages: React.FC<BmiTopicalPagesProps> = ({ activeRoute, o
                   <div>
                     <label
                       htmlFor="bmi-height-input"
-                      className="block text-xs font-extrabold uppercase tracking-wider text-slate-700 dark:text-slate-200 mb-1.5"
+                      className="block text-xs font-semibold text-slate-700 dark:text-slate-200 mb-1.5"
                     >
                       {unitSystem === 'metric' ? 'Height (cm)' : 'Height (inches)'}
                     </label>
@@ -332,7 +332,7 @@ export const BmiTopicalPages: React.FC<BmiTopicalPagesProps> = ({ activeRoute, o
                   <div>
                     <label
                       htmlFor="bmi-weight-input"
-                      className="block text-xs font-extrabold uppercase tracking-wider text-slate-700 dark:text-slate-200 mb-1.5"
+                      className="block text-xs font-semibold text-slate-700 dark:text-slate-200 mb-1.5"
                     >
                       {unitSystem === 'metric' ? 'Weight (kg)' : 'Weight (lbs)'}
                     </label>
@@ -366,7 +366,7 @@ export const BmiTopicalPages: React.FC<BmiTopicalPagesProps> = ({ activeRoute, o
                   <div>
                     <label
                       htmlFor="bmi-target-input"
-                      className="block text-xs font-extrabold uppercase tracking-wider text-slate-700 dark:text-slate-200 mb-1.5"
+                      className="block text-xs font-semibold text-slate-700 dark:text-slate-200 mb-1.5"
                     >
                       Target BMI
                     </label>
@@ -386,7 +386,7 @@ export const BmiTopicalPages: React.FC<BmiTopicalPagesProps> = ({ activeRoute, o
                 <div>
                   <label
                     htmlFor="bmi-age-input"
-                    className="block text-xs font-extrabold uppercase tracking-wider text-slate-700 dark:text-slate-200 mb-1.5"
+                    className="block text-xs font-semibold text-slate-700 dark:text-slate-200 mb-1.5"
                   >
                     Age (Years)
                   </label>
@@ -402,7 +402,7 @@ export const BmiTopicalPages: React.FC<BmiTopicalPagesProps> = ({ activeRoute, o
                 </div>
 
                 <div>
-                  <span className="block text-xs font-extrabold uppercase tracking-wider text-slate-700 dark:text-slate-200 mb-1.5">
+                  <span className="block text-xs font-semibold text-slate-700 dark:text-slate-200 mb-1.5">
                     Gender
                   </span>
                   <div className="grid grid-cols-2 gap-2">
@@ -437,14 +437,14 @@ export const BmiTopicalPages: React.FC<BmiTopicalPagesProps> = ({ activeRoute, o
                 {calcMode === 'standard' && (
                   <>
                     <div className="flex items-center justify-between gap-2">
-                      <span className="text-xs font-extrabold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                      <span className="text-xs font-semibold text-slate-500 dark:text-slate-400">
                         Your Body Mass Index
                       </span>
-                      <span className={`px-2.5 py-1 rounded-lg text-xs font-extrabold border ${bmiCat.badgeClass}`}>
+                      <span className={`px-2.5 py-1 rounded-lg text-xs font-semibold border ${bmiCat.badgeClass}`}>
                         {bmiCat.category} ({bmiCat.rangeText})
                       </span>
                     </div>
-                    <div className="text-4xl sm:text-5xl font-black text-[#7334fd] dark:text-indigo-400 tabular-nums">
+                    <div className="text-4xl sm:text-5xl font-semibold text-[#7334fd] dark:text-indigo-400 tabular-nums">
                       {bmiRounded.toFixed(1)}{' '}
                       <span className="text-sm font-bold text-slate-500 dark:text-slate-400">kg/m²</span>
                     </div>
@@ -469,18 +469,18 @@ export const BmiTopicalPages: React.FC<BmiTopicalPagesProps> = ({ activeRoute, o
                 {calcMode === 'reverse-weight' && (
                   <>
                     <div className="flex items-center justify-between gap-2">
-                      <span className="text-xs font-extrabold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                      <span className="text-xs font-semibold text-slate-500 dark:text-slate-400">
                         Reverse BMI: Required Weight
                       </span>
                       <span
-                        className={`px-2.5 py-1 rounded-lg text-xs font-extrabold border ${
+                        className={`px-2.5 py-1 rounded-lg text-xs font-semibold border ${
                           getAdultBmiCategoryInfo(revBmiVal).badgeClass
                         }`}
                       >
                         {getAdultBmiCategoryInfo(revBmiVal).category}
                       </span>
                     </div>
-                    <div className="text-3xl sm:text-4xl font-black text-[#ca3500] dark:text-orange-400 tabular-nums">
+                    <div className="text-3xl sm:text-4xl font-semibold text-[#ca3500] dark:text-orange-400 tabular-nums">
                       {unitSystem === 'metric'
                         ? `${revWeightKgFromHeight.toFixed(1)} kg (${revWeightLbsFromHeight.toFixed(1)} lbs)`
                         : `${revWeightLbsFromHeight.toFixed(1)} lbs (${revWeightKgFromHeight.toFixed(1)} kg)`}
@@ -499,18 +499,18 @@ export const BmiTopicalPages: React.FC<BmiTopicalPagesProps> = ({ activeRoute, o
                 {calcMode === 'reverse-height' && (
                   <>
                     <div className="flex items-center justify-between gap-2">
-                      <span className="text-xs font-extrabold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                      <span className="text-xs font-semibold text-slate-500 dark:text-slate-400">
                         Reverse BMI: Required Height
                       </span>
                       <span
-                        className={`px-2.5 py-1 rounded-lg text-xs font-extrabold border ${
+                        className={`px-2.5 py-1 rounded-lg text-xs font-semibold border ${
                           getAdultBmiCategoryInfo(revBmiVal).badgeClass
                         }`}
                       >
                         {getAdultBmiCategoryInfo(revBmiVal).category}
                       </span>
                     </div>
-                    <div className="text-3xl sm:text-4xl font-black text-[#4950fc] dark:text-sky-400 tabular-nums">
+                    <div className="text-3xl sm:text-4xl font-semibold text-[#4950fc] dark:text-sky-400 tabular-nums">
                       {unitSystem === 'metric'
                         ? `${revHeightCmFromWeight.toFixed(1)} cm (${revHeightInchesFromWeight.toFixed(1)} in)`
                         : `${revHeightInchesFromWeight.toFixed(1)} in / ${formatFeetInches(revHeightInchesFromWeight)} (${revHeightCmFromWeight.toFixed(1)} cm)`}
@@ -609,7 +609,7 @@ export const BmiTopicalPages: React.FC<BmiTopicalPagesProps> = ({ activeRoute, o
           {/* Guide Section: What BMI Is, The BMI Formula, and How to Lower Your BMI */}
           <section className="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-10 border border-slate-200 dark:border-slate-800 shadow-sm space-y-6">
             <div className="border-b border-slate-100 dark:border-slate-800 pb-4">
-              <h2 className="text-xl sm:text-3xl font-black text-slate-900 dark:text-white">
+              <h2 className="text-xl sm:text-3xl font-semibold text-slate-900 dark:text-white">
                 Complete Guide to Body Mass Index: What BMI Is, the BMI Formula, and How to Lower Your BMI
               </h2>
               <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 mt-1">
@@ -619,7 +619,7 @@ export const BmiTopicalPages: React.FC<BmiTopicalPagesProps> = ({ activeRoute, o
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
               <div className="space-y-2.5">
-                <h3 className="text-base font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
+                <h3 className="text-base font-semibold text-slate-900 dark:text-white flex items-center gap-2">
                   <Scale className="w-4 h-4 text-[#7334fd] dark:text-indigo-400 shrink-0" />
                   What BMI Is
                 </h3>
@@ -647,7 +647,7 @@ export const BmiTopicalPages: React.FC<BmiTopicalPagesProps> = ({ activeRoute, o
               </div>
 
               <div className="space-y-2.5">
-                <h3 className="text-base font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
+                <h3 className="text-base font-semibold text-slate-900 dark:text-white flex items-center gap-2">
                   <Calculator className="w-4 h-4 text-[#ca3500] dark:text-orange-400 shrink-0" />
                   The BMI Formula
                 </h3>
@@ -679,7 +679,7 @@ export const BmiTopicalPages: React.FC<BmiTopicalPagesProps> = ({ activeRoute, o
               </div>
 
               <div className="space-y-2.5">
-                <h3 className="text-base font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
+                <h3 className="text-base font-semibold text-slate-900 dark:text-white flex items-center gap-2">
                   <Ruler className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
                   How to Lower Your BMI
                 </h3>
@@ -700,7 +700,7 @@ export const BmiTopicalPages: React.FC<BmiTopicalPagesProps> = ({ activeRoute, o
                 <HelpCircle className="w-5 h-5" />
               </div>
               <div>
-                <h2 className="text-lg sm:text-2xl font-black text-slate-900 dark:text-white">
+                <h2 className="text-lg sm:text-2xl font-semibold text-slate-900 dark:text-white">
                   BMI Calculator Frequently Asked Questions
                 </h2>
                 <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
@@ -724,7 +724,7 @@ export const BmiTopicalPages: React.FC<BmiTopicalPagesProps> = ({ activeRoute, o
                       className="w-full p-4 sm:p-5 text-left flex items-start justify-between gap-3 hover:bg-slate-100/70 dark:hover:bg-slate-800 transition-colors cursor-pointer"
                     >
                       <div>
-                        <span className="text-[11px] font-bold uppercase tracking-wider text-[#7334fd] dark:text-indigo-400 block">
+                        <span className="text-[11px] font-bold text-[#7334fd] dark:text-indigo-400 block">
                           {item.topic}
                         </span>
                         <h3 className="text-sm sm:text-base font-bold text-slate-900 dark:text-white mt-0.5">
@@ -822,7 +822,7 @@ export const BmiTopicalPages: React.FC<BmiTopicalPagesProps> = ({ activeRoute, o
           {/* 1. BMI Categories Table + Overweight Chart & Obesity Chart */}
           <section className="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-10 border border-slate-200 dark:border-slate-800 shadow-sm space-y-6">
             <div className="border-b border-slate-100 dark:border-slate-800 pb-4">
-              <h2 className="text-xl sm:text-3xl font-black text-slate-900 dark:text-white">
+              <h2 className="text-xl sm:text-3xl font-semibold text-slate-900 dark:text-white">
                 BMI Categories Table, Overweight Chart, and Obesity Chart
               </h2>
               <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 mt-1">
@@ -847,7 +847,7 @@ export const BmiTopicalPages: React.FC<BmiTopicalPagesProps> = ({ activeRoute, o
 
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs sm:text-sm border border-slate-200 dark:border-slate-700 rounded-2xl overflow-hidden">
-                <thead className="bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-100 font-extrabold">
+                <thead className="bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-100 font-semibold">
                   <tr>
                     <th className="p-3.5">BMI Category</th>
                     <th className="p-3.5">BMI Range (kg/m²)</th>
@@ -883,7 +883,7 @@ export const BmiTopicalPages: React.FC<BmiTopicalPagesProps> = ({ activeRoute, o
 
             {/* Women's BMI Chart, Men's BMI Chart, Overweight & Obesity Thresholds by Height */}
             <div className="space-y-3 pt-2">
-              <h3 className="text-base sm:text-xl font-black text-slate-900 dark:text-white flex items-center gap-2">
+              <h3 className="text-base sm:text-xl font-semibold text-slate-900 dark:text-white flex items-center gap-2">
                 <Table className="w-5 h-5 text-[#7334fd] dark:text-indigo-400 shrink-0" />
                 Women’s BMI Chart and Men’s BMI Chart: Category Weight Cutoffs by Height
               </h3>
@@ -941,7 +941,7 @@ export const BmiTopicalPages: React.FC<BmiTopicalPagesProps> = ({ activeRoute, o
           {/* 2. Height-and-Weight BMI Table (Formula-Computed Matrix) */}
           <section className="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-10 border border-slate-200 dark:border-slate-800 shadow-sm space-y-5">
             <div className="border-b border-slate-100 dark:border-slate-800 pb-4">
-              <h2 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white">
+              <h2 className="text-xl sm:text-2xl font-semibold text-slate-900 dark:text-white">
                 Height-and-Weight BMI Table (Computed from BMI = kg ÷ m²)
               </h2>
               <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 mt-1">
@@ -1001,7 +1001,7 @@ export const BmiTopicalPages: React.FC<BmiTopicalPagesProps> = ({ activeRoute, o
           {/* 3. BMI Chart by Age: Women by Age, Men, Teens, and Kids */}
           <section className="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-10 border border-slate-200 dark:border-slate-800 shadow-sm space-y-5">
             <div className="border-b border-slate-100 dark:border-slate-800 pb-4">
-              <h2 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white">
+              <h2 className="text-xl sm:text-2xl font-semibold text-slate-900 dark:text-white">
                 BMI Chart by Age: Women by Age, Men, Teens, and Kids
               </h2>
               <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 mt-1">
@@ -1011,7 +1011,7 @@ export const BmiTopicalPages: React.FC<BmiTopicalPagesProps> = ({ activeRoute, o
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
               <div className="space-y-2.5">
-                <h3 className="text-base font-extrabold text-slate-900 dark:text-white">
+                <h3 className="text-base font-semibold text-slate-900 dark:text-white">
                   BMI for Women by Age and Adult Men (Ages 20 and Older)
                 </h3>
                 <p>
@@ -1039,7 +1039,7 @@ export const BmiTopicalPages: React.FC<BmiTopicalPagesProps> = ({ activeRoute, o
               </div>
 
               <div className="space-y-2.5">
-                <h3 className="text-base font-extrabold text-slate-900 dark:text-white">
+                <h3 className="text-base font-semibold text-slate-900 dark:text-white">
                   BMI by Age for Teens and Kids (Ages 2 to 19)
                 </h3>
                 <p>
@@ -1078,7 +1078,7 @@ export const BmiTopicalPages: React.FC<BmiTopicalPagesProps> = ({ activeRoute, o
           <div className="bg-white dark:bg-slate-900 rounded-3xl p-5 sm:p-8 border border-slate-200 dark:border-slate-800 shadow-sm space-y-6">
             <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 dark:border-slate-800 pb-4">
               <div>
-                <h2 className="text-lg sm:text-2xl font-black text-slate-900 dark:text-white">
+                <h2 className="text-lg sm:text-2xl font-semibold text-slate-900 dark:text-white">
                   Healthy &amp; Ideal Weight Range Calculator (BMI 18.5 to 24.9)
                 </h2>
                 <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300">
@@ -1118,7 +1118,7 @@ export const BmiTopicalPages: React.FC<BmiTopicalPagesProps> = ({ activeRoute, o
                   <div>
                     <label
                       htmlFor="ideal-height-inches"
-                      className="block text-xs font-extrabold uppercase tracking-wider text-slate-700 dark:text-slate-200 mb-1.5"
+                      className="block text-xs font-semibold text-slate-700 dark:text-slate-200 mb-1.5"
                     >
                       Your Height in Inches
                     </label>
@@ -1141,7 +1141,7 @@ export const BmiTopicalPages: React.FC<BmiTopicalPagesProps> = ({ activeRoute, o
                   <div>
                     <label
                       htmlFor="ideal-height-cm"
-                      className="block text-xs font-extrabold uppercase tracking-wider text-slate-700 dark:text-slate-200 mb-1.5"
+                      className="block text-xs font-semibold text-slate-700 dark:text-slate-200 mb-1.5"
                     >
                       Your Height in Centimetres (cm)
                     </label>
@@ -1184,10 +1184,10 @@ export const BmiTopicalPages: React.FC<BmiTopicalPagesProps> = ({ activeRoute, o
 
               <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="p-5 rounded-2xl bg-emerald-50/80 dark:bg-emerald-950/50 border border-emerald-200 dark:border-emerald-800 space-y-1.5">
-                  <span className="text-xs font-extrabold uppercase tracking-wider text-emerald-800 dark:text-emerald-300">
+                  <span className="text-xs font-semibold text-emerald-800 dark:text-emerald-300">
                     Healthy Weight Range (BMI 18.5 to 24.9)
                   </span>
-                  <div className="text-2xl sm:text-3xl font-black text-emerald-700 dark:text-emerald-300 tabular-nums">
+                  <div className="text-2xl sm:text-3xl font-semibold text-emerald-700 dark:text-emerald-300 tabular-nums">
                     {idealUnit === 'imperial'
                       ? `${idealMinLbs.toFixed(1)} to ${idealMaxLbs.toFixed(1)} lbs`
                       : `${idealMinKg.toFixed(1)} to ${idealMaxKg.toFixed(1)} kg`}
@@ -1200,10 +1200,10 @@ export const BmiTopicalPages: React.FC<BmiTopicalPagesProps> = ({ activeRoute, o
                 </div>
 
                 <div className="p-5 rounded-2xl bg-indigo-50/80 dark:bg-indigo-950/50 border border-indigo-200 dark:border-indigo-800 space-y-1.5">
-                  <span className="text-xs font-extrabold uppercase tracking-wider text-[#7334fd] dark:text-indigo-300">
+                  <span className="text-xs font-semibold text-[#7334fd] dark:text-indigo-300">
                     Suggested Midpoint Weight (BMI 21.7)
                   </span>
-                  <div className="text-2xl sm:text-3xl font-black text-[#7334fd] dark:text-indigo-300 tabular-nums">
+                  <div className="text-2xl sm:text-3xl font-semibold text-[#7334fd] dark:text-indigo-300 tabular-nums">
                     {idealUnit === 'imperial' ? `${idealMidLbs.toFixed(1)} lbs` : `${idealMidKg.toFixed(1)} kg`}
                   </div>
                   <div className="text-xs font-semibold text-slate-600 dark:text-slate-300">
@@ -1270,7 +1270,7 @@ export const BmiTopicalPages: React.FC<BmiTopicalPagesProps> = ({ activeRoute, o
           {/* Weight Table by Height */}
           <section className="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-10 border border-slate-200 dark:border-slate-800 shadow-sm space-y-5">
             <div className="border-b border-slate-100 dark:border-slate-800 pb-4">
-              <h2 className="text-xl sm:text-3xl font-black text-slate-900 dark:text-white">
+              <h2 className="text-xl sm:text-3xl font-semibold text-slate-900 dark:text-white">
                 Weight Table by Height: Healthy Weight Range and Suggested Weight
               </h2>
               <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 mt-1">

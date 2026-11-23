@@ -72,10 +72,10 @@ export const SiteInfoPages: React.FC<SiteInfoPagesProps> = ({
       {activePage === 'about' && (
         <div className="space-y-6">
           <div className="space-y-2">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#7334fd] dark:text-indigo-400">
+            <span className="text-xs font-bold text-[#7334fd] dark:text-indigo-400">
               About Weight Loss Percentage
             </span>
-            <h1 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">
+            <h1 className="text-2xl sm:text-3xl font-semibold text-slate-900 dark:text-white">
               Clinically Validated Weight Loss &amp; Metabolic Calculators
             </h1>
             <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
@@ -142,10 +142,10 @@ export const SiteInfoPages: React.FC<SiteInfoPagesProps> = ({
       {activePage === 'methodology' && (
         <div className="space-y-6">
           <div className="space-y-2">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#ca3500] dark:text-orange-400">
+            <span className="text-xs font-bold text-[#ca3500] dark:text-orange-400">
               Editorial &amp; Clinical Standards
             </span>
-            <h1 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">
+            <h1 className="text-2xl sm:text-3xl font-semibold text-slate-900 dark:text-white">
               How We Review &amp; Test Our Calculators
             </h1>
             <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
@@ -210,7 +210,7 @@ export const SiteInfoPages: React.FC<SiteInfoPagesProps> = ({
         <div className="space-y-5">
           <div className="flex items-center gap-2.5">
             <Lock className="w-6 h-6 text-emerald-600 dark:text-emerald-400" />
-            <h1 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">
+            <h1 className="text-2xl sm:text-3xl font-semibold text-slate-900 dark:text-white">
               Privacy Policy &amp; Zero-Data Storage Guarantee
             </h1>
           </div>
@@ -243,7 +243,7 @@ export const SiteInfoPages: React.FC<SiteInfoPagesProps> = ({
         <div className="space-y-5">
           <div className="flex items-center gap-2.5">
             <Scale className="w-6 h-6 text-[#7334fd] dark:text-indigo-400" />
-            <h1 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">
+            <h1 className="text-2xl sm:text-3xl font-semibold text-slate-900 dark:text-white">
               Terms of Service &amp; Clinical Disclaimer
             </h1>
           </div>
@@ -273,7 +273,7 @@ export const SiteInfoPages: React.FC<SiteInfoPagesProps> = ({
         <div className="space-y-5">
           <div className="flex items-center gap-2.5">
             <Mail className="w-6 h-6 text-[#ca3500] dark:text-orange-400" />
-            <h1 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">
+            <h1 className="text-2xl sm:text-3xl font-semibold text-slate-900 dark:text-white">
               Contact Our Clinical &amp; Technical Team
             </h1>
           </div>
@@ -345,7 +345,7 @@ export const SiteInfoPages: React.FC<SiteInfoPagesProps> = ({
                 href="https://www.instagram.com/weightlosspercentage"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-gradient-to-r from-[#f09433] via-[#dc2743] to-[#bc1888] text-white hover:opacity-95 transition-opacity"
+                className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-slate-900 text-white hover:opacity-95 transition-opacity"
               >
                 <span>Instagram (@weightlosspercentage)</span>
                 <ExternalLink className="w-3.5 h-3.5" />

@@ -220,50 +220,52 @@ export const FAQWithLabels: React.FC<FAQWithLabelsProps> = ({ locale = 'en' }) =
   const localizedFaqs = locale === 'en' ? FAQ_DATA : t.faqs && t.faqs.length > 0 ? t.faqs : FAQ_DATA;
 
   return (
-    <section id="faq-section" className="w-full bg-white dark:bg-slate-900 rounded-2xl sm:rounded-3xl p-4 sm:p-10 border border-slate-200 dark:border-slate-800 shadow-sm space-y-5 scroll-mt-20 transition-colors">
-      <div className="flex items-center gap-3 border-b border-slate-100 dark:border-slate-800 pb-4">
-        <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-[#7334fd] to-[#ca3500] text-white flex items-center justify-center font-bold shrink-0">
-          <HelpCircle className="w-5 h-5" />
-        </div>
+    <section id="faq-section" className="w-full bg-white dark:bg-[#1c1917] rounded-2xl p-4 sm:p-8 border border-[#e5e1d8] dark:border-[#332f2b] space-y-6 scroll-mt-20 transition-colors duration-200">
+      <div className="flex items-start gap-3 border-b border-[#edeae3] dark:border-[#2a2623] pb-4">
+        <HelpCircle className="w-4 h-4 mt-1.5 text-[#57534e] dark:text-[#b5afa6] shrink-0" strokeWidth={1.75} />
         <div>
-          <h2 className="text-lg sm:text-2xl font-black text-slate-900 dark:text-white tracking-tight">
+          <h2 className="text-lg sm:text-2xl font-semibold text-[#1c1917] dark:text-[#f5f3ef] tracking-tight">
             {t.faqTitle}
           </h2>
-          <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
+          <p className="text-xs sm:text-sm text-[#57534e] dark:text-[#b5afa6] mt-1">
             {t.faqSubtitle}
           </p>
         </div>
       </div>
 
-      <div className="space-y-2.5">
+      <div className="space-y-3">
         {localizedFaqs.map((item, index) => {
           const isOpen = openIndex === index;
           return (
             <div
               key={index}
-              className="border border-slate-200/90 dark:border-slate-800 rounded-2xl overflow-hidden transition-all bg-white dark:bg-slate-800/50"
+              className="border border-[#e5e1d8] dark:border-[#332f2b] rounded-xl overflow-hidden transition-colors duration-150 bg-white dark:bg-[#1c1917]"
             >
               <button
                 type="button"
                 onClick={() => setOpenIndex(isOpen ? null : index)}
-                className="w-full min-h-[56px] p-4 sm:p-5 text-left flex items-start justify-between gap-3 hover:bg-slate-50/70 dark:hover:bg-slate-800 active:bg-slate-100/70 transition-colors"
+                className="w-full min-h-[56px] p-4 text-left flex items-start justify-between gap-4 hover:bg-[#faf9f7] dark:hover:bg-[#25221f] transition-colors duration-150 cursor-pointer"
                 aria-expanded={isOpen}
               >
-                <div className="space-y-0.5">
-                  <span className="text-[11px] font-semibold uppercase tracking-wider text-[#7334fd] dark:text-indigo-400 block">
+                <div className="space-y-1">
+                  <span className="text-xs font-normal text-[#78716c] dark:text-[#8c857d] block">
                     {item.topic}
                   </span>
-                  <h3 className="text-sm sm:text-base font-bold text-slate-900 dark:text-slate-100 leading-snug">
+                  <h3 className="text-sm sm:text-base font-medium text-[#1c1917] dark:text-[#f5f3ef] leading-snug">
                     {item.question}
                   </h3>
                 </div>
-                <div className="w-8 h-8 rounded-lg flex items-center justify-center text-slate-400 shrink-0 mt-0.5">
-                  {isOpen ? <ChevronUp className="w-5 h-5 text-[#7334fd] dark:text-indigo-400" /> : <ChevronDown className="w-5 h-5" />}
+                <div className="w-8 h-8 rounded-lg flex items-center justify-center text-[#78716c] dark:text-[#8c857d] shrink-0">
+                  {isOpen ? (
+                    <ChevronUp className="w-4 h-4 text-[#1c1917] dark:text-[#f5f3ef]" strokeWidth={1.75} />
+                  ) : (
+                    <ChevronDown className="w-4 h-4" strokeWidth={1.75} />
+                  )}
                 </div>
               </button>
 
               {isOpen && (
-                <div className="px-4 sm:px-5 pb-4 sm:pb-5 pt-0 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed border-t border-slate-100 dark:border-slate-700/80 bg-slate-50/40 dark:bg-slate-900/50">
+                <div className="px-4 pb-4 pt-0 text-xs sm:text-sm text-[#57534e] dark:text-[#b5afa6] leading-relaxed border-t border-[#edeae3] dark:border-[#2a2623] bg-[#faf9f7] dark:bg-[#141210]">
                   <p className="pt-3">{item.answer}</p>
                 </div>
               )}

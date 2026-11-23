@@ -2,14 +2,10 @@ import React, { useState, useMemo } from 'react';
 import { ChallengeParticipant, Unit } from '../types';
 import { INITIAL_DEMO_PARTICIPANTS } from '../utils/storage';
 import {
-  Users,
   Trophy,
-  Medal,
   Plus,
   Trash2,
-  TrendingDown,
   Scale,
-  Sparkles,
   RotateCcw
 } from 'lucide-react';
 
@@ -55,13 +51,13 @@ export const GroupChallengeTracker: React.FC<GroupChallengeTrackerProps> = ({
     if (!name.trim() || !s || !c) return;
 
     const colors = [
-      'bg-emerald-500',
-      'bg-sky-500',
-      'bg-indigo-500',
-      'bg-purple-500',
-      'bg-rose-500',
-      'bg-amber-500',
-      'bg-teal-500',
+      'bg-[#c2410c]',
+      'bg-stone-600',
+      'bg-orange-500',
+      'bg-stone-500',
+      'bg-[#9a3412]',
+      'bg-orange-400',
+      'bg-stone-400',
     ];
     const avatarColor = colors[participants.length % colors.length];
 
@@ -81,15 +77,15 @@ export const GroupChallengeTracker: React.FC<GroupChallengeTrackerProps> = ({
   return (
     <div className="space-y-6">
       {/* Top Banner */}
-      <div className="bg-gradient-to-r from-indigo-900 via-purple-900 to-slate-900 rounded-2xl p-6 sm:p-8 text-white shadow-lg relative overflow-hidden">
+      <div className="bg-stone-900 rounded-2xl p-6 sm:p-8 text-white shadow-lg relative overflow-hidden">
         <div className="max-w-2xl">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/20 backdrop-blur text-xs font-semibold uppercase tracking-wider text-purple-200 mb-3">
-            <Trophy className="w-3.5 h-3.5 text-amber-300" /> Fair Competition Leaderboard
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 text-xs font-medium text-orange-200 mb-3">
+            <Trophy className="w-3.5 h-3.5 text-orange-300" /> Fair Competition Leaderboard
           </span>
-          <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
+          <h1 className="text-2xl sm:text-3xl font-semibold tracking-tight">
             Group Weight Loss Challenge
           </h1>
-          <p className="mt-2 text-purple-100 text-sm leading-relaxed">
+          <p className="mt-2 text-stone-300 text-sm leading-relaxed">
             Comparing raw pounds lost is unfair to lighter individuals. 
             Percentage of body weight lost normalizes progress across different body sizes, 
             making it the universal fair standard for workplace and community competitions.
@@ -102,8 +98,8 @@ export const GroupChallengeTracker: React.FC<GroupChallengeTrackerProps> = ({
         <div className="lg:col-span-8 bg-white rounded-2xl p-6 border border-slate-200 shadow-xs space-y-4">
           <div className="flex items-center justify-between border-b border-slate-100 pb-3">
             <div>
-              <h2 className="text-lg font-bold text-slate-900 flex items-center gap-2">
-                <Trophy className="w-5 h-5 text-amber-500" />
+              <h2 className="text-lg font-semibold text-slate-900 flex items-center gap-2">
+                <Trophy className="w-5 h-5 text-[#c2410c]" />
                 Current Standings ({leaderboard.length})
               </h2>
               <span className="text-xs text-slate-500">
@@ -134,9 +130,9 @@ export const GroupChallengeTracker: React.FC<GroupChallengeTrackerProps> = ({
                 return (
                   <div
                     key={item.id}
-                    className={`p-4 rounded-xl border transition-all ${
+                    className={`p-4 rounded-xl border transition-colors ${
                       isWinner
-                        ? 'bg-gradient-to-r from-amber-50/70 to-yellow-50/40 border-amber-300 shadow-xs'
+                        ? 'bg-orange-50/60 border-orange-200 shadow-xs'
                         : rank === 2
                         ? 'bg-slate-50/90 border-slate-300'
                         : rank === 3
@@ -147,22 +143,14 @@ export const GroupChallengeTracker: React.FC<GroupChallengeTrackerProps> = ({
                     <div className="flex items-center justify-between gap-3">
                       <div className="flex items-center gap-3">
                         {/* Rank Badge */}
-                        <div className="flex items-center justify-center w-8 h-8 rounded-full font-extrabold text-sm shrink-0">
-                          {rank === 1 ? (
-                            <span className="text-xl" role="img" aria-label="1st">🥇</span>
-                          ) : rank === 2 ? (
-                            <span className="text-xl" role="img" aria-label="2nd">🥈</span>
-                          ) : rank === 3 ? (
-                            <span className="text-xl" role="img" aria-label="3rd">🥉</span>
-                          ) : (
-                            <span className="text-slate-500 font-bold">#{rank}</span>
-                          )}
+                        <div className={`flex items-center justify-center w-8 h-8 rounded-full font-medium text-sm shrink-0 ${rank === 1 ? 'bg-[#c2410c] text-white' : rank <= 3 ? 'bg-orange-100 text-orange-800' : 'bg-slate-100 text-slate-500'}`}>
+                          {rank <= 3 ? rank : `#${rank}`}
                         </div>
 
                         {/* Avatar & Name */}
                         <div className="flex items-center gap-2.5">
                           <div
-                            className={`w-9 h-9 rounded-full ${item.avatarColor} text-white flex items-center justify-center font-bold text-xs shadow-xs`}
+                            className={`w-9 h-9 rounded-full ${item.avatarColor} text-white flex items-center justify-center font-medium text-xs shadow-xs`}
                           >
                             {item.name.substring(0, 2).toUpperCase()}
                           </div>
@@ -170,7 +158,7 @@ export const GroupChallengeTracker: React.FC<GroupChallengeTrackerProps> = ({
                             <h3 className="font-bold text-slate-900 text-sm flex items-center gap-1.5">
                               {item.name}
                               {isWinner && (
-                                <span className="text-[10px] bg-amber-100 text-amber-800 font-bold px-2 py-0.5 rounded-full uppercase">
+                                <span className="text-[10px] bg-orange-100 text-orange-800 font-medium px-2 py-0.5 rounded-full">
                                   Leader
                                 </span>
                               )}
@@ -186,9 +174,9 @@ export const GroupChallengeTracker: React.FC<GroupChallengeTrackerProps> = ({
                       <div className="flex items-center gap-4">
                         <div className="text-right">
                           <span
-                            className={`text-lg font-black block leading-tight ${
+                            className={`text-lg font-medium block leading-tight ${
                               item.percentLost > 0
-                                ? 'text-emerald-600'
+                                ? 'text-[#c2410c]'
                                 : item.percentLost < 0
                                 ? 'text-rose-600'
                                 : 'text-slate-600'
@@ -215,8 +203,8 @@ export const GroupChallengeTracker: React.FC<GroupChallengeTrackerProps> = ({
                     {/* Mini progress bar of % lost */}
                     <div className="mt-3 w-full bg-slate-200/60 rounded-full h-2 overflow-hidden">
                       <div
-                        className={`h-full rounded-full transition-all duration-500 ${
-                          isWinner ? 'bg-amber-500' : 'bg-emerald-500'
+                        className={`h-full rounded-full transition-[width] duration-500 ${
+                          isWinner ? 'bg-[#c2410c]' : 'bg-[#c2410c]'
                         }`}
                         style={{ width: `${Math.min(100, Math.max(0, item.percentLost * 5))}%` }}
                       />
@@ -231,14 +219,14 @@ export const GroupChallengeTracker: React.FC<GroupChallengeTrackerProps> = ({
         {/* Add Participant Form & Explanation */}
         <div className="lg:col-span-4 space-y-5">
           <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-xs space-y-4">
-            <h3 className="font-bold text-slate-900 text-base flex items-center gap-2">
-              <Plus className="w-4 h-4 text-emerald-600" />
+            <h3 className="font-semibold text-slate-900 text-base flex items-center gap-2">
+              <Plus className="w-4 h-4 text-[#c2410c]" />
               Add Participant
             </h3>
 
             <form onSubmit={handleAdd} className="space-y-3">
               <div>
-                <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wide mb-1">
+                <label className="block text-xs font-medium text-slate-700 mb-1">
                   Participant Name
                 </label>
                 <input
@@ -252,7 +240,7 @@ export const GroupChallengeTracker: React.FC<GroupChallengeTrackerProps> = ({
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wide mb-1">
+                <label className="block text-xs font-medium text-slate-700 mb-1">
                   Starting Weight ({unitLabel})
                 </label>
                 <input
@@ -267,7 +255,7 @@ export const GroupChallengeTracker: React.FC<GroupChallengeTrackerProps> = ({
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wide mb-1">
+                <label className="block text-xs font-medium text-slate-700 mb-1">
                   Current Weight ({unitLabel})
                 </label>
                 <input
@@ -283,7 +271,7 @@ export const GroupChallengeTracker: React.FC<GroupChallengeTrackerProps> = ({
 
               <button
                 type="submit"
-                className="w-full py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-xs transition-colors flex items-center justify-center gap-1.5 shadow-xs"
+                className="w-full py-2.5 rounded-xl bg-[#c2410c] hover:bg-[#9a3412] text-white font-semibold text-xs transition-colors flex items-center justify-center gap-1.5 shadow-xs"
               >
                 <Plus className="w-4 h-4" />
                 Add to Leaderboard
@@ -293,18 +281,18 @@ export const GroupChallengeTracker: React.FC<GroupChallengeTrackerProps> = ({
 
           {/* Fairness Math Box */}
           <div className="bg-slate-50 rounded-2xl p-5 border border-slate-200 text-xs text-slate-600 space-y-2">
-            <span className="font-bold text-slate-900 block flex items-center gap-1.5">
-              <Scale className="w-4 h-4 text-emerald-600" />
+            <span className="font-medium text-slate-900 block flex items-center gap-1.5">
+              <Scale className="w-4 h-4 text-[#c2410c]" />
               The Math of Contest Fairness:
             </span>
             <p>
               If Contestant A starts at <strong>250 lbs</strong> and loses <strong>20 lbs</strong>, they lost <strong>8.0%</strong>.
             </p>
             <p>
-              If Contestant B starts at <strong>160 lbs</strong> and loses <strong>16 lbs</strong>, they lost <strong>10.0%</strong>!
+              If Contestant B starts at <strong>160 lbs</strong> and loses <strong>16 lbs</strong>, they lost <strong>10.0%</strong>.
             </p>
             <p className="text-[11px] text-slate-500 pt-1 border-t border-slate-200">
-              Contestant B shed a greater fraction of their biological mass despite losing fewer raw pounds. Percentage reflects pure effort!
+              Contestant B shed a greater fraction of their biological mass despite losing fewer raw pounds. Percentage reflects pure effort.
             </p>
           </div>
         </div>

@@ -4,8 +4,8 @@
   "description": "Clinically reviewed weight loss percentage calculator, newborn weight loss tracker, and BMR/TDEE calculator.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#fbfbfd",
-  "theme_color": "#7334fd",
+  "background_color": "#faf9f7",
+  "theme_color": "#1c1917",
   "icons": [
     {
       "src": "/favicon.svg",

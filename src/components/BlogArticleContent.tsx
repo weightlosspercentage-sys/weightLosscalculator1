@@ -18,11 +18,11 @@ export const BlogArticleContent: React.FC<BlogArticleContentProps> = ({ slug }) 
         className="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-10 border border-slate-200 dark:border-slate-800 shadow-sm space-y-8 text-slate-700 dark:text-slate-300 leading-relaxed"
       >
         <header className="border-b border-slate-100 dark:border-slate-800 pb-5 space-y-2">
-          <span className="inline-flex items-center gap-1.5 text-xs font-extrabold uppercase tracking-wider text-[#7334fd] dark:text-indigo-400">
+          <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#7334fd] dark:text-indigo-400">
             <Scale className="w-4 h-4" />
             <span>Weight Loss Progress &amp; Monthly Pace Guide</span>
           </span>
-          <h2 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white tracking-tight">
+          <h2 className="text-2xl sm:text-3xl font-semibold text-slate-900 dark:text-white tracking-tight">
             How Much Weight Have I Lost?
           </h2>
           <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300">
@@ -38,7 +38,7 @@ export const BlogArticleContent: React.FC<BlogArticleContentProps> = ({ slug }) 
         </header>
 
         <section className="space-y-3 text-xs sm:text-sm">
-          <h3 className="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white">
+          <h3 className="text-lg sm:text-xl font-semibold text-slate-900 dark:text-white">
             1. How to Calculate Your Weight Loss Percentage (The Formula)
           </h3>
           <p>
@@ -133,7 +133,7 @@ export const BlogArticleContent: React.FC<BlogArticleContentProps> = ({ slug }) 
         </section>
 
         <section className="space-y-3 text-xs sm:text-sm">
-          <h3 className="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white">
+          <h3 className="text-lg sm:text-xl font-semibold text-slate-900 dark:text-white">
             2. What Your Weight Loss Percentage Means (Reference Table)
           </h3>
           <p>
@@ -191,7 +191,7 @@ export const BlogArticleContent: React.FC<BlogArticleContentProps> = ({ slug }) 
         </section>
 
         <section className="space-y-3 text-xs sm:text-sm">
-          <h3 className="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
+          <h3 className="text-lg sm:text-xl font-semibold text-slate-900 dark:text-white flex items-center gap-2">
             <TrendingDown className="w-5 h-5 text-[#7334fd] dark:text-indigo-400 shrink-0" />
             <span>3. How Much Weight Can You Lose in a Month? (Safe Pace)</span>
           </h3>
@@ -244,7 +244,7 @@ export const BlogArticleContent: React.FC<BlogArticleContentProps> = ({ slug }) 
         </section>
 
         <section className="space-y-3 text-xs sm:text-sm">
-          <h3 className="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
+          <h3 className="text-lg sm:text-xl font-semibold text-slate-900 dark:text-white flex items-center gap-2">
             <CheckCircle2 className="w-5 h-5 text-emerald-600 dark:text-emerald-400 shrink-0" />
             <span>4. How to Track It Without Fooling Yourself</span>
           </h3>
@@ -273,7 +273,7 @@ export const BlogArticleContent: React.FC<BlogArticleContentProps> = ({ slug }) 
         </section>
 
         <section className="space-y-4 text-xs sm:text-sm border-t border-slate-100 dark:border-slate-800 pt-6">
-          <h3 className="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white">
+          <h3 className="text-lg sm:text-xl font-semibold text-slate-900 dark:text-white">
             5. Frequently Asked Questions
           </h3>
           <div className="space-y-3">
@@ -343,11 +343,11 @@ export const BlogArticleContent: React.FC<BlogArticleContentProps> = ({ slug }) 
         className="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-10 border border-slate-200 dark:border-slate-800 shadow-sm space-y-8 text-slate-700 dark:text-slate-300 leading-relaxed"
       >
         <header className="border-b border-slate-100 dark:border-slate-800 pb-5 space-y-2">
-          <span className="inline-flex items-center gap-1.5 text-xs font-extrabold uppercase tracking-wider text-[#7334fd] dark:text-indigo-400">
+          <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#7334fd] dark:text-indigo-400">
             <Scale className="w-4 h-4" />
             <span>Body Composition &amp; Measurement Guide</span>
           </span>
-          <h2 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white tracking-tight">
+          <h2 className="text-2xl sm:text-3xl font-semibold text-slate-900 dark:text-white tracking-tight">
             Fat Loss vs Weight Loss: Why Scale Weight and Body Fat Percentage Are Two Different Numbers
           </h2>
           <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300">
@@ -356,7 +356,7 @@ export const BlogArticleContent: React.FC<BlogArticleContentProps> = ({ slug }) 
         </header>
 
         <section className="space-y-3 text-xs sm:text-sm">
-          <h3 className="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white">
+          <h3 className="text-lg sm:text-xl font-semibold text-slate-900 dark:text-white">
             1. What Scale Weight Includes: Water, Glycogen, Muscle, and Fat
           </h3>
           <p>
@@ -368,7 +368,7 @@ export const BlogArticleContent: React.FC<BlogArticleContentProps> = ({ slug }) 
         </section>
 
         <section className="space-y-3 text-xs sm:text-sm">
-          <h3 className="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white">
+          <h3 className="text-lg sm:text-xl font-semibold text-slate-900 dark:text-white">
             2. What Body Fat Percentage Measures and How a Fat Loss Percentage Calculator Works
           </h3>
           <p>
@@ -404,7 +404,7 @@ export const BlogArticleContent: React.FC<BlogArticleContentProps> = ({ slug }) 
         </section>
 
         <section className="space-y-3 text-xs sm:text-sm">
-          <h3 className="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white">
+          <h3 className="text-lg sm:text-xl font-semibold text-slate-900 dark:text-white">
             3. Direct Comparison: Fat Loss vs Weight Loss
           </h3>
           <p>
@@ -446,7 +446,7 @@ export const BlogArticleContent: React.FC<BlogArticleContentProps> = ({ slug }) 
         </section>
 
         <section className="space-y-3 text-xs sm:text-sm">
-          <h3 className="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
+          <h3 className="text-lg sm:text-xl font-semibold text-slate-900 dark:text-white flex items-center gap-2">
             <Ruler className="w-5 h-5 text-[#ca3500] dark:text-orange-400 shrink-0" />
             <span>4. How to Track Both Numbers: Scale Weight, Waist Measurement, and Body Fat</span>
           </h3>
@@ -467,7 +467,7 @@ export const BlogArticleContent: React.FC<BlogArticleContentProps> = ({ slug }) 
         </section>
 
         <section className="space-y-3 text-xs sm:text-sm">
-          <h3 className="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
+          <h3 className="text-lg sm:text-xl font-semibold text-slate-900 dark:text-white flex items-center gap-2">
             <Activity className="w-5 h-5 text-emerald-600 dark:text-emerald-400 shrink-0" />
             <span>5. When Each Number Matters Most and How to Keep Loss Mostly Fat</span>
           </h3>
@@ -488,11 +488,11 @@ export const BlogArticleContent: React.FC<BlogArticleContentProps> = ({ slug }) 
       className="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-10 border border-slate-200 dark:border-slate-800 shadow-sm space-y-8 text-slate-700 dark:text-slate-300 leading-relaxed"
     >
       <header className="border-b border-slate-100 dark:border-slate-800 pb-5 space-y-2">
-        <span className="inline-flex items-center gap-1.5 text-xs font-extrabold uppercase tracking-wider text-[#7334fd] dark:text-indigo-400">
+        <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#7334fd] dark:text-indigo-400">
           <Calendar className="w-4 h-4" />
           <span>Evidence-Based Measurement Protocol</span>
         </span>
-        <h2 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white tracking-tight">
+        <h2 className="text-2xl sm:text-3xl font-semibold text-slate-900 dark:text-white tracking-tight">
           Weight Tracking Guide: How to Weigh Yourself Correctly and Read the Weekly Trend
         </h2>
         <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300">
@@ -501,7 +501,7 @@ export const BlogArticleContent: React.FC<BlogArticleContentProps> = ({ slug }) 
       </header>
 
       <section className="space-y-3 text-xs sm:text-sm">
-        <h3 className="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
+        <h3 className="text-lg sm:text-xl font-semibold text-slate-900 dark:text-white flex items-center gap-2">
           <CheckCircle2 className="w-5 h-5 text-emerald-600 dark:text-emerald-400 shrink-0" />
           <span>1. Standardized Morning Weigh-In Protocol: Same Time, Same Conditions</span>
         </h3>
@@ -528,7 +528,7 @@ export const BlogArticleContent: React.FC<BlogArticleContentProps> = ({ slug }) 
       </section>
 
       <section className="space-y-3 text-xs sm:text-sm">
-        <h3 className="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
+        <h3 className="text-lg sm:text-xl font-semibold text-slate-900 dark:text-white flex items-center gap-2">
           <TrendingDown className="w-5 h-5 text-[#7334fd] dark:text-indigo-400 shrink-0" />
           <span>2. Why You Must Read the 7-Day Weekly Average, Not a Single Day</span>
         </h3>
@@ -568,7 +568,7 @@ export const BlogArticleContent: React.FC<BlogArticleContentProps> = ({ slug }) 
       </section>
 
       <section className="space-y-3 text-xs sm:text-sm">
-        <h3 className="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white">
+        <h3 className="text-lg sm:text-xl font-semibold text-slate-900 dark:text-white">
           3. What Daily Scale Fluctuations Actually Mean
         </h3>
         <p>
@@ -591,7 +591,7 @@ export const BlogArticleContent: React.FC<BlogArticleContentProps> = ({ slug }) 
       </section>
 
       <section className="space-y-3 text-xs sm:text-sm">
-        <h3 className="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white">
+        <h3 className="text-lg sm:text-xl font-semibold text-slate-900 dark:text-white">
           4. When to Act and Adjust Your Plan vs When to Stay the Course
         </h3>
         <p>

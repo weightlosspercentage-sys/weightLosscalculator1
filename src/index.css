@@ -3,19 +3,46 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @layer base {
+  :root {
+    --surface-canvas: #faf9f7;
+    --surface-card: #ffffff;
+    --surface-subtle: #f3f1ed;
+    --border-default: #e5e1d8;
+    --border-subtle: #edeae3;
+    --ink-primary: #1c1917;
+    --ink-secondary: #57534e;
+    --ink-muted: #78716c;
+    --accent-terracotta: #c2410c;
+    --accent-terracotta-hover: #9a3412;
+  }
+
   html {
     -webkit-tap-highlight-color: transparent;
     scroll-behavior: smooth;
     color-scheme: light;
+    background-color: var(--surface-canvas);
+    color: var(--ink-primary);
   }
 
   html.dark {
     color-scheme: dark;
+    --surface-canvas: #141210;
+    --surface-card: #1c1917;
+    --surface-subtle: #25221f;
+    --border-default: #332f2b;
+    --border-subtle: #2a2623;
+    --ink-primary: #f5f3ef;
+    --ink-secondary: #b5afa6;
+    --ink-muted: #8c857d;
+    --accent-terracotta: #ea580c;
+    --accent-terracotta-hover: #c2410c;
   }
 
   body {
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
     overflow-x: hidden;
+    background-color: var(--surface-canvas);
+    color: var(--ink-primary);
   }
 
   /* Prevent iOS Safari zoom on input focus by ensuring at least 16px on mobile */
@@ -45,5 +72,3 @@
   content-visibility: auto;
   contain-intrinsic-size: 1px 520px;
 }
-
-

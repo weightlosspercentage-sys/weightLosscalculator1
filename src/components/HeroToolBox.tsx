@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import {
   Download,
   FileText,
-  Sparkles,
   Baby,
   Scale,
   Flame,
@@ -20,6 +19,7 @@ import { LOCALE_TRANSLATIONS } from '../data/localeStrings';
 import { EXTENDED_LOCALE_PARITY } from '../data/multilingualParity';
 import { ClinicalFocus, RestaurantBrand } from '../utils/seoIntentRouter';
 import { lbsToStonesAndPounds, LBS_PER_KG } from '../utils/calculations';
+import { ScaleMilestoneRule } from './ScaleMilestoneRule';
 
 export type ToolMode = 'adult' | 'newborn' | 'bmr' | 'subway';
 
@@ -94,10 +94,10 @@ export const HeroToolBox: React.FC<HeroToolBoxProps> = ({
   const [mcdDrink, setMcdDrink] = useState<number>(0);
   const [mcdSauce, setMcdSauce] = useState<number>(45);
 
-  // Five Guys meal builder inputs (official Five Guys nutrition guide, Sept 2026)
-  const [fgBurger, setFgBurger] = useState<number>(980);
-  const [fgFries, setFgFries] = useState<number>(526);
-  const [fgDrink, setFgDrink] = useState<number>(0);
+  // Five Guys meal builder inputs
+  const [fiveGuysBurger, setFiveGuysBurger] = useState<number>(840);
+  const [fiveGuysFries, setFiveGuysFries] = useState<number>(953);
+  const [fiveGuysDrink, setFiveGuysDrink] = useState<number>(0);
 
   const [copied, setCopied] = useState<boolean>(false);
   const [pdfDownloaded, setPdfDownloaded] = useState<boolean>(false);
@@ -286,21 +286,25 @@ export const HeroToolBox: React.FC<HeroToolBoxProps> = ({
   const ketoProteinG = Math.round((calculatedTdee * 0.25) / 4);
   const ketoCarbsG = Math.round((calculatedTdee * 0.05) / 4);
 
-  // Restaurant (Subway & McDonald's) calculation
+  // Restaurant (Subway, McDonald's & Five Guys) calculation
   const multiplier = subwaySize === 'footlong' ? 2 : 1;
   const subwayTotalCalories = (subwayBread + subwayMeat + subwayCheese + subwaySauce) * multiplier;
   const mcdTotalCalories = mcdMain + mcdFries + mcdDrink + mcdSauce;
-  const fgTotalCalories = fgBurger + fgFries + fgDrink;
+  const fiveGuysTotalCalories = fiveGuysBurger + fiveGuysFries + fiveGuysDrink;
   const activeRestaurantCalories =
-    activeBrand === 'mcdonalds' ? mcdTotalCalories : activeBrand === 'five-guys' ? fgTotalCalories : subwayTotalCalories;
+    activeBrand === 'five-guys'
+      ? fiveGuysTotalCalories
+      : activeBrand === 'mcdonalds'
+      ? mcdTotalCalories
+      : subwayTotalCalories;
 
   const triggerCelebration = async () => {
     const { default: confetti } = await import('canvas-confetti');
     confetti({
-      particleCount: 90,
-      spread: 75,
+      particleCount: 55,
+      spread: 60,
       origin: { y: 0.55 },
-      colors: ['#ca3500', '#7334fd', '#4950fc', '#10b981', '#f59e0b']
+      colors: ['#c2410c', '#ea580c', '#78716c', '#a8a29e', '#1c1917']
     });
   };
 
@@ -314,42 +318,42 @@ export const HeroToolBox: React.FC<HeroToolBoxProps> = ({
     });
 
     // Top Brand Header Banner
-    doc.setFillColor(25, 33, 52);
+    doc.setFillColor(28, 25, 23);
     doc.rect(0, 0, 210, 34, 'F');
 
     // Brand Badge [%]
-    doc.setFillColor(115, 52, 253);
+    doc.setFillColor(194, 65, 12);
     doc.roundedRect(14, 8, 12, 12, 2.5, 2.5, 'F');
-    doc.setTextColor(255, 255, 255);
+    doc.setTextColor(250, 249, 247);
     doc.setFont('helvetica', 'bold');
     doc.setFontSize(13);
     doc.text('%', 20, 16, { align: 'center' });
 
     // Brand Name & Subtitle
     doc.setFontSize(15);
-    doc.setTextColor(255, 255, 255);
+    doc.setTextColor(250, 249, 247);
     doc.text('Weight Loss Percentage', 30, 14);
     doc.setFont('helvetica', 'normal');
     doc.setFontSize(9);
-    doc.setTextColor(203, 213, 225);
+    doc.setTextColor(214, 211, 209);
     doc.text('Official Clinical & Metabolic Calculation Summary  |  https://www.weightlosspercentage.com/', 30, 20);
 
     // Date & Privacy Stamp
     doc.setFontSize(8.5);
-    doc.setTextColor(167, 243, 208);
+    doc.setTextColor(181, 175, 166);
     doc.text(`Report Date: ${dateStr}   •   100% Client-Side Browser Calculation (Zero Server Data Storage)`, 14, 29);
 
     // Medical Review Governance Bar
-    doc.setFillColor(245, 243, 255);
-    doc.setDrawColor(221, 214, 254);
+    doc.setFillColor(250, 249, 247);
+    doc.setDrawColor(229, 225, 216);
     doc.roundedRect(14, 40, 182, 18, 2, 2, 'FD');
     doc.setFont('helvetica', 'bold');
     doc.setFontSize(9.5);
-    doc.setTextColor(76, 29, 149);
+    doc.setTextColor(28, 25, 23);
     doc.text('Medically Reviewed Protocol: Dr. Rekha Kumar, M.D., M.S.', 19, 47);
     doc.setFont('helvetica', 'normal');
     doc.setFontSize(8.5);
-    doc.setTextColor(71, 85, 105);
+    doc.setTextColor(87, 83, 78);
     doc.text(
       'Board-Certified Endocrinologist & ABOM Diplomate  |  Associate Professor of Clinical Medicine, Weill Cornell Medicine',
       19,
@@ -368,22 +372,22 @@ export const HeroToolBox: React.FC<HeroToolBoxProps> = ({
       // Section Title
       doc.setFont('helvetica', 'bold');
       doc.setFontSize(13);
-      doc.setTextColor(15, 23, 42);
+      doc.setTextColor(28, 25, 23);
       doc.text('1. Patient Weight Loss Percentage Summary', 14, y);
       y += 6;
 
       // Primary Hero Highlight Card
-      doc.setFillColor(248, 250, 252);
-      doc.setDrawColor(203, 213, 225);
+      doc.setFillColor(250, 249, 247);
+      doc.setDrawColor(229, 225, 216);
       doc.roundedRect(14, y, 182, 28, 2.5, 2.5, 'FD');
 
       doc.setFont('helvetica', 'bold');
       doc.setFontSize(9);
-      doc.setTextColor(100, 116, 139);
-      doc.text('TOTAL BODY WEIGHT PERCENTAGE CHANGE', 20, y + 8);
+      doc.setTextColor(120, 113, 108);
+      doc.text('Total body weight percentage change', 20, y + 8);
 
       doc.setFontSize(22);
-      doc.setTextColor(115, 52, 253);
+      doc.setTextColor(194, 65, 12);
       doc.text(`${isLoss ? `-${adultPct}%` : `+${adultPct}%`}`, 20, y + 20);
 
       doc.setFontSize(11);
@@ -452,61 +456,61 @@ export const HeroToolBox: React.FC<HeroToolBoxProps> = ({
 
       const milestones = [
         {
-          title: `5% Metabolic Landmark (${(sWeight * 0.95).toFixed(1)} ${unit})`,
-          status: adultPct >= 5 ? 'ACHIEVED' : 'IN PROGRESS',
+          title: `5% clinical milestone (${(sWeight * 0.95).toFixed(1)} ${unit})`,
+          status: adultPct >= 5 ? 'Reached' : 'In progress',
           desc: 'Clinically meaningful improvements in HbA1c, insulin sensitivity, and systolic blood pressure (~5 mmHg).'
         },
         {
-          title: `10% Cardiovascular Landmark (${(sWeight * 0.90).toFixed(1)} ${unit})`,
-          status: adultPct >= 10 ? 'ACHIEVED' : 'IN PROGRESS',
+          title: `10% clinical milestone (${(sWeight * 0.90).toFixed(1)} ${unit})`,
+          status: adultPct >= 10 ? 'Reached' : 'In progress',
           desc: 'Significant visceral adipose reduction, lipid profile improvement, and sleep apnea symptom relief.'
         },
         {
-          title: `15% Systemic Reset Landmark (${(sWeight * 0.85).toFixed(1)} ${unit})`,
-          status: adultPct >= 15 ? 'ACHIEVED' : 'IN PROGRESS',
+          title: `15% clinical milestone (${(sWeight * 0.85).toFixed(1)} ${unit})`,
+          status: adultPct >= 15 ? 'Reached' : 'In progress',
           desc: 'Major cardiovascular risk reduction and clinical remission markers in Type 2 Diabetes.'
         }
       ];
 
       milestones.forEach((m) => {
-        doc.setFillColor(m.status === 'ACHIEVED' ? 236 : 248, m.status === 'ACHIEVED' ? 253 : 250, m.status === 'ACHIEVED' ? 245 : 252);
-        doc.setDrawColor(m.status === 'ACHIEVED' ? 167 : 226, m.status === 'ACHIEVED' ? 243 : 232, m.status === 'ACHIEVED' ? 208 : 240);
+        doc.setFillColor(250, 249, 247);
+        doc.setDrawColor(229, 225, 216);
         doc.roundedRect(14, y, 182, 15, 2, 2, 'FD');
 
         doc.setFont('helvetica', 'bold');
         doc.setFontSize(9.5);
-        doc.setTextColor(15, 23, 42);
+        doc.setTextColor(28, 25, 23);
         doc.text(m.title, 18, y + 6);
 
         doc.setFontSize(8.5);
-        doc.setTextColor(m.status === 'ACHIEVED' ? 5 : 100, m.status === 'ACHIEVED' ? 150 : 116, m.status === 'ACHIEVED' ? 105 : 139);
-        doc.text(`[${m.status}]`, 192, y + 6, { align: 'right' });
+        doc.setTextColor(m.status === 'Reached' ? 194 : 120, m.status === 'Reached' ? 65 : 113, m.status === 'Reached' ? 12 : 108);
+        doc.text(m.status, 192, y + 6, { align: 'right' });
 
         doc.setFont('helvetica', 'normal');
         doc.setFontSize(8.5);
-        doc.setTextColor(71, 85, 105);
+        doc.setTextColor(87, 83, 78);
         doc.text(m.desc, 18, y + 11.8);
         y += 18;
       });
     } else if (mode === 'newborn') {
       doc.setFont('helvetica', 'bold');
       doc.setFontSize(13);
-      doc.setTextColor(15, 23, 42);
+      doc.setTextColor(28, 25, 23);
       doc.text('1. Newborn Postnatal Weight Loss Summary (AAP Protocol)', 14, y);
       y += 6;
 
-      doc.setFillColor(255, 247, 237);
-      doc.setDrawColor(253, 186, 116);
+      doc.setFillColor(250, 249, 247);
+      doc.setDrawColor(229, 225, 216);
       doc.roundedRect(14, y, 182, 26, 2.5, 2.5, 'FD');
 
       doc.setFont('helvetica', 'bold');
       doc.setFontSize(20);
-      doc.setTextColor(202, 53, 0);
+      doc.setTextColor(194, 65, 12);
       doc.text(`-${newbornLossPct}%  (-${newbornGramsLost} g)`, 20, y + 14);
 
       doc.setFont('helvetica', 'normal');
       doc.setFontSize(9.5);
-      doc.setTextColor(71, 85, 105);
+      doc.setTextColor(87, 83, 78);
       doc.text(
         `Birth Weight: ${birthGramsTotal} g   |   Current Weight: ${currentGramsTotal} g   |   Postnatal Age: ${babyHoursOld} hours`,
         20,
@@ -563,10 +567,10 @@ export const HeroToolBox: React.FC<HeroToolBoxProps> = ({
       doc.setFontSize(13);
       doc.setTextColor(15, 23, 42);
       doc.text(
-        activeBrand === 'mcdonalds'
-          ? '1. McDonald’s Meal Nutrition & Calorie Summary'
-          : activeBrand === 'five-guys'
+        activeBrand === 'five-guys'
           ? '1. Five Guys Meal Nutrition & Calorie Summary'
+          : activeBrand === 'mcdonalds'
+          ? '1. McDonald’s Meal Nutrition & Calorie Summary'
           : '1. Subway Meal Nutrition & Calorie Summary',
         14,
         y
@@ -575,10 +579,10 @@ export const HeroToolBox: React.FC<HeroToolBoxProps> = ({
       doc.setFont('helvetica', 'normal');
       doc.setFontSize(10);
       doc.text(
-        activeBrand === 'mcdonalds'
+        activeBrand === 'five-guys'
+          ? `Burger (${fiveGuysBurger} kcal) + Fries (${fiveGuysFries} kcal) + Beverage (${fiveGuysDrink} kcal) = ${fiveGuysTotalCalories} kcal`
+          : activeBrand === 'mcdonalds'
           ? `Entrée (${mcdMain} kcal) + Side (${mcdFries} kcal) + Beverage (${mcdDrink} kcal) + Sauce (${mcdSauce} kcal) = ${mcdTotalCalories} kcal`
-          : activeBrand === 'five-guys'
-          ? `Burger (${fgBurger} kcal) + Fries (${fgFries} kcal) + Beverage (${fgDrink} kcal) = ${fgTotalCalories} kcal`
           : `Sandwich Portion: ${subwaySize === 'footlong' ? '12-Inch Footlong' : '6-Inch Sub'}   |   Total Meal Energy: ${subwayTotalCalories} kcal`,
         14,
         y
@@ -634,136 +638,138 @@ export const HeroToolBox: React.FC<HeroToolBoxProps> = ({
   };
 
   return (
-    <div className="hero-tool-box relative w-full bg-[#fbfbfd] dark:bg-slate-900 rounded-2xl sm:rounded-3xl border border-slate-200/90 dark:border-slate-800 shadow-xl overflow-hidden transition-all duration-300">
+    <div className="hero-tool-box relative w-full bg-[#ffffff] dark:bg-[#1c1917] rounded-2xl border border-[#e5e1d8] dark:border-[#332f2b] shadow-sm overflow-hidden transition-colors duration-200">
       {/* Tool Topbar with Responsive Mode Selector Grid (2x2 on mobile, row on desktop) */}
-      <div className="bg-gradient-to-r from-[#7334fd] via-[#4950fc] to-[#ca3500] p-1">
-        <div className="bg-[#ffffff] dark:bg-slate-900 p-3 sm:px-6 sm:py-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 rounded-t-[18px] sm:rounded-t-[22px] transition-colors">
-          {/* Mode Switcher: 2x2 grid on mobile for easy 44px+ touch targets */}
-          <div className="grid grid-cols-2 sm:flex sm:flex-wrap items-center gap-1.5 sm:gap-2">
-            <button
-              type="button"
-              onClick={() => setMode('adult')}
-              className={`min-h-[44px] px-3 py-2 rounded-xl text-xs font-bold transition-all flex items-center justify-center sm:justify-start gap-1.5 whitespace-nowrap ${
-                mode === 'adult'
-                  ? 'bg-[#7334fd] text-white shadow-md shadow-[#7334fd]/20'
-                  : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-700 active:bg-slate-300'
-              }`}
-            >
-              <Scale className="w-4 h-4 shrink-0" />
-              <span className="truncate">{t.tabAdult}</span>
-            </button>
+      <div className="border-b border-[#e5e1d8] dark:border-[#332f2b] bg-[#faf9f7] dark:bg-[#141210] px-4 py-3 sm:px-6 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        {/* Mode Switcher: 2x2 grid on mobile for easy 44px+ touch targets */}
+        <div className="grid grid-cols-2 sm:flex sm:flex-wrap items-center gap-2">
+          <button
+            type="button"
+            onClick={() => setMode('adult')}
+            className={`min-h-[40px] px-3 py-2 rounded-[8px] text-xs font-medium transition-colors duration-150 flex items-center justify-center sm:justify-start gap-2 whitespace-nowrap cursor-pointer ${
+              mode === 'adult'
+                ? 'bg-[#1c1917] dark:bg-[#f5f3ef] text-[#faf9f7] dark:text-[#1c1917]'
+                : 'bg-[#f3f1ed] dark:bg-[#25221f] text-[#57534e] dark:text-[#b5afa6] hover:bg-[#e5e1d8] dark:hover:bg-[#332f2b] hover:text-[#1c1917] dark:hover:text-[#f5f3ef]'
+            }`}
+          >
+            <Scale className="w-4 h-4 shrink-0" strokeWidth={1.75} />
+            <span className="truncate">{t.tabAdult}</span>
+          </button>
 
-            <button
-              type="button"
-              onClick={() => setMode('newborn')}
-              className={`min-h-[44px] px-3 py-2 rounded-xl text-xs font-bold transition-all flex items-center justify-center sm:justify-start gap-1.5 whitespace-nowrap ${
-                mode === 'newborn'
-                  ? 'bg-[#ca3500] text-white shadow-md shadow-[#ca3500]/20'
-                  : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-700 active:bg-slate-300'
-              }`}
-            >
-              <Baby className="w-4 h-4 shrink-0" />
-              <span className="truncate">{t.tabNewborn}</span>
-            </button>
+          <button
+            type="button"
+            onClick={() => setMode('newborn')}
+            className={`min-h-[40px] px-3 py-2 rounded-[8px] text-xs font-medium transition-colors duration-150 flex items-center justify-center sm:justify-start gap-2 whitespace-nowrap cursor-pointer ${
+              mode === 'newborn'
+                ? 'bg-[#1c1917] dark:bg-[#f5f3ef] text-[#faf9f7] dark:text-[#1c1917]'
+                : 'bg-[#f3f1ed] dark:bg-[#25221f] text-[#57534e] dark:text-[#b5afa6] hover:bg-[#e5e1d8] dark:hover:bg-[#332f2b] hover:text-[#1c1917] dark:hover:text-[#f5f3ef]'
+            }`}
+          >
+            <Baby className="w-4 h-4 shrink-0" strokeWidth={1.75} />
+            <span className="truncate">{t.tabNewborn}</span>
+          </button>
 
-            <button
-              type="button"
-              onClick={() => setMode('bmr')}
-              className={`min-h-[44px] px-3 py-2 rounded-xl text-xs font-bold transition-all flex items-center justify-center sm:justify-start gap-1.5 whitespace-nowrap ${
-                mode === 'bmr'
-                  ? 'bg-[#4950fc] text-white shadow-md shadow-[#4950fc]/20'
-                  : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-700 active:bg-slate-300'
-              }`}
-            >
-              <Flame className="w-4 h-4 shrink-0" />
-              <span className="truncate">{t.tabBmr}</span>
-            </button>
+          <button
+            type="button"
+            onClick={() => setMode('bmr')}
+            className={`min-h-[40px] px-3 py-2 rounded-[8px] text-xs font-medium transition-colors duration-150 flex items-center justify-center sm:justify-start gap-2 whitespace-nowrap cursor-pointer ${
+              mode === 'bmr'
+                ? 'bg-[#1c1917] dark:bg-[#f5f3ef] text-[#faf9f7] dark:text-[#1c1917]'
+                : 'bg-[#f3f1ed] dark:bg-[#25221f] text-[#57534e] dark:text-[#b5afa6] hover:bg-[#e5e1d8] dark:hover:bg-[#332f2b] hover:text-[#1c1917] dark:hover:text-[#f5f3ef]'
+            }`}
+          >
+            <Flame className="w-4 h-4 shrink-0" strokeWidth={1.75} />
+            <span className="truncate">{t.tabBmr}</span>
+          </button>
 
+          <button
+            type="button"
+            onClick={() => setMode('subway')}
+            className={`min-h-[40px] px-3 py-2 rounded-[8px] text-xs font-medium transition-colors duration-150 flex items-center justify-center sm:justify-start gap-2 whitespace-nowrap cursor-pointer ${
+              mode === 'subway'
+                ? 'bg-[#1c1917] dark:bg-[#f5f3ef] text-[#faf9f7] dark:text-[#1c1917]'
+                : 'bg-[#f3f1ed] dark:bg-[#25221f] text-[#57534e] dark:text-[#b5afa6] hover:bg-[#e5e1d8] dark:hover:bg-[#332f2b] hover:text-[#1c1917] dark:hover:text-[#f5f3ef]'
+            }`}
+          >
+            <Utensils className="w-4 h-4 shrink-0" strokeWidth={1.75} />
+            <span className="truncate">{t.tabSubway}</span>
+          </button>
+        </div>
+
+        {/* Unit Toggle for Adult/BMR */}
+        {mode === 'adult' && (
+          <div className="grid grid-cols-2 sm:flex items-center bg-[#f3f1ed] dark:bg-[#25221f] border border-[#e5e1d8] dark:border-[#332f2b] rounded-[10px] p-1 text-xs font-medium shrink-0">
             <button
               type="button"
-              onClick={() => setMode('subway')}
-              className={`min-h-[44px] px-3 py-2 rounded-xl text-xs font-bold transition-all flex items-center justify-center sm:justify-start gap-1.5 whitespace-nowrap ${
-                mode === 'subway'
-                  ? 'bg-[#ca5983] text-white shadow-md shadow-[#ca5983]/20'
-                  : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-700 active:bg-slate-300'
+              onClick={() => setUnit('lbs')}
+              className={`min-h-[36px] sm:min-h-[32px] px-3 py-1 rounded-[8px] transition-colors duration-150 whitespace-nowrap cursor-pointer ${
+                unit === 'lbs'
+                  ? 'bg-[#ffffff] dark:bg-[#1c1917] text-[#1c1917] dark:text-[#f5f3ef] shadow-xs'
+                  : 'text-[#57534e] dark:text-[#b5afa6] hover:text-[#1c1917] dark:hover:text-[#f5f3ef]'
               }`}
             >
-              <Utensils className="w-4 h-4 shrink-0" />
-              <span className="truncate">{t.tabSubway}</span>
+              {t.unitLbs}
+            </button>
+            <button
+              type="button"
+              onClick={() => setUnit('kg')}
+              className={`min-h-[36px] sm:min-h-[32px] px-3 py-1 rounded-[8px] transition-colors duration-150 whitespace-nowrap cursor-pointer ${
+                unit === 'kg'
+                  ? 'bg-[#ffffff] dark:bg-[#1c1917] text-[#1c1917] dark:text-[#f5f3ef] shadow-xs'
+                  : 'text-[#57534e] dark:text-[#b5afa6] hover:text-[#1c1917] dark:hover:text-[#f5f3ef]'
+              }`}
+            >
+              {t.unitKg}
             </button>
           </div>
-
-          {/* Unit Toggle for Adult/BMR */}
-          {mode === 'adult' && (
-            <div className="grid grid-cols-2 sm:flex items-center bg-slate-100 dark:bg-slate-800 rounded-xl p-1 text-xs font-bold shrink-0">
-              <button
-                type="button"
-                onClick={() => setUnit('lbs')}
-                className={`min-h-[40px] sm:min-h-[34px] px-4 py-1.5 rounded-lg transition-colors whitespace-nowrap ${
-                  unit === 'lbs' ? 'bg-white dark:bg-slate-900 text-slate-900 dark:text-white shadow-xs' : 'text-slate-600 dark:text-slate-400'
-                }`}
-              >
-                {t.unitLbs}
-              </button>
-              <button
-                type="button"
-                onClick={() => setUnit('kg')}
-                className={`min-h-[40px] sm:min-h-[34px] px-4 py-1.5 rounded-lg transition-colors whitespace-nowrap ${
-                  unit === 'kg' ? 'bg-white dark:bg-slate-900 text-slate-900 dark:text-white shadow-xs' : 'text-slate-600 dark:text-slate-400'
-                }`}
-              >
-                {t.unitKg}
-              </button>
-            </div>
-          )}
-        </div>
+        )}
       </div>
 
       {/* Main Tool Interactive Grid */}
-      <div className="p-3.5 sm:p-8 grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-8">
+      <div className="p-4 sm:p-6 grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* LEFT COLUMN: Reactive Inputs & Mobile Touch Steppers */}
         <div className="lg:col-span-7 space-y-4">
           {/* Mobile Instant Live Result Strip (visible immediately above inputs on phone viewports) */}
-          <div className="lg:hidden bg-gradient-to-r from-[#7334fd]/10 via-indigo-50/80 to-orange-50/70 dark:from-indigo-950/80 dark:via-slate-800 dark:to-slate-800 border border-indigo-200/80 dark:border-indigo-500/30 rounded-2xl p-3 flex items-center justify-between gap-2">
+          <div className="lg:hidden bg-[#faf9f7] dark:bg-[#141210] border border-[#e5e1d8] dark:border-[#332f2b] rounded-xl p-4 flex items-center justify-between gap-3">
             <div>
-              <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 block">
+              <span className="text-xs font-medium text-[#57534e] dark:text-[#b5afa6] block">
                 {mode === 'adult'
-                  ? 'Instant Weight Loss %'
+                  ? 'Instant weight loss %'
                   : mode === 'newborn'
-                  ? 'Newborn Loss %'
+                  ? 'Newborn weight change'
                   : mode === 'bmr'
                   ? 'Daily BMR / TDEE'
                   : activeBrand === 'five-guys'
-                  ? 'Five Guys Meal Total'
+                  ? 'Five Guys meal total'
                   : activeBrand === 'mcdonalds'
-                  ? (p.mcdResultHeading || "McDonald's Meal Total")
-                  : (t.resultHeadingSubway || 'Subway Meal Total')}
+                  ? (p.mcdResultHeading || "McDonald's meal total")
+                  : (t.resultHeadingSubway || 'Subway meal total')}
               </span>
-              <div className="flex items-baseline gap-1.5 tabular-nums">
+              <div className="flex items-baseline gap-2 tabular-nums mt-0.5">
                 {mode === 'adult' && (
                   <>
-                    <span className="text-2xl font-black text-[#7334fd] dark:text-indigo-400">
+                    <span className="text-2xl font-medium text-[#c2410c] dark:text-[#ea580c]">
                       {isLoss ? `-${adultPct}%` : `${adultPct}%`}
                     </span>
-                    <span className="text-xs font-bold text-slate-600 dark:text-slate-300">
+                    <span className="text-xs font-normal text-[#57534e] dark:text-[#b5afa6]">
                       ({isLoss ? `-${adultLost.toFixed(1)}` : `+${Math.abs(adultLost).toFixed(1)}`} {unit})
                     </span>
                   </>
                 )}
                 {mode === 'newborn' && (
                   <>
-                    <span className="text-2xl font-black text-[#ca3500] dark:text-orange-400">{newbornLossPct}%</span>
-                    <span className="text-xs font-bold text-slate-600 dark:text-slate-300">(-{newbornGramsLost}g)</span>
+                    <span className="text-2xl font-medium text-[#c2410c] dark:text-[#ea580c]">{newbornLossPct}%</span>
+                    <span className="text-xs font-normal text-[#57534e] dark:text-[#b5afa6]">(-{newbornGramsLost} g)</span>
                   </>
                 )}
                 {mode === 'bmr' && (
                   <>
-                    <span className="text-xl font-black text-[#4950fc] dark:text-indigo-400">{calculatedBmr} kcal</span>
-                    <span className="text-xs font-bold text-slate-600 dark:text-slate-300">/ {calculatedTdee} TDEE</span>
+                    <span className="text-xl font-medium text-[#c2410c] dark:text-[#ea580c]">{calculatedBmr} kcal</span>
+                    <span className="text-xs font-normal text-[#57534e] dark:text-[#b5afa6]">/ {calculatedTdee} TDEE</span>
                   </>
                 )}
                 {mode === 'subway' && (
-                  <span className="text-2xl font-black text-[#ca5983] dark:text-pink-400">{activeRestaurantCalories} kcal</span>
+                  <span className="text-2xl font-medium text-[#c2410c] dark:text-[#ea580c]">{activeRestaurantCalories} kcal</span>
                 )}
               </div>
             </div>
@@ -771,17 +777,17 @@ export const HeroToolBox: React.FC<HeroToolBoxProps> = ({
             <button
               type="button"
               onClick={downloadResult}
-              className="min-h-[40px] px-3 py-1.5 rounded-xl bg-gradient-to-r from-[#ca3500] to-[#7334fd] text-white font-bold text-xs shadow-xs flex items-center gap-1.5 shrink-0"
+              className="min-h-[40px] px-3 py-2 rounded-[8px] bg-[#c2410c] hover:bg-[#9a3412] text-white font-medium text-xs transition-colors duration-150 flex items-center gap-1.5 shrink-0 cursor-pointer"
             >
-              <Download className="w-3.5 h-3.5" />
+              <Download className="w-4 h-4" strokeWidth={1.75} />
               <span>{t.downloadReport}</span>
             </button>
           </div>
 
           {/* Quick-Win Preset Buttons & Clinical Focus Selector */}
-          <div className="space-y-2">
+          <div className="space-y-3">
             {mode === 'adult' && (
-              <div className="flex flex-wrap items-center gap-1.5 pb-1">
+              <div className="flex flex-wrap items-center gap-2">
                 {(
                   [
                     { id: 'standard', label: p.focusStandard },
@@ -795,10 +801,10 @@ export const HeroToolBox: React.FC<HeroToolBoxProps> = ({
                     key={item.id}
                     type="button"
                     onClick={() => handleFocusSelect(item.id)}
-                    className={`min-h-[34px] px-2.5 py-1 rounded-lg text-[11px] font-extrabold transition-all border cursor-pointer ${
+                    className={`min-h-[34px] px-3 py-1 rounded-[8px] text-xs font-medium transition-colors duration-150 border cursor-pointer ${
                       activeFocus === item.id
-                        ? 'bg-[#7334fd] text-white border-[#7334fd] shadow-2xs'
-                        : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border-slate-200 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700'
+                        ? 'bg-[#1c1917] dark:bg-[#f5f3ef] text-[#faf9f7] dark:text-[#1c1917] border-[#1c1917] dark:border-[#f5f3ef]'
+                        : 'bg-[#f3f1ed] dark:bg-[#25221f] text-[#57534e] dark:text-[#b5afa6] border-[#e5e1d8] dark:border-[#332f2b] hover:bg-[#e5e1d8] dark:hover:bg-[#332f2b] hover:text-[#1c1917] dark:hover:text-[#f5f3ef]'
                     }`}
                   >
                     {item.label}
@@ -807,54 +813,56 @@ export const HeroToolBox: React.FC<HeroToolBoxProps> = ({
               </div>
             )}
 
-            <span className="text-[11px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider block">
-              {t.presetHeading}
-            </span>
-            <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 pb-0.5">
-              {mode === 'adult' && (
-                <>
-                  <button
-                    type="button"
-                    onClick={() => { setAdultStart('215'); setAdultCurrent('193.5'); setAdultGoal('175'); }}
-                    className="min-h-[38px] px-3 py-1 rounded-xl bg-indigo-50 dark:bg-indigo-950/60 text-[#7334fd] dark:text-indigo-300 hover:bg-indigo-100 dark:hover:bg-indigo-900/60 active:scale-98 font-bold text-xs border border-indigo-200/60 dark:border-indigo-500/40 transition-all whitespace-nowrap shrink-0"
-                  >
-                    10% Loss (215 → 193.5)
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => { setAdultStart('180'); setAdultCurrent('171'); setAdultGoal('155'); }}
-                    className="min-h-[38px] px-3 py-1 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 hover:bg-emerald-100 dark:hover:bg-emerald-900/60 active:scale-98 font-bold text-xs border border-emerald-200 dark:border-emerald-500/40 transition-all whitespace-nowrap shrink-0"
-                  >
-                    5% Milestone (180 → 171)
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => { setAdultStart('260'); setAdultCurrent('221'); setAdultGoal('190'); }}
-                    className="min-h-[38px] px-3 py-1 rounded-xl bg-amber-50 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300 hover:bg-amber-100 dark:hover:bg-amber-900/60 active:scale-98 font-bold text-xs border border-amber-200 dark:border-amber-500/40 transition-all whitespace-nowrap shrink-0"
-                  >
-                    15% Loss (260 → 221)
-                  </button>
-                </>
-              )}
+            <div className="space-y-2">
+              <span className="text-xs font-medium text-[#57534e] dark:text-[#b5afa6] block">
+                {t.presetHeading}
+              </span>
+              <div className="flex flex-wrap items-center gap-2">
+                {mode === 'adult' && (
+                  <>
+                    <button
+                      type="button"
+                      onClick={() => { setAdultStart('215'); setAdultCurrent('193.5'); setAdultGoal('175'); }}
+                      className="min-h-[36px] px-3 py-1 rounded-[8px] bg-[#faf9f7] dark:bg-[#141210] text-[#1c1917] dark:text-[#f5f3ef] hover:bg-[#f3f1ed] dark:hover:bg-[#25221f] font-normal text-xs border border-[#e5e1d8] dark:border-[#332f2b] transition-colors duration-150 whitespace-nowrap shrink-0 tabular-nums cursor-pointer"
+                    >
+                      10% loss (215 → 193.5)
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => { setAdultStart('180'); setAdultCurrent('171'); setAdultGoal('155'); }}
+                      className="min-h-[36px] px-3 py-1 rounded-[8px] bg-[#faf9f7] dark:bg-[#141210] text-[#1c1917] dark:text-[#f5f3ef] hover:bg-[#f3f1ed] dark:hover:bg-[#25221f] font-normal text-xs border border-[#e5e1d8] dark:border-[#332f2b] transition-colors duration-150 whitespace-nowrap shrink-0 tabular-nums cursor-pointer"
+                    >
+                      5% milestone (180 → 171)
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => { setAdultStart('260'); setAdultCurrent('221'); setAdultGoal('190'); }}
+                      className="min-h-[36px] px-3 py-1 rounded-[8px] bg-[#faf9f7] dark:bg-[#141210] text-[#1c1917] dark:text-[#f5f3ef] hover:bg-[#f3f1ed] dark:hover:bg-[#25221f] font-normal text-xs border border-[#e5e1d8] dark:border-[#332f2b] transition-colors duration-150 whitespace-nowrap shrink-0 tabular-nums cursor-pointer"
+                    >
+                      15% loss (260 → 221)
+                    </button>
+                  </>
+                )}
 
-              {mode === 'newborn' && (
-                <>
-                  <button
-                    type="button"
-                    onClick={() => { setBirthLbs('8'); setBirthOz('4'); setCurrentLbs('7'); setCurrentOz('10'); setBabyHoursOld('48'); }}
-                    className="min-h-[38px] px-3 py-1 rounded-xl bg-orange-50 dark:bg-orange-950/60 text-[#ca3500] dark:text-orange-300 hover:bg-orange-100 dark:hover:bg-orange-900/60 font-bold text-xs border border-orange-200 dark:border-orange-500/40 transition-colors whitespace-nowrap shrink-0"
-                  >
-                    Day 2 Example (7.6% drop)
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => { setBirthLbs('7'); setBirthOz('8'); setCurrentLbs('6'); setCurrentOz('11'); setBabyHoursOld('72'); }}
-                    className="min-h-[38px] px-3 py-1 rounded-xl bg-rose-50 dark:bg-rose-950/60 text-rose-700 dark:text-rose-300 hover:bg-rose-100 dark:hover:bg-rose-900/60 font-bold text-xs border border-rose-200 dark:border-rose-500/40 transition-colors whitespace-nowrap shrink-0"
-                  >
-                    Over 10% Check (10.8% drop)
-                  </button>
-                </>
-              )}
+                {mode === 'newborn' && (
+                  <>
+                    <button
+                      type="button"
+                      onClick={() => { setBirthLbs('8'); setBirthOz('4'); setCurrentLbs('7'); setCurrentOz('10'); setBabyHoursOld('48'); }}
+                      className="min-h-[36px] px-3 py-1 rounded-[8px] bg-[#faf9f7] dark:bg-[#141210] text-[#1c1917] dark:text-[#f5f3ef] hover:bg-[#f3f1ed] dark:hover:bg-[#25221f] font-normal text-xs border border-[#e5e1d8] dark:border-[#332f2b] transition-colors duration-150 whitespace-nowrap shrink-0 tabular-nums cursor-pointer"
+                    >
+                      Day 2 example (7.6% drop)
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => { setBirthLbs('7'); setBirthOz('8'); setCurrentLbs('6'); setCurrentOz('11'); setBabyHoursOld('72'); }}
+                      className="min-h-[36px] px-3 py-1 rounded-[8px] bg-[#faf9f7] dark:bg-[#141210] text-[#1c1917] dark:text-[#f5f3ef] hover:bg-[#f3f1ed] dark:hover:bg-[#25221f] font-normal text-xs border border-[#e5e1d8] dark:border-[#332f2b] transition-colors duration-150 whitespace-nowrap shrink-0 tabular-nums cursor-pointer"
+                    >
+                      Over 10% check (10.8% drop)
+                    </button>
+                  </>
+                )}
+              </div>
             </div>
           </div>
 
@@ -863,10 +871,10 @@ export const HeroToolBox: React.FC<HeroToolBoxProps> = ({
             <div className="space-y-4">
               {/* Specialized Clinical Protocol Selector (when Fasting, Bariatric, GLP-1, or Postpartum is active) */}
               {activeFocus === 'fasting' && (
-                <div className="bg-sky-50/80 dark:bg-sky-950/50 p-3.5 rounded-2xl border border-sky-200/90 dark:border-sky-500/40 space-y-2">
-                  <div className="flex items-center justify-between gap-2">
-                    <label htmlFor="fasting-protocol-select" className="text-xs font-extrabold text-sky-950 dark:text-sky-100 uppercase tracking-wider">
-                      Water Fast / OMAD Protocol Duration
+                <div className="bg-[#faf9f7] dark:bg-[#141210] p-4 rounded-xl border border-[#e5e1d8] dark:border-[#332f2b] space-y-2">
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                    <label htmlFor="fasting-protocol-select" className="text-xs font-medium text-[#1c1917] dark:text-[#f5f3ef]">
+                      Water fast / OMAD protocol duration
                     </label>
                     <button
                       type="button"
@@ -875,16 +883,16 @@ export const HeroToolBox: React.FC<HeroToolBoxProps> = ({
                           setAdultCurrent(Math.max(1, +(sWeight - fastingTotalDrop).toFixed(1)).toString());
                         }
                       }}
-                      className="px-2.5 py-1 rounded-lg bg-[#7334fd] text-white text-[11px] font-bold hover:opacity-95 cursor-pointer"
+                      className="px-3 py-1 rounded-[8px] bg-[#1c1917] dark:bg-[#f5f3ef] text-[#faf9f7] dark:text-[#1c1917] text-xs font-medium hover:opacity-90 transition-opacity duration-150 tabular-nums cursor-pointer"
                     >
-                      Apply Projected Fast Weight (-{fastingTotalDrop} {unit})
+                      Apply projected weight (-{fastingTotalDrop} {unit})
                     </button>
                   </div>
                   <select
                     id="fasting-protocol-select"
                     value={fastingProtocol}
                     onChange={(e) => setFastingProtocol(e.target.value as typeof fastingProtocol)}
-                    className="w-full h-11 px-3 bg-white dark:bg-slate-900 border border-sky-300 dark:border-sky-600 rounded-xl text-xs sm:text-sm font-bold text-slate-900 dark:text-white"
+                    className="w-full h-11 px-3 bg-[#ffffff] dark:bg-[#1c1917] border border-[#e5e1d8] dark:border-[#332f2b] rounded-[8px] text-xs sm:text-sm font-medium text-[#1c1917] dark:text-[#f5f3ef] focus:outline-none focus:border-[#1c1917] dark:focus:border-[#f5f3ef]"
                   >
                     <option value="24h">24-Hour Water Fast (1 Day • Glycogen Initiation)</option>
                     <option value="48h">48-Hour Water Fast (2 Days • Deep Ketosis Transition)</option>
@@ -898,15 +906,15 @@ export const HeroToolBox: React.FC<HeroToolBoxProps> = ({
               )}
 
               {activeFocus === 'bariatric' && (
-                <div className="bg-purple-50/80 dark:bg-purple-950/50 p-3.5 rounded-2xl border border-purple-200/90 dark:border-purple-500/40 space-y-2">
-                  <label htmlFor="bariatric-procedure-select" className="block text-xs font-extrabold text-purple-950 dark:text-purple-100 uppercase tracking-wider">
-                    Bariatric Surgical Procedure (ASMBS %EWL Curve)
+                <div className="bg-[#faf9f7] dark:bg-[#141210] p-4 rounded-xl border border-[#e5e1d8] dark:border-[#332f2b] space-y-2">
+                  <label htmlFor="bariatric-procedure-select" className="block text-xs font-medium text-[#1c1917] dark:text-[#f5f3ef]">
+                    Bariatric surgical procedure (ASMBS %EWL curve)
                   </label>
                   <select
                     id="bariatric-procedure-select"
                     value={bariatricProcedure}
                     onChange={(e) => setBariatricProcedure(e.target.value as typeof bariatricProcedure)}
-                    className="w-full h-11 px-3 bg-white dark:bg-slate-900 border border-purple-300 dark:border-purple-600 rounded-xl text-xs sm:text-sm font-bold text-slate-900 dark:text-white"
+                    className="w-full h-11 px-3 bg-[#ffffff] dark:bg-[#1c1917] border border-[#e5e1d8] dark:border-[#332f2b] rounded-[8px] text-xs sm:text-sm font-medium text-[#1c1917] dark:text-[#f5f3ef] focus:outline-none focus:border-[#1c1917] dark:focus:border-[#f5f3ef]"
                   >
                     <option value="vsg">Vertical Sleeve Gastrectomy (VSG — ~62% EWL / ~25% TBWL)</option>
                     <option value="rny">Roux-en-Y Gastric Bypass (RNY — ~70% EWL / ~30% TBWL)</option>
@@ -916,15 +924,15 @@ export const HeroToolBox: React.FC<HeroToolBoxProps> = ({
               )}
 
               {activeFocus === 'glp1' && (
-                <div className="bg-emerald-50/80 dark:bg-emerald-950/50 p-3.5 rounded-2xl border border-emerald-200/90 dark:border-emerald-500/40 space-y-2">
-                  <label htmlFor="glp1-medication-select" className="block text-xs font-extrabold text-emerald-950 dark:text-emerald-100 uppercase tracking-wider">
-                    GLP-1 / GIP Medication & Clinical Trial Benchmark
+                <div className="bg-[#faf9f7] dark:bg-[#141210] p-4 rounded-xl border border-[#e5e1d8] dark:border-[#332f2b] space-y-2">
+                  <label htmlFor="glp1-medication-select" className="block text-xs font-medium text-[#1c1917] dark:text-[#f5f3ef]">
+                    GLP-1 / GIP medication and clinical trial benchmark
                   </label>
                   <select
                     id="glp1-medication-select"
                     value={glp1Medication}
                     onChange={(e) => setGlp1Medication(e.target.value as typeof glp1Medication)}
-                    className="w-full h-11 px-3 bg-white dark:bg-slate-900 border border-emerald-300 dark:border-emerald-600 rounded-xl text-xs sm:text-sm font-bold text-slate-900 dark:text-white"
+                    className="w-full h-11 px-3 bg-[#ffffff] dark:bg-[#1c1917] border border-[#e5e1d8] dark:border-[#332f2b] rounded-[8px] text-xs sm:text-sm font-medium text-[#1c1917] dark:text-[#f5f3ef] focus:outline-none focus:border-[#1c1917] dark:focus:border-[#f5f3ef]"
                   >
                     <option value="semaglutide">Semaglutide (Ozempic® / Wegovy® — STEP-1 Trial: 14.9% TBWL)</option>
                     <option value="tirzepatide">Tirzepatide (Mounjaro® / Zepbound® — SURMOUNT-1 Trial: 20.9% TBWL)</option>
@@ -935,15 +943,15 @@ export const HeroToolBox: React.FC<HeroToolBoxProps> = ({
               )}
 
               {activeFocus === 'postpartum' && (
-                <div className="bg-amber-50/80 dark:bg-amber-950/50 p-3.5 rounded-2xl border border-amber-200/90 dark:border-amber-500/40 space-y-2">
-                  <label htmlFor="lactation-status-select" className="block text-xs font-extrabold text-amber-950 dark:text-amber-100 uppercase tracking-wider">
-                    Postpartum Lactation & Breastfeeding Energy Output
+                <div className="bg-[#faf9f7] dark:bg-[#141210] p-4 rounded-xl border border-[#e5e1d8] dark:border-[#332f2b] space-y-2">
+                  <label htmlFor="lactation-status-select" className="block text-xs font-medium text-[#1c1917] dark:text-[#f5f3ef]">
+                    Postpartum lactation and breastfeeding energy output
                   </label>
                   <select
                     id="lactation-status-select"
                     value={lactationStatus}
                     onChange={(e) => setLactationStatus(e.target.value as typeof lactationStatus)}
-                    className="w-full h-11 px-3 bg-white dark:bg-slate-900 border border-amber-300 dark:border-amber-600 rounded-xl text-xs sm:text-sm font-bold text-slate-900 dark:text-white"
+                    className="w-full h-11 px-3 bg-[#ffffff] dark:bg-[#1c1917] border border-[#e5e1d8] dark:border-[#332f2b] rounded-[8px] text-xs sm:text-sm font-medium text-[#1c1917] dark:text-[#f5f3ef] focus:outline-none focus:border-[#1c1917] dark:focus:border-[#f5f3ef]"
                   >
                     <option value="exclusive">Exclusive Breastfeeding (+450 kcal/day milk synthesis • Min 1,800 kcal)</option>
                     <option value="combo">Combination Breast + Formula Feeding (+250 kcal/day • Min 1,650 kcal)</option>
@@ -954,8 +962,8 @@ export const HeroToolBox: React.FC<HeroToolBoxProps> = ({
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {/* Starting Weight with Touch Stepper */}
-                <div className="bg-white dark:bg-slate-800/90 p-3.5 rounded-2xl border border-slate-200/90 dark:border-slate-700 shadow-2xs">
-                  <label htmlFor="adult-start-input" className="block text-xs font-bold text-slate-700 dark:text-slate-200 uppercase tracking-wider mb-2">
+                <div className="bg-[#faf9f7] dark:bg-[#141210] p-4 rounded-xl border border-[#e5e1d8] dark:border-[#332f2b]">
+                  <label htmlFor="adult-start-input" className="block text-xs font-medium text-[#57534e] dark:text-[#b5afa6] mb-2">
                     {t.startWeightLabel} ({unit})
                   </label>
                   <div className="flex items-center gap-2">
@@ -963,9 +971,9 @@ export const HeroToolBox: React.FC<HeroToolBoxProps> = ({
                       type="button"
                       onClick={() => stepValue(adultStart, setAdultStart, -1)}
                       aria-label="Decrease starting weight"
-                      className="w-11 h-11 rounded-xl bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 active:bg-slate-300 flex items-center justify-center text-slate-700 dark:text-slate-100 shrink-0 transition-colors"
+                      className="w-11 h-11 rounded-[8px] bg-[#f3f1ed] dark:bg-[#25221f] border border-[#e5e1d8] dark:border-[#332f2b] hover:bg-[#e5e1d8] dark:hover:bg-[#332f2b] flex items-center justify-center text-[#1c1917] dark:text-[#f5f3ef] shrink-0 transition-colors duration-150 cursor-pointer"
                     >
-                      <Minus className="w-4 h-4" />
+                      <Minus className="w-4 h-4" strokeWidth={1.75} />
                     </button>
                     <div className="relative flex-1">
                       <input
@@ -976,23 +984,23 @@ export const HeroToolBox: React.FC<HeroToolBoxProps> = ({
                         value={adultStart}
                         onChange={(e) => setAdultStart(e.target.value)}
                         placeholder="215"
-                        className="w-full h-11 px-3 bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-xl text-center text-lg font-extrabold text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#7334fd] focus:bg-white dark:focus:bg-slate-950 tabular-nums"
+                        className="w-full h-11 px-3 bg-[#ffffff] dark:bg-[#1c1917] border border-[#e5e1d8] dark:border-[#332f2b] rounded-[8px] text-center text-lg font-medium text-[#1c1917] dark:text-[#f5f3ef] focus:outline-none focus:border-[#1c1917] dark:focus:border-[#f5f3ef] tabular-nums"
                       />
                     </div>
                     <button
                       type="button"
                       onClick={() => stepValue(adultStart, setAdultStart, 1)}
                       aria-label="Increase starting weight"
-                      className="w-11 h-11 rounded-xl bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 active:bg-slate-300 flex items-center justify-center text-slate-700 dark:text-slate-100 shrink-0 transition-colors"
+                      className="w-11 h-11 rounded-[8px] bg-[#f3f1ed] dark:bg-[#25221f] border border-[#e5e1d8] dark:border-[#332f2b] hover:bg-[#e5e1d8] dark:hover:bg-[#332f2b] flex items-center justify-center text-[#1c1917] dark:text-[#f5f3ef] shrink-0 transition-colors duration-150 cursor-pointer"
                     >
-                      <Plus className="w-4 h-4" />
+                      <Plus className="w-4 h-4" strokeWidth={1.75} />
                     </button>
                   </div>
                 </div>
 
                 {/* Current Weight with Touch Stepper */}
-                <div className="bg-white dark:bg-slate-800/90 p-3.5 rounded-2xl border border-slate-200/90 dark:border-slate-700 shadow-2xs">
-                  <label htmlFor="adult-current-input" className="block text-xs font-bold text-slate-700 dark:text-slate-200 uppercase tracking-wider mb-2">
+                <div className="bg-[#faf9f7] dark:bg-[#141210] p-4 rounded-xl border border-[#e5e1d8] dark:border-[#332f2b]">
+                  <label htmlFor="adult-current-input" className="block text-xs font-medium text-[#57534e] dark:text-[#b5afa6] mb-2">
                     {t.currentWeightLabel} ({unit})
                   </label>
                   <div className="flex items-center gap-2">
@@ -1000,9 +1008,9 @@ export const HeroToolBox: React.FC<HeroToolBoxProps> = ({
                       type="button"
                       onClick={() => stepValue(adultCurrent, setAdultCurrent, -0.5)}
                       aria-label="Decrease current weight"
-                      className="w-11 h-11 rounded-xl bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 active:bg-slate-300 flex items-center justify-center text-slate-700 dark:text-slate-100 shrink-0 transition-colors"
+                      className="w-11 h-11 rounded-[8px] bg-[#f3f1ed] dark:bg-[#25221f] border border-[#e5e1d8] dark:border-[#332f2b] hover:bg-[#e5e1d8] dark:hover:bg-[#332f2b] flex items-center justify-center text-[#1c1917] dark:text-[#f5f3ef] shrink-0 transition-colors duration-150 cursor-pointer"
                     >
-                      <Minus className="w-4 h-4" />
+                      <Minus className="w-4 h-4" strokeWidth={1.75} />
                     </button>
                     <div className="relative flex-1">
                       <input
@@ -1013,16 +1021,16 @@ export const HeroToolBox: React.FC<HeroToolBoxProps> = ({
                         value={adultCurrent}
                         onChange={(e) => setAdultCurrent(e.target.value)}
                         placeholder="193.5"
-                        className="w-full h-11 px-3 bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-xl text-center text-lg font-extrabold text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#7334fd] focus:bg-white dark:focus:bg-slate-950 tabular-nums"
+                        className="w-full h-11 px-3 bg-[#ffffff] dark:bg-[#1c1917] border border-[#e5e1d8] dark:border-[#332f2b] rounded-[8px] text-center text-lg font-medium text-[#1c1917] dark:text-[#f5f3ef] focus:outline-none focus:border-[#1c1917] dark:focus:border-[#f5f3ef] tabular-nums"
                       />
                     </div>
                     <button
                       type="button"
                       onClick={() => stepValue(adultCurrent, setAdultCurrent, 0.5)}
                       aria-label="Increase current weight"
-                      className="w-11 h-11 rounded-xl bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 active:bg-slate-300 flex items-center justify-center text-slate-700 dark:text-slate-100 shrink-0 transition-colors"
+                      className="w-11 h-11 rounded-[8px] bg-[#f3f1ed] dark:bg-[#25221f] border border-[#e5e1d8] dark:border-[#332f2b] hover:bg-[#e5e1d8] dark:hover:bg-[#332f2b] flex items-center justify-center text-[#1c1917] dark:text-[#f5f3ef] shrink-0 transition-colors duration-150 cursor-pointer"
                     >
-                      <Plus className="w-4 h-4" />
+                      <Plus className="w-4 h-4" strokeWidth={1.75} />
                     </button>
                   </div>
                 </div>
@@ -1033,32 +1041,32 @@ export const HeroToolBox: React.FC<HeroToolBoxProps> = ({
                 <div
                   role="status"
                   data-testid="input-feedback-banner"
-                  className="p-3 rounded-xl bg-amber-50 dark:bg-amber-950/60 border border-amber-300 dark:border-amber-500/40 text-amber-950 dark:text-amber-100 text-xs flex items-start gap-2"
+                  className="p-3 rounded-xl bg-[#f3f1ed] dark:bg-[#25221f] border border-[#e5e1d8] dark:border-[#332f2b] text-[#1c1917] dark:text-[#f5f3ef] text-xs flex items-start gap-2"
                 >
-                  <AlertTriangle className="w-4 h-4 text-amber-600 dark:text-amber-400 shrink-0 mt-0.5" />
+                  <AlertTriangle className="w-4 h-4 text-[#57534e] dark:text-[#b5afa6] shrink-0 mt-0.5" strokeWidth={1.75} />
                   <span>
-                    Please enter a starting weight and current weight above 0 {unit} so we can calculate your percentage change right away.
+                    Please enter a starting weight and current weight above 0 {unit} to calculate your percentage change.
                   </span>
                 </div>
               ) : (sWeight > 1200 || cWeight > 1200) ? (
                 <div
                   role="status"
                   data-testid="input-feedback-banner"
-                  className="p-3 rounded-xl bg-amber-50 dark:bg-amber-950/60 border border-amber-300 dark:border-amber-500/40 text-amber-950 dark:text-amber-100 text-xs flex items-start gap-2"
+                  className="p-3 rounded-xl bg-[#f3f1ed] dark:bg-[#25221f] border border-[#e5e1d8] dark:border-[#332f2b] text-[#1c1917] dark:text-[#f5f3ef] text-xs flex items-start gap-2"
                 >
-                  <AlertTriangle className="w-4 h-4 text-amber-600 dark:text-amber-400 shrink-0 mt-0.5" />
+                  <AlertTriangle className="w-4 h-4 text-[#57534e] dark:text-[#b5afa6] shrink-0 mt-0.5" strokeWidth={1.75} />
                   <span>
-                    That weight is over 1,200 {unit}. Double-check your digits or make sure you have the right unit ({unit}) selected above!
+                    That weight is over 1,200 {unit}. Double-check your digits or make sure you have the right unit ({unit}) selected above.
                   </span>
                 </div>
               ) : cWeight > sWeight ? (
                 <div
                   role="status"
                   data-testid="input-feedback-banner"
-                  className="p-3 rounded-xl bg-indigo-50/90 dark:bg-indigo-950/70 border border-indigo-200 dark:border-indigo-500/40 text-indigo-950 dark:text-indigo-100 text-xs flex items-start justify-between gap-3"
+                  className="p-3 rounded-xl bg-[#f3f1ed] dark:bg-[#25221f] border border-[#e5e1d8] dark:border-[#332f2b] text-[#1c1917] dark:text-[#f5f3ef] text-xs flex items-start justify-between gap-3"
                 >
-                  <span>
-                    Your current weight is <strong>{Math.abs(adultLost).toFixed(1)} {unit} higher</strong> than your starting weight (a <strong>+{Math.abs(adultPct)}% weight gain</strong>). If you meant to calculate weight loss, swap the two numbers.
+                  <span className="tabular-nums">
+                    Your current weight is <span className="font-semibold">{Math.abs(adultLost).toFixed(1)} {unit} higher</span> than your starting weight (a <span className="font-semibold">+{Math.abs(adultPct)}% weight gain</span>). If you meant to calculate weight loss, swap the two numbers.
                   </span>
                   <button
                     type="button"
@@ -1067,7 +1075,7 @@ export const HeroToolBox: React.FC<HeroToolBoxProps> = ({
                       setAdultStart(adultCurrent);
                       setAdultCurrent(prevStart);
                     }}
-                    className="px-2.5 py-1 rounded-lg bg-[#7334fd] text-white font-bold text-[11px] shrink-0 hover:opacity-95 cursor-pointer"
+                    className="px-3 py-1 rounded-[8px] bg-[#1c1917] dark:bg-[#f5f3ef] text-[#faf9f7] dark:text-[#1c1917] font-medium text-xs shrink-0 hover:opacity-90 transition-opacity duration-150 cursor-pointer"
                   >
                     {t.swapWeightsBtn}
                   </button>
@@ -1075,18 +1083,18 @@ export const HeroToolBox: React.FC<HeroToolBoxProps> = ({
               ) : null}
 
               {/* Target Goal Weight with Touch Stepper */}
-              <div className="bg-white dark:bg-slate-800/90 p-3.5 rounded-2xl border border-slate-200/90 dark:border-slate-700 shadow-2xs">
-                <label htmlFor="adult-goal-input" className="block text-xs font-bold text-slate-700 dark:text-slate-200 uppercase tracking-wider mb-2">
-                  {t.goalWeightLabel} ({unit}) <span className="text-slate-400 dark:text-slate-400 font-normal">{t.optionalLabel}</span>
+              <div className="bg-[#faf9f7] dark:bg-[#141210] p-4 rounded-xl border border-[#e5e1d8] dark:border-[#332f2b]">
+                <label htmlFor="adult-goal-input" className="block text-xs font-medium text-[#57534e] dark:text-[#b5afa6] mb-2">
+                  {t.goalWeightLabel}{' '}({unit}){' '}<span className="text-[#78716c] dark:text-[#8c857d] font-normal">{t.optionalLabel}</span>
                 </label>
                 <div className="flex items-center gap-2">
                   <button
                     type="button"
                     onClick={() => stepValue(adultGoal, setAdultGoal, -1)}
                     aria-label="Decrease goal weight"
-                    className="w-11 h-11 rounded-xl bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 active:bg-slate-300 flex items-center justify-center text-slate-700 dark:text-slate-100 shrink-0 transition-colors"
+                    className="w-11 h-11 rounded-[8px] bg-[#f3f1ed] dark:bg-[#25221f] border border-[#e5e1d8] dark:border-[#332f2b] hover:bg-[#e5e1d8] dark:hover:bg-[#332f2b] flex items-center justify-center text-[#1c1917] dark:text-[#f5f3ef] shrink-0 transition-colors duration-150 cursor-pointer"
                   >
-                    <Minus className="w-4 h-4" />
+                    <Minus className="w-4 h-4" strokeWidth={1.75} />
                   </button>
                   <input
                     id="adult-goal-input"
@@ -1096,23 +1104,23 @@ export const HeroToolBox: React.FC<HeroToolBoxProps> = ({
                     value={adultGoal}
                     onChange={(e) => setAdultGoal(e.target.value)}
                     placeholder="175"
-                    className="w-full h-11 px-3 bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-xl text-center text-base font-bold text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-[#7334fd] focus:bg-white dark:focus:bg-slate-950 tabular-nums"
+                    className="w-full h-11 px-3 bg-[#ffffff] dark:bg-[#1c1917] border border-[#e5e1d8] dark:border-[#332f2b] rounded-[8px] text-center text-base font-medium text-[#1c1917] dark:text-[#f5f3ef] focus:outline-none focus:border-[#1c1917] dark:focus:border-[#f5f3ef] tabular-nums"
                   />
                   <button
                     type="button"
                     onClick={() => stepValue(adultGoal, setAdultGoal, 1)}
                     aria-label="Increase goal weight"
-                    className="w-11 h-11 rounded-xl bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 active:bg-slate-300 flex items-center justify-center text-slate-700 dark:text-slate-100 shrink-0 transition-colors"
+                    className="w-11 h-11 rounded-[8px] bg-[#f3f1ed] dark:bg-[#25221f] border border-[#e5e1d8] dark:border-[#332f2b] hover:bg-[#e5e1d8] dark:hover:bg-[#332f2b] flex items-center justify-center text-[#1c1917] dark:text-[#f5f3ef] shrink-0 transition-colors duration-150 cursor-pointer"
                   >
-                    <Plus className="w-4 h-4" />
+                    <Plus className="w-4 h-4" strokeWidth={1.75} />
                   </button>
                 </div>
               </div>
 
               {/* Formula Callout */}
-              <div className="p-3 bg-slate-100/80 dark:bg-slate-800/80 rounded-xl border border-slate-200 dark:border-slate-700 text-xs text-slate-600 dark:text-slate-300 flex flex-wrap items-center justify-between gap-2">
-                <span className="font-bold text-slate-900 dark:text-white">{t.formulaLabel}</span>
-                <span className="text-slate-500 dark:text-slate-400 text-[11px]">{t.worksInUnits}</span>
+              <div className="p-3 bg-[#faf9f7] dark:bg-[#141210] rounded-xl border border-[#edeae3] dark:border-[#2a2623] text-xs text-[#57534e] dark:text-[#b5afa6] flex flex-wrap items-center justify-between gap-2">
+                <span className="font-medium text-[#1c1917] dark:text-[#f5f3ef]">{t.formulaLabel}</span>
+                <span className="text-[#78716c] dark:text-[#8c857d] text-[11px]">{t.worksInUnits}</span>
               </div>
             </div>
           )}
@@ -1124,8 +1132,10 @@ export const HeroToolBox: React.FC<HeroToolBoxProps> = ({
                 <button
                   type="button"
                   onClick={() => setBabyUnit('lbs_oz')}
-                  className={`min-h-[44px] px-3 py-2 rounded-xl font-bold transition-colors ${
-                    babyUnit === 'lbs_oz' ? 'bg-[#ca3500] text-white shadow-xs' : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200'
+                  className={`min-h-[40px] px-3 py-2 rounded-[8px] font-medium transition-colors duration-150 cursor-pointer ${
+                    babyUnit === 'lbs_oz'
+                      ? 'bg-[#1c1917] dark:bg-[#f5f3ef] text-[#faf9f7] dark:text-[#1c1917]'
+                      : 'bg-[#f3f1ed] dark:bg-[#25221f] text-[#57534e] dark:text-[#b5afa6] hover:bg-[#e5e1d8] dark:hover:bg-[#332f2b]'
                   }`}
                 >
                   {t.lbsOzUnit}
@@ -1133,8 +1143,10 @@ export const HeroToolBox: React.FC<HeroToolBoxProps> = ({
                 <button
                   type="button"
                   onClick={() => setBabyUnit('grams')}
-                  className={`min-h-[44px] px-3 py-2 rounded-xl font-bold transition-colors ${
-                    babyUnit === 'grams' ? 'bg-[#ca3500] text-white shadow-xs' : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200'
+                  className={`min-h-[40px] px-3 py-2 rounded-[8px] font-medium transition-colors duration-150 cursor-pointer ${
+                    babyUnit === 'grams'
+                      ? 'bg-[#1c1917] dark:bg-[#f5f3ef] text-[#faf9f7] dark:text-[#1c1917]'
+                      : 'bg-[#f3f1ed] dark:bg-[#25221f] text-[#57534e] dark:text-[#b5afa6] hover:bg-[#e5e1d8] dark:hover:bg-[#332f2b]'
                   }`}
                 >
                   {t.gramsUnit}
@@ -1143,8 +1155,8 @@ export const HeroToolBox: React.FC<HeroToolBoxProps> = ({
 
               {babyUnit === 'lbs_oz' ? (
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div className="bg-white dark:bg-slate-800/90 p-3.5 rounded-2xl border border-slate-200 dark:border-slate-700">
-                    <label className="block text-xs font-bold text-slate-700 dark:text-slate-200 uppercase mb-2">
+                  <div className="bg-[#faf9f7] dark:bg-[#141210] p-4 rounded-xl border border-[#e5e1d8] dark:border-[#332f2b]">
+                    <label className="block text-xs font-medium text-[#57534e] dark:text-[#b5afa6] mb-2">
                       {t.birthWeightLbsOz}
                     </label>
                     <div className="grid grid-cols-2 gap-2">
@@ -1155,10 +1167,10 @@ export const HeroToolBox: React.FC<HeroToolBoxProps> = ({
                           aria-label="Birth weight pounds"
                           value={birthLbs}
                           onChange={(e) => setBirthLbs(e.target.value)}
-                          className="w-full h-11 px-3 bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-xl text-base font-bold text-slate-900 dark:text-white tabular-nums"
+                          className="w-full h-11 px-3 bg-[#ffffff] dark:bg-[#1c1917] border border-[#e5e1d8] dark:border-[#332f2b] rounded-[8px] text-base font-medium text-[#1c1917] dark:text-[#f5f3ef] focus:outline-none focus:border-[#1c1917] dark:focus:border-[#f5f3ef] tabular-nums"
                           placeholder="lbs"
                         />
-                        <span className="absolute right-2.5 top-3 text-xs text-slate-400 font-semibold">lbs</span>
+                        <span className="absolute right-2.5 top-3 text-xs text-[#78716c] dark:text-[#8c857d] font-normal">lbs</span>
                       </div>
                       <div className="relative">
                         <input
@@ -1167,16 +1179,16 @@ export const HeroToolBox: React.FC<HeroToolBoxProps> = ({
                           aria-label="Birth weight ounces"
                           value={birthOz}
                           onChange={(e) => setBirthOz(e.target.value)}
-                          className="w-full h-11 px-3 bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-xl text-base font-bold text-slate-900 dark:text-white tabular-nums"
+                          className="w-full h-11 px-3 bg-[#ffffff] dark:bg-[#1c1917] border border-[#e5e1d8] dark:border-[#332f2b] rounded-[8px] text-base font-medium text-[#1c1917] dark:text-[#f5f3ef] focus:outline-none focus:border-[#1c1917] dark:focus:border-[#f5f3ef] tabular-nums"
                           placeholder="oz"
                         />
-                        <span className="absolute right-2.5 top-3 text-xs text-slate-400 font-semibold">oz</span>
+                        <span className="absolute right-2.5 top-3 text-xs text-[#78716c] dark:text-[#8c857d] font-normal">oz</span>
                       </div>
                     </div>
                   </div>
 
-                  <div className="bg-white dark:bg-slate-800/90 p-3.5 rounded-2xl border border-slate-200 dark:border-slate-700">
-                    <label className="block text-xs font-bold text-slate-700 dark:text-slate-200 uppercase mb-2">
+                  <div className="bg-[#faf9f7] dark:bg-[#141210] p-4 rounded-xl border border-[#e5e1d8] dark:border-[#332f2b]">
+                    <label className="block text-xs font-medium text-[#57534e] dark:text-[#b5afa6] mb-2">
                       {t.currentWeightLbsOz}
                     </label>
                     <div className="grid grid-cols-2 gap-2">
@@ -1187,10 +1199,10 @@ export const HeroToolBox: React.FC<HeroToolBoxProps> = ({
                           aria-label="Current weight pounds"
                           value={currentLbs}
                           onChange={(e) => setCurrentLbs(e.target.value)}
-                          className="w-full h-11 px-3 bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-xl text-base font-bold text-slate-900 dark:text-white tabular-nums"
+                          className="w-full h-11 px-3 bg-[#ffffff] dark:bg-[#1c1917] border border-[#e5e1d8] dark:border-[#332f2b] rounded-[8px] text-base font-medium text-[#1c1917] dark:text-[#f5f3ef] focus:outline-none focus:border-[#1c1917] dark:focus:border-[#f5f3ef] tabular-nums"
                           placeholder="lbs"
                         />
-                        <span className="absolute right-2.5 top-3 text-xs text-slate-400 font-semibold">lbs</span>
+                        <span className="absolute right-2.5 top-3 text-xs text-[#78716c] dark:text-[#8c857d] font-normal">lbs</span>
                       </div>
                       <div className="relative">
                         <input
@@ -1199,18 +1211,18 @@ export const HeroToolBox: React.FC<HeroToolBoxProps> = ({
                           aria-label="Current weight ounces"
                           value={currentOz}
                           onChange={(e) => setCurrentOz(e.target.value)}
-                          className="w-full h-11 px-3 bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-xl text-base font-bold text-slate-900 dark:text-white tabular-nums"
+                          className="w-full h-11 px-3 bg-[#ffffff] dark:bg-[#1c1917] border border-[#e5e1d8] dark:border-[#332f2b] rounded-[8px] text-base font-medium text-[#1c1917] dark:text-[#f5f3ef] focus:outline-none focus:border-[#1c1917] dark:focus:border-[#f5f3ef] tabular-nums"
                           placeholder="oz"
                         />
-                        <span className="absolute right-2.5 top-3 text-xs text-slate-400 font-semibold">oz</span>
+                        <span className="absolute right-2.5 top-3 text-xs text-[#78716c] dark:text-[#8c857d] font-normal">oz</span>
                       </div>
                     </div>
                   </div>
                 </div>
               ) : (
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div className="bg-white dark:bg-slate-800/90 p-3.5 rounded-2xl border border-slate-200 dark:border-slate-700">
-                    <label htmlFor="birth-grams-input" className="block text-xs font-bold text-slate-700 dark:text-slate-200 uppercase mb-2">
+                  <div className="bg-[#faf9f7] dark:bg-[#141210] p-4 rounded-xl border border-[#e5e1d8] dark:border-[#332f2b]">
+                    <label htmlFor="birth-grams-input" className="block text-xs font-medium text-[#57534e] dark:text-[#b5afa6] mb-2">
                       {t.birthWeightGrams}
                     </label>
                     <input
@@ -1219,12 +1231,12 @@ export const HeroToolBox: React.FC<HeroToolBoxProps> = ({
                       inputMode="numeric"
                       value={birthGrams}
                       onChange={(e) => setBirthGrams(e.target.value)}
-                      className="w-full h-11 px-3 bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-xl text-base font-bold text-slate-900 dark:text-white tabular-nums"
+                      className="w-full h-11 px-3 bg-[#ffffff] dark:bg-[#1c1917] border border-[#e5e1d8] dark:border-[#332f2b] rounded-[8px] text-base font-medium text-[#1c1917] dark:text-[#f5f3ef] focus:outline-none focus:border-[#1c1917] dark:focus:border-[#f5f3ef] tabular-nums"
                       placeholder="3500"
                     />
                   </div>
-                  <div className="bg-white dark:bg-slate-800/90 p-3.5 rounded-2xl border border-slate-200 dark:border-slate-700">
-                    <label htmlFor="current-grams-input" className="block text-xs font-bold text-slate-700 dark:text-slate-200 uppercase mb-2">
+                  <div className="bg-[#faf9f7] dark:bg-[#141210] p-4 rounded-xl border border-[#e5e1d8] dark:border-[#332f2b]">
+                    <label htmlFor="current-grams-input" className="block text-xs font-medium text-[#57534e] dark:text-[#b5afa6] mb-2">
                       {t.currentWeightGrams}
                     </label>
                     <input
@@ -1233,37 +1245,37 @@ export const HeroToolBox: React.FC<HeroToolBoxProps> = ({
                       inputMode="numeric"
                       value={currentGrams}
                       onChange={(e) => setCurrentGrams(e.target.value)}
-                      className="w-full h-11 px-3 bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-xl text-base font-bold text-slate-900 dark:text-white tabular-nums"
+                      className="w-full h-11 px-3 bg-[#ffffff] dark:bg-[#1c1917] border border-[#e5e1d8] dark:border-[#332f2b] rounded-[8px] text-base font-medium text-[#1c1917] dark:text-[#f5f3ef] focus:outline-none focus:border-[#1c1917] dark:focus:border-[#f5f3ef] tabular-nums"
                       placeholder="3250"
                     />
                   </div>
                 </div>
               )}
 
-              <div className="bg-white dark:bg-slate-800/90 p-3.5 rounded-2xl border border-slate-200 dark:border-slate-700">
-                <label htmlFor="baby-hours-input" className="block text-xs font-bold text-slate-700 dark:text-slate-200 uppercase mb-2">
+              <div className="bg-[#faf9f7] dark:bg-[#141210] p-4 rounded-xl border border-[#e5e1d8] dark:border-[#332f2b]">
+                <label htmlFor="baby-hours-input" className="block text-xs font-medium text-[#57534e] dark:text-[#b5afa6] mb-2">
                   {t.babyAgeHours}
                 </label>
-                <div className="flex items-center gap-3">
+                <div className="flex flex-wrap items-center gap-3">
                   <input
                     id="baby-hours-input"
                     type="number"
                     inputMode="numeric"
                     value={babyHoursOld}
                     onChange={(e) => setBabyHoursOld(e.target.value)}
-                    className="w-32 h-11 px-3 bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-xl text-base font-bold text-slate-900 dark:text-white tabular-nums"
+                    className="w-32 h-11 px-3 bg-[#ffffff] dark:bg-[#1c1917] border border-[#e5e1d8] dark:border-[#332f2b] rounded-[8px] text-base font-medium text-[#1c1917] dark:text-[#f5f3ef] focus:outline-none focus:border-[#1c1917] dark:focus:border-[#f5f3ef] tabular-nums"
                     placeholder="48"
                   />
-                  <div className="flex gap-1.5">
+                  <div className="flex gap-2">
                     {['24', '48', '72', '96'].map((h) => (
                       <button
                         key={h}
                         type="button"
                         onClick={() => setBabyHoursOld(h)}
-                        className={`min-h-[40px] px-2.5 rounded-lg text-xs font-bold border ${
+                        className={`min-h-[40px] px-3 rounded-[8px] text-xs font-medium border transition-colors duration-150 tabular-nums cursor-pointer ${
                           babyHoursOld === h
-                            ? 'bg-orange-50 dark:bg-orange-950/70 border-[#ca3500] dark:border-orange-400 text-[#ca3500] dark:text-orange-300'
-                            : 'bg-slate-50 dark:bg-slate-900 border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300'
+                            ? 'bg-[#1c1917] dark:bg-[#f5f3ef] border-[#1c1917] dark:border-[#f5f3ef] text-[#faf9f7] dark:text-[#1c1917]'
+                            : 'bg-[#ffffff] dark:bg-[#1c1917] border-[#e5e1d8] dark:border-[#332f2b] text-[#57534e] dark:text-[#b5afa6] hover:bg-[#f3f1ed] dark:hover:bg-[#25221f]'
                         }`}
                       >
                         {h}h
@@ -1279,51 +1291,51 @@ export const HeroToolBox: React.FC<HeroToolBoxProps> = ({
           {mode === 'bmr' && (
             <div className="space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                <div className="bg-white dark:bg-slate-800/90 p-3 rounded-2xl border border-slate-200 dark:border-slate-700">
-                  <label htmlFor="bmr-age-input" className="block text-xs font-bold text-slate-700 dark:text-slate-200 mb-1.5">{t.ageYearsLabel}</label>
+                <div className="bg-[#faf9f7] dark:bg-[#141210] p-4 rounded-xl border border-[#e5e1d8] dark:border-[#332f2b]">
+                  <label htmlFor="bmr-age-input" className="block text-xs font-medium text-[#57534e] dark:text-[#b5afa6] mb-2">{t.ageYearsLabel}</label>
                   <input
                     id="bmr-age-input"
                     type="number"
                     inputMode="numeric"
                     value={age}
                     onChange={(e) => setAge(e.target.value)}
-                    className="w-full h-11 px-3 bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-xl font-bold text-base text-slate-900 dark:text-white tabular-nums"
+                    className="w-full h-11 px-3 bg-[#ffffff] dark:bg-[#1c1917] border border-[#e5e1d8] dark:border-[#332f2b] rounded-[8px] font-medium text-base text-[#1c1917] dark:text-[#f5f3ef] focus:outline-none focus:border-[#1c1917] dark:focus:border-[#f5f3ef] tabular-nums"
                   />
                 </div>
-                <div className="bg-white dark:bg-slate-800/90 p-3 rounded-2xl border border-slate-200 dark:border-slate-700">
-                  <label htmlFor="bmr-sex-select" className="block text-xs font-bold text-slate-700 dark:text-slate-200 mb-1.5">{t.sexLabel}</label>
+                <div className="bg-[#faf9f7] dark:bg-[#141210] p-4 rounded-xl border border-[#e5e1d8] dark:border-[#332f2b]">
+                  <label htmlFor="bmr-sex-select" className="block text-xs font-medium text-[#57534e] dark:text-[#b5afa6] mb-2">{t.sexLabel}</label>
                   <select
                     id="bmr-sex-select"
                     value={gender}
                     onChange={(e) => setGender(e.target.value as 'female' | 'male')}
-                    className="w-full h-11 px-3 bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-xl text-sm font-bold text-slate-900 dark:text-white"
+                    className="w-full h-11 px-3 bg-[#ffffff] dark:bg-[#1c1917] border border-[#e5e1d8] dark:border-[#332f2b] rounded-[8px] text-sm font-medium text-[#1c1917] dark:text-[#f5f3ef] focus:outline-none focus:border-[#1c1917] dark:focus:border-[#f5f3ef]"
                   >
                     <option value="female">{t.femaleLabel}</option>
                     <option value="male">{t.maleLabel}</option>
                   </select>
                 </div>
-                <div className="bg-white dark:bg-slate-800/90 p-3 rounded-2xl border border-slate-200 dark:border-slate-700">
-                  <label htmlFor="bmr-height-input" className="block text-xs font-bold text-slate-700 dark:text-slate-200 mb-1.5">{t.heightInchesLabel}</label>
+                <div className="bg-[#faf9f7] dark:bg-[#141210] p-4 rounded-xl border border-[#e5e1d8] dark:border-[#332f2b]">
+                  <label htmlFor="bmr-height-input" className="block text-xs font-medium text-[#57534e] dark:text-[#b5afa6] mb-2">{t.heightInchesLabel}</label>
                   <input
                     id="bmr-height-input"
                     type="number"
                     inputMode="numeric"
                     value={heightInches}
                     onChange={(e) => setHeightInches(e.target.value)}
-                    className="w-full h-11 px-3 bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-xl font-bold text-base text-slate-900 dark:text-white tabular-nums"
+                    className="w-full h-11 px-3 bg-[#ffffff] dark:bg-[#1c1917] border border-[#e5e1d8] dark:border-[#332f2b] rounded-[8px] font-medium text-base text-[#1c1917] dark:text-[#f5f3ef] focus:outline-none focus:border-[#1c1917] dark:focus:border-[#f5f3ef] tabular-nums"
                     placeholder="66"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <div className="bg-white dark:bg-slate-800/90 p-3.5 rounded-2xl border border-slate-200 dark:border-slate-700">
-                  <label htmlFor="bmr-activity-select" className="block text-xs font-bold text-slate-700 dark:text-slate-200 mb-1.5">{t.activityLabel}</label>
+                <div className="bg-[#faf9f7] dark:bg-[#141210] p-4 rounded-xl border border-[#e5e1d8] dark:border-[#332f2b]">
+                  <label htmlFor="bmr-activity-select" className="block text-xs font-medium text-[#57534e] dark:text-[#b5afa6] mb-2">{t.activityLabel}</label>
                   <select
                     id="bmr-activity-select"
                     value={activityFactor}
                     onChange={(e) => setActivityFactor(e.target.value)}
-                    className="w-full h-11 px-3 bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-xl text-xs sm:text-sm font-semibold text-slate-900 dark:text-white"
+                    className="w-full h-11 px-3 bg-[#ffffff] dark:bg-[#1c1917] border border-[#e5e1d8] dark:border-[#332f2b] rounded-[8px] text-xs sm:text-sm font-medium text-[#1c1917] dark:text-[#f5f3ef] focus:outline-none focus:border-[#1c1917] dark:focus:border-[#f5f3ef]"
                   >
                     <option value="1.2">Sedentary (Desk work, minimal exercise)</option>
                     <option value="1.375">Light Activity (1-3 days/week exercise)</option>
@@ -1332,9 +1344,9 @@ export const HeroToolBox: React.FC<HeroToolBoxProps> = ({
                   </select>
                 </div>
 
-                <div className="bg-white dark:bg-slate-800/90 p-3.5 rounded-2xl border border-slate-200 dark:border-slate-700">
-                  <label htmlFor="bmr-daily-intake-input" className="block text-xs font-bold text-slate-700 dark:text-slate-200 mb-1.5">
-                    Daily Calorie Intake Target (kcal/day)
+                <div className="bg-[#faf9f7] dark:bg-[#141210] p-4 rounded-xl border border-[#e5e1d8] dark:border-[#332f2b]">
+                  <label htmlFor="bmr-daily-intake-input" className="block text-xs font-medium text-[#57534e] dark:text-[#b5afa6] mb-2">
+                    Daily calorie intake target (kcal/day)
                   </label>
                   <input
                     id="bmr-daily-intake-input"
@@ -1343,7 +1355,7 @@ export const HeroToolBox: React.FC<HeroToolBoxProps> = ({
                     value={customDailyIntake}
                     onChange={(e) => setCustomDailyIntake(e.target.value)}
                     placeholder="1550"
-                    className="w-full h-11 px-3 bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-xl font-bold text-base text-slate-900 dark:text-white tabular-nums"
+                    className="w-full h-11 px-3 bg-[#ffffff] dark:bg-[#1c1917] border border-[#e5e1d8] dark:border-[#332f2b] rounded-[8px] font-medium text-base text-[#1c1917] dark:text-[#f5f3ef] focus:outline-none focus:border-[#1c1917] dark:focus:border-[#f5f3ef] tabular-nums"
                   />
                 </div>
               </div>
@@ -1358,10 +1370,10 @@ export const HeroToolBox: React.FC<HeroToolBoxProps> = ({
                 <button
                   type="button"
                   onClick={() => handleBrandSelect('mcdonalds')}
-                  className={`min-h-[44px] px-3 py-2 rounded-xl font-extrabold transition-colors cursor-pointer ${
+                  className={`min-h-[40px] px-2 py-2 rounded-[8px] font-medium transition-colors duration-150 cursor-pointer text-center ${
                     activeBrand === 'mcdonalds'
-                      ? 'bg-[#ca3500] text-white shadow-xs'
-                      : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-700'
+                      ? 'bg-[#1c1917] dark:bg-[#f5f3ef] text-[#faf9f7] dark:text-[#1c1917]'
+                      : 'bg-[#f3f1ed] dark:bg-[#25221f] text-[#57534e] dark:text-[#b5afa6] hover:bg-[#e5e1d8] dark:hover:bg-[#332f2b]'
                   }`}
                 >
                   {p.mcdBuilderBtn}
@@ -1369,10 +1381,10 @@ export const HeroToolBox: React.FC<HeroToolBoxProps> = ({
                 <button
                   type="button"
                   onClick={() => handleBrandSelect('subway')}
-                  className={`min-h-[44px] px-3 py-2 rounded-xl font-extrabold transition-colors cursor-pointer ${
+                  className={`min-h-[40px] px-2 py-2 rounded-[8px] font-medium transition-colors duration-150 cursor-pointer text-center ${
                     activeBrand === 'subway'
-                      ? 'bg-[#ca5983] text-white shadow-xs'
-                      : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-700'
+                      ? 'bg-[#1c1917] dark:bg-[#f5f3ef] text-[#faf9f7] dark:text-[#1c1917]'
+                      : 'bg-[#f3f1ed] dark:bg-[#25221f] text-[#57534e] dark:text-[#b5afa6] hover:bg-[#e5e1d8] dark:hover:bg-[#332f2b]'
                   }`}
                 >
                   {p.subwayBuilderBtn}
@@ -1380,96 +1392,27 @@ export const HeroToolBox: React.FC<HeroToolBoxProps> = ({
                 <button
                   type="button"
                   onClick={() => handleBrandSelect('five-guys')}
-                  className={`min-h-[44px] px-3 py-2 rounded-xl font-extrabold transition-colors cursor-pointer ${
+                  className={`min-h-[40px] px-2 py-2 rounded-[8px] font-medium transition-colors duration-150 cursor-pointer text-center ${
                     activeBrand === 'five-guys'
-                      ? 'bg-[#b91c1c] text-white shadow-xs'
-                      : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-700'
+                      ? 'bg-[#1c1917] dark:bg-[#f5f3ef] text-[#faf9f7] dark:text-[#1c1917]'
+                      : 'bg-[#f3f1ed] dark:bg-[#25221f] text-[#57534e] dark:text-[#b5afa6] hover:bg-[#e5e1d8] dark:hover:bg-[#332f2b]'
                   }`}
                 >
-                  {p.fiveGuysBuilderBtn}
+                  Five Guys
                 </button>
               </div>
 
-              {activeBrand === 'mcdonalds' ? (
+              {activeBrand === 'five-guys' ? (
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-                  <div className="bg-white dark:bg-slate-800/90 p-3 rounded-2xl border border-slate-200 dark:border-slate-700">
-                    <label htmlFor="mcd-main-select" className="block font-bold text-slate-700 dark:text-slate-200 mb-1.5">
-                      Burger / Main Entrée
-                    </label>
-                    <select
-                      id="mcd-main-select"
-                      value={mcdMain}
-                      onChange={(e) => setMcdMain(Number(e.target.value))}
-                      className="w-full h-11 px-3 bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-xl text-sm font-semibold text-slate-900 dark:text-white"
-                    >
-                      <option value={590}>Big Mac (590 kcal • 25g protein)</option>
-                      <option value={520}>Quarter Pounder w/ Cheese (520 kcal • 30g protein)</option>
-                      <option value={410}>10 pc Chicken McNuggets (410 kcal • 23g protein)</option>
-                      <option value={400}>McChicken Sandwich (400 kcal • 14g protein)</option>
-                      <option value={390}>Filet-O-Fish (390 kcal • 16g protein)</option>
-                      <option value={300}>Cheeseburger (300 kcal • 15g protein)</option>
-                    </select>
-                  </div>
-                  <div className="bg-white dark:bg-slate-800/90 p-3 rounded-2xl border border-slate-200 dark:border-slate-700">
-                    <label htmlFor="mcd-fries-select" className="block font-bold text-slate-700 dark:text-slate-200 mb-1.5">
-                      Fries / Side Portion
-                    </label>
-                    <select
-                      id="mcd-fries-select"
-                      value={mcdFries}
-                      onChange={(e) => setMcdFries(Number(e.target.value))}
-                      className="w-full h-11 px-3 bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-xl text-sm font-semibold text-slate-900 dark:text-white"
-                    >
-                      <option value={0}>No Fries / Apple Slices (15 kcal)</option>
-                      <option value={230}>Small World Famous Fries (230 kcal)</option>
-                      <option value={320}>Medium World Famous Fries (320 kcal)</option>
-                      <option value={480}>Large World Famous Fries (480 kcal)</option>
-                    </select>
-                  </div>
-                  <div className="bg-white dark:bg-slate-800/90 p-3 rounded-2xl border border-slate-200 dark:border-slate-700">
-                    <label htmlFor="mcd-drink-select" className="block font-bold text-slate-700 dark:text-slate-200 mb-1.5">
-                      Beverage Choice
-                    </label>
-                    <select
-                      id="mcd-drink-select"
-                      value={mcdDrink}
-                      onChange={(e) => setMcdDrink(Number(e.target.value))}
-                      className="w-full h-11 px-3 bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-xl text-sm font-semibold text-slate-900 dark:text-white"
-                    >
-                      <option value={0}>Diet Coke / Coke Zero / Water (0 kcal)</option>
-                      <option value={140}>Iced Coffee Sugar-Free Vanilla (140 kcal)</option>
-                      <option value={210}>Medium Coca-Cola Classic (210 kcal)</option>
-                      <option value={530}>Medium Oreo McFlurry (530 kcal)</option>
-                    </select>
-                  </div>
-                  <div className="bg-white dark:bg-slate-800/90 p-3 rounded-2xl border border-slate-200 dark:border-slate-700">
-                    <label htmlFor="mcd-sauce-select" className="block font-bold text-slate-700 dark:text-slate-200 mb-1.5">
-                      Dipping Sauce Packet
-                    </label>
-                    <select
-                      id="mcd-sauce-select"
-                      value={mcdSauce}
-                      onChange={(e) => setMcdSauce(Number(e.target.value))}
-                      className="w-full h-11 px-3 bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-xl text-sm font-semibold text-slate-900 dark:text-white"
-                    >
-                      <option value={0}>No Dipping Sauce (0 kcal)</option>
-                      <option value={45}>Tangy Barbeque Sauce (45 kcal)</option>
-                      <option value={50}>Sweet ‘N Sour Sauce (50 kcal)</option>
-                      <option value={110}>Creamy Ranch Sauce (110 kcal)</option>
-                    </select>
-                  </div>
-                </div>
-              ) : activeBrand === 'five-guys' ? (
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-                  <div className="bg-white dark:bg-slate-800/90 p-3 rounded-2xl border border-slate-200 dark:border-slate-700">
-                    <label htmlFor="fg-burger-select" className="block font-bold text-slate-700 dark:text-slate-200 mb-1.5">
-                      Burger / Main Entrée
+                  <div className="bg-[#faf9f7] dark:bg-[#141210] p-4 rounded-xl border border-[#e5e1d8] dark:border-[#332f2b] sm:col-span-2">
+                    <label htmlFor="fg-burger-select" className="block font-medium text-[#57534e] dark:text-[#b5afa6] mb-2">
+                      Five Guys burger selection
                     </label>
                     <select
                       id="fg-burger-select"
-                      value={fgBurger}
-                      onChange={(e) => setFgBurger(Number(e.target.value))}
-                      className="w-full h-11 px-3 bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-xl text-sm font-semibold text-slate-900 dark:text-white"
+                      value={fiveGuysBurger}
+                      onChange={(e) => setFiveGuysBurger(Number(e.target.value))}
+                      className="w-full h-11 px-3 bg-[#ffffff] dark:bg-[#1c1917] border border-[#e5e1d8] dark:border-[#332f2b] rounded-[8px] text-sm font-medium text-[#1c1917] dark:text-[#f5f3ef] focus:outline-none focus:border-[#1c1917] dark:focus:border-[#f5f3ef]"
                     >
                       <option value={840}>Hamburger (840 kcal)</option>
                       <option value={980}>Cheeseburger (980 kcal)</option>
@@ -1479,42 +1422,106 @@ export const HeroToolBox: React.FC<HeroToolBoxProps> = ({
                       <option value={610}>Little Cheeseburger (610 kcal)</option>
                     </select>
                   </div>
-                  <div className="bg-white dark:bg-slate-800/90 p-3 rounded-2xl border border-slate-200 dark:border-slate-700">
-                    <label htmlFor="fg-fries-select" className="block font-bold text-slate-700 dark:text-slate-200 mb-1.5">
-                      Fries / Side Portion
+                  <div className="bg-[#faf9f7] dark:bg-[#141210] p-4 rounded-xl border border-[#e5e1d8] dark:border-[#332f2b]">
+                    <label htmlFor="fg-fries-select" className="block font-medium text-[#57534e] dark:text-[#b5afa6] mb-2">
+                      Fresh cut peanut oil fries
                     </label>
                     <select
                       id="fg-fries-select"
-                      value={fgFries}
-                      onChange={(e) => setFgFries(Number(e.target.value))}
-                      className="w-full h-11 px-3 bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-xl text-sm font-semibold text-slate-900 dark:text-white"
+                      value={fiveGuysFries}
+                      onChange={(e) => setFiveGuysFries(Number(e.target.value))}
+                      className="w-full h-11 px-3 bg-[#ffffff] dark:bg-[#1c1917] border border-[#e5e1d8] dark:border-[#332f2b] rounded-[8px] text-sm font-medium text-[#1c1917] dark:text-[#f5f3ef] focus:outline-none focus:border-[#1c1917] dark:focus:border-[#f5f3ef]"
                     >
                       <option value={0}>No Fries (0 kcal)</option>
-                      <option value={526}>Little Fries (526 kcal)</option>
-                      <option value={953}>Regular Fries (953 kcal)</option>
-                      <option value={1314}>Large Fries (1,314 kcal)</option>
+                      <option value={526}>Little Fresh Cut Fries (526 kcal)</option>
+                      <option value={953}>Regular Fresh Cut Fries (953 kcal)</option>
+                      <option value={1314}>Large Fresh Cut Fries (1,314 kcal)</option>
                     </select>
                   </div>
-                  <div className="bg-white dark:bg-slate-800/90 p-3 rounded-2xl border border-slate-200 dark:border-slate-700">
-                    <label htmlFor="fg-drink-select" className="block font-bold text-slate-700 dark:text-slate-200 mb-1.5">
-                      Beverage Choice
+                  <div className="bg-[#faf9f7] dark:bg-[#141210] p-4 rounded-xl border border-[#e5e1d8] dark:border-[#332f2b]">
+                    <label htmlFor="fg-drink-select" className="block font-medium text-[#57534e] dark:text-[#b5afa6] mb-2">
+                      Beverage and shake choice
                     </label>
                     <select
                       id="fg-drink-select"
-                      value={fgDrink}
-                      onChange={(e) => setFgDrink(Number(e.target.value))}
-                      className="w-full h-11 px-3 bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-xl text-sm font-semibold text-slate-900 dark:text-white"
+                      value={fiveGuysDrink}
+                      onChange={(e) => setFiveGuysDrink(Number(e.target.value))}
+                      className="w-full h-11 px-3 bg-[#ffffff] dark:bg-[#1c1917] border border-[#e5e1d8] dark:border-[#332f2b] rounded-[8px] text-sm font-medium text-[#1c1917] dark:text-[#f5f3ef] focus:outline-none focus:border-[#1c1917] dark:focus:border-[#f5f3ef]"
                     >
-                      <option value={0}>Water / Diet Soda (0 kcal)</option>
+                      <option value={0}>Diet Soda / Water (0 kcal)</option>
                       <option value={200}>Regular Fountain Soda (200 kcal)</option>
                       <option value={670}>Five Guys Milkshake Base (670 kcal)</option>
+                      <option value={840}>Five Guys Milkshake w/ Mix-ins (840 kcal)</option>
                     </select>
                   </div>
-                  <div className="bg-white dark:bg-slate-800/90 p-3 rounded-2xl border border-slate-200 dark:border-slate-700">
-                    <p className="font-bold text-slate-700 dark:text-slate-200 mb-1.5">About Five Guys Portions</p>
-                    <p className="text-slate-600 dark:text-slate-300 leading-relaxed">
-                      Regular burgers carry two patties; Little burgers carry one. Fries are fresh-cut and cooked in peanut oil, and every size is generously filled.
-                    </p>
+                </div>
+              ) : activeBrand === 'mcdonalds' ? (
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                  <div className="bg-[#faf9f7] dark:bg-[#141210] p-4 rounded-xl border border-[#e5e1d8] dark:border-[#332f2b]">
+                    <label htmlFor="mcd-main-select" className="block font-medium text-[#57534e] dark:text-[#b5afa6] mb-2">
+                      Burger / main entrée
+                    </label>
+                    <select
+                      id="mcd-main-select"
+                      value={mcdMain}
+                      onChange={(e) => setMcdMain(Number(e.target.value))}
+                      className="w-full h-11 px-3 bg-[#ffffff] dark:bg-[#1c1917] border border-[#e5e1d8] dark:border-[#332f2b] rounded-[8px] text-sm font-medium text-[#1c1917] dark:text-[#f5f3ef] focus:outline-none focus:border-[#1c1917] dark:focus:border-[#f5f3ef]"
+                    >
+                      <option value={590}>Big Mac (590 kcal • 25g protein)</option>
+                      <option value={520}>Quarter Pounder w/ Cheese (520 kcal • 30g protein)</option>
+                      <option value={410}>10 pc Chicken McNuggets (410 kcal • 23g protein)</option>
+                      <option value={400}>McChicken Sandwich (400 kcal • 14g protein)</option>
+                      <option value={390}>Filet-O-Fish (390 kcal • 16g protein)</option>
+                      <option value={300}>Cheeseburger (300 kcal • 15g protein)</option>
+                    </select>
+                  </div>
+                  <div className="bg-[#faf9f7] dark:bg-[#141210] p-4 rounded-xl border border-[#e5e1d8] dark:border-[#332f2b]">
+                    <label htmlFor="mcd-fries-select" className="block font-medium text-[#57534e] dark:text-[#b5afa6] mb-2">
+                      Fries / side portion
+                    </label>
+                    <select
+                      id="mcd-fries-select"
+                      value={mcdFries}
+                      onChange={(e) => setMcdFries(Number(e.target.value))}
+                      className="w-full h-11 px-3 bg-[#ffffff] dark:bg-[#1c1917] border border-[#e5e1d8] dark:border-[#332f2b] rounded-[8px] text-sm font-medium text-[#1c1917] dark:text-[#f5f3ef] focus:outline-none focus:border-[#1c1917] dark:focus:border-[#f5f3ef]"
+                    >
+                      <option value={0}>No Fries / Apple Slices (15 kcal)</option>
+                      <option value={230}>Small World Famous Fries (230 kcal)</option>
+                      <option value={320}>Medium World Famous Fries (320 kcal)</option>
+                      <option value={480}>Large World Famous Fries (480 kcal)</option>
+                    </select>
+                  </div>
+                  <div className="bg-[#faf9f7] dark:bg-[#141210] p-4 rounded-xl border border-[#e5e1d8] dark:border-[#332f2b]">
+                    <label htmlFor="mcd-drink-select" className="block font-medium text-[#57534e] dark:text-[#b5afa6] mb-2">
+                      Beverage choice
+                    </label>
+                    <select
+                      id="mcd-drink-select"
+                      value={mcdDrink}
+                      onChange={(e) => setMcdDrink(Number(e.target.value))}
+                      className="w-full h-11 px-3 bg-[#ffffff] dark:bg-[#1c1917] border border-[#e5e1d8] dark:border-[#332f2b] rounded-[8px] text-sm font-medium text-[#1c1917] dark:text-[#f5f3ef] focus:outline-none focus:border-[#1c1917] dark:focus:border-[#f5f3ef]"
+                    >
+                      <option value={0}>Diet Coke / Coke Zero / Water (0 kcal)</option>
+                      <option value={140}>Iced Coffee Sugar-Free Vanilla (140 kcal)</option>
+                      <option value={210}>Medium Coca-Cola Classic (210 kcal)</option>
+                      <option value={530}>Medium Oreo McFlurry (530 kcal)</option>
+                    </select>
+                  </div>
+                  <div className="bg-[#faf9f7] dark:bg-[#141210] p-4 rounded-xl border border-[#e5e1d8] dark:border-[#332f2b]">
+                    <label htmlFor="mcd-sauce-select" className="block font-medium text-[#57534e] dark:text-[#b5afa6] mb-2">
+                      Dipping sauce packet
+                    </label>
+                    <select
+                      id="mcd-sauce-select"
+                      value={mcdSauce}
+                      onChange={(e) => setMcdSauce(Number(e.target.value))}
+                      className="w-full h-11 px-3 bg-[#ffffff] dark:bg-[#1c1917] border border-[#e5e1d8] dark:border-[#332f2b] rounded-[8px] text-sm font-medium text-[#1c1917] dark:text-[#f5f3ef] focus:outline-none focus:border-[#1c1917] dark:focus:border-[#f5f3ef]"
+                    >
+                      <option value={0}>No Dipping Sauce (0 kcal)</option>
+                      <option value={45}>Tangy Barbeque Sauce (45 kcal)</option>
+                      <option value={50}>Sweet ‘N Sour Sauce (50 kcal)</option>
+                      <option value={110}>Creamy Ranch Sauce (110 kcal)</option>
+                    </select>
                   </div>
                 </div>
               ) : (
@@ -1523,44 +1530,48 @@ export const HeroToolBox: React.FC<HeroToolBoxProps> = ({
                     <button
                       type="button"
                       onClick={() => setSubwaySize('six_inch')}
-                      className={`min-h-[40px] px-3 py-1.5 rounded-xl font-bold transition-colors ${
-                        subwaySize === 'six_inch' ? 'bg-slate-900 dark:bg-slate-700 text-white shadow-xs' : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200'
+                      className={`min-h-[40px] px-3 py-2 rounded-[8px] font-medium transition-colors duration-150 cursor-pointer ${
+                        subwaySize === 'six_inch'
+                          ? 'bg-[#1c1917] dark:bg-[#f5f3ef] text-[#faf9f7] dark:text-[#1c1917]'
+                          : 'bg-[#f3f1ed] dark:bg-[#25221f] text-[#57534e] dark:text-[#b5afa6] hover:bg-[#e5e1d8] dark:hover:bg-[#332f2b]'
                       }`}
                     >
-                      6-Inch Sub
+                      6-inch sub
                     </button>
                     <button
                       type="button"
                       onClick={() => setSubwaySize('footlong')}
-                      className={`min-h-[40px] px-3 py-1.5 rounded-xl font-bold transition-colors ${
-                        subwaySize === 'footlong' ? 'bg-slate-900 dark:bg-slate-700 text-white shadow-xs' : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200'
+                      className={`min-h-[40px] px-3 py-2 rounded-[8px] font-medium transition-colors duration-150 cursor-pointer ${
+                        subwaySize === 'footlong'
+                          ? 'bg-[#1c1917] dark:bg-[#f5f3ef] text-[#faf9f7] dark:text-[#1c1917]'
+                          : 'bg-[#f3f1ed] dark:bg-[#25221f] text-[#57534e] dark:text-[#b5afa6] hover:bg-[#e5e1d8] dark:hover:bg-[#332f2b]'
                       }`}
                     >
-                      Footlong (12-Inch)
+                      Footlong (12-inch)
                     </button>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-                    <div className="bg-white dark:bg-slate-800/90 p-3 rounded-2xl border border-slate-200 dark:border-slate-700">
-                      <label htmlFor="subway-bread-select" className="block font-bold text-slate-700 dark:text-slate-200 mb-1.5">Bread Choice</label>
+                    <div className="bg-[#faf9f7] dark:bg-[#141210] p-4 rounded-xl border border-[#e5e1d8] dark:border-[#332f2b]">
+                      <label htmlFor="subway-bread-select" className="block font-medium text-[#57534e] dark:text-[#b5afa6] mb-2">Bread choice</label>
                       <select
                         id="subway-bread-select"
                         value={subwayBread}
                         onChange={(e) => setSubwayBread(Number(e.target.value))}
-                        className="w-full h-11 px-3 bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-xl text-sm font-semibold text-slate-900 dark:text-white"
+                        className="w-full h-11 px-3 bg-[#ffffff] dark:bg-[#1c1917] border border-[#e5e1d8] dark:border-[#332f2b] rounded-[8px] text-sm font-medium text-[#1c1917] dark:text-[#f5f3ef] focus:outline-none focus:border-[#1c1917] dark:focus:border-[#f5f3ef]"
                       >
                         <option value={200}>9-Grain Wheat (200 kcal)</option>
                         <option value={190}>Artisan Italian White (190 kcal)</option>
                         <option value={230}>Italian Herbs & Cheese (230 kcal)</option>
                       </select>
                     </div>
-                    <div className="bg-white dark:bg-slate-800/90 p-3 rounded-2xl border border-slate-200 dark:border-slate-700">
-                      <label htmlFor="subway-meat-select" className="block font-bold text-slate-700 dark:text-slate-200 mb-1.5">Protein Filling</label>
+                    <div className="bg-[#faf9f7] dark:bg-[#141210] p-4 rounded-xl border border-[#e5e1d8] dark:border-[#332f2b]">
+                      <label htmlFor="subway-meat-select" className="block font-medium text-[#57534e] dark:text-[#b5afa6] mb-2">Protein filling</label>
                       <select
                         id="subway-meat-select"
                         value={subwayMeat}
                         onChange={(e) => setSubwayMeat(Number(e.target.value))}
-                        className="w-full h-11 px-3 bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-xl text-sm font-semibold text-slate-900 dark:text-white"
+                        className="w-full h-11 px-3 bg-[#ffffff] dark:bg-[#1c1917] border border-[#e5e1d8] dark:border-[#332f2b] rounded-[8px] text-sm font-medium text-[#1c1917] dark:text-[#f5f3ef] focus:outline-none focus:border-[#1c1917] dark:focus:border-[#f5f3ef]"
                       >
                         <option value={110}>Oven Roasted Turkey (110 kcal)</option>
                         <option value={160}>Rotisserie Style Chicken (160 kcal)</option>
@@ -1568,13 +1579,13 @@ export const HeroToolBox: React.FC<HeroToolBoxProps> = ({
                         <option value={290}>Italian B.M.T. (290 kcal)</option>
                       </select>
                     </div>
-                    <div className="bg-white dark:bg-slate-800/90 p-3 rounded-2xl border border-slate-200 dark:border-slate-700">
-                      <label htmlFor="subway-cheese-select" className="block font-bold text-slate-700 dark:text-slate-200 mb-1.5">Cheese Option</label>
+                    <div className="bg-[#faf9f7] dark:bg-[#141210] p-4 rounded-xl border border-[#e5e1d8] dark:border-[#332f2b]">
+                      <label htmlFor="subway-cheese-select" className="block font-medium text-[#57534e] dark:text-[#b5afa6] mb-2">Cheese option</label>
                       <select
                         id="subway-cheese-select"
                         value={subwayCheese}
                         onChange={(e) => setSubwayCheese(Number(e.target.value))}
-                        className="w-full h-11 px-3 bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-xl text-sm font-semibold text-slate-900 dark:text-white"
+                        className="w-full h-11 px-3 bg-[#ffffff] dark:bg-[#1c1917] border border-[#e5e1d8] dark:border-[#332f2b] rounded-[8px] text-sm font-medium text-[#1c1917] dark:text-[#f5f3ef] focus:outline-none focus:border-[#1c1917] dark:focus:border-[#f5f3ef]"
                       >
                         <option value={0}>No Cheese (0 kcal)</option>
                         <option value={40}>American Cheese (40 kcal)</option>
@@ -1582,13 +1593,13 @@ export const HeroToolBox: React.FC<HeroToolBoxProps> = ({
                         <option value={60}>Pepper Jack (60 kcal)</option>
                       </select>
                     </div>
-                    <div className="bg-white dark:bg-slate-800/90 p-3 rounded-2xl border border-slate-200 dark:border-slate-700">
-                      <label htmlFor="subway-sauce-select" className="block font-bold text-slate-700 dark:text-slate-200 mb-1.5">Sauce / Dressing</label>
+                    <div className="bg-[#faf9f7] dark:bg-[#141210] p-4 rounded-xl border border-[#e5e1d8] dark:border-[#332f2b]">
+                      <label htmlFor="subway-sauce-select" className="block font-medium text-[#57534e] dark:text-[#b5afa6] mb-2">Sauce / dressing</label>
                       <select
                         id="subway-sauce-select"
                         value={subwaySauce}
                         onChange={(e) => setSubwaySauce(Number(e.target.value))}
-                        className="w-full h-11 px-3 bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-xl text-sm font-semibold text-slate-900 dark:text-white"
+                        className="w-full h-11 px-3 bg-[#ffffff] dark:bg-[#1c1917] border border-[#e5e1d8] dark:border-[#332f2b] rounded-[8px] text-sm font-medium text-[#1c1917] dark:text-[#f5f3ef] focus:outline-none focus:border-[#1c1917] dark:focus:border-[#f5f3ef]"
                       >
                         <option value={5}>Yellow Mustard (5 kcal)</option>
                         <option value={30}>Sweet Onion Teriyaki (30 kcal)</option>
@@ -1604,7 +1615,7 @@ export const HeroToolBox: React.FC<HeroToolBoxProps> = ({
         </div>
 
         {/* RIGHT COLUMN: Live Result Card & Download */}
-        <div className="lg:col-span-5 relative bg-gradient-to-br from-white via-slate-50 to-indigo-50/30 dark:from-slate-800/95 dark:via-slate-900 dark:to-indigo-950/40 rounded-2xl p-5 sm:p-6 border border-slate-200/80 dark:border-slate-700/90 shadow-md flex flex-col justify-between space-y-5">
+        <div className="lg:col-span-5 relative bg-[#faf9f7] dark:bg-[#141210] rounded-2xl p-6 border border-[#e5e1d8] dark:border-[#332f2b] flex flex-col justify-between space-y-6">
           {/* Floating Print / PDF Summary Action Button */}
           <button
             type="button"
@@ -1612,16 +1623,16 @@ export const HeroToolBox: React.FC<HeroToolBoxProps> = ({
             data-testid="floating-print-pdf-btn"
             aria-label="Print and download PDF summary"
             title="Generate and download a clean PDF summary of your results"
-            className="absolute top-3.5 right-3.5 z-10 min-h-[38px] px-3 py-1.5 rounded-full bg-white/95 dark:bg-slate-800/95 backdrop-blur-md border border-indigo-200/90 dark:border-indigo-500/40 text-[#7334fd] dark:text-indigo-300 hover:bg-[#7334fd] hover:text-white dark:hover:bg-indigo-600 dark:hover:text-white hover:border-transparent shadow-md shadow-indigo-500/10 hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 transition-all flex items-center gap-1.5 text-xs font-extrabold cursor-pointer"
+            className="absolute top-4 right-4 z-10 min-h-[36px] px-3 py-1.5 rounded-[8px] bg-[#ffffff] dark:bg-[#1c1917] border border-[#e5e1d8] dark:border-[#332f2b] text-[#1c1917] dark:text-[#f5f3ef] hover:bg-[#f3f1ed] dark:hover:bg-[#25221f] transition-colors duration-150 flex items-center gap-1.5 text-xs font-medium cursor-pointer"
           >
             {pdfDownloaded ? (
               <>
-                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
+                <CheckCircle2 className="w-4 h-4 shrink-0" strokeWidth={1.75} />
                 <span>{t.savedPdf}</span>
               </>
             ) : (
               <>
-                <Printer className="w-3.5 h-3.5 shrink-0" />
+                <Printer className="w-4 h-4 shrink-0" strokeWidth={1.75} />
                 <span>{t.printPdf}</span>
               </>
             )}
@@ -1630,25 +1641,25 @@ export const HeroToolBox: React.FC<HeroToolBoxProps> = ({
           {/* Main Visual Stat */}
           {mode === 'adult' && (
             <div>
-              <span className="text-[11px] font-bold tracking-wider uppercase text-slate-500 dark:text-slate-400 block mb-1 pr-28">
+              <span className="text-xs font-medium text-[#57534e] dark:text-[#b5afa6] block mb-2 pr-28">
                 {t.resultHeadingAdult}
               </span>
               <div className="flex flex-wrap items-baseline gap-2">
-                <span className={`text-4xl sm:text-6xl font-black tracking-tight tabular-nums ${isLoss ? 'text-[#7334fd] dark:text-indigo-400' : 'text-slate-800 dark:text-white'}`}>
+                <span className={`text-4xl sm:text-5xl font-medium tracking-tight tabular-nums ${isLoss ? 'text-[#c2410c] dark:text-[#ea580c]' : 'text-[#1c1917] dark:text-[#f5f3ef]'}`}>
                   {isLoss ? `-${adultPct}%` : `${adultPct}%`}
                 </span>
-                <span className="text-sm font-bold text-slate-600 dark:text-slate-300 tabular-nums">
+                <span className="text-sm font-normal text-[#57534e] dark:text-[#b5afa6] tabular-nums">
                   ({isLoss ? `-${adultLost.toFixed(1)}` : `+${Math.abs(adultLost).toFixed(1)}`} {unit})
                 </span>
               </div>
 
-              {/* UK / Imperial Stone & Pounds Equivalent Badge */}
-              <div className="mt-1.5 inline-flex flex-wrap items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-100/90 dark:bg-slate-800/80 border border-slate-200/80 dark:border-slate-700 text-[11px] font-bold text-slate-600 dark:text-slate-300 tabular-nums">
-                <span className="text-slate-500 dark:text-slate-400">{p.stoneEquivalentLabel}</span>
-                <span className="text-slate-800 dark:text-slate-100">
+              {/* UK / Imperial Stone & Pounds Equivalent */}
+              <div className="mt-2 inline-flex flex-wrap items-center gap-1.5 px-2.5 py-1 rounded-[8px] bg-[#ffffff] dark:bg-[#1c1917] border border-[#e5e1d8] dark:border-[#332f2b] text-xs font-normal text-[#57534e] dark:text-[#b5afa6] tabular-nums">
+                <span>{p.stoneEquivalentLabel}</span>
+                <span className="font-medium text-[#1c1917] dark:text-[#f5f3ef]">
                   {isLoss ? '-' : '+'}{lostStoneAndLbs.stones} st {lostStoneAndLbs.pounds} lbs
                 </span>
-                <span className="text-slate-400">•</span>
+                <span className="text-[#a8a29e]">•</span>
                 <span>
                   {currentStoneAndLbs.stones} st {currentStoneAndLbs.pounds} lbs
                 </span>
@@ -1656,41 +1667,41 @@ export const HeroToolBox: React.FC<HeroToolBoxProps> = ({
 
               {/* Clinical Sub-Focus Card (Fasting/OMAD, Bariatric %EWL, GLP-1 Trajectory, or Postpartum) */}
               {activeFocus === 'fasting' && (
-                <div className="mt-3 p-3 rounded-xl bg-sky-50/90 dark:bg-sky-950/60 border border-sky-200 dark:border-sky-500/40 text-xs text-sky-950 dark:text-sky-100 space-y-2">
-                  <div className="flex items-center justify-between font-extrabold">
+                <div className="mt-4 p-4 rounded-xl bg-[#ffffff] dark:bg-[#1c1917] border border-[#e5e1d8] dark:border-[#332f2b] text-xs text-[#1c1917] dark:text-[#f5f3ef] space-y-2">
+                  <div className="flex items-center justify-between font-medium">
                     <span>{p.fastingLabel}</span>
-                    <span className="text-sm text-[#7334fd] dark:text-indigo-300 tabular-nums">
-                      -{fastingTotalDrop} {unit} Total Scale
+                    <span className="text-sm font-medium text-[#1c1917] dark:text-[#f5f3ef] tabular-nums">
+                      -{fastingTotalDrop} {unit} total scale
                     </span>
                   </div>
-                  <div className="grid grid-cols-2 gap-2 pt-1 border-t border-sky-200/70 dark:border-sky-700/60 tabular-nums">
-                    <div className="bg-white/80 dark:bg-slate-900/70 p-2 rounded-lg border border-sky-200/60 dark:border-sky-800">
-                      <span className="block text-[10px] text-slate-500 dark:text-slate-400 uppercase font-bold">True Fat Loss (Kept)</span>
-                      <span className="text-sm font-black text-emerald-700 dark:text-emerald-400">
+                  <div className="grid grid-cols-2 gap-2 pt-2 border-t border-[#edeae3] dark:border-[#2a2623] tabular-nums">
+                    <div className="bg-[#faf9f7] dark:bg-[#141210] p-2.5 rounded-[8px] border border-[#e5e1d8] dark:border-[#332f2b]">
+                      <span className="block text-[11px] text-[#57534e] dark:text-[#b5afa6] font-normal">True fat loss (kept)</span>
+                      <span className="text-sm font-medium text-[#1c1917] dark:text-[#f5f3ef]">
                         -{fastingTrueFatLoss} {unit} (-{fastingNetPct}%)
                       </span>
                     </div>
-                    <div className="bg-white/80 dark:bg-slate-900/70 p-2 rounded-lg border border-sky-200/60 dark:border-sky-800">
-                      <span className="block text-[10px] text-slate-500 dark:text-slate-400 uppercase font-bold">Glycogen + Water</span>
-                      <span className="text-sm font-black text-sky-700 dark:text-sky-300">
-                        -{fastingWaterLoss} {unit} (Refeed)
+                    <div className="bg-[#faf9f7] dark:bg-[#141210] p-2.5 rounded-[8px] border border-[#e5e1d8] dark:border-[#332f2b]">
+                      <span className="block text-[11px] text-[#57534e] dark:text-[#b5afa6] font-normal">Glycogen and water</span>
+                      <span className="text-sm font-medium text-[#1c1917] dark:text-[#f5f3ef]">
+                        -{fastingWaterLoss} {unit} (refeed)
                       </span>
                     </div>
                   </div>
-                  <p className="text-[11px] text-sky-800 dark:text-sky-200 leading-snug">
+                  <p className="text-[11px] text-[#57534e] dark:text-[#b5afa6] leading-relaxed">
                     {p.fastingDesc}
                   </p>
                 </div>
               )}
 
               {activeFocus === 'bariatric' && (
-                <div className="mt-3 p-3 rounded-xl bg-purple-50/90 dark:bg-purple-950/60 border border-purple-200 dark:border-purple-500/40 text-xs text-purple-950 dark:text-purple-100 space-y-2">
-                  <div className="flex items-center justify-between font-extrabold">
+                <div className="mt-4 p-4 rounded-xl bg-[#ffffff] dark:bg-[#1c1917] border border-[#e5e1d8] dark:border-[#332f2b] text-xs text-[#1c1917] dark:text-[#f5f3ef] space-y-2">
+                  <div className="flex items-center justify-between font-medium">
                     <span>{p.ewlLabel}</span>
-                    <span className="text-base text-[#7334fd] dark:text-indigo-300 tabular-nums">{excessWeightLostPct}% EWL</span>
+                    <span className="text-sm font-medium text-[#1c1917] dark:text-[#f5f3ef] tabular-nums">{excessWeightLostPct}% EWL</span>
                   </div>
                   {/* Month-by-Month Post-Op Timeline Table (1M, 3M, 6M, 12M, 18M) */}
-                  <div className="grid grid-cols-5 gap-1 pt-1 border-t border-purple-200/70 dark:border-purple-700/60 text-center tabular-nums">
+                  <div className="grid grid-cols-5 gap-1.5 pt-2 border-t border-[#edeae3] dark:border-[#2a2623] text-center tabular-nums">
                     {[
                       { m: '1M', ewl: activeBariatric.ewlMonths[0] },
                       { m: '3M', ewl: activeBariatric.ewlMonths[1] },
@@ -1700,63 +1711,63 @@ export const HeroToolBox: React.FC<HeroToolBoxProps> = ({
                     ].map((pt) => {
                       const projWeight = Math.max(gWeight || sWeight * 0.65, +(sWeight - (excessWeightTotal * pt.ewl) / 100).toFixed(0));
                       return (
-                        <div key={pt.m} className="bg-white/80 dark:bg-slate-900/70 p-1.5 rounded-lg border border-purple-200/60 dark:border-purple-800">
-                          <span className="block text-[10px] font-bold text-purple-700 dark:text-purple-300">{pt.m} ({pt.ewl}%)</span>
-                          <span className="text-[11px] font-black text-slate-900 dark:text-white">{projWeight} {unit}</span>
+                        <div key={pt.m} className="bg-[#faf9f7] dark:bg-[#141210] p-1.5 rounded-[8px] border border-[#e5e1d8] dark:border-[#332f2b]">
+                          <span className="block text-[10px] font-normal text-[#57534e] dark:text-[#b5afa6]">{pt.m} ({pt.ewl}%)</span>
+                          <span className="text-[11px] font-medium text-[#1c1917] dark:text-[#f5f3ef]">{projWeight} {unit}</span>
                         </div>
                       );
                     })}
                   </div>
-                  <p className="text-[11px] text-purple-800 dark:text-purple-200 leading-snug">
-                    {p.ewlDesc(gWeight > 0 ? gWeight.toFixed(1) : (sWeight * 0.65).toFixed(1), unit)}
+                  <p className="text-[11px] text-[#57534e] dark:text-[#b5afa6] leading-relaxed">
+                    {p.ewlDesc((gWeight || sWeight * 0.65).toFixed(0), unit)}
                   </p>
                 </div>
               )}
 
               {activeFocus === 'glp1' && (
-                <div className="mt-3 p-3 rounded-xl bg-emerald-50/90 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-500/40 text-xs text-emerald-950 dark:text-emerald-100 space-y-2">
-                  <div className="flex items-center justify-between font-extrabold">
+                <div className="mt-4 p-4 rounded-xl bg-[#ffffff] dark:bg-[#1c1917] border border-[#e5e1d8] dark:border-[#332f2b] text-xs text-[#1c1917] dark:text-[#f5f3ef] space-y-2">
+                  <div className="flex items-center justify-between font-medium">
                     <span>{activeGlp1.name}</span>
-                    <span className="text-emerald-700 dark:text-emerald-300 tabular-nums">
+                    <span className="text-[#1c1917] dark:text-[#f5f3ef] tabular-nums">
                       {(sWeight * (1 - activeGlp1.meanTbwlPct / 100)).toFixed(1)} {unit} (-{activeGlp1.meanTbwlPct}%)
                     </span>
                   </div>
-                  <div className="p-2 rounded-lg bg-white/80 dark:bg-slate-900/70 border border-emerald-200/70 dark:border-emerald-800 text-[11px]">
-                    <span className="font-bold text-emerald-900 dark:text-emerald-200 block mb-0.5">
-                      {activeGlp1.trialName} Escalation:
+                  <div className="p-2.5 rounded-[8px] bg-[#faf9f7] dark:bg-[#141210] border border-[#e5e1d8] dark:border-[#332f2b] text-[11px]">
+                    <span className="font-medium text-[#1c1917] dark:text-[#f5f3ef] block mb-0.5">
+                      {activeGlp1.trialName} escalation:
                     </span>
-                    <span className="text-slate-700 dark:text-slate-300">{activeGlp1.titrationSchedule}</span>
+                    <span className="text-[#57534e] dark:text-[#b5afa6]">{activeGlp1.titrationSchedule}</span>
                   </div>
-                  <p className="text-[10.5px] text-emerald-800 dark:text-emerald-200 leading-snug">
-                    <strong>Clinical Safety Note:</strong> FDA-approved GLP-1/GIP therapies are dispensed in calibrated pre-filled pens. Avoid unapproved research peptides or DIY syringe reconstitution.
+                  <p className="text-[11px] text-[#57534e] dark:text-[#b5afa6] leading-relaxed">
+                    <span className="font-medium text-[#1c1917] dark:text-[#f5f3ef]">Clinical safety note:</span> FDA-approved GLP-1/GIP therapies are dispensed in calibrated pre-filled pens. Avoid unapproved research peptides or DIY syringe reconstitution.
                   </p>
                 </div>
               )}
 
               {activeFocus === 'postpartum' && (
-                <div className="mt-3 p-3 rounded-xl bg-amber-50/90 dark:bg-amber-950/60 border border-amber-200 dark:border-amber-500/40 text-xs text-amber-950 dark:text-amber-100 space-y-1.5">
-                  <div className="flex items-center justify-between font-extrabold">
+                <div className="mt-4 p-4 rounded-xl bg-[#ffffff] dark:bg-[#1c1917] border border-[#e5e1d8] dark:border-[#332f2b] text-xs text-[#1c1917] dark:text-[#f5f3ef] space-y-1.5">
+                  <div className="flex items-center justify-between font-medium">
                     <span>{p.postpartumLabel}</span>
-                    <span className="text-amber-800 dark:text-amber-300 tabular-nums">{postpartumSafeDailyKcal} kcal/day Safe Goal</span>
+                    <span className="text-[#1c1917] dark:text-[#f5f3ef] tabular-nums">{postpartumSafeDailyKcal} kcal/day safe goal</span>
                   </div>
-                  <p className="text-[11px] text-amber-800 dark:text-amber-200 leading-snug">
-                    Includes <strong>+{activeLactation.kcalAdder} kcal/day</strong> lactation synthesis allowance ({p.postpartumPace}) to protect maternal milk supply.
+                  <p className="text-[11px] text-[#57534e] dark:text-[#b5afa6] leading-relaxed">
+                    Includes <span className="font-medium text-[#1c1917] dark:text-[#f5f3ef]">+{activeLactation.kcalAdder} kcal/day</span> lactation synthesis allowance ({p.postpartumPace}) to protect maternal milk supply.
                   </p>
                 </div>
               )}
 
               {/* Progress to Goal */}
               {gWeight > 0 && sWeight !== gWeight && (
-                <div className="mt-4 space-y-1.5">
-                  <div className="flex justify-between text-xs font-semibold text-slate-600 dark:text-slate-300 tabular-nums">
+                <div className="mt-4 space-y-2">
+                  <div className="flex justify-between text-xs font-normal text-[#57534e] dark:text-[#b5afa6] tabular-nums">
                     <span>{t.goalLabel}: {gWeight} {unit}</span>
-                    <span className="text-[#7334fd] dark:text-indigo-400 font-bold">
+                    <span className="text-[#1c1917] dark:text-[#f5f3ef] font-medium">
                       {Math.max(0, Math.min(100, +(((sWeight - cWeight) / (sWeight - gWeight)) * 100).toFixed(0)))}% {t.ofGoalLabel}
                     </span>
                   </div>
-                  <div className="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-3 overflow-hidden">
+                  <div className="w-full bg-[#e5e1d8] dark:bg-[#332f2b] rounded-full h-1.5 overflow-hidden">
                     <div
-                      className="bg-gradient-to-r from-[#7334fd] to-[#4950fc] h-full rounded-full transition-all duration-500"
+                      className="bg-[#1c1917] dark:bg-[#f5f3ef] h-full rounded-full transition-all duration-200"
                       style={{
                         width: `${Math.min(100, Math.max(0, ((sWeight - cWeight) / (sWeight - gWeight)) * 100))}%`
                       }}
@@ -1765,51 +1776,64 @@ export const HeroToolBox: React.FC<HeroToolBoxProps> = ({
                 </div>
               )}
 
-              {/* Clinical Milestone Tag */}
-              <div className="mt-4 p-3.5 bg-indigo-50/70 dark:bg-indigo-950/60 border border-indigo-200 dark:border-indigo-500/40 rounded-xl text-xs text-indigo-950 dark:text-indigo-100">
-                <div className="flex items-center gap-1.5 font-bold mb-1">
-                  <Award className="w-4 h-4 text-[#7334fd] dark:text-indigo-400 shrink-0" />
-                  <span>
-                    {adultPct >= 15
-                      ? t.milestone15
-                      : adultPct >= 10
-                      ? t.milestone10
-                      : adultPct >= 5
-                      ? t.milestone5
-                      : t.milestoneNext5}
-                  </span>
+              {/* Scale-Tick Clinical Milestone Rule + Plain Summary */}
+              <div className="mt-4 pt-4 border-t border-[#e5e1d8] dark:border-[#332f2b] space-y-3">
+                <ScaleMilestoneRule
+                  percentLoss={isLoss ? adultPct : 0}
+                  maxPercent={15}
+                  label="Clinical milestones"
+                  statusText={isLoss ? `${adultPct}% lost` : '0%'}
+                  compact
+                />
+                <div className="text-xs text-[#1c1917] dark:text-[#f5f3ef] space-y-1">
+                  <p className="font-medium leading-snug">
+                    {locale === 'en'
+                      ? adultPct >= 15
+                        ? '15% weight loss — a clinically significant milestone'
+                        : adultPct >= 10
+                        ? '10% weight loss — a clinically significant milestone'
+                        : adultPct >= 5
+                        ? '5% weight loss — a clinically significant milestone'
+                        : 'Next clinical milestone: 5% body weight reduction'
+                      : (adultPct >= 15
+                          ? t.milestone15
+                          : adultPct >= 10
+                          ? t.milestone10
+                          : adultPct >= 5
+                          ? t.milestone5
+                          : t.milestoneNext5
+                        ).replace(/!/g, '')}
+                  </p>
+                  <p className="text-[11px] text-[#57534e] dark:text-[#b5afa6] leading-relaxed">
+                    {t.milestoneDescReached}
+                  </p>
                 </div>
-                <p className="text-[11px] text-indigo-800 dark:text-indigo-200 leading-relaxed">
-                  {t.milestoneDescReached}
-                </p>
               </div>
             </div>
           )}
 
           {mode === 'newborn' && (
             <div>
-              <span className="text-[11px] font-bold tracking-wider uppercase text-slate-500 dark:text-slate-400 block mb-1 pr-28">
+              <span className="text-xs font-medium text-[#57534e] dark:text-[#b5afa6] block mb-2 pr-28">
                 {t.resultHeadingNewborn}
               </span>
               <div className="flex flex-wrap items-baseline gap-2">
-                <span className={`text-4xl sm:text-5xl font-black tracking-tight tabular-nums ${newbornLossPct > 10 ? 'text-rose-600 dark:text-rose-400' : newbornLossPct >= 7 ? 'text-amber-600 dark:text-amber-400' : 'text-[#ca3500] dark:text-orange-400'}`}>
+                <span className="text-4xl sm:text-5xl font-medium tracking-tight tabular-nums text-[#c2410c] dark:text-[#ea580c]">
                   {newbornLossPct}%
                 </span>
-                <span className="text-xs font-bold text-slate-600 dark:text-slate-300 tabular-nums">
+                <span className="text-xs font-normal text-[#57534e] dark:text-[#b5afa6] tabular-nums">
                   (-{newbornGramsLost} g, {babyHoursOld} {t.hoursOldSuffix})
                 </span>
               </div>
 
               {/* AAP Guideline Callout */}
-              <div className={`mt-4 p-3.5 rounded-xl border text-xs ${
-                newbornLossPct > 10
-                  ? 'bg-rose-50 dark:bg-rose-950/60 border-rose-300 dark:border-rose-500/40 text-rose-950 dark:text-rose-100'
-                  : newbornLossPct >= 7
-                  ? 'bg-amber-50 dark:bg-amber-950/60 border-amber-300 dark:border-amber-500/40 text-amber-950 dark:text-amber-100'
-                  : 'bg-emerald-50 dark:bg-emerald-950/60 border-emerald-300 dark:border-emerald-500/40 text-emerald-950 dark:text-emerald-100'
-              }`}>
-                <div className="flex items-center gap-1.5 font-bold mb-1">
-                  {newbornLossPct > 10 ? <AlertTriangle className="w-4 h-4 text-rose-600 dark:text-rose-400 shrink-0" /> : <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" />}
+              <div className="mt-4 p-4 rounded-xl border border-[#e5e1d8] dark:border-[#332f2b] bg-[#ffffff] dark:bg-[#1c1917] text-xs text-[#1c1917] dark:text-[#f5f3ef]">
+                <div className="flex items-center gap-2 font-medium mb-1">
+                  {newbornLossPct > 10 ? (
+                    <AlertTriangle className="w-4 h-4 text-[#1c1917] dark:text-[#f5f3ef] shrink-0" strokeWidth={1.75} />
+                  ) : (
+                    <CheckCircle2 className="w-4 h-4 text-[#1c1917] dark:text-[#f5f3ef] shrink-0" strokeWidth={1.75} />
+                  )}
                   <span>
                     {newbornLossPct > 10
                       ? t.aapOver10Title
@@ -1818,7 +1842,7 @@ export const HeroToolBox: React.FC<HeroToolBoxProps> = ({
                       : t.aapUnder7Title}
                   </span>
                 </div>
-                <p className="text-[11px] leading-relaxed">
+                <p className="text-[11px] text-[#57534e] dark:text-[#b5afa6] leading-relaxed">
                   {newbornLossPct > 10
                     ? t.aapOver10Desc
                     : newbornLossPct >= 7
@@ -1831,40 +1855,40 @@ export const HeroToolBox: React.FC<HeroToolBoxProps> = ({
 
           {mode === 'bmr' && (
             <div>
-              <span className="text-[11px] font-bold tracking-wider uppercase text-slate-500 dark:text-slate-400 block mb-2 pr-28">
+              <span className="text-xs font-medium text-[#57534e] dark:text-[#b5afa6] block mb-3 pr-28">
                 {t.resultHeadingBmr}
               </span>
               <div className="space-y-2.5 tabular-nums">
-                <div className="flex justify-between items-baseline border-b border-slate-200 dark:border-slate-700 pb-1.5">
-                  <span className="text-xs font-semibold text-slate-700 dark:text-slate-200">{t.restingBurnLabel}</span>
-                  <span className="text-lg sm:text-xl font-black text-[#4950fc] dark:text-indigo-400">{calculatedBmr} <span className="text-xs text-slate-500 dark:text-slate-400">kcal/day</span></span>
+                <div className="flex justify-between items-baseline border-b border-[#e5e1d8] dark:border-[#332f2b] pb-2">
+                  <span className="text-xs font-normal text-[#57534e] dark:text-[#b5afa6]">{t.restingBurnLabel}</span>
+                  <span className="text-xl font-medium text-[#c2410c] dark:text-[#ea580c]">{calculatedBmr} <span className="text-xs font-normal text-[#78716c] dark:text-[#8c857d]">kcal/day</span></span>
                 </div>
-                <div className="flex justify-between items-baseline border-b border-slate-200 dark:border-slate-700 pb-1.5">
-                  <span className="text-xs font-semibold text-slate-700 dark:text-slate-200">{t.maintenanceLabel}</span>
-                  <span className="text-lg sm:text-xl font-black text-slate-900 dark:text-white">{calculatedTdee} <span className="text-xs text-slate-500 dark:text-slate-400">kcal/day</span></span>
+                <div className="flex justify-between items-baseline border-b border-[#e5e1d8] dark:border-[#332f2b] pb-2">
+                  <span className="text-xs font-normal text-[#57534e] dark:text-[#b5afa6]">{t.maintenanceLabel}</span>
+                  <span className="text-xl font-medium text-[#1c1917] dark:text-[#f5f3ef]">{calculatedTdee} <span className="text-xs font-normal text-[#78716c] dark:text-[#8c857d]">kcal/day</span></span>
                 </div>
                 <div className="flex justify-between items-baseline">
-                  <span className="text-xs font-semibold text-emerald-700 dark:text-emerald-400">{t.steadyLossLabel}</span>
-                  <span className="text-lg sm:text-xl font-black text-emerald-600 dark:text-emerald-400">{Math.max(1200, calculatedTdee - 500)} <span className="text-xs text-slate-500 dark:text-slate-400">kcal/day</span></span>
+                  <span className="text-xs font-normal text-[#57534e] dark:text-[#b5afa6]">{t.steadyLossLabel}</span>
+                  <span className="text-xl font-medium text-[#1c1917] dark:text-[#f5f3ef]">{Math.max(1200, calculatedTdee - 500)} <span className="text-xs font-normal text-[#78716c] dark:text-[#8c857d]">kcal/day</span></span>
                 </div>
 
                 {/* Losertown-Style 12-Week Weight & Date Forecast Table */}
-                <div className="mt-3 pt-2.5 border-t border-slate-200 dark:border-slate-700">
-                  <div className="flex items-center justify-between text-[11px] font-extrabold text-slate-800 dark:text-slate-100 mb-1.5">
-                    <span>12-Week Weight Forecast ({intakeVal} kcal/d)</span>
-                    <span className="text-[#4950fc] dark:text-indigo-300">
+                <div className="mt-4 pt-3 border-t border-[#e5e1d8] dark:border-[#332f2b]">
+                  <div className="flex items-center justify-between text-xs font-medium text-[#1c1917] dark:text-[#f5f3ef] mb-2">
+                    <span>12-week weight forecast ({intakeVal} kcal/d)</span>
+                    <span className="text-[#57534e] dark:text-[#b5afa6]">
                       {weeklyWeightChange >= 0 ? `-${weeklyWeightChange}` : `+${Math.abs(weeklyWeightChange)}`} {unit}/wk
                     </span>
                   </div>
-                  <div className="grid grid-cols-4 gap-1 text-center text-[11px]">
+                  <div className="grid grid-cols-4 gap-1.5 text-center text-[11px]">
                     {[2, 4, 8, 12].map((wk) => {
                       const projW = Math.max(40, +(cWeight - weeklyWeightChange * wk).toFixed(1));
                       const pctChange = cWeight > 0 ? +(((cWeight - projW) / cWeight) * 100).toFixed(1) : 0;
                       return (
-                        <div key={wk} className="bg-white/90 dark:bg-slate-900/80 p-1.5 rounded-lg border border-slate-200 dark:border-slate-700">
-                          <span className="block text-[10px] font-bold text-slate-500 dark:text-slate-400">Wk {wk}</span>
-                          <span className="block font-black text-slate-900 dark:text-white">{projW} {unit}</span>
-                          <span className="block text-[10px] font-bold text-emerald-600 dark:text-emerald-400">-{pctChange}%</span>
+                        <div key={wk} className="bg-[#ffffff] dark:bg-[#1c1917] p-2 rounded-[8px] border border-[#e5e1d8] dark:border-[#332f2b]">
+                          <span className="block text-[10px] font-normal text-[#78716c] dark:text-[#8c857d]">Wk {wk}</span>
+                          <span className="block font-medium text-[#1c1917] dark:text-[#f5f3ef]">{projW} {unit}</span>
+                          <span className="block text-[10px] font-normal text-[#57534e] dark:text-[#b5afa6]">-{pctChange}%</span>
                         </div>
                       );
                     })}
@@ -1873,26 +1897,26 @@ export const HeroToolBox: React.FC<HeroToolBoxProps> = ({
 
                 {/* Keto Live Macro Grams Split (70% Fat, 25% Protein, 5% Carbs) based on user TDEE */}
                 {isKeto && (
-                  <div className="mt-3 pt-2.5 border-t border-slate-200 dark:border-slate-700">
-                    <div className="flex items-center justify-between text-[11px] font-extrabold text-slate-800 dark:text-slate-100 mb-1.5">
-                      <span>Keto Macro Split ({calculatedTdee} kcal TDEE)</span>
-                      <span className="text-amber-600 dark:text-amber-400 font-black">70 / 25 / 5%</span>
+                  <div className="mt-4 pt-3 border-t border-[#e5e1d8] dark:border-[#332f2b]">
+                    <div className="flex items-center justify-between text-xs font-medium text-[#1c1917] dark:text-[#f5f3ef] mb-2">
+                      <span>Keto macro split ({calculatedTdee} kcal TDEE)</span>
+                      <span className="text-[#57534e] dark:text-[#b5afa6]">70 / 25 / 5%</span>
                     </div>
-                    <div className="grid grid-cols-3 gap-1.5 text-center text-[11px]">
-                      <div className="bg-amber-50/80 dark:bg-amber-950/40 p-2 rounded-xl border border-amber-200/80 dark:border-amber-800/60">
-                        <span className="block text-[10px] font-bold text-amber-700 dark:text-amber-300">Fat (70%)</span>
-                        <span className="block text-sm font-black text-slate-900 dark:text-white">{ketoFatG}g</span>
-                        <span className="block text-[9px] text-slate-500 dark:text-slate-400">9 kcal/g</span>
+                    <div className="grid grid-cols-3 gap-2 text-center text-[11px]">
+                      <div className="bg-[#ffffff] dark:bg-[#1c1917] p-2.5 rounded-[8px] border border-[#e5e1d8] dark:border-[#332f2b]">
+                        <span className="block text-[10px] font-normal text-[#57534e] dark:text-[#b5afa6]">Fat (70%)</span>
+                        <span className="block text-sm font-medium text-[#1c1917] dark:text-[#f5f3ef]">{ketoFatG}g</span>
+                        <span className="block text-[10px] text-[#78716c] dark:text-[#8c857d]">9 kcal/g</span>
                       </div>
-                      <div className="bg-indigo-50/80 dark:bg-indigo-950/40 p-2 rounded-xl border border-indigo-200/80 dark:border-indigo-800/60">
-                        <span className="block text-[10px] font-bold text-indigo-700 dark:text-indigo-300">Protein (25%)</span>
-                        <span className="block text-sm font-black text-slate-900 dark:text-white">{ketoProteinG}g</span>
-                        <span className="block text-[9px] text-slate-500 dark:text-slate-400">4 kcal/g</span>
+                      <div className="bg-[#ffffff] dark:bg-[#1c1917] p-2.5 rounded-[8px] border border-[#e5e1d8] dark:border-[#332f2b]">
+                        <span className="block text-[10px] font-normal text-[#57534e] dark:text-[#b5afa6]">Protein (25%)</span>
+                        <span className="block text-sm font-medium text-[#1c1917] dark:text-[#f5f3ef]">{ketoProteinG}g</span>
+                        <span className="block text-[10px] text-[#78716c] dark:text-[#8c857d]">4 kcal/g</span>
                       </div>
-                      <div className="bg-emerald-50/80 dark:bg-emerald-950/40 p-2 rounded-xl border border-emerald-200/80 dark:border-emerald-800/60">
-                        <span className="block text-[10px] font-bold text-emerald-700 dark:text-emerald-300">Net Carbs (5%)</span>
-                        <span className="block text-sm font-black text-slate-900 dark:text-white">{ketoCarbsG}g</span>
-                        <span className="block text-[9px] text-slate-500 dark:text-slate-400">4 kcal/g</span>
+                      <div className="bg-[#ffffff] dark:bg-[#1c1917] p-2.5 rounded-[8px] border border-[#e5e1d8] dark:border-[#332f2b]">
+                        <span className="block text-[10px] font-normal text-[#57534e] dark:text-[#b5afa6]">Net carbs (5%)</span>
+                        <span className="block text-sm font-medium text-[#1c1917] dark:text-[#f5f3ef]">{ketoCarbsG}g</span>
+                        <span className="block text-[10px] text-[#78716c] dark:text-[#8c857d]">4 kcal/g</span>
                       </div>
                     </div>
                   </div>
@@ -1903,39 +1927,43 @@ export const HeroToolBox: React.FC<HeroToolBoxProps> = ({
 
           {mode === 'subway' && (
             <div>
-              <span className="text-[11px] font-bold tracking-wider uppercase text-slate-500 dark:text-slate-400 block mb-1 pr-28">
-                {activeBrand === 'mcdonalds' ? p.mcdResultHeading : activeBrand === 'five-guys' ? p.fiveGuysResultHeading : t.resultHeadingSubway}
+              <span className="text-xs font-medium text-[#57534e] dark:text-[#b5afa6] block mb-2 pr-28">
+                {activeBrand === 'five-guys'
+                  ? 'Five Guys meal total'
+                  : activeBrand === 'mcdonalds'
+                  ? p.mcdResultHeading
+                  : t.resultHeadingSubway}
               </span>
-              <div className="text-4xl sm:text-5xl font-black text-[#ca5983] dark:text-pink-400 tabular-nums">
-                {activeRestaurantCalories} <span className="text-base font-semibold text-slate-500 dark:text-slate-400">kcal</span>
+              <div className="text-4xl sm:text-5xl font-medium text-[#c2410c] dark:text-[#ea580c] tabular-nums">
+                {activeRestaurantCalories} <span className="text-base font-normal text-[#57534e] dark:text-[#b5afa6]">kcal</span>
               </div>
-              <p className="text-xs text-slate-500 dark:text-slate-300 mt-2 leading-relaxed">
-                {activeBrand === 'mcdonalds'
+              <p className="text-xs text-[#57534e] dark:text-[#b5afa6] mt-2 leading-relaxed tabular-nums">
+                {activeBrand === 'five-guys'
+                  ? `Represents ${Math.round((activeRestaurantCalories / Math.max(1200, calculatedTdee - 500)) * 100)}% of a ${Math.max(1200, calculatedTdee - 500)} kcal daily weight-loss budget. Fresh-cut fries cooked in pure peanut oil.`
+                  : activeBrand === 'mcdonalds'
                   ? `Represents ${Math.round((activeRestaurantCalories / Math.max(1200, calculatedTdee - 500)) * 100)}% of a ${Math.max(1200, calculatedTdee - 500)} kcal daily weight-loss budget.`
-                  : activeBrand === 'five-guys'
-                  ? 'Estimated from the official Five Guys nutrition guide; toppings and customizations change the total.'
-                  : `Estimated for a ${subwaySize === 'footlong' ? '12-Inch Footlong' : '6-Inch Sub'} based on official restaurant nutrition guides.`}
+                  : `Estimated for a ${subwaySize === 'footlong' ? '12-inch footlong' : '6-inch sub'} based on official restaurant nutrition guides.`}
               </p>
             </div>
           )}
 
           {/* Action Buttons: 48px Touch-Friendly Download PDF Report & Copy */}
-          <div className="space-y-2.5 pt-4 border-t border-slate-200 dark:border-slate-700">
+          <div className="space-y-2.5 pt-4 border-t border-[#e5e1d8] dark:border-[#332f2b]">
             <button
               type="button"
               onClick={downloadResult}
-              className="w-full min-h-[48px] py-3 px-4 bg-gradient-to-r from-[#ca3500] via-[#d35a2f] to-[#7334fd] hover:opacity-95 text-white font-extrabold text-sm rounded-xl shadow-lg shadow-orange-500/20 flex items-center justify-center gap-2 transition-all active:scale-98 cursor-pointer"
+              className="w-full min-h-[44px] py-2.5 px-4 bg-[#c2410c] hover:bg-[#9a3412] text-white font-medium text-sm rounded-[8px] flex items-center justify-center gap-2 transition-colors duration-150 cursor-pointer"
             >
               {pdfDownloaded ? (
                 <>
-                  <CheckCircle2 className="w-4 h-4 shrink-0" />
+                  <CheckCircle2 className="w-4 h-4 shrink-0" strokeWidth={1.75} />
                   <span>{t.pdfReportDownloaded}</span>
                 </>
               ) : (
                 <>
-                  <FileText className="w-4 h-4 shrink-0" />
+                  <FileText className="w-4 h-4 shrink-0" strokeWidth={1.75} />
                   <span>{t.downloadReport}</span>
-                  <span className="text-[11px] font-bold bg-white/20 px-2 py-0.5 rounded-md">
+                  <span className="text-[11px] font-medium bg-white/15 px-1.5 py-0.5 rounded-[6px]">
                     PDF
                   </span>
                 </>
@@ -1946,19 +1974,19 @@ export const HeroToolBox: React.FC<HeroToolBoxProps> = ({
               <button
                 type="button"
                 onClick={copySummary}
-                className="min-h-[44px] py-2.5 px-3 bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 active:bg-slate-200 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 font-bold text-xs rounded-xl flex items-center justify-center gap-1.5 transition-colors"
+                className="min-h-[40px] py-2 px-3 bg-[#ffffff] dark:bg-[#1c1917] hover:bg-[#f3f1ed] dark:hover:bg-[#25221f] border border-[#e5e1d8] dark:border-[#332f2b] text-[#1c1917] dark:text-[#f5f3ef] font-medium text-xs rounded-[8px] flex items-center justify-center gap-1.5 transition-colors duration-150 cursor-pointer"
               >
-                <Copy className="w-3.5 h-3.5 text-slate-500 dark:text-slate-400 shrink-0" />
+                <Copy className="w-4 h-4 text-[#57534e] dark:text-[#b5afa6] shrink-0" strokeWidth={1.75} />
                 <span>{copied ? t.copied : t.copySummary}</span>
               </button>
 
               <button
                 type="button"
                 onClick={triggerCelebration}
-                className="min-h-[44px] py-2.5 px-3 bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 active:bg-slate-200 border border-slate-200 dark:border-slate-700 text-[#7334fd] dark:text-indigo-300 font-bold text-xs rounded-xl flex items-center justify-center gap-1.5 transition-colors"
+                className="min-h-[40px] py-2 px-3 bg-[#ffffff] dark:bg-[#1c1917] hover:bg-[#f3f1ed] dark:hover:bg-[#25221f] border border-[#e5e1d8] dark:border-[#332f2b] text-[#1c1917] dark:text-[#f5f3ef] font-medium text-xs rounded-[8px] flex items-center justify-center gap-1.5 transition-colors duration-150 cursor-pointer"
               >
-                <Sparkles className="w-3.5 h-3.5 shrink-0" />
-                <span>{t.celebrate}</span>
+                <Award className="w-4 h-4 text-[#57534e] dark:text-[#b5afa6] shrink-0" strokeWidth={1.75} />
+                <span>Mark milestone</span>
               </button>
             </div>
           </div>

@@ -143,7 +143,7 @@ export const SiloContentSections: React.FC<SiloContentSectionsProps> = ({
         )}
               {/* Dedicated Calculators Navigation List for BMI, BMI Chart, Ideal Weight, Newborn & Baby Tools */}
         <div className="mt-4 pt-4 border-t border-slate-100 dark:border-slate-800">
-          <h3 className="text-xs font-extrabold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-2.5">
+          <h3 className="text-xs font-semibold text-slate-500 dark:text-slate-400 mb-2.5">
             BMI, Ideal Weight &amp; Pediatric Calculators Navigation
           </h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2 text-xs">
@@ -189,7 +189,7 @@ export const SiloContentSections: React.FC<SiloContentSectionsProps> = ({
       {/* ================= SILO 1: PERCENTAGE ================= */}
       <section id="percentage" className="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-10 border border-slate-200 dark:border-slate-800 shadow-sm space-y-6 scroll-mt-20 transition-colors">
         <div className="border-b border-slate-100 dark:border-slate-800 pb-4 space-y-2">
-          <h2 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">
+          <h2 className="text-2xl sm:text-3xl font-semibold text-slate-900 dark:text-white">
             Weight Loss Percentage Calculator
           </h2>
           <p className="text-slate-600 dark:text-slate-300 text-xs sm:text-sm leading-relaxed">
@@ -434,7 +434,7 @@ export const SiloContentSections: React.FC<SiloContentSectionsProps> = ({
       {/* ================= SILO 2: NEWBORN ================= */}
       <section id="newborn" className="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-10 border border-slate-200 dark:border-slate-800 shadow-sm space-y-6 scroll-mt-20 transition-colors">
         <div className="border-b border-slate-100 dark:border-slate-800 pb-4 space-y-2">
-          <h2 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">
+          <h2 className="text-2xl sm:text-3xl font-semibold text-slate-900 dark:text-white">
             Newborn Weight Loss Calculator
           </h2>
           <p className="text-slate-600 dark:text-slate-300 text-xs sm:text-sm leading-relaxed">
@@ -718,7 +718,7 @@ export const SiloContentSections: React.FC<SiloContentSectionsProps> = ({
       <section id="water-fasting" className="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-10 border border-slate-200 dark:border-slate-800 shadow-sm space-y-6 scroll-mt-20 transition-colors">
         <div className="border-b border-slate-100 dark:border-slate-800 pb-4 flex flex-wrap items-center justify-between gap-3">
           <div>
-            <h2 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">
+            <h2 className="text-2xl sm:text-3xl font-semibold text-slate-900 dark:text-white">
               Water Fasting &amp; OMAD Weight Loss Calculator
             </h2>
             <p className="text-slate-600 dark:text-slate-300 text-sm mt-1">
@@ -818,7 +818,7 @@ export const SiloContentSections: React.FC<SiloContentSectionsProps> = ({
       <section id="glp1-calculator" className="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-10 border border-slate-200 dark:border-slate-800 shadow-sm space-y-6 scroll-mt-20 transition-colors">
         <div className="border-b border-slate-100 dark:border-slate-800 pb-4 flex flex-wrap items-center justify-between gap-3">
           <div>
-            <h2 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">
+            <h2 className="text-2xl sm:text-3xl font-semibold text-slate-900 dark:text-white">
               GLP-1, Semaglutide &amp; Tirzepatide Weight Loss Calculator
             </h2>
             <p className="text-slate-600 dark:text-slate-300 text-sm mt-1">
@@ -871,7 +871,7 @@ export const SiloContentSections: React.FC<SiloContentSectionsProps> = ({
       {/* ================= SILO 3: CALORIE ================= */}
       <section id="calorie" className="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-10 border border-slate-200 dark:border-slate-800 shadow-sm space-y-6 scroll-mt-20 transition-colors">
         <div className="border-b border-slate-100 dark:border-slate-800 pb-4">
-          <h2 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">
+          <h2 className="text-2xl sm:text-3xl font-semibold text-slate-900 dark:text-white">
             Subway Calorie Calculator
           </h2>
           <p className="text-slate-600 dark:text-slate-300 text-sm mt-1">
@@ -913,7 +913,7 @@ export const SiloContentSections: React.FC<SiloContentSectionsProps> = ({
       {/* ================= SILO 4: NUTRITION ================= */}
       <section id="nutrition" className="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-10 border border-slate-200 dark:border-slate-800 shadow-sm space-y-6 scroll-mt-20 transition-colors">
         <div className="border-b border-slate-100 dark:border-slate-800 pb-4">
-          <h2 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">
+          <h2 className="text-2xl sm:text-3xl font-semibold text-slate-900 dark:text-white">
             Subway Nutrition Calculator
           </h2>
           <p className="text-slate-600 dark:text-slate-300 text-sm mt-1">
@@ -981,7 +981,7 @@ export const SiloContentSections: React.FC<SiloContentSectionsProps> = ({
       {/* ================= SILO 5: LBS ================= */}
       <section id="lbs" className="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-10 border border-slate-200 dark:border-slate-800 shadow-sm space-y-6 scroll-mt-20 transition-colors">
         <div className="border-b border-slate-100 dark:border-slate-800 pb-4">
-          <h2 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">
+          <h2 className="text-2xl sm:text-3xl font-semibold text-slate-900 dark:text-white">
             5'2" 105 lbs
           </h2>
           <p className="text-slate-600 dark:text-slate-300 text-sm mt-1">
@@ -1017,7 +1017,7 @@ export const SiloContentSections: React.FC<SiloContentSectionsProps> = ({
       {/* ================= SILO 6: MUCH ================= */}
       <section id="much" className="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-10 border border-slate-200 dark:border-slate-800 shadow-sm space-y-6 scroll-mt-20 transition-colors">
         <div className="border-b border-slate-100 dark:border-slate-800 pb-4">
-          <h2 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">
+          <h2 className="text-2xl sm:text-3xl font-semibold text-slate-900 dark:text-white">
             How Much Weight Have I Lost Calculator
           </h2>
           <p className="text-slate-600 dark:text-slate-300 text-sm mt-1">
@@ -1045,7 +1045,7 @@ export const SiloContentSections: React.FC<SiloContentSectionsProps> = ({
       {/* ================= SILO 7: CALORIES ================= */}
       <section id="calories" className="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-10 border border-slate-200 dark:border-slate-800 shadow-sm space-y-6 scroll-mt-20 transition-colors">
         <div className="border-b border-slate-100 dark:border-slate-800 pb-4">
-          <h2 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">
+          <h2 className="text-2xl sm:text-3xl font-semibold text-slate-900 dark:text-white">
             Subway Calories Calculator
           </h2>
           <p className="text-slate-600 dark:text-slate-300 text-sm mt-1">
@@ -1068,7 +1068,7 @@ export const SiloContentSections: React.FC<SiloContentSectionsProps> = ({
       {/* ================= SILO 8: PERCENT ================= */}
       <section id="percent" className="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-10 border border-slate-200 dark:border-slate-800 shadow-sm space-y-6 scroll-mt-20 transition-colors">
         <div className="border-b border-slate-100 dark:border-slate-800 pb-4">
-          <h2 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">
+          <h2 className="text-2xl sm:text-3xl font-semibold text-slate-900 dark:text-white">
             Percent Weight Loss Calculator
           </h2>
           <p className="text-slate-600 dark:text-slate-300 text-sm mt-1">
@@ -1102,7 +1102,7 @@ export const SiloContentSections: React.FC<SiloContentSectionsProps> = ({
       {/* ================= SILO 9: BABY ================= */}
       <section id="baby" className="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-10 border border-slate-200 dark:border-slate-800 shadow-sm space-y-6 scroll-mt-20 transition-colors">
         <div className="border-b border-slate-100 dark:border-slate-800 pb-4 space-y-2">
-          <h2 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">
+          <h2 className="text-2xl sm:text-3xl font-semibold text-slate-900 dark:text-white">
             Baby Weight Loss Percentage Calculator
           </h2>
           <p className="text-slate-600 dark:text-slate-300 text-xs sm:text-sm leading-relaxed">
@@ -1301,7 +1301,7 @@ export const SiloContentSections: React.FC<SiloContentSectionsProps> = ({
       {/* ================= SILO 10: KETO ================= */}
       <section id="keto" className="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-10 border border-slate-200 dark:border-slate-800 shadow-sm space-y-6 scroll-mt-20 transition-colors">
         <div className="border-b border-slate-100 dark:border-slate-800 pb-4">
-          <h2 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">
+          <h2 className="text-2xl sm:text-3xl font-semibold text-slate-900 dark:text-white">
             Keto Diet Calculator
           </h2>
           <p className="text-slate-600 dark:text-slate-300 text-sm mt-1">
@@ -1326,7 +1326,7 @@ export const SiloContentSections: React.FC<SiloContentSectionsProps> = ({
       {/* ================= SILO 11: METABOLIC RATE ================= */}
       <section id="metabolic-rate" className="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-10 border border-slate-200 dark:border-slate-800 shadow-sm space-y-6 scroll-mt-20 transition-colors">
         <div className="border-b border-slate-100 dark:border-slate-800 pb-4">
-          <h2 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">
+          <h2 className="text-2xl sm:text-3xl font-semibold text-slate-900 dark:text-white">
             Basal Metabolic Rate Calculator
           </h2>
           <p className="text-slate-600 dark:text-slate-300 text-sm mt-1">
@@ -1349,7 +1349,7 @@ export const SiloContentSections: React.FC<SiloContentSectionsProps> = ({
       {/* ================= SILO 12: GASTRIC BYPASS ================= */}
       <section id="gastric-bypass" className="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-10 border border-slate-200 dark:border-slate-800 shadow-sm space-y-6 scroll-mt-20 transition-colors">
         <div className="border-b border-slate-100 dark:border-slate-800 pb-4">
-          <h2 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">
+          <h2 className="text-2xl sm:text-3xl font-semibold text-slate-900 dark:text-white">
             Gastric Bypass Surgery Weight Loss Calculator
           </h2>
           <p className="text-slate-600 dark:text-slate-300 text-sm mt-1">
@@ -1375,7 +1375,7 @@ export const SiloContentSections: React.FC<SiloContentSectionsProps> = ({
       {/* ================= SILO 13: CALCULATE BIRTH ================= */}
       <section id="calculate-birth" className="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-10 border border-slate-200 dark:border-slate-800 shadow-sm space-y-6 scroll-mt-20 transition-colors">
         <div className="border-b border-slate-100 dark:border-slate-800 pb-4">
-          <h2 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">
+          <h2 className="text-2xl sm:text-3xl font-semibold text-slate-900 dark:text-white">
             Birth Weight Loss Calculator
           </h2>
           <p className="text-slate-600 dark:text-slate-300 text-sm mt-1">
@@ -1398,7 +1398,7 @@ export const SiloContentSections: React.FC<SiloContentSectionsProps> = ({
       {/* ================= SILO 14: PER MONTH ================= */}
       <section id="per-month" className="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-10 border border-slate-200 dark:border-slate-800 shadow-sm space-y-6 scroll-mt-20 transition-colors">
         <div className="border-b border-slate-100 dark:border-slate-800 pb-4">
-          <h2 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">
+          <h2 className="text-2xl sm:text-3xl font-semibold text-slate-900 dark:text-white">
             Healthy Weight Loss Per Month
           </h2>
           <p className="text-slate-600 dark:text-slate-300 text-sm mt-1">
@@ -1425,7 +1425,7 @@ export const SiloContentSections: React.FC<SiloContentSectionsProps> = ({
       {/* ================= SILO 15: BMR ================= */}
       <section id="bmr" className="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-10 border border-slate-200 dark:border-slate-800 shadow-sm space-y-6 scroll-mt-20 transition-colors">
         <div className="border-b border-slate-100 dark:border-slate-800 pb-4 space-y-2">
-          <h2 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">
+          <h2 className="text-2xl sm:text-3xl font-semibold text-slate-900 dark:text-white">
             BMR Calculator: Basal Metabolic Rate &amp; Resting Calories
           </h2>
           <p className="text-slate-600 dark:text-slate-300 text-xs sm:text-sm leading-relaxed">
@@ -1644,7 +1644,7 @@ export const SiloContentSections: React.FC<SiloContentSectionsProps> = ({
       {/* ================= SILO 16: INFANT ================= */}
       <section id="infant" className="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-10 border border-slate-200 dark:border-slate-800 shadow-sm space-y-6 scroll-mt-20 transition-colors">
         <div className="border-b border-slate-100 dark:border-slate-800 pb-4">
-          <h2 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">
+          <h2 className="text-2xl sm:text-3xl font-semibold text-slate-900 dark:text-white">
             Infant Weight Loss Calculator
           </h2>
           <p className="text-slate-600 dark:text-slate-300 text-sm mt-1">
@@ -1667,7 +1667,7 @@ export const SiloContentSections: React.FC<SiloContentSectionsProps> = ({
       {/* ================= SILO 17: BMI ================= */}
       <section id="bmi" className="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-10 border border-slate-200 dark:border-slate-800 shadow-sm space-y-6 scroll-mt-20 transition-colors">
         <div className="border-b border-slate-100 dark:border-slate-800 pb-4">
-          <h2 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">
+          <h2 className="text-2xl sm:text-3xl font-semibold text-slate-900 dark:text-white">
             5'4" 115 BMI
           </h2>
           <p className="text-slate-600 dark:text-slate-300 text-sm mt-1">
@@ -1690,7 +1690,7 @@ export const SiloContentSections: React.FC<SiloContentSectionsProps> = ({
       {/* ================= SILO 18: SUBWAY ================= */}
       <section id="subway" className="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-10 border border-slate-200 dark:border-slate-800 shadow-sm space-y-6 scroll-mt-20 transition-colors">
         <div className="border-b border-slate-100 dark:border-slate-800 pb-4 space-y-2">
-          <h2 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">
+          <h2 className="text-2xl sm:text-3xl font-semibold text-slate-900 dark:text-white">
             Subway Nutrition Calculator &amp; Calorie Counter (2026 Menu)
           </h2>
           <p className="text-slate-600 dark:text-slate-300 text-xs sm:text-sm leading-relaxed">
@@ -1867,7 +1867,7 @@ export const SiloContentSections: React.FC<SiloContentSectionsProps> = ({
       {/* ================= SILO 19: BARIATRIC SURGERY ================= */}
       <section id="bariatric-surgery" className="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-10 border border-slate-200 dark:border-slate-800 shadow-sm space-y-6 scroll-mt-20 transition-colors">
         <div className="border-b border-slate-100 dark:border-slate-800 pb-4">
-          <h2 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">
+          <h2 className="text-2xl sm:text-3xl font-semibold text-slate-900 dark:text-white">
             Bariatric Calculator
           </h2>
           <p className="text-slate-600 dark:text-slate-300 text-sm mt-1">
@@ -1890,7 +1890,7 @@ export const SiloContentSections: React.FC<SiloContentSectionsProps> = ({
       {/* ================= SILO 20: BIGGEST LOSER ================= */}
       <section id="biggest-loser" className="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-10 border border-slate-200 dark:border-slate-800 shadow-sm space-y-6 scroll-mt-20 transition-colors">
         <div className="border-b border-slate-100 dark:border-slate-800 pb-4 space-y-2">
-          <h2 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">
+          <h2 className="text-2xl sm:text-3xl font-semibold text-slate-900 dark:text-white">
             Biggest Loser Weight Loss Calculator
           </h2>
           <p className="text-slate-600 dark:text-slate-300 text-xs sm:text-sm leading-relaxed">
@@ -2062,7 +2062,7 @@ export const SiloContentSections: React.FC<SiloContentSectionsProps> = ({
       {/* ================= SILO 21: CALCULATE ================= */}
       <section id="calculate" className="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-10 border border-slate-200 dark:border-slate-800 shadow-sm space-y-6 scroll-mt-20 transition-colors">
         <div className="border-b border-slate-100 dark:border-slate-800 pb-4">
-          <h2 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">
+          <h2 className="text-2xl sm:text-3xl font-semibold text-slate-900 dark:text-white">
             Calculate Weight Loss
           </h2>
           <p className="text-slate-600 dark:text-slate-300 text-sm mt-1">
@@ -2085,7 +2085,7 @@ export const SiloContentSections: React.FC<SiloContentSectionsProps> = ({
       {/* ================= SILO 22: BODY ================= */}
       <section id="body" className="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-10 border border-slate-200 dark:border-slate-800 shadow-sm space-y-6 scroll-mt-20 transition-colors">
         <div className="border-b border-slate-100 dark:border-slate-800 pb-4">
-          <h2 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">
+          <h2 className="text-2xl sm:text-3xl font-semibold text-slate-900 dark:text-white">
             Total Body Weight Loss
           </h2>
           <p className="text-slate-600 dark:text-slate-300 text-sm mt-1">
@@ -2108,7 +2108,7 @@ export const SiloContentSections: React.FC<SiloContentSectionsProps> = ({
       {/* ================= SILO 23: POUNDS ================= */}
       <section id="pounds" className="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-10 border border-slate-200 dark:border-slate-800 shadow-sm space-y-6 scroll-mt-20 transition-colors">
         <div className="border-b border-slate-100 dark:border-slate-800 pb-4">
-          <h2 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">
+          <h2 className="text-2xl sm:text-3xl font-semibold text-slate-900 dark:text-white">
             10% of 7 Pounds
           </h2>
           <p className="text-slate-600 dark:text-slate-300 text-sm mt-1">
@@ -2131,7 +2131,7 @@ export const SiloContentSections: React.FC<SiloContentSectionsProps> = ({
       {/* ================= SILO 24: TDEE ================= */}
       <section id="tdee" className="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-10 border border-slate-200 dark:border-slate-800 shadow-sm space-y-6 scroll-mt-20 transition-colors">
         <div className="border-b border-slate-100 dark:border-slate-800 pb-4">
-          <h2 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">
+          <h2 className="text-2xl sm:text-3xl font-semibold text-slate-900 dark:text-white">
             TDEE Calculator
           </h2>
           <p className="text-slate-600 dark:text-slate-300 text-sm mt-1">

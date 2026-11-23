@@ -37,13 +37,13 @@ export function calculateBmi(weightKg: number, heightMeters: number): number {
 }
 
 export function getBmiCategory(bmi: number): { label: string; color: string; desc: string } {
-  if (bmi <= 0) return { label: 'Unknown', color: 'text-slate-500', desc: 'No data' };
-  if (bmi < 18.5) return { label: 'Underweight', color: 'text-amber-500', desc: 'Below recommended healthy range' };
-  if (bmi < 25.0) return { label: 'Normal weight', color: 'text-emerald-500', desc: 'Optimal health range' };
-  if (bmi < 30.0) return { label: 'Overweight', color: 'text-amber-600', desc: 'Slightly above recommended range' };
-  if (bmi < 35.0) return { label: 'Obese (Class I)', color: 'text-rose-500', desc: 'Moderate health risk' };
-  if (bmi < 40.0) return { label: 'Obese (Class II)', color: 'text-rose-600', desc: 'Severe health risk' };
-  return { label: 'Obese (Class III)', color: 'text-purple-600', desc: 'Very severe health risk' };
+  if (bmi <= 0) return { label: 'Unknown', color: 'text-[#78716c]', desc: 'No data' };
+  if (bmi < 18.5) return { label: 'Underweight', color: 'text-[#57534e]', desc: 'Below recommended healthy range' };
+  if (bmi < 25.0) return { label: 'Normal weight', color: 'text-[#1c1917] dark:text-[#f5f3ef]', desc: 'Within standard reference range' };
+  if (bmi < 30.0) return { label: 'Overweight', color: 'text-[#57534e]', desc: 'Above standard reference range' };
+  if (bmi < 35.0) return { label: 'Obese (Class I)', color: 'text-[#44403c]', desc: 'Moderate health risk' };
+  if (bmi < 40.0) return { label: 'Obese (Class II)', color: 'text-[#44403c]', desc: 'Elevated health risk' };
+  return { label: 'Obese (Class III)', color: 'text-[#1c1917] dark:text-[#f5f3ef]', desc: 'High health risk' };
 }
 
 export function getHeightInMeters(height: HeightData): number {
@@ -212,27 +212,27 @@ export function calculateWeightLossResult(
 export const CLINICAL_MILESTONES = [
   {
     percentage: 5,
-    title: '5% Clinical Landmark',
-    clinicalImpact: 'Clinically proven to significantly lower blood pressure, normalize blood glucose (HbA1c), reduce liver enzymes, and reduce cardiovascular risk by up to 25%.',
-    badgeColor: 'emerald'
+    title: '5% clinical milestone',
+    clinicalImpact: 'Clinically shown to lower blood pressure, improve blood glucose (HbA1c), reduce liver enzymes, and reduce cardiovascular risk by up to 25%.',
+    badgeColor: 'stone'
   },
   {
     percentage: 10,
-    title: '10% Metabolic Reset',
-    clinicalImpact: 'Marked reduction in visceral abdominal fat, significant reduction in obstructive sleep apnea severity, 50% drop in fasting triglycerides, and marked easing of osteoarthritis knee pressure.',
-    badgeColor: 'sky'
+    title: '10% metabolic milestone',
+    clinicalImpact: 'Marked reduction in visceral abdominal fat, reduced obstructive sleep apnea severity, lower fasting triglycerides, and less knee joint load.',
+    badgeColor: 'stone'
   },
   {
     percentage: 15,
-    title: '15% Systemic Transformation',
-    clinicalImpact: 'High potential for complete remission of type 2 diabetes, dramatic improvement in NASH/fatty liver disease, major mobility enhancement, and decreased overall systemic inflammation markers (CRP).',
-    badgeColor: 'indigo'
+    title: '15% clinical milestone',
+    clinicalImpact: 'Higher likelihood of type 2 diabetes remission, meaningful improvement in fatty liver disease, improved mobility, and lower systemic inflammation markers (CRP).',
+    badgeColor: 'stone'
   },
   {
     percentage: 20,
-    title: '20% Peak Health Rejuvenation',
-    clinicalImpact: 'Long-term vascular rejuvenation, profound reduction in all-cause mortality hazard, normalization of metabolic syndrome profile, and substantial improvement in stamina and vitality.',
-    badgeColor: 'purple'
+    title: '20% sustained reduction',
+    clinicalImpact: 'Long-term vascular improvement, lower all-cause mortality risk, improved metabolic profile, and measurable gains in physical stamina.',
+    badgeColor: 'stone'
   }
 ];
 

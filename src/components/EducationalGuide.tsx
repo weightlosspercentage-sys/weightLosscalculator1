@@ -39,7 +39,7 @@ export const EducationalGuide: React.FC = () => {
       {/* Header */}
       <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-xs">
         <div className="flex items-center gap-2">
-          <span className="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold">
+          <span className="w-8 h-8 rounded-lg bg-orange-100 text-[#c2410c] flex items-center justify-center font-bold">
             <BookOpen className="w-5 h-5" />
           </span>
           <h2 className="text-xl font-bold text-slate-900">
@@ -55,7 +55,7 @@ export const EducationalGuide: React.FC = () => {
       {/* Interactive 3-Step Formula Breakdown */}
       <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-xs space-y-6">
         <h3 className="font-bold text-slate-900 text-base flex items-center gap-2">
-          <Calculator className="w-5 h-5 text-emerald-600" />
+          <Calculator className="w-5 h-5 text-[#c2410c]" />
           Interactive 3-Step Formula Walkthrough
         </h3>
 
@@ -63,7 +63,7 @@ export const EducationalGuide: React.FC = () => {
           {/* Step 1 */}
           <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
             <div className="flex items-center gap-2 font-bold text-slate-800 text-sm">
-              <span className="w-6 h-6 rounded-full bg-emerald-600 text-white flex items-center justify-center text-xs">
+              <span className="w-6 h-6 rounded-full bg-[#c2410c] text-white flex items-center justify-center text-xs">
                 1
               </span>
               Find Total Weight Lost
@@ -72,14 +72,14 @@ export const EducationalGuide: React.FC = () => {
               Subtract your current weight from your initial starting weight:
             </p>
             <div className="p-2.5 bg-white rounded-lg border border-slate-200 font-mono text-xs text-slate-800">
-              {demoStart} - {demoCurrent} = <strong className="text-emerald-700">{demoLost} lbs</strong>
+              {demoStart} - {demoCurrent} = <strong className="text-[#c2410c]">{demoLost} lbs</strong>
             </div>
           </div>
 
           {/* Step 2 */}
           <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
             <div className="flex items-center gap-2 font-bold text-slate-800 text-sm">
-              <span className="w-6 h-6 rounded-full bg-emerald-600 text-white flex items-center justify-center text-xs">
+              <span className="w-6 h-6 rounded-full bg-[#c2410c] text-white flex items-center justify-center text-xs">
                 2
               </span>
               Divide by Starting Weight
@@ -88,14 +88,14 @@ export const EducationalGuide: React.FC = () => {
               Divide the lost amount by your original starting baseline:
             </p>
             <div className="p-2.5 bg-white rounded-lg border border-slate-200 font-mono text-xs text-slate-800">
-              {demoLost} ÷ {demoStart} = <strong className="text-emerald-700">{demoFraction}</strong>
+              {demoLost} ÷ {demoStart} = <strong className="text-[#c2410c]">{demoFraction}</strong>
             </div>
           </div>
 
           {/* Step 3 */}
           <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
             <div className="flex items-center gap-2 font-bold text-slate-800 text-sm">
-              <span className="w-6 h-6 rounded-full bg-emerald-600 text-white flex items-center justify-center text-xs">
+              <span className="w-6 h-6 rounded-full bg-[#c2410c] text-white flex items-center justify-center text-xs">
                 3
               </span>
               Multiply by 100 for %
@@ -104,15 +104,15 @@ export const EducationalGuide: React.FC = () => {
               Multiply the decimal result by 100 to convert to a percentage:
             </p>
             <div className="p-2.5 bg-white rounded-lg border border-slate-200 font-mono text-xs text-slate-800">
-              {demoFraction} × 100 = <strong className="text-emerald-700">{demoPct}%</strong>
+              {demoFraction} × 100 = <strong className="text-[#c2410c]">{demoPct}%</strong>
             </div>
           </div>
         </div>
 
         {/* Try with slider */}
-        <div className="p-4 bg-emerald-50/60 rounded-xl border border-emerald-100 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="p-4 bg-orange-50/60 rounded-xl border border-orange-100 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="space-y-1 text-xs">
-            <span className="font-bold text-emerald-900 block">Try your own test values:</span>
+            <span className="font-bold text-[#7c2d12] block">Try your own test values:</span>
             <div className="flex items-center gap-3">
               <label className="flex items-center gap-1.5 font-medium text-slate-700">
                 Start:
@@ -137,7 +137,7 @@ export const EducationalGuide: React.FC = () => {
 
           <div className="text-center sm:text-right">
             <span className="text-xs text-slate-500 block">Calculated Result:</span>
-            <span className="text-2xl font-black text-emerald-700">
+            <span className="text-2xl font-semibold text-[#c2410c]">
               {demoPct}% lost
             </span>
           </div>
@@ -147,7 +147,7 @@ export const EducationalGuide: React.FC = () => {
       {/* Frequently Asked Questions Accordion */}
       <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-xs space-y-4">
         <h3 className="font-bold text-slate-900 text-base flex items-center gap-2">
-          <HelpCircle className="w-5 h-5 text-emerald-600" />
+          <HelpCircle className="w-5 h-5 text-[#c2410c]" />
           Frequently Asked Questions
         </h3>
 

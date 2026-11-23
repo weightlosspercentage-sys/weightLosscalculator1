@@ -13,7 +13,6 @@ import {
   Calendar,
   Flame,
   CheckCircle2,
-  Sparkles,
   Copy,
   PlusCircle,
   HelpCircle,
@@ -21,6 +20,7 @@ import {
   ArrowRight,
   Scale
 } from 'lucide-react';
+import { ScaleMilestoneRule } from './ScaleMilestoneRule';
 
 interface QuickCalculatorProps {
   unit: Unit;
@@ -109,10 +109,10 @@ export const QuickCalculator: React.FC<QuickCalculatorProps> = ({
 
   const triggerConfetti = () => {
     confetti({
-      particleCount: 80,
-      spread: 70,
+      particleCount: 55,
+      spread: 60,
       origin: { y: 0.6 },
-      colors: ['#10b981', '#06b6d4', '#f59e0b', '#3b82f6', '#ec4899'],
+      colors: ['#c2410c', '#ea580c', '#78716c', '#a8a29e', '#1c1917'],
     });
   };
 
@@ -120,7 +120,7 @@ export const QuickCalculator: React.FC<QuickCalculatorProps> = ({
     if (!result) return;
     const unitLabel = unit === 'kg' ? 'kg' : 'lbs';
     const lines = [
-      '📊 Weight Loss Percentage Summary',
+      'Weight Loss Percentage Summary',
       `• Starting Weight: ${result.displayStartWeight} ${unitLabel}`,
       `• Current Weight: ${result.displayCurrentWeight} ${unitLabel}`,
       result.isLoss
@@ -204,45 +204,42 @@ export const QuickCalculator: React.FC<QuickCalculatorProps> = ({
   return (
     <div className="space-y-6">
       {/* Top Banner & Preset Quick Toggles */}
-      <div className="bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-700 rounded-2xl p-6 sm:p-8 text-white shadow-lg relative overflow-hidden">
-        <div className="absolute right-0 top-0 bottom-0 opacity-10 pointer-events-none flex items-center pr-6">
-          <TrendingDown className="w-64 h-64 text-white -mr-12" />
-        </div>
-        <div className="relative z-10 max-w-2xl">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/20 backdrop-blur text-xs font-semibold uppercase tracking-wider text-emerald-100 mb-3">
-            <Sparkles className="w-3.5 h-3.5" /> Clinical Percentage Formula
+      <div className="bg-[#ffffff] dark:bg-[#1c1917] rounded-2xl p-6 sm:p-8 border border-[#e5e1d8] dark:border-[#332f2b] shadow-xs">
+        <div className="max-w-2xl">
+          <span className="inline-block text-xs font-medium text-[#57534e] dark:text-[#b5afa6] mb-2">
+            Clinical percentage formula
           </span>
-          <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
+          <h1 className="text-2xl sm:text-3xl font-medium tracking-tight text-[#1c1917] dark:text-[#f5f3ef]">
             Accurate Weight Loss Percentage Calculator
           </h1>
-          <p className="mt-2 text-emerald-50 text-sm sm:text-base leading-relaxed">
-            Measure your genuine metabolic transformation. A 5% to 10% reduction in body weight 
-            unlocks verified cardiovascular, glycemic, and longevity benefits regardless of starting weight.
+          <p className="mt-2 text-[#57534e] dark:text-[#b5afa6] text-sm sm:text-base leading-relaxed">
+            Measure your genuine metabolic progress. A 5% to 10% reduction in body weight
+            is associated with verified cardiovascular, glycemic, and longevity benefits regardless of starting weight.
           </p>
 
           {/* Quick presets */}
           <div className="mt-4 flex flex-wrap gap-2 items-center text-xs">
-            <span className="text-emerald-200 font-medium">Quick examples:</span>
+            <span className="text-[#57534e] dark:text-[#b5afa6] font-medium">Quick examples:</span>
             <button
               type="button"
               onClick={() => handleLoadPreset('10pct')}
-              className="px-2.5 py-1 bg-white/15 hover:bg-white/25 rounded-lg border border-white/20 transition-colors"
+              className="px-3 py-1.5 bg-[#faf9f7] dark:bg-[#141210] hover:bg-[#f3f1ed] dark:hover:bg-[#25221f] text-[#1c1917] dark:text-[#f5f3ef] rounded-[8px] border border-[#e5e1d8] dark:border-[#332f2b] transition-colors duration-150 tabular-nums cursor-pointer"
             >
-              10% Landmark (215 → 193.5)
+              10% milestone (215 → 193.5)
             </button>
             <button
               type="button"
               onClick={() => handleLoadPreset('5pct')}
-              className="px-2.5 py-1 bg-white/15 hover:bg-white/25 rounded-lg border border-white/20 transition-colors"
+              className="px-3 py-1.5 bg-[#faf9f7] dark:bg-[#141210] hover:bg-[#f3f1ed] dark:hover:bg-[#25221f] text-[#1c1917] dark:text-[#f5f3ef] rounded-[8px] border border-[#e5e1d8] dark:border-[#332f2b] transition-colors duration-150 tabular-nums cursor-pointer"
             >
-              5% Landmark (180 → 171)
+              5% milestone (180 → 171)
             </button>
             <button
               type="button"
               onClick={() => handleLoadPreset('50lbs')}
-              className="px-2.5 py-1 bg-white/15 hover:bg-white/25 rounded-lg border border-white/20 transition-colors"
+              className="px-3 py-1.5 bg-[#faf9f7] dark:bg-[#141210] hover:bg-[#f3f1ed] dark:hover:bg-[#25221f] text-[#1c1917] dark:text-[#f5f3ef] rounded-[8px] border border-[#e5e1d8] dark:border-[#332f2b] transition-colors duration-150 tabular-nums cursor-pointer"
             >
-              20% Major (250 → 200)
+              20% reduction (250 → 200)
             </button>
           </div>
         </div>
@@ -251,13 +248,13 @@ export const QuickCalculator: React.FC<QuickCalculatorProps> = ({
       {/* Main Grid: Inputs vs Results */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* INPUTS COLUMN */}
-        <div className="lg:col-span-5 bg-white rounded-2xl p-6 border border-slate-200 shadow-xs space-y-5">
-          <div className="flex items-center justify-between border-b border-slate-100 pb-3">
-            <h2 className="font-bold text-slate-900 text-lg flex items-center gap-2">
-              <Scale className="w-5 h-5 text-emerald-600" />
-              Weight Inputs
+        <div className="lg:col-span-5 bg-[#ffffff] dark:bg-[#1c1917] rounded-2xl p-6 border border-[#e5e1d8] dark:border-[#332f2b] shadow-xs space-y-5">
+          <div className="flex items-center justify-between border-b border-[#e5e1d8] dark:border-[#332f2b] pb-3">
+            <h2 className="font-medium text-[#1c1917] dark:text-[#f5f3ef] text-lg flex items-center gap-2">
+              <Scale className="w-4 h-4 text-[#57534e] dark:text-[#b5afa6]" strokeWidth={1.75} />
+              Weight inputs
             </h2>
-            <span className="text-xs bg-slate-100 text-slate-600 font-semibold px-2 py-0.5 rounded-md uppercase">
+            <span className="text-xs bg-[#f3f1ed] dark:bg-[#25221f] text-[#57534e] dark:text-[#b5afa6] font-medium px-2.5 py-0.5 rounded-[8px]">
               {unit === 'st' ? 'Stones & lbs' : unit}
             </span>
           </div>
@@ -266,8 +263,8 @@ export const QuickCalculator: React.FC<QuickCalculatorProps> = ({
           {unit !== 'st' && (
             <div className="space-y-4">
               <div>
-                <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wide mb-1.5">
-                  Starting Weight ({unit})
+                <label className="block text-xs font-medium text-[#57534e] dark:text-[#b5afa6] mb-1.5">
+                  Starting weight ({unit})
                 </label>
                 <div className="relative">
                   <input
@@ -277,17 +274,17 @@ export const QuickCalculator: React.FC<QuickCalculatorProps> = ({
                     value={startWeight}
                     onChange={(e) => setStartWeight(e.target.value)}
                     placeholder="e.g. 215"
-                    className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:bg-white transition-all text-base"
+                    className="w-full px-3.5 py-2.5 bg-[#faf9f7] dark:bg-[#141210] border border-[#e5e1d8] dark:border-[#332f2b] rounded-[8px] text-[#1c1917] dark:text-[#f5f3ef] font-medium tabular-nums focus:outline-none focus:border-[#1c1917] dark:focus:border-[#f5f3ef] focus:bg-[#ffffff] dark:focus:bg-[#1c1917] transition-colors text-base"
                   />
-                  <span className="absolute right-3.5 top-2.5 text-slate-400 font-medium text-sm">
+                  <span className="absolute right-3.5 top-2.5 text-[#78716c] dark:text-[#8c857d] font-normal text-sm">
                     {unit}
                   </span>
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wide mb-1.5">
-                  Current Weight ({unit})
+                <label className="block text-xs font-medium text-[#57534e] dark:text-[#b5afa6] mb-1.5">
+                  Current weight ({unit})
                 </label>
                 <div className="relative">
                   <input
@@ -297,17 +294,17 @@ export const QuickCalculator: React.FC<QuickCalculatorProps> = ({
                     value={currentWeight}
                     onChange={(e) => setCurrentWeight(e.target.value)}
                     placeholder="e.g. 193.5"
-                    className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:bg-white transition-all text-base"
+                    className="w-full px-3.5 py-2.5 bg-[#faf9f7] dark:bg-[#141210] border border-[#e5e1d8] dark:border-[#332f2b] rounded-[8px] text-[#1c1917] dark:text-[#f5f3ef] font-medium tabular-nums focus:outline-none focus:border-[#1c1917] dark:focus:border-[#f5f3ef] focus:bg-[#ffffff] dark:focus:bg-[#1c1917] transition-colors text-base"
                   />
-                  <span className="absolute right-3.5 top-2.5 text-slate-400 font-medium text-sm">
+                  <span className="absolute right-3.5 top-2.5 text-[#78716c] dark:text-[#8c857d] font-normal text-sm">
                     {unit}
                   </span>
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wide mb-1.5">
-                  Goal / Target Weight ({unit}) <span className="text-slate-400 font-normal">(Optional)</span>
+                <label className="block text-xs font-medium text-[#57534e] dark:text-[#b5afa6] mb-1.5">
+                  Goal / target weight ({unit}) <span className="text-[#78716c] dark:text-[#8c857d] font-normal">(optional)</span>
                 </label>
                 <div className="relative">
                   <input
@@ -317,9 +314,9 @@ export const QuickCalculator: React.FC<QuickCalculatorProps> = ({
                     value={goalWeight}
                     onChange={(e) => setGoalWeight(e.target.value)}
                     placeholder="e.g. 175"
-                    className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:bg-white transition-all text-base"
+                    className="w-full px-3.5 py-2.5 bg-[#faf9f7] dark:bg-[#141210] border border-[#e5e1d8] dark:border-[#332f2b] rounded-[8px] text-[#1c1917] dark:text-[#f5f3ef] font-medium tabular-nums focus:outline-none focus:border-[#1c1917] dark:focus:border-[#f5f3ef] focus:bg-[#ffffff] dark:focus:bg-[#1c1917] transition-colors text-base"
                   />
-                  <span className="absolute right-3.5 top-2.5 text-slate-400 font-medium text-sm">
+                  <span className="absolute right-3.5 top-2.5 text-[#78716c] dark:text-[#8c857d] font-normal text-sm">
                     {unit}
                   </span>
                 </div>
@@ -331,8 +328,8 @@ export const QuickCalculator: React.FC<QuickCalculatorProps> = ({
           {unit === 'st' && (
             <div className="space-y-4">
               <div>
-                <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wide mb-1.5">
-                  Starting Weight
+                <label className="block text-xs font-medium text-[#57534e] dark:text-[#b5afa6] mb-1.5">
+                  Starting weight
                 </label>
                 <div className="grid grid-cols-2 gap-2">
                   <div className="relative">
@@ -341,9 +338,9 @@ export const QuickCalculator: React.FC<QuickCalculatorProps> = ({
                       value={startStones}
                       onChange={(e) => setStartStones(e.target.value)}
                       placeholder="Stones"
-                      className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl font-semibold text-sm"
+                      className="w-full px-3 py-2 bg-[#faf9f7] dark:bg-[#141210] border border-[#e5e1d8] dark:border-[#332f2b] rounded-[8px] text-[#1c1917] dark:text-[#f5f3ef] font-medium tabular-nums text-sm focus:outline-none focus:border-[#1c1917] dark:focus:border-[#f5f3ef]"
                     />
-                    <span className="absolute right-2.5 top-2 text-xs text-slate-400">st</span>
+                    <span className="absolute right-2.5 top-2 text-xs text-[#78716c] dark:text-[#8c857d]">st</span>
                   </div>
                   <div className="relative">
                     <input
@@ -352,16 +349,16 @@ export const QuickCalculator: React.FC<QuickCalculatorProps> = ({
                       value={startPounds}
                       onChange={(e) => setStartPounds(e.target.value)}
                       placeholder="lbs"
-                      className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl font-semibold text-sm"
+                      className="w-full px-3 py-2 bg-[#faf9f7] dark:bg-[#141210] border border-[#e5e1d8] dark:border-[#332f2b] rounded-[8px] text-[#1c1917] dark:text-[#f5f3ef] font-medium tabular-nums text-sm focus:outline-none focus:border-[#1c1917] dark:focus:border-[#f5f3ef]"
                     />
-                    <span className="absolute right-2.5 top-2 text-xs text-slate-400">lbs</span>
+                    <span className="absolute right-2.5 top-2 text-xs text-[#78716c] dark:text-[#8c857d]">lbs</span>
                   </div>
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wide mb-1.5">
-                  Current Weight
+                <label className="block text-xs font-medium text-[#57534e] dark:text-[#b5afa6] mb-1.5">
+                  Current weight
                 </label>
                 <div className="grid grid-cols-2 gap-2">
                   <div className="relative">
@@ -370,9 +367,9 @@ export const QuickCalculator: React.FC<QuickCalculatorProps> = ({
                       value={currentStones}
                       onChange={(e) => setCurrentStones(e.target.value)}
                       placeholder="Stones"
-                      className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl font-semibold text-sm"
+                      className="w-full px-3 py-2 bg-[#faf9f7] dark:bg-[#141210] border border-[#e5e1d8] dark:border-[#332f2b] rounded-[8px] text-[#1c1917] dark:text-[#f5f3ef] font-medium tabular-nums text-sm focus:outline-none focus:border-[#1c1917] dark:focus:border-[#f5f3ef]"
                     />
-                    <span className="absolute right-2.5 top-2 text-xs text-slate-400">st</span>
+                    <span className="absolute right-2.5 top-2 text-xs text-[#78716c] dark:text-[#8c857d]">st</span>
                   </div>
                   <div className="relative">
                     <input
@@ -381,16 +378,16 @@ export const QuickCalculator: React.FC<QuickCalculatorProps> = ({
                       value={currentPounds}
                       onChange={(e) => setCurrentPounds(e.target.value)}
                       placeholder="lbs"
-                      className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl font-semibold text-sm"
+                      className="w-full px-3 py-2 bg-[#faf9f7] dark:bg-[#141210] border border-[#e5e1d8] dark:border-[#332f2b] rounded-[8px] text-[#1c1917] dark:text-[#f5f3ef] font-medium tabular-nums text-sm focus:outline-none focus:border-[#1c1917] dark:focus:border-[#f5f3ef]"
                     />
-                    <span className="absolute right-2.5 top-2 text-xs text-slate-400">lbs</span>
+                    <span className="absolute right-2.5 top-2 text-xs text-[#78716c] dark:text-[#8c857d]">lbs</span>
                   </div>
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wide mb-1.5">
-                  Goal Weight <span className="text-slate-400 font-normal">(Optional)</span>
+                <label className="block text-xs font-medium text-[#57534e] dark:text-[#b5afa6] mb-1.5">
+                  Goal weight <span className="text-[#78716c] dark:text-[#8c857d] font-normal">(optional)</span>
                 </label>
                 <div className="grid grid-cols-2 gap-2">
                   <div className="relative">
@@ -399,9 +396,9 @@ export const QuickCalculator: React.FC<QuickCalculatorProps> = ({
                       value={goalStones}
                       onChange={(e) => setGoalStones(e.target.value)}
                       placeholder="Stones"
-                      className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl font-semibold text-sm"
+                      className="w-full px-3 py-2 bg-[#faf9f7] dark:bg-[#141210] border border-[#e5e1d8] dark:border-[#332f2b] rounded-[8px] text-[#1c1917] dark:text-[#f5f3ef] font-medium tabular-nums text-sm focus:outline-none focus:border-[#1c1917] dark:focus:border-[#f5f3ef]"
                     />
-                    <span className="absolute right-2.5 top-2 text-xs text-slate-400">st</span>
+                    <span className="absolute right-2.5 top-2 text-xs text-[#78716c] dark:text-[#8c857d]">st</span>
                   </div>
                   <div className="relative">
                     <input
@@ -410,9 +407,9 @@ export const QuickCalculator: React.FC<QuickCalculatorProps> = ({
                       value={goalPounds}
                       onChange={(e) => setGoalPounds(e.target.value)}
                       placeholder="lbs"
-                      className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl font-semibold text-sm"
+                      className="w-full px-3 py-2 bg-[#faf9f7] dark:bg-[#141210] border border-[#e5e1d8] dark:border-[#332f2b] rounded-[8px] text-[#1c1917] dark:text-[#f5f3ef] font-medium tabular-nums text-sm focus:outline-none focus:border-[#1c1917] dark:focus:border-[#f5f3ef]"
                     />
-                    <span className="absolute right-2.5 top-2 text-xs text-slate-400">lbs</span>
+                    <span className="absolute right-2.5 top-2 text-xs text-[#78716c] dark:text-[#8c857d]">lbs</span>
                   </div>
                 </div>
               </div>
@@ -420,41 +417,41 @@ export const QuickCalculator: React.FC<QuickCalculatorProps> = ({
           )}
 
           {/* Dates Expandable */}
-          <div className="border-t border-slate-100 pt-3">
+          <div className="border-t border-[#e5e1d8] dark:border-[#332f2b] pt-3">
             <button
               type="button"
               onClick={() => setShowDates(!showDates)}
-              className="flex items-center justify-between w-full text-xs font-semibold text-slate-700 hover:text-emerald-700 transition-colors"
+              className="flex items-center justify-between w-full text-xs font-medium text-[#1c1917] dark:text-[#f5f3ef] hover:text-[#57534e] dark:hover:text-[#b5afa6] transition-colors cursor-pointer"
             >
               <span className="flex items-center gap-1.5">
-                <Calendar className="w-4 h-4 text-emerald-600" />
-                Weigh-in Dates & Weekly Rate
+                <Calendar className="w-4 h-4 text-[#57534e] dark:text-[#b5afa6]" strokeWidth={1.75} />
+                Weigh-in dates &amp; weekly rate
               </span>
-              <span className="text-slate-400 text-xs">{showDates ? 'Hide' : 'Show'}</span>
+              <span className="text-[#78716c] dark:text-[#8c857d] text-xs font-normal">{showDates ? 'Hide' : 'Show'}</span>
             </button>
 
             {showDates && (
               <div className="grid grid-cols-2 gap-3 mt-3">
                 <div>
-                  <label className="block text-[11px] font-medium text-slate-500 mb-1">
-                    Start Date
+                  <label className="block text-xs font-normal text-[#57534e] dark:text-[#b5afa6] mb-1">
+                    Start date
                   </label>
                   <input
                     type="date"
                     value={startDate}
                     onChange={(e) => setStartDate(e.target.value)}
-                    className="w-full px-2.5 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-xs text-slate-800"
+                    className="w-full px-2.5 py-1.5 bg-[#faf9f7] dark:bg-[#141210] border border-[#e5e1d8] dark:border-[#332f2b] rounded-[8px] text-xs text-[#1c1917] dark:text-[#f5f3ef] tabular-nums focus:outline-none focus:border-[#1c1917] dark:focus:border-[#f5f3ef]"
                   />
                 </div>
                 <div>
-                  <label className="block text-[11px] font-medium text-slate-500 mb-1">
-                    Current Date
+                  <label className="block text-xs font-normal text-[#57534e] dark:text-[#b5afa6] mb-1">
+                    Current date
                   </label>
                   <input
                     type="date"
                     value={currentDate}
                     onChange={(e) => setCurrentDate(e.target.value)}
-                    className="w-full px-2.5 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-xs text-slate-800"
+                    className="w-full px-2.5 py-1.5 bg-[#faf9f7] dark:bg-[#141210] border border-[#e5e1d8] dark:border-[#332f2b] rounded-[8px] text-xs text-[#1c1917] dark:text-[#f5f3ef] tabular-nums focus:outline-none focus:border-[#1c1917] dark:focus:border-[#f5f3ef]"
                   />
                 </div>
               </div>
@@ -462,17 +459,17 @@ export const QuickCalculator: React.FC<QuickCalculatorProps> = ({
           </div>
 
           {/* Height / BMI Expandable */}
-          <div className="border-t border-slate-100 pt-3">
+          <div className="border-t border-[#e5e1d8] dark:border-[#332f2b] pt-3">
             <button
               type="button"
               onClick={() => setShowBmi(!showBmi)}
-              className="flex items-center justify-between w-full text-xs font-semibold text-slate-700 hover:text-emerald-700 transition-colors"
+              className="flex items-center justify-between w-full text-xs font-medium text-[#1c1917] dark:text-[#f5f3ef] hover:text-[#57534e] dark:hover:text-[#b5afa6] transition-colors cursor-pointer"
             >
               <span className="flex items-center gap-1.5">
-                <Activity className="w-4 h-4 text-emerald-600" />
-                Height (for BMI Category Tracking)
+                <Activity className="w-4 h-4 text-[#57534e] dark:text-[#b5afa6]" strokeWidth={1.75} />
+                Height (for BMI category tracking)
               </span>
-              <span className="text-slate-400 text-xs">{showBmi ? 'Hide' : 'Show'}</span>
+              <span className="text-[#78716c] dark:text-[#8c857d] text-xs font-normal">{showBmi ? 'Hide' : 'Show'}</span>
             </button>
 
             {showBmi && (
@@ -481,17 +478,21 @@ export const QuickCalculator: React.FC<QuickCalculatorProps> = ({
                   <button
                     type="button"
                     onClick={() => setHeightUnit('ft_in')}
-                    className={`px-2 py-1 rounded-md text-[11px] font-medium ${
-                      heightUnit === 'ft_in' ? 'bg-slate-200 text-slate-900 font-bold' : 'text-slate-500'
+                    className={`px-2.5 py-1 rounded-[8px] text-xs transition-colors cursor-pointer ${
+                      heightUnit === 'ft_in'
+                        ? 'bg-[#f3f1ed] dark:bg-[#25221f] text-[#1c1917] dark:text-[#f5f3ef] font-medium border border-[#e5e1d8] dark:border-[#332f2b]'
+                        : 'text-[#57534e] dark:text-[#b5afa6] font-normal hover:bg-[#faf9f7] dark:hover:bg-[#141210]'
                     }`}
                   >
-                    Feet & Inches
+                    Feet &amp; inches
                   </button>
                   <button
                     type="button"
                     onClick={() => setHeightUnit('cm')}
-                    className={`px-2 py-1 rounded-md text-[11px] font-medium ${
-                      heightUnit === 'cm' ? 'bg-slate-200 text-slate-900 font-bold' : 'text-slate-500'
+                    className={`px-2.5 py-1 rounded-[8px] text-xs transition-colors cursor-pointer ${
+                      heightUnit === 'cm'
+                        ? 'bg-[#f3f1ed] dark:bg-[#25221f] text-[#1c1917] dark:text-[#f5f3ef] font-medium border border-[#e5e1d8] dark:border-[#332f2b]'
+                        : 'text-[#57534e] dark:text-[#b5afa6] font-normal hover:bg-[#faf9f7] dark:hover:bg-[#141210]'
                     }`}
                   >
                     Centimeters
@@ -508,9 +509,9 @@ export const QuickCalculator: React.FC<QuickCalculatorProps> = ({
                         value={heightFeet}
                         onChange={(e) => setHeightFeet(e.target.value)}
                         placeholder="Feet"
-                        className="w-full px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-xs"
+                        className="w-full px-3 py-1.5 bg-[#faf9f7] dark:bg-[#141210] border border-[#e5e1d8] dark:border-[#332f2b] rounded-[8px] text-xs text-[#1c1917] dark:text-[#f5f3ef] tabular-nums focus:outline-none focus:border-[#1c1917] dark:focus:border-[#f5f3ef]"
                       />
-                      <span className="absolute right-2.5 top-1.5 text-xs text-slate-400">ft</span>
+                      <span className="absolute right-2.5 top-1.5 text-xs text-[#78716c] dark:text-[#8c857d]">ft</span>
                     </div>
                     <div className="relative">
                       <input
@@ -520,9 +521,9 @@ export const QuickCalculator: React.FC<QuickCalculatorProps> = ({
                         value={heightInches}
                         onChange={(e) => setHeightInches(e.target.value)}
                         placeholder="Inches"
-                        className="w-full px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-xs"
+                        className="w-full px-3 py-1.5 bg-[#faf9f7] dark:bg-[#141210] border border-[#e5e1d8] dark:border-[#332f2b] rounded-[8px] text-xs text-[#1c1917] dark:text-[#f5f3ef] tabular-nums focus:outline-none focus:border-[#1c1917] dark:focus:border-[#f5f3ef]"
                       />
-                      <span className="absolute right-2.5 top-1.5 text-xs text-slate-400">in</span>
+                      <span className="absolute right-2.5 top-1.5 text-xs text-[#78716c] dark:text-[#8c857d]">in</span>
                     </div>
                   </div>
                 ) : (
@@ -534,9 +535,9 @@ export const QuickCalculator: React.FC<QuickCalculatorProps> = ({
                       value={heightCm}
                       onChange={(e) => setHeightCm(e.target.value)}
                       placeholder="e.g. 175"
-                      className="w-full px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-xs"
+                      className="w-full px-3 py-1.5 bg-[#faf9f7] dark:bg-[#141210] border border-[#e5e1d8] dark:border-[#332f2b] rounded-[8px] text-xs text-[#1c1917] dark:text-[#f5f3ef] tabular-nums focus:outline-none focus:border-[#1c1917] dark:focus:border-[#f5f3ef]"
                     />
-                    <span className="absolute right-3 top-1.5 text-xs text-slate-400">cm</span>
+                    <span className="absolute right-3 top-1.5 text-xs text-[#78716c] dark:text-[#8c857d]">cm</span>
                   </div>
                 )}
               </div>
@@ -547,42 +548,32 @@ export const QuickCalculator: React.FC<QuickCalculatorProps> = ({
         {/* RESULTS COLUMN */}
         <div className="lg:col-span-7 space-y-5">
           {result ? (
-            <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-xs space-y-5">
+            <div className="bg-[#ffffff] dark:bg-[#1c1917] rounded-2xl p-6 border border-[#e5e1d8] dark:border-[#332f2b] shadow-xs space-y-5">
               {/* Hero Percentage Card */}
-              <div
-                className={`p-6 rounded-2xl border text-center transition-all ${
-                  result.isLoss
-                    ? 'bg-gradient-to-br from-emerald-50 via-teal-50/60 to-emerald-100/40 border-emerald-200'
-                    : result.isGain
-                    ? 'bg-gradient-to-br from-rose-50 to-orange-50 border-rose-200'
-                    : 'bg-slate-50 border-slate-200'
-                }`}
-              >
-                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-2 shadow-xs bg-white">
+              <div className="p-6 rounded-xl border border-[#e5e1d8] dark:border-[#332f2b] bg-[#faf9f7] dark:bg-[#141210] text-center">
+                <div className="inline-flex items-center gap-1.5 text-xs font-medium text-[#57534e] dark:text-[#b5afa6] mb-2">
                   {result.isLoss ? (
                     <>
-                      <TrendingDown className="w-3.5 h-3.5 text-emerald-600" />
-                      <span className="text-emerald-700">Body Weight Reduction</span>
+                      <TrendingDown className="w-4 h-4 text-[#57534e] dark:text-[#b5afa6]" strokeWidth={1.75} />
+                      <span>Body weight reduction</span>
                     </>
                   ) : result.isGain ? (
                     <>
-                      <TrendingUp className="w-3.5 h-3.5 text-rose-600" />
-                      <span className="text-rose-700">Weight Increase</span>
+                      <TrendingUp className="w-4 h-4 text-[#57534e] dark:text-[#b5afa6]" strokeWidth={1.75} />
+                      <span>Weight increase</span>
                     </>
                   ) : (
-                    <span className="text-slate-600">No Weight Change</span>
+                    <span>No weight change</span>
                   )}
                 </div>
 
                 {/* Big number */}
                 <div className="flex items-center justify-center gap-2">
                   <span
-                    className={`text-5xl sm:text-6xl font-extrabold tracking-tight ${
+                    className={`text-5xl sm:text-6xl font-medium tracking-tight tabular-nums ${
                       result.isLoss
-                        ? 'text-emerald-600'
-                        : result.isGain
-                        ? 'text-rose-600'
-                        : 'text-slate-700'
+                        ? 'text-[#c2410c] dark:text-[#ea580c]'
+                        : 'text-[#1c1917] dark:text-[#f5f3ef]'
                     }`}
                   >
                     {result.isLoss ? '-' : result.isGain ? '+' : ''}
@@ -590,72 +581,83 @@ export const QuickCalculator: React.FC<QuickCalculatorProps> = ({
                   </span>
                 </div>
 
-                <p className="mt-1 text-sm font-medium text-slate-700">
+                <p className="mt-2 text-sm font-normal text-[#57534e] dark:text-[#b5afa6]">
                   {result.isLoss ? (
                     <>
                       You have lost{' '}
-                      <span className="font-bold text-slate-900">
+                      <span className="font-medium text-[#1c1917] dark:text-[#f5f3ef] tabular-nums">
                         {result.weightChange} {unitLabel}
                       </span>{' '}
-                      from your starting weight of {result.displayStartWeight} {unitLabel}.
+                      from your starting weight of{' '}
+                      <span className="tabular-nums">
+                        {result.displayStartWeight} {unitLabel}
+                      </span>
+                      .
                     </>
                   ) : result.isGain ? (
                     <>
                       You have gained{' '}
-                      <span className="font-bold text-slate-900">
+                      <span className="font-medium text-[#1c1917] dark:text-[#f5f3ef] tabular-nums">
                         {Math.abs(result.weightChange)} {unitLabel}
                       </span>{' '}
                       over your starting weight.
                     </>
                   ) : (
-                    'Your current weight matches your starting weight exactly.'
+                    'Your current weight matches your starting weight.'
                   )}
                 </p>
 
-                {/* Milestone celebration banner */}
-                {result.isLoss && result.percentChange >= 5 && (
-                  <div className="mt-3.5 inline-flex items-center gap-2 px-3.5 py-1.5 bg-emerald-600 text-white rounded-xl text-xs font-semibold shadow-xs animate-pulse">
-                    <Award className="w-4 h-4 text-emerald-100" />
+                {/* Clinical milestone rule & plain status note */}
+                <div className="mt-5 pt-4 border-t border-[#e5e1d8] dark:border-[#332f2b] text-left space-y-2.5">
+                  <ScaleMilestoneRule
+                    percentLoss={result.isLoss ? result.percentChange : 0}
+                    maxPercent={15}
+                    label="Clinical milestones"
+                    statusText={result.isLoss ? `${result.percentChange}% lost` : '0%'}
+                    compact
+                  />
+                  <div className="flex items-center gap-2 text-xs text-[#57534e] dark:text-[#b5afa6]">
+                    <Award className="w-4 h-4 text-[#57534e] dark:text-[#b5afa6] shrink-0" strokeWidth={1.75} />
                     <span>
-                      {result.percentChange >= 15
-                        ? '🎉 Outstanding! 15%+ Systemic Transformation Reached'
-                        : result.percentChange >= 10
-                        ? '🎉 Amazing! 10%+ Metabolic Reset Reached'
-                        : '🎉 Clinically Significant: 5%+ Landmark Reached!'}
+                      {result.isLoss && result.percentChange >= 15
+                        ? '15% weight loss — a clinically significant milestone'
+                        : result.isLoss && result.percentChange >= 10
+                        ? '10% weight loss — a clinically significant milestone'
+                        : result.isLoss && result.percentChange >= 5
+                        ? '5% weight loss — a clinically significant milestone'
+                        : 'Next clinical milestone: 5% body weight reduction'}
                     </span>
                   </div>
-                )}
+                </div>
               </div>
 
               {/* Goal Progress Bar if goal set */}
               {result.displayGoalWeight !== null && result.remainingToGoal !== null && (
-                <div className="bg-slate-50 p-4 rounded-xl border border-slate-100 space-y-2">
-                  <div className="flex items-center justify-between text-xs font-semibold">
-                    <span className="text-slate-700 flex items-center gap-1.5">
-                      <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-                      Goal Progress (Target: {result.displayGoalWeight} {unitLabel})
+                <div className="bg-[#faf9f7] dark:bg-[#141210] p-4 rounded-xl border border-[#e5e1d8] dark:border-[#332f2b] space-y-2">
+                  <div className="flex items-center justify-between text-xs font-medium">
+                    <span className="text-[#1c1917] dark:text-[#f5f3ef] flex items-center gap-1.5">
+                      <CheckCircle2 className="w-4 h-4 text-[#57534e] dark:text-[#b5afa6]" strokeWidth={1.75} />
+                      Goal progress (target: {result.displayGoalWeight} {unitLabel})
                     </span>
-                    <span className="text-emerald-700 font-bold">
+                    <span className="text-[#1c1917] dark:text-[#f5f3ef] font-medium tabular-nums">
                       {result.percentGoalAchieved !== null ? `${result.percentGoalAchieved}%` : ''}
                     </span>
                   </div>
 
                   {/* Progress bar */}
-                  <div className="w-full bg-slate-200 rounded-full h-3 overflow-hidden p-0.5">
+                  <div className="w-full bg-[#e5e1d8] dark:bg-[#332f2b] rounded-full h-1.5 overflow-hidden">
                     <div
-                      className="bg-gradient-to-r from-emerald-500 to-teal-500 h-full rounded-full transition-all duration-500"
+                      className="bg-[#1c1917] dark:bg-[#f5f3ef] h-full rounded-full transition-all duration-300"
                       style={{ width: `${Math.min(100, result.percentGoalAchieved || 0)}%` }}
                     />
                   </div>
 
-                  <div className="flex items-center justify-between text-[11px] text-slate-500">
+                  <div className="flex items-center justify-between text-xs text-[#78716c] dark:text-[#8c857d] tabular-nums">
                     <span>Start: {result.displayStartWeight} {unitLabel}</span>
-                    <span className="font-semibold text-slate-700">
-                      {result.remainingToGoal > 0 ? (
-                        `${result.remainingToGoal} ${unitLabel} to go`
-                      ) : (
-                        '🎉 Goal reached or surpassed!'
-                      )}
+                    <span className="font-medium text-[#1c1917] dark:text-[#f5f3ef]">
+                      {result.remainingToGoal > 0
+                        ? `${result.remainingToGoal} ${unitLabel} to go`
+                        : 'Goal reached'}
                     </span>
                     <span>Goal: {result.displayGoalWeight} {unitLabel}</span>
                   </div>
@@ -665,17 +667,17 @@ export const QuickCalculator: React.FC<QuickCalculatorProps> = ({
               {/* Detailed Metrics Grid */}
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                 {/* Metric: Weekly Rate */}
-                <div className="p-3.5 bg-slate-50 rounded-xl border border-slate-100">
-                  <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider block">
-                    Weekly Rate
+                <div className="p-3.5 bg-[#faf9f7] dark:bg-[#141210] rounded-xl border border-[#e5e1d8] dark:border-[#332f2b]">
+                  <span className="text-xs font-normal text-[#57534e] dark:text-[#b5afa6] block">
+                    Weekly rate
                   </span>
                   <div className="mt-1 flex items-baseline gap-1">
-                    <span className="text-lg font-bold text-slate-900">
+                    <span className="text-lg font-medium text-[#1c1917] dark:text-[#f5f3ef] tabular-nums">
                       {result.lossRatePerWeek !== null ? `${result.lossRatePerWeek}` : '--'}
                     </span>
-                    <span className="text-xs text-slate-500">{unitLabel}/wk</span>
+                    <span className="text-xs text-[#78716c] dark:text-[#8c857d]">{unitLabel}/wk</span>
                   </div>
-                  <span className="text-[10px] text-emerald-600 block mt-0.5">
+                  <span className="text-xs text-[#78716c] dark:text-[#8c857d] block mt-0.5">
                     {result.lossRatePerWeek && Math.abs(result.lossRatePerWeek) <= 2
                       ? 'Healthy pace'
                       : 'Active progression'}
@@ -683,20 +685,20 @@ export const QuickCalculator: React.FC<QuickCalculatorProps> = ({
                 </div>
 
                 {/* Metric: Calorie Deficit */}
-                <div className="p-3.5 bg-slate-50 rounded-xl border border-slate-100">
-                  <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider block flex items-center gap-1">
-                    <Flame className="w-3 h-3 text-amber-500" />
-                    Est. Deficit
+                <div className="p-3.5 bg-[#faf9f7] dark:bg-[#141210] rounded-xl border border-[#e5e1d8] dark:border-[#332f2b]">
+                  <span className="text-xs font-normal text-[#57534e] dark:text-[#b5afa6] flex items-center gap-1.5">
+                    <Flame className="w-4 h-4 text-[#57534e] dark:text-[#b5afa6]" strokeWidth={1.75} />
+                    Est. deficit
                   </span>
                   <div className="mt-1 flex items-baseline gap-1">
-                    <span className="text-lg font-bold text-slate-900">
+                    <span className="text-lg font-medium text-[#1c1917] dark:text-[#f5f3ef] tabular-nums">
                       {result.estimatedDeficitTotal !== null
                         ? `${(result.estimatedDeficitTotal / 1000).toFixed(1)}k`
                         : '--'}
                     </span>
-                    <span className="text-xs text-slate-500">kcal total</span>
+                    <span className="text-xs text-[#78716c] dark:text-[#8c857d]">kcal total</span>
                   </div>
-                  <span className="text-[10px] text-slate-500 block mt-0.5">
+                  <span className="text-xs text-[#78716c] dark:text-[#8c857d] block mt-0.5 tabular-nums">
                     {result.estimatedDailyDeficit !== null
                       ? `~${result.estimatedDailyDeficit} kcal/day`
                       : '3,500 kcal/lb fat'}
@@ -704,32 +706,32 @@ export const QuickCalculator: React.FC<QuickCalculatorProps> = ({
                 </div>
 
                 {/* Metric: Projected Goal Date */}
-                <div className="p-3.5 bg-slate-50 rounded-xl border border-slate-100">
-                  <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider block">
-                    Projected Goal
+                <div className="p-3.5 bg-[#faf9f7] dark:bg-[#141210] rounded-xl border border-[#e5e1d8] dark:border-[#332f2b]">
+                  <span className="text-xs font-normal text-[#57534e] dark:text-[#b5afa6] block">
+                    Projected goal
                   </span>
                   <div className="mt-1">
-                    <span className="text-sm font-bold text-slate-900 leading-tight block">
-                      {result.projectedGoalDate || (result.remainingToGoal && result.remainingToGoal <= 0 ? 'Achieved!' : '--')}
+                    <span className="text-sm font-medium text-[#1c1917] dark:text-[#f5f3ef] leading-tight block tabular-nums">
+                      {result.projectedGoalDate || (result.remainingToGoal && result.remainingToGoal <= 0 ? 'Achieved' : '--')}
                     </span>
                   </div>
-                  <span className="text-[10px] text-slate-500 block mt-0.5">
+                  <span className="text-xs text-[#78716c] dark:text-[#8c857d] block mt-0.5">
                     {result.projectedGoalDate ? 'At current weekly pace' : 'Set goal & dates'}
                   </span>
                 </div>
 
                 {/* Metric: Start BMI */}
                 {result.startBmi !== null && (
-                  <div className="p-3.5 bg-slate-50 rounded-xl border border-slate-100">
-                    <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider block">
+                  <div className="p-3.5 bg-[#faf9f7] dark:bg-[#141210] rounded-xl border border-[#e5e1d8] dark:border-[#332f2b]">
+                    <span className="text-xs font-normal text-[#57534e] dark:text-[#b5afa6] block">
                       Initial BMI
                     </span>
                     <div className="mt-1 flex items-baseline gap-1">
-                      <span className="text-lg font-bold text-slate-900">
+                      <span className="text-lg font-medium text-[#1c1917] dark:text-[#f5f3ef] tabular-nums">
                         {result.startBmi}
                       </span>
                     </div>
-                    <span className={`text-[10px] font-medium block mt-0.5 ${getBmiCategory(result.startBmi).color}`}>
+                    <span className="text-xs font-normal text-[#78716c] dark:text-[#8c857d] block mt-0.5">
                       {getBmiCategory(result.startBmi).label}
                     </span>
                   </div>
@@ -737,98 +739,98 @@ export const QuickCalculator: React.FC<QuickCalculatorProps> = ({
 
                 {/* Metric: Current BMI */}
                 {result.currentBmi !== null && (
-                  <div className="p-3.5 bg-slate-50 rounded-xl border border-slate-100">
-                    <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider block">
+                  <div className="p-3.5 bg-[#faf9f7] dark:bg-[#141210] rounded-xl border border-[#e5e1d8] dark:border-[#332f2b]">
+                    <span className="text-xs font-normal text-[#57534e] dark:text-[#b5afa6] block">
                       Current BMI
                     </span>
                     <div className="mt-1 flex items-baseline gap-1">
-                      <span className="text-lg font-bold text-slate-900">
+                      <span className="text-lg font-medium text-[#1c1917] dark:text-[#f5f3ef] tabular-nums">
                         {result.currentBmi}
                       </span>
                     </div>
-                    <span className={`text-[10px] font-medium block mt-0.5 ${getBmiCategory(result.currentBmi).color}`}>
+                    <span className="text-xs font-normal text-[#78716c] dark:text-[#8c857d] block mt-0.5">
                       {getBmiCategory(result.currentBmi).label}
                     </span>
                   </div>
                 )}
 
                 {/* Metric: Duration */}
-                <div className="p-3.5 bg-slate-50 rounded-xl border border-slate-100">
-                  <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider block">
-                    Time Span
+                <div className="p-3.5 bg-[#faf9f7] dark:bg-[#141210] rounded-xl border border-[#e5e1d8] dark:border-[#332f2b]">
+                  <span className="text-xs font-normal text-[#57534e] dark:text-[#b5afa6] block">
+                    Time span
                   </span>
                   <div className="mt-1 flex items-baseline gap-1">
-                    <span className="text-lg font-bold text-slate-900">
+                    <span className="text-lg font-medium text-[#1c1917] dark:text-[#f5f3ef] tabular-nums">
                       {result.daysDuration !== null ? result.daysDuration : '--'}
                     </span>
-                    <span className="text-xs text-slate-500">days</span>
+                    <span className="text-xs text-[#78716c] dark:text-[#8c857d]">days</span>
                   </div>
-                  <span className="text-[10px] text-slate-500 block mt-0.5">
+                  <span className="text-xs text-[#78716c] dark:text-[#8c857d] block mt-0.5 tabular-nums">
                     {result.weeksDuration !== null ? `${result.weeksDuration} weeks` : 'Continuous'}
                   </span>
                 </div>
               </div>
 
-              {/* Actions row: Confetti, Copy, Add to Log */}
-              <div className="flex flex-wrap items-center gap-2 pt-2 border-t border-slate-100">
+              {/* Actions row: Save to Log, Copy, Mark Milestone */}
+              <div className="flex flex-wrap items-center gap-2 pt-3 border-t border-[#e5e1d8] dark:border-[#332f2b]">
                 <button
                   type="button"
-                  onClick={triggerConfetti}
-                  className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold shadow-xs transition-colors"
+                  onClick={handleSaveToLog}
+                  className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-[8px] bg-[#c2410c] hover:bg-[#9a3412] text-white text-xs font-medium shadow-xs transition-colors cursor-pointer"
                 >
-                  <Sparkles className="w-3.5 h-3.5" />
-                  Celebrate!
+                  <PlusCircle className="w-4 h-4 text-white" strokeWidth={1.75} />
+                  {savedToast ? 'Saved to weight log' : 'Save to weight log'}
                 </button>
 
                 <button
                   type="button"
                   onClick={handleCopySummary}
-                  className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold transition-colors"
+                  className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-[8px] bg-[#f3f1ed] dark:bg-[#25221f] hover:bg-[#e7e3dc] dark:hover:bg-[#332f2b] text-[#1c1917] dark:text-[#f5f3ef] text-xs font-medium border border-[#e5e1d8] dark:border-[#332f2b] transition-colors cursor-pointer"
                 >
-                  <Copy className="w-3.5 h-3.5 text-slate-500" />
-                  {copiedToast ? 'Copied to Clipboard!' : 'Copy Summary'}
+                  <Copy className="w-4 h-4 text-[#57534e] dark:text-[#b5afa6]" strokeWidth={1.75} />
+                  {copiedToast ? 'Copied to clipboard' : 'Copy summary'}
                 </button>
 
                 <button
                   type="button"
-                  onClick={handleSaveToLog}
-                  className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold transition-colors"
+                  onClick={triggerConfetti}
+                  className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-[8px] bg-[#f3f1ed] dark:bg-[#25221f] hover:bg-[#e7e3dc] dark:hover:bg-[#332f2b] text-[#1c1917] dark:text-[#f5f3ef] text-xs font-medium border border-[#e5e1d8] dark:border-[#332f2b] transition-colors cursor-pointer"
                 >
-                  <PlusCircle className="w-3.5 h-3.5 text-emerald-600" />
-                  {savedToast ? 'Saved to Weight Log!' : 'Save to Weight Log'}
+                  <Award className="w-4 h-4 text-[#57534e] dark:text-[#b5afa6]" strokeWidth={1.75} />
+                  Mark milestone
                 </button>
 
                 <button
                   type="button"
                   onClick={() => onNavigateToTab('milestones')}
-                  className="ml-auto inline-flex items-center gap-1 text-xs font-semibold text-emerald-700 hover:text-emerald-800 transition-colors"
+                  className="ml-auto inline-flex items-center gap-1 text-xs font-medium text-[#1c1917] dark:text-[#f5f3ef] hover:text-[#c2410c] dark:hover:text-[#ea580c] transition-colors cursor-pointer"
                 >
-                  <span>View Clinical Milestones</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
+                  <span>View clinical milestones</span>
+                  <ArrowRight className="w-4 h-4" strokeWidth={1.75} />
                 </button>
               </div>
             </div>
           ) : (
-            <div className="bg-white rounded-2xl p-12 text-center border border-slate-200 text-slate-400">
-              <HelpCircle className="w-10 h-10 mx-auto text-slate-300 mb-2" />
-              <p className="text-sm font-medium">Please enter positive starting and current weights to view calculations.</p>
+            <div className="bg-[#ffffff] dark:bg-[#1c1917] rounded-2xl p-12 text-center border border-[#e5e1d8] dark:border-[#332f2b] text-[#78716c] dark:text-[#8c857d]">
+              <HelpCircle className="w-4 h-4 mx-auto text-[#78716c] dark:text-[#8c857d] mb-2" strokeWidth={1.75} />
+              <p className="text-sm font-normal">Please enter positive starting and current weights to view calculations.</p>
             </div>
           )}
 
           {/* Quick Formula Explainer Banner */}
-          <div className="bg-slate-100/80 rounded-2xl p-4 border border-slate-200 flex items-start gap-3">
-            <div className="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0 font-bold text-sm">
+          <div className="bg-[#faf9f7] dark:bg-[#141210] rounded-2xl p-4 border border-[#e5e1d8] dark:border-[#332f2b] flex items-start gap-3">
+            <div className="w-8 h-8 rounded-[8px] bg-[#f3f1ed] dark:bg-[#25221f] border border-[#e5e1d8] dark:border-[#332f2b] text-[#1c1917] dark:text-[#f5f3ef] flex items-center justify-center shrink-0 font-medium text-sm">
               %
             </div>
-            <div className="text-xs text-slate-600 space-y-1">
-              <span className="font-semibold text-slate-900 block">
-                Standard Medical Formula:
+            <div className="text-xs text-[#57534e] dark:text-[#b5afa6] space-y-1.5">
+              <span className="font-medium text-[#1c1917] dark:text-[#f5f3ef] block">
+                Standard medical formula
               </span>
-              <p className="font-mono bg-white px-2 py-1 rounded border border-slate-200 text-slate-800 text-[11px] inline-block">
+              <p className="font-mono bg-[#ffffff] dark:bg-[#1c1917] px-2.5 py-1 rounded-[8px] border border-[#e5e1d8] dark:border-[#332f2b] text-[#1c1917] dark:text-[#f5f3ef] text-xs inline-block">
                 Weight Loss % = ((Starting Weight - Current Weight) ÷ Starting Weight) × 100
               </p>
-              <p className="text-[11px] text-slate-500">
-                Losing 10 lbs from 200 lbs equals <strong>5.00%</strong>, whereas 10 lbs from 150 lbs equals <strong>6.67%</strong>. 
+              <p className="text-xs text-[#78716c] dark:text-[#8c857d] leading-relaxed">
+                Losing 10 lbs from 200 lbs equals <span className="font-medium text-[#1c1917] dark:text-[#f5f3ef] tabular-nums">5.00%</span>, whereas 10 lbs from 150 lbs equals <span className="font-medium text-[#1c1917] dark:text-[#f5f3ef] tabular-nums">6.67%</span>.
                 Percentage accurately measures relative metabolic effort.
               </p>
             </div>

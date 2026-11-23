@@ -1,7 +1,5 @@
 import React, { useState, useEffect, Suspense, lazy } from 'react';
 import { HeroToolBox, ToolMode } from './components/HeroToolBox';
-import { BmiTopicalPages, BmiTopicalRoute } from './components/BmiTopicalPages';
-import { BlogArticleContent } from './components/BlogArticleContent';
 import { StructuredData } from './components/StructuredData';
 import type { SitePageKey } from './components/SiteInfoPages';
 import { TopToolSearchBar } from './components/TopToolSearchBar';
@@ -24,6 +22,8 @@ const MedicalReviewerProfile = lazy(() =>
 const SiteInfoPages = lazy(() =>
   import('./components/SiteInfoPages').then((m) => ({ default: m.SiteInfoPages }))
 );
+import { BmiTopicalPages, BmiTopicalRoute } from './components/BmiTopicalPages';
+import { BlogArticleContent } from './components/BlogArticleContent';
 import { SearchableToolItem } from './utils/toolSearch';
 import {
   resolveSearchIntentFromPath,
@@ -361,67 +361,53 @@ export const App: React.FC = () => {
     subtitle: string;
     href: string;
     icon: React.ReactNode;
-    activeClass: string;
-    badgeColor: string;
   }[] = [
     {
       id: 'adult',
       label: 'Weight Loss Percentage Calculator',
       subtitle: 'Track pounds or kg lost, % change & goal progress',
       href: '#percentage',
-      icon: <Scale className="w-4 h-4 shrink-0" />,
-      activeClass: 'bg-indigo-50/90 dark:bg-indigo-950/70 text-[#7334fd] dark:text-indigo-300 border-indigo-200/90 dark:border-indigo-800/80 shadow-2xs',
-      badgeColor: 'bg-[#7334fd]'
+      icon: <Scale className="w-4 h-4 shrink-0" strokeWidth={1.75} />
     },
     {
       id: 'newborn',
       label: 'Newborn Weight Loss Calculator',
       subtitle: 'Check baby weight change in the first days after birth',
       href: '#newborn',
-      icon: <Baby className="w-4 h-4 shrink-0" />,
-      activeClass: 'bg-orange-50/90 dark:bg-orange-950/70 text-[#ca3500] dark:text-orange-300 border-orange-200/90 dark:border-orange-800/80 shadow-2xs',
-      badgeColor: 'bg-[#ca3500]'
+      icon: <Baby className="w-4 h-4 shrink-0" strokeWidth={1.75} />
     },
     {
       id: 'bmr',
       label: 'BMR & TDEE Calculator',
       subtitle: 'Estimate your resting & daily calorie needs',
       href: '#bmr',
-      icon: <Flame className="w-4 h-4 shrink-0" />,
-      activeClass: 'bg-blue-50/90 dark:bg-blue-950/70 text-[#4950fc] dark:text-sky-300 border-blue-200/90 dark:border-blue-800/80 shadow-2xs',
-      badgeColor: 'bg-[#4950fc]'
+      icon: <Flame className="w-4 h-4 shrink-0" strokeWidth={1.75} />
     },
     {
       id: 'subway',
       label: 'Calorie & Nutrition Calculator',
       subtitle: 'Compare sandwich calories & meal portions',
       href: '#calorie',
-      icon: <Utensils className="w-4 h-4 shrink-0" />,
-      activeClass: 'bg-pink-50/90 dark:bg-pink-950/70 text-[#ca5983] dark:text-pink-300 border-pink-200/90 dark:border-pink-800/80 shadow-2xs',
-      badgeColor: 'bg-[#ca5983]'
+      icon: <Utensils className="w-4 h-4 shrink-0" strokeWidth={1.75} />
     },
     {
       id: 'faq',
       label: 'Common Questions (FAQ)',
       subtitle: 'Clear answers on weight loss math & healthy pace',
       href: '#faq-section',
-      icon: <HelpCircle className="w-4 h-4 shrink-0" />,
-      activeClass: 'bg-indigo-50/90 dark:bg-indigo-950/70 text-[#7334fd] dark:text-indigo-300 border-indigo-200/90 dark:border-indigo-800/80 shadow-2xs',
-      badgeColor: 'bg-[#7334fd]'
+      icon: <HelpCircle className="w-4 h-4 shrink-0" strokeWidth={1.75} />
     },
     {
       id: 'silos',
       label: 'All 38 Calculators & Guides',
       subtitle: 'Formulas, newborn charts, fasting, GLP-1 & BMI guides',
       href: '#percentage',
-      icon: <BookOpen className="w-4 h-4 shrink-0" />,
-      activeClass: 'bg-indigo-50/90 dark:bg-indigo-950/70 text-[#7334fd] dark:text-indigo-300 border-indigo-200/90 dark:border-indigo-800/80 shadow-2xs',
-      badgeColor: 'bg-[#7334fd]'
+      icon: <BookOpen className="w-4 h-4 shrink-0" strokeWidth={1.75} />
     }
   ];
 
   return (
-    <div className="min-h-screen bg-[#fbfbfd] dark:bg-slate-950 text-slate-900 dark:text-slate-100 flex flex-col font-sans selection:bg-[#ca3500] selection:text-white pb-20 lg:pb-0 transition-colors duration-200">
+    <div className="min-h-screen bg-[#faf9f7] dark:bg-[#141210] text-[#1c1917] dark:text-[#f5f3ef] flex flex-col font-sans selection:bg-[#c2410c] selection:text-white pb-20 lg:pb-0 transition-colors duration-200">
       {/* Inject Structured Data (JSON-LD) into DOM head */}
       <StructuredData
         locale={selectedLocale}
@@ -430,29 +416,29 @@ export const App: React.FC = () => {
         customDescription={routeIntent.customMetaDescription}
       />
 
-      {/* Top Navigation Bar (Compact 48px on Mobile, 54px on Desktop) */}
-      <header className="sticky top-0 z-40 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-200/80 dark:border-slate-800 transition-colors duration-200">
-        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between gap-1.5 sm:gap-2 h-12 sm:h-13">
-            {/* Zone 1: Brand Logo matching Screenshot 1 ([%] Weight Loss Percentage) */}
+      {/* Top Navigation Bar */}
+      <header className="sticky top-0 z-40 bg-white dark:bg-[#1c1917] border-b border-[#e5e1d8] dark:border-[#332f2b] transition-colors duration-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between gap-2 h-12 sm:h-14">
+            {/* Zone 1: Brand Logo (Solid Neutral Tile) */}
             <a
               href="/"
               onClick={(e) => {
                 e.preventDefault();
                 navigateHome();
               }}
-              className="flex items-center gap-1.5 sm:gap-2.5 group min-w-0 shrink"
+              className="flex items-center gap-2 sm:gap-2.5 group min-w-0 shrink"
             >
-              <div className="w-7 h-7 sm:w-9 sm:h-9 rounded-[9px] sm:rounded-[10px] bg-gradient-to-b from-[#5856f6] via-[#7c3aed] to-[#c94b38] flex items-center justify-center text-white shadow-xs shrink-0 font-black text-sm sm:text-lg leading-none select-none">
+              <div className="w-8 h-8 rounded-[8px] bg-[#1c1917] dark:bg-[#f5f3ef] flex items-center justify-center text-[#faf9f7] dark:text-[#1c1917] shrink-0 font-semibold text-sm sm:text-base leading-none select-none">
                 %
               </div>
-              <span className="font-extrabold text-slate-900 dark:text-white text-[13.5px] sm:text-xl tracking-tight whitespace-nowrap">
-                Weight Loss <span className="text-[#ca3500] dark:text-orange-400">Percentage</span>
+              <span className="font-semibold text-[#1c1917] dark:text-[#f5f3ef] text-sm sm:text-lg tracking-tight whitespace-nowrap">
+                Weight Loss Percentage
               </span>
             </a>
 
-            {/* Zone 2: Concise Single-Line Desktop Nav Links with Active Indicators */}
-            <nav className="hidden lg:flex items-center gap-2 text-xs font-bold text-slate-600 dark:text-slate-300">
+            {/* Zone 2: Concise Single-Line Desktop Nav Links */}
+            <nav className="hidden lg:flex items-center gap-1 text-xs font-medium text-[#57534e] dark:text-[#b5afa6]">
               <a
                 href="#percentage"
                 onClick={(e) => {
@@ -460,10 +446,10 @@ export const App: React.FC = () => {
                   handleBottomNavClick('adult');
                 }}
                 aria-current={activeView === 'home' && activeBottomNav === 'adult' ? 'page' : undefined}
-                className={`px-3 py-1.5 rounded-lg transition-all whitespace-nowrap shrink-0 ${
+                className={`px-3 py-1.5 rounded-lg transition-colors duration-150 whitespace-nowrap shrink-0 ${
                   activeView === 'home' && activeBottomNav === 'adult'
-                    ? 'bg-indigo-50 dark:bg-indigo-950/80 text-[#7334fd] dark:text-indigo-300 shadow-2xs'
-                    : 'hover:text-[#7334fd] dark:hover:text-indigo-300 hover:bg-slate-50 dark:hover:bg-slate-800/70'
+                    ? 'bg-[#f3f1ed] dark:bg-[#25221f] text-[#1c1917] dark:text-[#f5f3ef]'
+                    : 'hover:text-[#1c1917] dark:hover:text-[#f5f3ef] hover:bg-[#faf9f7] dark:hover:bg-[#25221f]/60'
                 }`}
               >
                 {t.navPercentage}
@@ -475,10 +461,10 @@ export const App: React.FC = () => {
                   handleBottomNavClick('newborn');
                 }}
                 aria-current={activeView === 'home' && activeBottomNav === 'newborn' ? 'page' : undefined}
-                className={`px-3 py-1.5 rounded-lg transition-all whitespace-nowrap shrink-0 ${
+                className={`px-3 py-1.5 rounded-lg transition-colors duration-150 whitespace-nowrap shrink-0 ${
                   activeView === 'home' && activeBottomNav === 'newborn'
-                    ? 'bg-orange-50 dark:bg-orange-950/80 text-[#ca3500] dark:text-orange-300 shadow-2xs'
-                    : 'hover:text-[#ca3500] dark:hover:text-orange-300 hover:bg-slate-50 dark:hover:bg-slate-800/70'
+                    ? 'bg-[#f3f1ed] dark:bg-[#25221f] text-[#1c1917] dark:text-[#f5f3ef]'
+                    : 'hover:text-[#1c1917] dark:hover:text-[#f5f3ef] hover:bg-[#faf9f7] dark:hover:bg-[#25221f]/60'
                 }`}
               >
                 {t.navNewborn}
@@ -490,10 +476,10 @@ export const App: React.FC = () => {
                   handleBottomNavClick('bmr');
                 }}
                 aria-current={activeView === 'home' && activeBottomNav === 'bmr' ? 'page' : undefined}
-                className={`px-3 py-1.5 rounded-lg transition-all whitespace-nowrap shrink-0 ${
+                className={`px-3 py-1.5 rounded-lg transition-colors duration-150 whitespace-nowrap shrink-0 ${
                   activeView === 'home' && activeBottomNav === 'bmr'
-                    ? 'bg-blue-50 dark:bg-blue-950/80 text-[#4950fc] dark:text-sky-300 shadow-2xs'
-                    : 'hover:text-[#4950fc] dark:hover:text-sky-300 hover:bg-slate-50 dark:hover:bg-slate-800/70'
+                    ? 'bg-[#f3f1ed] dark:bg-[#25221f] text-[#1c1917] dark:text-[#f5f3ef]'
+                    : 'hover:text-[#1c1917] dark:hover:text-[#f5f3ef] hover:bg-[#faf9f7] dark:hover:bg-[#25221f]/60'
                 }`}
               >
                 {t.navBmr}
@@ -505,10 +491,10 @@ export const App: React.FC = () => {
                   handleBottomNavClick('faq', 'faq-section');
                 }}
                 aria-current={activeView === 'home' && activeBottomNav === 'faq' ? 'page' : undefined}
-                className={`px-3 py-1.5 rounded-lg transition-all whitespace-nowrap shrink-0 ${
+                className={`px-3 py-1.5 rounded-lg transition-colors duration-150 whitespace-nowrap shrink-0 ${
                   activeView === 'home' && activeBottomNav === 'faq'
-                    ? 'bg-indigo-50 dark:bg-indigo-950/80 text-[#7334fd] dark:text-indigo-300 shadow-2xs'
-                    : 'hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-slate-800/70'
+                    ? 'bg-[#f3f1ed] dark:bg-[#25221f] text-[#1c1917] dark:text-[#f5f3ef]'
+                    : 'hover:text-[#1c1917] dark:hover:text-[#f5f3ef] hover:bg-[#faf9f7] dark:hover:bg-[#25221f]/60'
                 }`}
               >
                 {t.navFaq}
@@ -517,42 +503,42 @@ export const App: React.FC = () => {
                 type="button"
                 onClick={navigateReviewerProfile}
                 aria-current={activeView === 'reviewer' ? 'page' : undefined}
-                className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-all whitespace-nowrap shrink-0 ${
+                className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-colors duration-150 whitespace-nowrap shrink-0 cursor-pointer ${
                   activeView === 'reviewer'
-                    ? 'bg-indigo-50 dark:bg-indigo-950/80 text-[#7334fd] dark:text-indigo-300 shadow-2xs'
-                    : 'hover:text-[#7334fd] dark:hover:text-indigo-300 hover:bg-slate-50 dark:hover:bg-slate-800/70'
+                    ? 'bg-[#f3f1ed] dark:bg-[#25221f] text-[#1c1917] dark:text-[#f5f3ef]'
+                    : 'hover:text-[#1c1917] dark:hover:text-[#f5f3ef] hover:bg-[#faf9f7] dark:hover:bg-[#25221f]/60'
                 }`}
               >
-                <Stethoscope className="w-3.5 h-3.5 text-[#7334fd] dark:text-indigo-400" />
+                <Stethoscope className="w-4 h-4 text-[#78716c] dark:text-[#8c857d]" strokeWidth={1.75} />
                 <span>Dr. Rekha Kumar, M.D.</span>
               </button>
             </nav>
 
             {/* Zone 3: Theme Toggle, Locale Selector & Mobile Menu Button */}
-            <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+            <div className="flex items-center gap-2 shrink-0">
               <button
                 type="button"
                 onClick={() => setDarkMode((prev) => !prev)}
                 aria-label={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
                 aria-pressed={darkMode}
                 title={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
-                className="min-h-[36px] px-2.5 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 border border-slate-200/80 dark:border-slate-700 text-slate-700 dark:text-slate-200 flex items-center gap-1.5 text-xs font-bold transition-colors cursor-pointer"
+                className="min-h-[36px] px-2.5 py-1.5 rounded-lg bg-[#f3f1ed] dark:bg-[#25221f] hover:bg-[#e5e1d8] dark:hover:bg-[#332f2b] border border-[#e5e1d8] dark:border-[#332f2b] text-[#1c1917] dark:text-[#f5f3ef] flex items-center gap-1.5 text-xs font-medium transition-colors duration-150 cursor-pointer"
               >
                 {darkMode ? (
                   <>
-                    <Sun className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+                    <Sun className="w-4 h-4 text-[#b5afa6] shrink-0" strokeWidth={1.75} />
                     <span className="hidden sm:inline">Light</span>
                   </>
                 ) : (
                   <>
-                    <Moon className="w-3.5 h-3.5 text-indigo-600 shrink-0" />
+                    <Moon className="w-4 h-4 text-[#57534e] shrink-0" strokeWidth={1.75} />
                     <span className="hidden sm:inline">Dark</span>
                   </>
                 )}
               </button>
 
-              <div className="flex items-center gap-1 bg-slate-100 dark:bg-slate-800 border border-slate-200/80 dark:border-slate-700 px-2 py-1 rounded-lg text-xs font-semibold text-slate-700 dark:text-slate-200 min-h-[36px]">
-                <Globe className="w-3.5 h-3.5 text-slate-500 dark:text-slate-400 shrink-0" />
+              <div className="flex items-center gap-1.5 bg-[#f3f1ed] dark:bg-[#25221f] border border-[#e5e1d8] dark:border-[#332f2b] px-2 py-1 rounded-lg text-xs font-medium text-[#1c1917] dark:text-[#f5f3ef] min-h-[36px]">
+                <Globe className="w-4 h-4 text-[#78716c] dark:text-[#8c857d] shrink-0" strokeWidth={1.75} />
                 <select
                   value={selectedLocale}
                   onChange={(e) => {
@@ -567,11 +553,11 @@ export const App: React.FC = () => {
                       }
                     }
                   }}
-                  className="bg-transparent dark:bg-slate-800 focus:outline-none cursor-pointer font-bold text-slate-900 dark:text-slate-100 text-xs"
+                  className="bg-transparent dark:bg-[#25221f] focus:outline-none cursor-pointer font-medium text-[#1c1917] dark:text-[#f5f3ef] text-xs"
                   aria-label="Select Regional Health Locale"
                 >
                   {LOCALES.map((loc) => (
-                    <option key={loc.code} value={loc.code} className="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">
+                    <option key={loc.code} value={loc.code} className="bg-white dark:bg-[#1c1917] text-[#1c1917] dark:text-[#f5f3ef]">
                       {loc.code.toUpperCase()}
                     </option>
                   ))}
@@ -581,10 +567,10 @@ export const App: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className={`lg:hidden w-10 h-10 flex items-center justify-center rounded-xl transition-all duration-200 shrink-0 ${
+                className={`lg:hidden w-10 h-10 flex items-center justify-center rounded-lg transition-colors duration-150 shrink-0 cursor-pointer ${
                   mobileMenuOpen
-                    ? 'bg-[#7334fd] text-white shadow-sm'
-                    : 'text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 active:bg-slate-200'
+                    ? 'bg-[#1c1917] text-[#faf9f7] dark:bg-[#f5f3ef] dark:text-[#1c1917]'
+                    : 'text-[#1c1917] dark:text-[#f5f3ef] hover:bg-[#f3f1ed] dark:hover:bg-[#25221f]'
                 }`}
                 aria-label="Toggle navigation menu"
                 aria-expanded={mobileMenuOpen}
@@ -592,16 +578,16 @@ export const App: React.FC = () => {
               >
                 <span className="sr-only">Toggle navigation menu</span>
                 {mobileMenuOpen ? (
-                  <X className="w-5 h-5 transition-transform duration-200 rotate-0" />
+                  <X className="w-4 h-4" strokeWidth={1.75} />
                 ) : (
-                  <Menu className="w-5 h-5 transition-transform duration-200" />
+                  <Menu className="w-4 h-4" strokeWidth={1.75} />
                 )}
               </button>
             </div>
           </div>
 
-          {/* Top Search Bar for Quickly Finding Any of the 26 Calculators & Guides */}
-          <div className="pb-1.5 pt-0">
+          {/* Top Search Bar for Quickly Finding Any of the 38 Calculators & Guides */}
+          <div className="pb-2 pt-0">
             <TopToolSearchBar
               query={searchQuery}
               onQueryChange={setSearchQuery}
@@ -614,17 +600,17 @@ export const App: React.FC = () => {
 
       {/* Smooth Slide-In Mobile Navigation Drawer & Backdrop Overlay */}
       <div
-        className={`lg:hidden fixed inset-x-0 top-24 sm:top-28 bottom-14 z-40 transition-all duration-300 ease-in-out ${
+        className={`lg:hidden fixed inset-x-0 top-24 sm:top-28 bottom-14 z-40 transition-opacity duration-200 ${
           mobileMenuOpen
             ? 'opacity-100 pointer-events-auto visible'
             : 'opacity-0 pointer-events-none invisible'
         }`}
         aria-hidden={!mobileMenuOpen}
       >
-        {/* Translucent Backdrop */}
+        {/* Backdrop */}
         <div
           onClick={() => setMobileMenuOpen(false)}
-          className={`absolute inset-0 bg-slate-900/45 dark:bg-black/65 backdrop-blur-[2px] transition-opacity duration-300 ${
+          className={`absolute inset-0 bg-[#1c1917]/40 dark:bg-black/60 transition-opacity duration-200 ${
             mobileMenuOpen ? 'opacity-100' : 'opacity-0'
           }`}
         />
@@ -633,21 +619,21 @@ export const App: React.FC = () => {
         <nav
           id="mobile-slide-menu"
           aria-label="Mobile Navigation Drawer"
-          className={`relative ml-auto w-full max-w-sm h-full bg-white dark:bg-slate-900 border-l border-slate-200/90 dark:border-slate-800 shadow-2xl flex flex-col justify-between overflow-y-auto px-4 py-4 transform transition-transform duration-300 ease-out ${
+          className={`relative ml-auto w-full max-w-sm h-full bg-white dark:bg-[#1c1917] border-l border-[#e5e1d8] dark:border-[#332f2b] flex flex-col justify-between overflow-y-auto p-4 transform transition-transform duration-200 ease-out ${
             mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
           }`}
         >
           <div className="space-y-4">
-            <div className="flex items-center justify-between px-1 pb-2 border-b border-slate-100 dark:border-slate-800">
-              <span className="text-[11px] font-extrabold uppercase tracking-wider text-slate-500 dark:text-slate-400">
-                Calculators &amp; Guides
+            <div className="flex items-center justify-between px-1 pb-2 border-b border-[#edeae3] dark:border-[#2a2623]">
+              <span className="text-xs font-medium text-[#57534e] dark:text-[#b5afa6]">
+                Calculators &amp; guides
               </span>
-              <span className="text-[11px] font-semibold text-emerald-700 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/70 border border-emerald-200/80 dark:border-emerald-800/80 px-2 py-0.5 rounded-md">
+              <span className="text-xs text-[#78716c] dark:text-[#8c857d]">
                 Private on device
               </span>
             </div>
 
-            <div className="space-y-1.5">
+            <div className="space-y-1">
               {mobileNavItems.map((item) => {
                 const isActive = activeView === 'home' && activeBottomNav === item.id;
                 return (
@@ -662,49 +648,33 @@ export const App: React.FC = () => {
                         item.id === 'faq' ? 'faq-section' : item.id === 'silos' ? 'percentage' : 'calculator-hero'
                       );
                     }}
-                    className={`group relative flex items-center justify-between gap-3 px-3.5 py-2.5 rounded-2xl border transition-all duration-200 min-h-[54px] ${
+                    className={`group flex items-center justify-between gap-3 px-3 py-2.5 rounded-xl border transition-colors duration-150 min-h-[52px] ${
                       isActive
-                        ? item.activeClass
-                        : 'bg-white dark:bg-slate-900 border-transparent hover:bg-slate-50 dark:hover:bg-slate-800/80 hover:border-slate-200/80 dark:hover:border-slate-700 text-slate-700 dark:text-slate-200'
+                        ? 'bg-[#f3f1ed] dark:bg-[#25221f] text-[#1c1917] dark:text-[#f5f3ef] border-[#d6d0c4] dark:border-[#3f3a34]'
+                        : 'bg-white dark:bg-[#1c1917] border-transparent hover:bg-[#faf9f7] dark:hover:bg-[#25221f]/60 text-[#1c1917] dark:text-[#f5f3ef]'
                     }`}
                   >
-                    {/* Left Active Pill Indicator */}
-                    {isActive && (
-                      <span
-                        aria-hidden="true"
-                        className={`absolute left-1.5 top-3 bottom-3 w-1 rounded-full ${item.badgeColor}`}
-                      />
-                    )}
-
-                    <div className="flex items-center gap-3 min-w-0 pl-1">
-                      <div
-                        className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 transition-colors ${
-                          isActive
-                            ? `${item.badgeColor} text-white shadow-xs`
-                            : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 group-hover:bg-slate-200/80 dark:group-hover:bg-slate-700'
-                        }`}
-                      >
+                    <div className="flex items-center gap-3 min-w-0">
+                      <span className="text-[#57534e] dark:text-[#b5afa6] shrink-0">
                         {item.icon}
-                      </div>
+                      </span>
                       <div className="min-w-0">
-                        <div className="text-xs sm:text-sm font-extrabold truncate">
+                        <div className="text-xs sm:text-sm font-medium truncate">
                           {item.label}
                         </div>
-                        <div className="text-[11px] text-slate-500 dark:text-slate-400 font-medium truncate">
+                        <div className="text-xs text-[#78716c] dark:text-[#8c857d] truncate">
                           {item.subtitle}
                         </div>
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-1.5 shrink-0">
+                    <div className="flex items-center shrink-0">
                       {isActive ? (
-                        <span
-                          className={`text-[10px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded-md text-white ${item.badgeColor}`}
-                        >
+                        <span className="text-xs font-medium text-[#c2410c] dark:text-[#ea580c]">
                           Active
                         </span>
                       ) : (
-                        <ChevronRight className="w-4 h-4 text-slate-400 dark:text-slate-500 group-hover:translate-x-0.5 transition-transform" />
+                        <ChevronRight className="w-4 h-4 text-[#78716c] dark:text-[#8c857d]" strokeWidth={1.75} />
                       )}
                     </div>
                   </a>
@@ -713,56 +683,36 @@ export const App: React.FC = () => {
             </div>
 
             {/* Clinical Medical Reviewer Card Item */}
-            <div className="pt-2 border-t border-slate-100 dark:border-slate-800">
-              <span className="px-1 text-[11px] font-extrabold uppercase tracking-wider text-slate-500 dark:text-slate-400 block mb-1.5">
-                Medical Review &amp; Site Info
+            <div className="pt-3 border-t border-[#edeae3] dark:border-[#2a2623]">
+              <span className="px-1 text-xs font-medium text-[#57534e] dark:text-[#b5afa6] block mb-2">
+                Medical review &amp; site info
               </span>
               <button
                 type="button"
                 onClick={navigateReviewerProfile}
                 aria-current={activeView === 'reviewer' ? 'page' : undefined}
-                className={`w-full relative flex items-center justify-between gap-3 px-3.5 py-2.5 rounded-2xl border transition-all duration-200 min-h-[54px] text-left ${
+                className={`w-full flex items-center justify-between gap-3 px-3 py-2.5 rounded-xl border transition-colors duration-150 min-h-[52px] text-left cursor-pointer ${
                   activeView === 'reviewer'
-                    ? 'bg-indigo-50/90 dark:bg-indigo-950/70 text-[#7334fd] dark:text-indigo-300 border-indigo-200/90 dark:border-indigo-800 shadow-2xs'
-                    : 'bg-slate-50/80 dark:bg-slate-800/70 hover:bg-indigo-50/50 dark:hover:bg-slate-800 border-slate-200/70 dark:border-slate-700/80 text-slate-800 dark:text-slate-100'
+                    ? 'bg-[#f3f1ed] dark:bg-[#25221f] text-[#1c1917] dark:text-[#f5f3ef] border-[#d6d0c4] dark:border-[#3f3a34]'
+                    : 'bg-[#faf9f7] dark:bg-[#141210] hover:bg-[#f3f1ed] dark:hover:bg-[#25221f] border-[#e5e1d8] dark:border-[#332f2b] text-[#1c1917] dark:text-[#f5f3ef]'
                 }`}
               >
-                {activeView === 'reviewer' && (
-                  <span
-                    aria-hidden="true"
-                    className="absolute left-1.5 top-3 bottom-3 w-1 rounded-full bg-[#7334fd]"
-                  />
-                )}
-                <div className="flex items-center gap-3 min-w-0 pl-1">
-                  <div
-                    className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 ${
-                      activeView === 'reviewer'
-                        ? 'bg-[#7334fd] text-white'
-                        : 'bg-indigo-100 dark:bg-indigo-950 text-[#7334fd] dark:text-indigo-300'
-                    }`}
-                  >
-                    <Stethoscope className="w-4 h-4" />
-                  </div>
+                <div className="flex items-center gap-3 min-w-0">
+                  <Stethoscope className="w-4 h-4 text-[#57534e] dark:text-[#b5afa6] shrink-0" strokeWidth={1.75} />
                   <div className="min-w-0">
-                    <div className="text-xs sm:text-sm font-extrabold text-[#7334fd] dark:text-indigo-300 truncate">
+                    <div className="text-xs sm:text-sm font-medium truncate">
                       Dr. Rekha Kumar, M.D., M.S.
                     </div>
-                    <div className="text-[11px] text-slate-500 dark:text-slate-400 font-medium truncate">
-                      Lead Medical Reviewer • Weill Cornell Medicine
+                    <div className="text-xs text-[#78716c] dark:text-[#8c857d] truncate">
+                      Lead Medical Reviewer · Weill Cornell Medicine
                     </div>
                   </div>
                 </div>
-                {activeView === 'reviewer' ? (
-                  <span className="text-[10px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded-md text-white bg-[#7334fd] shrink-0">
-                    Active
-                  </span>
-                ) : (
-                  <ChevronRight className="w-4 h-4 text-[#7334fd] dark:text-indigo-400 shrink-0" />
-                )}
+                <ChevronRight className="w-4 h-4 text-[#78716c] dark:text-[#8c857d] shrink-0" strokeWidth={1.75} />
               </button>
 
-              {/* Quick Policy Pills */}
-              <div className="grid grid-cols-3 gap-1.5 mt-2">
+              {/* Quick Policy Links */}
+              <div className="grid grid-cols-3 gap-2 mt-2">
                 {(
                   [
                     { key: 'about', label: 'About Us' },
@@ -777,10 +727,10 @@ export const App: React.FC = () => {
                       type="button"
                       onClick={() => navigateSitePage(p.key)}
                       aria-current={isInfoActive ? 'page' : undefined}
-                      className={`min-h-[38px] px-2 py-1.5 rounded-xl text-xs font-bold border transition-all ${
+                      className={`min-h-[36px] px-2 py-1.5 rounded-lg text-xs font-medium border transition-colors duration-150 cursor-pointer ${
                         isInfoActive
-                          ? 'bg-[#7334fd] text-white border-[#7334fd]'
-                          : 'bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 border-slate-200/80 dark:border-slate-700'
+                          ? 'bg-[#1c1917] text-[#faf9f7] border-[#1c1917] dark:bg-[#f5f3ef] dark:text-[#1c1917] dark:border-[#f5f3ef]'
+                          : 'bg-[#faf9f7] dark:bg-[#141210] hover:bg-[#f3f1ed] dark:hover:bg-[#25221f] text-[#57534e] dark:text-[#b5afa6] border-[#e5e1d8] dark:border-[#332f2b]'
                       }`}
                     >
                       {p.label}
@@ -792,9 +742,9 @@ export const App: React.FC = () => {
           </div>
 
           {/* Bottom Social Bar inside Mobile Slide-In Drawer */}
-          <div className="pt-3 mt-4 border-t border-slate-200/80 dark:border-slate-800 px-1 flex items-center justify-between">
-            <span className="text-xs font-extrabold uppercase tracking-wider text-slate-500 dark:text-slate-400">
-              Follow Us
+          <div className="pt-3 mt-4 border-t border-[#edeae3] dark:border-[#2a2623] px-1 flex items-center justify-between">
+            <span className="text-xs font-medium text-[#57534e] dark:text-[#b5afa6]">
+              Follow us
             </span>
             <div className="flex items-center gap-2">
               <a
@@ -802,7 +752,7 @@ export const App: React.FC = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Follow us on X"
-                className="w-9 h-9 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 flex items-center justify-center transition-colors"
+                className="w-9 h-9 rounded-lg bg-[#f3f1ed] dark:bg-[#25221f] hover:bg-[#e5e1d8] dark:hover:bg-[#332f2b] text-[#57534e] dark:text-[#b5afa6] flex items-center justify-center transition-colors duration-150"
               >
                 <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
                   <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
@@ -813,7 +763,7 @@ export const App: React.FC = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Follow us on Facebook"
-                className="w-9 h-9 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-blue-50 dark:hover:bg-slate-700 text-[#1877F2] dark:text-blue-400 flex items-center justify-center transition-colors"
+                className="w-9 h-9 rounded-lg bg-[#f3f1ed] dark:bg-[#25221f] hover:bg-[#e5e1d8] dark:hover:bg-[#332f2b] text-[#57534e] dark:text-[#b5afa6] flex items-center justify-center transition-colors duration-150"
               >
                 <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
                   <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" />
@@ -824,7 +774,7 @@ export const App: React.FC = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Follow us on Instagram"
-                className="w-9 h-9 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-pink-50 dark:hover:bg-slate-700 text-[#E1306C] dark:text-pink-400 flex items-center justify-center transition-colors"
+                className="w-9 h-9 rounded-lg bg-[#f3f1ed] dark:bg-[#25221f] hover:bg-[#e5e1d8] dark:hover:bg-[#332f2b] text-[#57534e] dark:text-[#b5afa6] flex items-center justify-center transition-colors duration-150"
               >
                 <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
                   <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
@@ -835,7 +785,7 @@ export const App: React.FC = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Follow us on YouTube"
-                className="w-9 h-9 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-red-50 dark:hover:bg-slate-700 text-[#FF0000] dark:text-red-400 flex items-center justify-center transition-colors"
+                className="w-9 h-9 rounded-lg bg-[#f3f1ed] dark:bg-[#25221f] hover:bg-[#e5e1d8] dark:hover:bg-[#332f2b] text-[#57534e] dark:text-[#b5afa6] flex items-center justify-center transition-colors duration-150"
               >
                 <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
                   <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
@@ -847,9 +797,9 @@ export const App: React.FC = () => {
       </div>
 
       {/* Main Content Area */}
-      <main className="flex-1 max-w-7xl w-full mx-auto px-3 sm:px-6 lg:px-8 py-2.5 sm:py-4 space-y-5 sm:space-y-12">
+      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 space-y-6 sm:space-y-10">
         {activeView === 'reviewer' ? (
-          <Suspense fallback={<div className="min-h-[480px] rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 p-8" />}>
+          <Suspense fallback={<div className="min-h-[480px] rounded-2xl bg-white dark:bg-[#1c1917] border border-[#e5e1d8] dark:border-[#332f2b] p-8" />}>
             <MedicalReviewerProfile
               isStandalonePage={true}
               onBackToCalculator={navigateHome}
@@ -872,7 +822,7 @@ export const App: React.FC = () => {
             />
           </Suspense>
         ) : activeView === 'info' ? (
-          <Suspense fallback={<div className="min-h-[480px] rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 p-8" />}>
+          <Suspense fallback={<div className="min-h-[480px] rounded-2xl bg-white dark:bg-[#1c1917] border border-[#e5e1d8] dark:border-[#332f2b] p-8" />}>
             <SiteInfoPages
               activePage={activeSitePage}
               onSelectPage={navigateSitePage}
@@ -893,35 +843,35 @@ export const App: React.FC = () => {
         ) : (
           <>
             {/* Above-The-Fold: Main Heading, Concise Intro & Clinical Reviewer Byline */}
-            <section className="space-y-1 sm:space-y-1.5 max-w-4xl">
-              <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[11px] sm:text-xs text-slate-600 dark:text-slate-300 font-medium">
+            <section className="space-y-2 max-w-4xl">
+              <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-[#57534e] dark:text-[#b5afa6] font-normal">
                 <button
                   type="button"
                   onClick={navigateReviewerProfile}
-                  className="inline-flex items-center gap-1.5 text-[#7334fd] dark:text-indigo-400 hover:underline font-bold"
+                  className="inline-flex items-center gap-1.5 text-[#1c1917] dark:text-[#f5f3ef] hover:underline underline-offset-2 font-medium cursor-pointer"
                 >
                   <span>{t.bylineReviewed}</span>
                 </button>
-                <span aria-hidden="true" className="text-slate-300 dark:text-slate-600">·</span>
+                <span aria-hidden="true" className="text-[#d6d0c4] dark:text-[#3f3a34]">·</span>
                 <span>{t.bylinePrivate}</span>
-                <span aria-hidden="true" className="text-slate-300 dark:text-slate-600">·</span>
+                <span aria-hidden="true" className="text-[#d6d0c4] dark:text-[#3f3a34]">·</span>
                 <span>{t.bylinePdf}</span>
                 {routeIntent.intentBadge && (
                   <>
-                    <span aria-hidden="true" className="text-slate-300 dark:text-slate-600">·</span>
-                    <span className="inline-flex items-center px-2 py-0.5 rounded-md bg-indigo-50 dark:bg-indigo-950/80 text-[#7334fd] dark:text-indigo-300 font-extrabold text-[10px] sm:text-[11px]">
+                    <span aria-hidden="true" className="text-[#d6d0c4] dark:text-[#3f3a34]">·</span>
+                    <span className="text-xs font-medium text-[#57534e] dark:text-[#b5afa6]">
                       {routeIntent.intentBadge}
                     </span>
                   </>
                 )}
               </div>
 
-              <h1 className="text-2xl sm:text-4xl font-black text-slate-900 dark:text-white tracking-tight leading-tight">
+              <h1 className="text-2xl sm:text-4xl font-semibold text-[#1c1917] dark:text-[#f5f3ef] tracking-tight leading-tight">
                 {routeIntent.customHeroTitle || t.heroTitle}
               </h1>
 
-              {/* Intro text strictly under 45 words, warm and human-friendly with zero em dashes */}
-              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-snug font-normal">
+              {/* Intro text */}
+              <p className="text-xs sm:text-sm text-[#57534e] dark:text-[#b5afa6] leading-relaxed font-normal">
                 {routeIntent.customHeroIntro || t.heroIntro}
               </p>
             </section>
@@ -961,10 +911,10 @@ export const App: React.FC = () => {
               <div className="cv-auto">
                 {routeIntent.canonicalPath.endsWith('/blog/fat-loss-vs-weight-loss/') ? (
                   <BlogArticleContent slug="fat-loss-vs-weight-loss" />
-                ) : routeIntent.canonicalPath.endsWith('/blog/how-much-weight-have-i-lost/') ? (
-                  <BlogArticleContent slug="how-much-weight-have-i-lost" />
                 ) : routeIntent.canonicalPath.endsWith('/blog/weight-tracking-guide/') ? (
                   <BlogArticleContent slug="weight-tracking-guide" />
+                ) : routeIntent.canonicalPath.endsWith('/blog/how-much-weight-have-i-lost/') ? (
+                  <BlogArticleContent slug="how-much-weight-have-i-lost" />
                 ) : (
                   /* Comprehensive 26 Calculators & Clinical Reference Guides (includes mid-page In-article Ad Unit 2) */
                   <SiloContentSections
@@ -1007,92 +957,92 @@ export const App: React.FC = () => {
       {/* Fixed Bottom Thumb-Zone Navigation Bar on Mobile (< lg) */}
       <nav
         aria-label="Mobile Quick Navigation"
-        className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-t border-slate-200/90 dark:border-slate-800 px-2 pb-safe shadow-lg transition-colors duration-200"
+        className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-white dark:bg-[#1c1917] border-t border-[#e5e1d8] dark:border-[#332f2b] px-2 pb-safe transition-colors duration-200"
       >
         <div className="grid grid-cols-5 items-center h-14 max-w-md mx-auto">
           <button
             type="button"
             onClick={() => handleBottomNavClick('adult')}
             aria-current={activeBottomNav === 'adult' && activeView === 'home' ? 'page' : undefined}
-            className={`relative flex flex-col items-center justify-center h-full min-h-[44px] transition-all ${
+            className={`relative flex flex-col items-center justify-center h-full min-h-[44px] transition-colors duration-150 ${
               activeBottomNav === 'adult' && activeView === 'home'
-                ? 'text-[#7334fd] dark:text-indigo-400 font-extrabold'
-                : 'text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200'
+                ? 'text-[#1c1917] dark:text-[#f5f3ef] font-medium'
+                : 'text-[#78716c] dark:text-[#8c857d] hover:text-[#1c1917] dark:hover:text-[#f5f3ef]'
             }`}
           >
             {activeBottomNav === 'adult' && activeView === 'home' && (
-              <span aria-hidden="true" className="absolute top-0 inset-x-3 h-0.5 rounded-b-full bg-[#7334fd] dark:bg-indigo-400" />
+              <span aria-hidden="true" className="absolute top-0 inset-x-3 h-0.5 bg-[#1c1917] dark:bg-[#f5f3ef]" />
             )}
-            <Scale className="w-5 h-5" />
-            <span className="text-[10px] mt-0.5 tracking-tight whitespace-nowrap">Weight %</span>
+            <Scale className="w-4 h-4" strokeWidth={1.75} />
+            <span className="text-[11px] mt-1 whitespace-nowrap">Weight %</span>
           </button>
 
           <button
             type="button"
             onClick={() => handleBottomNavClick('newborn')}
             aria-current={activeBottomNav === 'newborn' && activeView === 'home' ? 'page' : undefined}
-            className={`relative flex flex-col items-center justify-center h-full min-h-[44px] transition-all ${
+            className={`relative flex flex-col items-center justify-center h-full min-h-[44px] transition-colors duration-150 ${
               activeBottomNav === 'newborn' && activeView === 'home'
-                ? 'text-[#ca3500] dark:text-orange-400 font-extrabold'
-                : 'text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200'
+                ? 'text-[#1c1917] dark:text-[#f5f3ef] font-medium'
+                : 'text-[#78716c] dark:text-[#8c857d] hover:text-[#1c1917] dark:hover:text-[#f5f3ef]'
             }`}
           >
             {activeBottomNav === 'newborn' && activeView === 'home' && (
-              <span aria-hidden="true" className="absolute top-0 inset-x-3 h-0.5 rounded-b-full bg-[#ca3500] dark:bg-orange-400" />
+              <span aria-hidden="true" className="absolute top-0 inset-x-3 h-0.5 bg-[#1c1917] dark:bg-[#f5f3ef]" />
             )}
-            <Baby className="w-5 h-5" />
-            <span className="text-[10px] mt-0.5 tracking-tight whitespace-nowrap">Newborn</span>
+            <Baby className="w-4 h-4" strokeWidth={1.75} />
+            <span className="text-[11px] mt-1 whitespace-nowrap">Newborn</span>
           </button>
 
           <button
             type="button"
             onClick={() => handleBottomNavClick('bmr')}
             aria-current={activeBottomNav === 'bmr' && activeView === 'home' ? 'page' : undefined}
-            className={`relative flex flex-col items-center justify-center h-full min-h-[44px] transition-all ${
+            className={`relative flex flex-col items-center justify-center h-full min-h-[44px] transition-colors duration-150 ${
               activeBottomNav === 'bmr' && activeView === 'home'
-                ? 'text-[#4950fc] dark:text-sky-400 font-extrabold'
-                : 'text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200'
+                ? 'text-[#1c1917] dark:text-[#f5f3ef] font-medium'
+                : 'text-[#78716c] dark:text-[#8c857d] hover:text-[#1c1917] dark:hover:text-[#f5f3ef]'
             }`}
           >
             {activeBottomNav === 'bmr' && activeView === 'home' && (
-              <span aria-hidden="true" className="absolute top-0 inset-x-3 h-0.5 rounded-b-full bg-[#4950fc] dark:bg-sky-400" />
+              <span aria-hidden="true" className="absolute top-0 inset-x-3 h-0.5 bg-[#1c1917] dark:bg-[#f5f3ef]" />
             )}
-            <Flame className="w-5 h-5" />
-            <span className="text-[10px] mt-0.5 tracking-tight whitespace-nowrap">BMR/TDEE</span>
+            <Flame className="w-4 h-4" strokeWidth={1.75} />
+            <span className="text-[11px] mt-1 whitespace-nowrap">BMR/TDEE</span>
           </button>
 
           <button
             type="button"
             onClick={() => handleBottomNavClick('faq', 'faq-section')}
             aria-current={activeBottomNav === 'faq' && activeView === 'home' ? 'page' : undefined}
-            className={`relative flex flex-col items-center justify-center h-full min-h-[44px] transition-all ${
+            className={`relative flex flex-col items-center justify-center h-full min-h-[44px] transition-colors duration-150 ${
               activeBottomNav === 'faq' && activeView === 'home'
-                ? 'text-[#7334fd] dark:text-indigo-400 font-extrabold'
-                : 'text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200'
+                ? 'text-[#1c1917] dark:text-[#f5f3ef] font-medium'
+                : 'text-[#78716c] dark:text-[#8c857d] hover:text-[#1c1917] dark:hover:text-[#f5f3ef]'
             }`}
           >
             {activeBottomNav === 'faq' && activeView === 'home' && (
-              <span aria-hidden="true" className="absolute top-0 inset-x-3 h-0.5 rounded-b-full bg-[#7334fd] dark:bg-indigo-400" />
+              <span aria-hidden="true" className="absolute top-0 inset-x-3 h-0.5 bg-[#1c1917] dark:bg-[#f5f3ef]" />
             )}
-            <HelpCircle className="w-5 h-5" />
-            <span className="text-[10px] mt-0.5 tracking-tight whitespace-nowrap">FAQ</span>
+            <HelpCircle className="w-4 h-4" strokeWidth={1.75} />
+            <span className="text-[11px] mt-1 whitespace-nowrap">FAQ</span>
           </button>
 
           <button
             type="button"
             onClick={() => handleBottomNavClick('silos', 'percentage')}
             aria-current={activeBottomNav === 'silos' && activeView === 'home' ? 'page' : undefined}
-            className={`relative flex flex-col items-center justify-center h-full min-h-[44px] transition-all ${
+            className={`relative flex flex-col items-center justify-center h-full min-h-[44px] transition-colors duration-150 ${
               activeBottomNav === 'silos' && activeView === 'home'
-                ? 'text-[#7334fd] dark:text-indigo-400 font-extrabold'
-                : 'text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200'
+                ? 'text-[#1c1917] dark:text-[#f5f3ef] font-medium'
+                : 'text-[#78716c] dark:text-[#8c857d] hover:text-[#1c1917] dark:hover:text-[#f5f3ef]'
             }`}
           >
             {activeBottomNav === 'silos' && activeView === 'home' && (
-              <span aria-hidden="true" className="absolute top-0 inset-x-3 h-0.5 rounded-b-full bg-[#7334fd] dark:bg-indigo-400" />
+              <span aria-hidden="true" className="absolute top-0 inset-x-3 h-0.5 bg-[#1c1917] dark:bg-[#f5f3ef]" />
             )}
-            <BookOpen className="w-5 h-5" />
-            <span className="text-[10px] mt-0.5 tracking-tight whitespace-nowrap">Guides</span>
+            <BookOpen className="w-4 h-4" strokeWidth={1.75} />
+            <span className="text-[11px] mt-1 whitespace-nowrap">Guides</span>
           </button>
         </div>
       </nav>

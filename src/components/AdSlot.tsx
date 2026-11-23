@@ -132,10 +132,10 @@ export const AdSlot: React.FC<AdSlotProps> = ({
       aria-label="Advertisement"
       className={`my-6 w-full max-w-7xl mx-auto clear-both ${className}`.trim()}
     >
-      <div className="text-[10px] uppercase tracking-widest text-slate-400 dark:text-slate-500 text-center mb-1.5 select-none font-medium">
+      <div className="text-[11px] text-[#78716c] dark:text-[#8c857d] text-center mb-2 select-none font-normal">
         Advertisement
       </div>
-      <div className="w-full min-h-[280px] md:min-h-[250px] flex items-center justify-center overflow-hidden rounded-xl bg-slate-100/40 dark:bg-slate-900/40">
+      <div className="w-full min-h-[280px] md:min-h-[250px] flex items-center justify-center overflow-hidden rounded-xl bg-[#f3f1ed]/60 dark:bg-[#25221f]/50">
         <ins
           ref={insRef}
           className="adsbygoogle block w-full"
