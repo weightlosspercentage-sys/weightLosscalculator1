@@ -1402,7 +1402,7 @@ export const SiloContentSections: React.FC<SiloContentSectionsProps> = ({
             Healthy Weight Loss Per Month
           </h2>
           <p className="text-slate-600 dark:text-slate-300 text-sm mt-1">
-            Why 4 to 8 pounds per month is the sweet spot for lasting results.
+            Why 4 to 8 pounds per month is a sustainable pace for lasting results.
           </p>
         </div>
         <div className="space-y-3 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
