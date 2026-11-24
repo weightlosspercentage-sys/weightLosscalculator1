@@ -563,6 +563,20 @@ export const SiloContentSections: React.FC<SiloContentSectionsProps> = ({
           </div>
         </div>
 
+        <div className="space-y-3 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+          <p>
+            Birth weight returns by day 10 to 14 for most infants. After that milestone, parents can follow weekly change through the first month with the{' '}
+            <a href="/calculators/baby-weight-loss/" className="text-[#4950fc] dark:text-sky-400 font-bold hover:underline">
+              baby weight tracker
+            </a>
+            , which applies the same percentage method to the regain curve. Mothers can track their own recovery with the{' '}
+            <a href="/calculators/postpartum-weight-loss/" className="text-[#7334fd] dark:text-indigo-400 font-bold hover:underline">
+              postpartum recovery calculator
+            </a>
+            , which measures maternal weight change while breastfeeding.
+          </p>
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
           <div className="space-y-3">
             <h3 className="text-base font-bold text-slate-900 dark:text-white">
@@ -1116,7 +1130,11 @@ export const SiloContentSections: React.FC<SiloContentSectionsProps> = ({
               What the tool computes
             </h3>
             <p>
-              A baby weight loss percentage is ((starting weight minus current weight) divided by starting weight) times 100. The tool&apos;s input is birth weight plus the baby&apos;s current weight. The tool&apos;s output is one percentage. The tool accepts pounds, ounces and grams. The reference weight is birth weight or peak weight.
+              A baby weight loss percentage is ((starting weight minus current weight) divided by starting weight) times 100. The tool&apos;s input is birth weight plus the baby&apos;s current weight. The tool&apos;s output is one percentage. The tool accepts pounds, ounces and grams. The reference weight is birth weight or peak weight. The first 72 hours drop fastest. For hour-by-hour thresholds in those first days, the{' '}
+              <a href="/calculators/newborn-weight-loss/" className="text-[#ca3500] dark:text-orange-400 font-bold hover:underline">
+                newborn first-days tool
+              </a>
+              , which maps each 24-hour window in finer detail than this monthly tracker.
             </p>
           </div>
 
