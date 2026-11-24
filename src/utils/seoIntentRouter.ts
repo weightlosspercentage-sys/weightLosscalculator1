@@ -190,6 +190,10 @@ export function resolveSearchIntentFromPath(rawPathname: string): RouteIntentRes
     const isUk = locale === 'uk';
     const isAu = locale === 'au';
     const regionLabel = isUk ? 'UK (NHS / NICE)' : isAu ? 'Australia' : 'AAP Clinical';
+    // Bing fix: /blog/newborn-weight-loss/ and /calculators/infant-weight-loss/ are
+    // distinct pages from the newborn calculator — they need their own title/description.
+    const isBlog = cleanPath.includes('/blog/');
+    const isInfant = cleanPath.includes('infant-weight-loss');
 
     return {
       locale,
@@ -201,11 +205,18 @@ export function resolveSearchIntentFromPath(rawPathname: string): RouteIntentRes
       restaurantBrand: 'subway',
       defaultWeightUnit,
       defaultBabyUnit,
-      customMetaTitle: isUk
-        ? 'Baby & Newborn Weight Loss Calculator UK (lbs/oz & Grams)'
-        : 'Newborn & Infant Weight Loss Percentage Calculator (lbs/oz & Grams)',
-      customMetaDescription:
-        'Free newborn weight loss tool: calculate weight loss after birth and see if it is in the normal range. 7% normal, 10% alert thresholds.',
+      customMetaTitle: isBlog
+        ? 'Newborn Weight Loss Guide: Normal Ranges & Warning Signs'
+        : isInfant
+          ? 'Infant Weight Loss Calculator (Birth to 14 Days)'
+          : isUk
+            ? 'Baby & Newborn Weight Loss Calculator UK (lbs/oz & Grams)'
+            : 'Newborn & Infant Weight Loss Percentage Calculator (lbs/oz & Grams)',
+      customMetaDescription: isBlog
+        ? 'A guide to newborn weight loss after birth: the normal 5 to 7% range, the 10% alert threshold, and when to call your pediatrician.'
+        : isInfant
+          ? 'Calculate infant weight loss as a percentage of birth weight from birth to 14 days. Check the 7% normal and 10% alert thresholds.'
+          : 'Free newborn weight loss tool: calculate weight loss after birth and see if it is in the normal range. 7% normal, 10% alert thresholds.',
       customHeroTitle: isUk
         ? 'Baby & Newborn Weight Loss Percentage Calculator (UK)'
         : 'Newborn & Infant Weight Loss Percentage Calculator',
@@ -227,6 +238,9 @@ export function resolveSearchIntentFromPath(rawPathname: string): RouteIntentRes
       cleanPath.includes('/calculators/water-fasting-weight-loss') ||
       cleanPath.includes('/calculators/omad-weight-loss') ||
       cleanPath.includes('/blog/water-fasting-weight-loss');
+    // Bing fix: the blog guide and the OMAD calculator are distinct pages from the
+    // water-fast calculator — they need their own title/description.
+    const isBlog = cleanPath.includes('/blog/');
     return {
       locale,
       shouldRedirectToHome: false,
@@ -241,11 +255,16 @@ export function resolveSearchIntentFromPath(rawPathname: string): RouteIntentRes
       restaurantBrand: 'subway',
       defaultWeightUnit,
       defaultBabyUnit,
-      customMetaTitle: isOmad
-        ? 'OMAD & Intermittent Fasting Weight Loss Calculator (Fat vs. Water)'
-        : 'Water Fast Weight Loss Calculator (24h, 72h, 7-Day & OMAD Fat Loss)',
-      customMetaDescription:
-        'Calculate exact water fast and OMAD weight loss in lbs or kg. Separates early glycogen/water weight drop (Days 1–3) from true body fat oxidation (TDEE ÷ 3,500 kcal).',
+      customMetaTitle: isBlog
+        ? 'Water Fasting Weight Loss Guide (24h, 72h & 7-Day)'
+        : isOmad
+          ? 'OMAD & Intermittent Fasting Weight Loss Calculator (Fat vs. Water)'
+          : 'Water Fast Weight Loss Calculator (24h, 72h, 7-Day & OMAD Fat Loss)',
+      customMetaDescription: isBlog
+        ? 'How water fasting affects weight: the early glycogen and water drop in days 1 to 3, then true fat loss — and how to track both.'
+        : isOmad
+          ? 'Calculate OMAD and intermittent fasting weight loss in lbs or kg. See the early water-weight drop and the true fat loss after refeeding.'
+          : 'Calculate exact water fast and OMAD weight loss in lbs or kg. Separates early glycogen/water weight drop (Days 1–3) from true body fat oxidation (TDEE ÷ 3,500 kcal).',
       customHeroTitle: isOmad
         ? 'OMAD & Intermittent Fasting Weight Loss Calculator'
         : 'Water Fasting & OMAD Weight Loss Calculator',
@@ -265,6 +284,8 @@ export function resolveSearchIntentFromPath(rawPathname: string): RouteIntentRes
     cleanPath.includes('excess-weight-loss')
   ) {
     const isAuthoritativeBariatric = cleanPath.includes('/calculators/bariatric-surgery-weight-loss');
+    // Bing fix: the blog timeline is a distinct page from the bariatric calculator.
+    const isBlog = cleanPath.includes('/blog/');
     return {
       locale,
       shouldRedirectToHome: false,
@@ -277,9 +298,12 @@ export function resolveSearchIntentFromPath(rawPathname: string): RouteIntentRes
       restaurantBrand: 'subway',
       defaultWeightUnit,
       defaultBabyUnit,
-      customMetaTitle: 'Bariatric Weight Loss Calculator by Month (%EWL, RNY Bypass, Sleeve & Duodenal Switch)',
-      customMetaDescription:
-        'Calculate Percentage of Excess Weight Loss (%EWL), Total Body Weight Loss (%TBWL), and month-by-month post-op weight projections for RNY gastric bypass, sleeve, and duodenal switch.',
+      customMetaTitle: isBlog
+        ? 'Bariatric Surgery Weight Loss Timeline (Month by Month)'
+        : 'Bariatric Weight Loss Calculator by Month (%EWL, RNY Bypass, Sleeve & Duodenal Switch)',
+      customMetaDescription: isBlog
+        ? 'Month-by-month bariatric surgery weight loss timeline: expected %EWL and %TBWL after RNY bypass, sleeve, and duodenal switch.'
+        : 'Calculate Percentage of Excess Weight Loss (%EWL), Total Body Weight Loss (%TBWL), and month-by-month post-op weight projections for RNY gastric bypass, sleeve, and duodenal switch.',
       customHeroTitle: 'Bariatric Surgery Weight Loss Calculator (%EWL & Monthly Timeline)',
       customHeroIntro:
         'Track Excess Weight Loss (%EWL) and month-by-month post-op projections (Months 1, 3, 6, 12, and 18) for Roux-en-Y Gastric Bypass (RNY), Vertical Sleeve Gastrectomy (VSG), and Duodenal Switch.',
@@ -300,6 +324,8 @@ export function resolveSearchIntentFromPath(rawPathname: string): RouteIntentRes
     cleanPath.includes('phentermine')
   ) {
     const isAuthoritativeGlp1 = cleanPath.includes('/calculators/glp1-weight-loss');
+    // Bing fix: the blog medication guide is a distinct page from the GLP-1 calculator.
+    const isBlog = cleanPath.includes('/blog/');
     return {
       locale,
       shouldRedirectToHome: false,
@@ -310,9 +336,12 @@ export function resolveSearchIntentFromPath(rawPathname: string): RouteIntentRes
       restaurantBrand: 'subway',
       defaultWeightUnit,
       defaultBabyUnit,
-      customMetaTitle: 'GLP-1, Semaglutide, Tirzepatide & Mounjaro Weight Loss Calculator (+ FDA Titration PDF)',
-      customMetaDescription:
-        'Calculate weight loss percentage on Semaglutide (Ozempic/Wegovy), Tirzepatide (Mounjaro/Zepbound), Phentermine, and clinical trial benchmarks with printable FDA titration schedules.',
+      customMetaTitle: isBlog
+        ? 'GLP-1 Medications for Weight Loss: Guide (Ozempic, Wegovy & Mounjaro)'
+        : 'GLP-1, Semaglutide, Tirzepatide & Mounjaro Weight Loss Calculator (+ FDA Titration PDF)',
+      customMetaDescription: isBlog
+        ? 'A guide to GLP-1 weight loss medications: Semaglutide, Tirzepatide, and Phentermine results from clinical trials, with FDA titration schedules.'
+        : 'Calculate weight loss percentage on Semaglutide (Ozempic/Wegovy), Tirzepatide (Mounjaro/Zepbound), Phentermine, and clinical trial benchmarks with printable FDA titration schedules.',
       customHeroTitle: 'GLP-1, Semaglutide & Tirzepatide Weight Loss Calculator',
       customHeroIntro:
         'Compare your weight loss percentage with STEP-1 (Semaglutide 14.9%), SURMOUNT-1 (Tirzepatide 20.9%), and Phase 2 clinical trials, complete with official FDA weekly titration schedules.',
@@ -323,6 +352,8 @@ export function resolveSearchIntentFromPath(rawPathname: string): RouteIntentRes
   // 7. Postpartum & Breastfeeding Weight Loss Intent
   if (cleanPath.includes('postpartum') || cleanPath.includes('breastfeeding')) {
     const isAuthoritativePostpartum = cleanPath.includes('/calculators/postpartum-weight-loss');
+    // Bing fix: the blog safe guide is a distinct page from the postpartum calculator.
+    const isBlog = cleanPath.includes('/blog/');
     return {
       locale,
       shouldRedirectToHome: false,
@@ -335,9 +366,12 @@ export function resolveSearchIntentFromPath(rawPathname: string): RouteIntentRes
       restaurantBrand: 'subway',
       defaultWeightUnit,
       defaultBabyUnit,
-      customMetaTitle: 'Postpartum & Breastfeeding Weight Loss Calorie Calculator',
-      customMetaDescription:
-        'Calculate postpartum weight loss percentage and safe breastfeeding calorie targets (+450 to +500 kcal/day lactation output) to lose weight without reducing milk supply.',
+      customMetaTitle: isBlog
+        ? 'Postpartum Weight Loss: Safe Guide for Breastfeeding Mothers'
+        : 'Postpartum & Breastfeeding Weight Loss Calorie Calculator',
+      customMetaDescription: isBlog
+        ? 'A safe postpartum weight loss guide for breastfeeding mothers: how to lose weight gradually without reducing milk supply.'
+        : 'Calculate postpartum weight loss percentage and safe breastfeeding calorie targets (+450 to +500 kcal/day lactation output) to lose weight without reducing milk supply.',
       customHeroTitle: 'Postpartum & Breastfeeding Weight Loss Calculator',
       customHeroIntro:
         'Track your gradual postpartum weight change from pre-pregnancy or delivery weight and calculate breastfeeding-safe daily calories that protect your milk supply.',
@@ -752,6 +786,7 @@ export function resolveSearchIntentFromPath(rawPathname: string): RouteIntentRes
       restaurantBrand: 'subway',
       defaultWeightUnit,
       defaultBabyUnit,
+      customMetaTitle: 'Weight Loss Percentage Calculator (Start & Current Weight)',
       customMetaDescription:
         'Calculate your weight loss percentage in seconds. Enter your starting and current weight to see your progress and track your results.'
     };
@@ -768,6 +803,7 @@ export function resolveSearchIntentFromPath(rawPathname: string): RouteIntentRes
       restaurantBrand: 'subway',
       defaultWeightUnit,
       defaultBabyUnit,
+      customMetaTitle: 'Body Fat Percentage Calculator (US Navy Method)',
       customMetaDescription:
         'Measure your body fat percentage with a free calculator. Enter your measurements to estimate body fat and track changes over time.'
     };
@@ -784,6 +820,7 @@ export function resolveSearchIntentFromPath(rawPathname: string): RouteIntentRes
       restaurantBrand: 'subway',
       defaultWeightUnit,
       defaultBabyUnit,
+      customMetaTitle: 'Biggest Loser Weight Loss Percentage Calculator',
       customMetaDescription:
         'Calculate Biggest Loser weight loss percentage the way the show ranks contestants. Enter starting and current weight to see your percentage.'
     };
@@ -800,6 +837,7 @@ export function resolveSearchIntentFromPath(rawPathname: string): RouteIntentRes
       restaurantBrand: 'subway',
       defaultWeightUnit,
       defaultBabyUnit,
+      customMetaTitle: 'Smoothie Calorie Calculator & Weight Loss Recipes',
       customMetaDescription:
         'Find smoothie calories and weight loss friendly recipes. Calculate nutrition for your smoothie and plan a lighter breakfast or snack.'
     };
@@ -816,6 +854,7 @@ export function resolveSearchIntentFromPath(rawPathname: string): RouteIntentRes
       restaurantBrand: 'subway',
       defaultWeightUnit,
       defaultBabyUnit,
+      customMetaTitle: 'BMR vs TDEE: Difference & Daily Calorie Needs',
       customMetaDescription:
         'Compare BMR vs TDEE and learn the difference. See how basal metabolic rate and total daily energy expenditure shape your daily calorie needs.'
     };
@@ -832,6 +871,7 @@ export function resolveSearchIntentFromPath(rawPathname: string): RouteIntentRes
       restaurantBrand: 'subway',
       defaultWeightUnit,
       defaultBabyUnit,
+      customMetaTitle: 'Pregnancy Weight Calculators & Guides',
       customMetaDescription:
         'Explore pregnancy weight calculators and guides. Track healthy weight gain, baby weight loss after birth, and postpartum progress in one place.'
     };
@@ -848,8 +888,36 @@ export function resolveSearchIntentFromPath(rawPathname: string): RouteIntentRes
       restaurantBrand: 'subway',
       defaultWeightUnit,
       defaultBabyUnit,
+      customMetaTitle: 'Weight Loss Calculators & Guides (All Tools)',
       customMetaDescription:
         'Browse weight loss calculators and guides in one place. Calculate weight loss percentage, BMI, and calories to track your progress.'
+    };
+  }
+
+  // Bing fix: locale weight-loss & biggest-loser tool pages (e.g. /uk/calculators/weight-loss/)
+  // fell through to the generic locale fallback and shared the regional homepage title.
+  // Give each locale+tool its own title/description; generate-route-html.mjs appends
+  // the " | Region" suffix for non-English locales.
+  if (
+    /^\/(ca|uk|au|de|it|ru|zh)\/calculators\/(weight-loss|biggest-loser)\/?$/.test(cleanPath)
+  ) {
+    const isBiggestLoser = cleanPath.includes('biggest-loser');
+    return {
+      locale,
+      shouldRedirectToHome: false,
+      redirectTarget: normalizedCanonical,
+      canonicalPath: normalizedCanonical,
+      toolMode: 'adult',
+      clinicalFocus: 'standard',
+      restaurantBrand: 'subway',
+      defaultWeightUnit,
+      defaultBabyUnit,
+      customMetaTitle: isBiggestLoser
+        ? 'Biggest Loser Weight Loss Percentage Calculator'
+        : 'Weight Loss Percentage Calculator (Start & Current Weight)',
+      customMetaDescription: isBiggestLoser
+        ? 'Calculate Biggest Loser weight loss percentage the way the show ranks contestants. Enter starting and current weight to see your percentage.'
+        : 'Calculate your weight loss percentage in seconds. Enter your starting and current weight to see your progress and track your results.'
     };
   }
 
@@ -1074,6 +1142,12 @@ export function resolveSearchIntentFromPath(rawPathname: string): RouteIntentRes
     cleanPath.includes('/calculators/calorie')
   ) {
     const isDeficit = cleanPath.includes('deficit');
+    // Bing fix: /calculators/bmr/, /calculators/calorie/, /calculators/calorie-deficit/
+    // and /blog/calorie-deficit-weight-loss/ are four distinct pages — they need their
+    // own title/description instead of sharing one BMR description.
+    const isBlog = cleanPath.includes('/blog/');
+    const isCalorieAlias =
+      cleanPath.endsWith('/calculators/calorie') || cleanPath.endsWith('/calculators/calorie/');
     return {
       locale,
       shouldRedirectToHome: false,
@@ -1084,11 +1158,20 @@ export function resolveSearchIntentFromPath(rawPathname: string): RouteIntentRes
       restaurantBrand: 'subway',
       defaultWeightUnit: isMetricLocale ? 'kg' : 'lbs',
       defaultBabyUnit,
-      customMetaTitle: isDeficit
-        ? 'Calorie Deficit & 12-Week Weight Loss Projection Calculator (BMR + TDEE)'
-        : 'BMR Calculator (Mifflin-St Jeor): Daily Calories & TDEE',
-      customMetaDescription:
-        'Calculate your Basal Metabolic Rate (BMR), Maintenance Calories (TDEE), 500-calorie daily deficit, and week-by-week weight projection table.',
+      customMetaTitle: isBlog
+        ? 'Calorie Deficit for Weight Loss: Guide (500 kcal/day)'
+        : isCalorieAlias
+          ? 'Daily Calorie Calculator (BMR, TDEE & Maintenance Calories)'
+          : isDeficit
+            ? 'Calorie Deficit & 12-Week Weight Loss Projection Calculator (BMR + TDEE)'
+            : 'BMR Calculator (Mifflin-St Jeor): Daily Calories & TDEE',
+      customMetaDescription: isBlog
+        ? 'How a calorie deficit works for weight loss: the 500 kcal per day rule, the 3,500 kcal pound, and a safe 12-week plan.'
+        : isCalorieAlias
+          ? 'Calculate your daily calorie needs from BMR and activity level. See maintenance calories (TDEE) and a 500-calorie daily deficit.'
+          : isDeficit
+            ? 'Calculate a calorie deficit for weight loss. A 500-calorie daily deficit loses about 1 pound per week; see your 12-week projection.'
+            : 'Calculate your Basal Metabolic Rate (BMR) with the Mifflin-St Jeor equation. See daily calories, TDEE, and a 12-week weight projection.',
       customHeroTitle: isDeficit
         ? 'Calorie Deficit & 12-Week Weight Loss Projection Calculator'
         : 'BMR, TDEE & Weekly Weight Loss Projection Calculator',
