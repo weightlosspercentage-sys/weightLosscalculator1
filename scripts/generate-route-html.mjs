@@ -70,6 +70,21 @@ const HREFLANG_TAGS = [
   '    <link rel="alternate" hreflang="x-default" href="https://www.weightlosspercentage.com/" />'
 ].join('\n');
 
+// Google Analytics (GA4) — injected into <head> on EVERY route.
+// NOTE: Do not add the gtag snippet to Layout.astro — the Astro/vite build strips
+// <script> tags from the layout head, so the tag must be injected here, where all
+// 146 static pages are generated from the dist/index.html template.
+const GA_TAG = [
+  '    <!-- Google tag (gtag.js) — GA4, property G-VY7X5E6GFN -->',
+  '    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VY7X5E6GFN"></script>',
+  '    <script>',
+  '      window.dataLayer = window.dataLayer || [];',
+  '      function gtag(){dataLayer.push(arguments);}',
+  "      gtag('js', new Date());",
+  "      gtag('config', 'G-VY7X5E6GFN');",
+  '    </script>'
+].join('\n');
+
 function escapeHtml(str) {
   if (!str) return '';
   return str
@@ -209,6 +224,15 @@ for (const loc of locMatches) {
     routeHtml = routeHtml.replace(
       /<link\s+rel="canonical"[^>]*\/?>/,
       `$&\n${HREFLANG_TAGS}`
+    );
+  }
+
+  // GA4: Inject Google Analytics tag right after canonical on EVERY route.
+  // The guard prevents a duplicate if the tag is already present (e.g. in the template).
+  if (!routeHtml.includes('G-VY7X5E6GFN')) {
+    routeHtml = routeHtml.replace(
+      /<link\s+rel="canonical"[^>]*\/?>/,
+      `$&\n${GA_TAG}`
     );
   }
 
