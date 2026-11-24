@@ -571,6 +571,7 @@ for (const loc of locMatches) {
             </tbody>
           </table>
           <p>Weight loss after the first 3 to 4 days is not normal. Later loss, or a failure to gain after that window, requires clinical evaluation. This tracker covers birth through the first month, including the regain curve by day 10 to 14. For day-by-day first-week physiology, see the <a href="/calculators/newborn-weight-loss/">newborn weight loss calculator</a>, which examines the earliest feeding checks in finer detail.</p>
+          <p>After the first month, the percentage from birth weight stops being the right measure. The <a href="/calculators/baby-weight-percentile/">baby weight percentile calculator</a> places the same weight on the WHO and CDC growth chart for the baby&apos;s age and sex, so parents can track growth month by month instead of against birth weight.</p>
           <h3>Continue tracking or call the pediatrician</h3>
           <p>The checklist below separates routine home tracking from situations the guidelines assign to a clinician.</p>
           <p><strong>Continue tracking at home.</strong> The loss sits inside the expected range in the table above. The baby wets at least 6 diapers daily from day 4 onward. Feeds are regular and the baby wakes easily.</p>
@@ -743,6 +744,49 @@ for (const loc of locMatches) {
             <li>PubMed studies on fat mass versus lean mass loss rates</li>
             <li>Metabolic adaptation research on weight loss competition cohorts</li>
           </ul>
+        </section>`;
+  } else if (routePath.endsWith('/calculators/baby-weight-percentile/')) {
+    preRenderedSectionHtml = `
+        <section id="baby-weight-percentile" style="margin-top: 1.5rem; padding: 1.5rem; background: var(--cp-surface); border: 1px solid var(--cp-border); border-radius: 1.25rem;">
+          <h2>Baby Weight Percentile Calculator: WHO &amp; CDC Growth Chart (0-60 Months)</h2>
+          <p>A baby weight percentile calculator is a growth chart tool that converts a baby&apos;s weight and age into a percentile for that age and sex. It uses the WHO Child Growth Standards from birth to 24 months and the CDC 2000 Growth Charts from 24 to 60 months. Enter the baby&apos;s sex, age in months, and weight to see the percentile, the z-score, and the 3rd, 50th, and 97th percentile weights for that age and sex.</p>
+          <h3>What a baby weight percentile means</h3>
+          <p>A baby weight percentile is a ranking that places one baby&apos;s weight against the weights of babies the same age and sex on a standard growth chart. A percentile of 50 means the baby weighs the same as the median baby of that age and sex. A percentile of 25 means the baby weighs more than about 25 out of 100 babies the same age and sex. A percentile of 75 means the baby weighs more than about 75 out of 100.</p>
+          <p>The percentile answers one question: where does this baby&apos;s weight sit on the growth chart for this age and sex. It does not grade the baby. It does not diagnose a problem. It gives parents and pediatricians a common reference point for tracking growth over time.</p>
+          <p>Pediatricians track the percentile across visits. A baby who stays near the same percentile line grows steadily. A baby who crosses two percentile lines in either direction earns a closer look at feeding, illness, and growth.</p>
+          <p>In the first days after birth, weight moves fast. The <a href="/calculators/newborn-weight-loss/">newborn weight loss calculator</a> checks the first-days drop against the normal range. After the first month, the <a href="/calculators/baby-weight-loss/">baby weight loss calculator</a> tracks the percentage change from birth weight. The <a href="/calculators/infant-weight-loss/">infant weight loss calculator</a> covers the same check for older infants.</p>
+          <h3>How the percentile is calculated</h3>
+          <p>The calculator uses the LMS method. WHO and the CDC publish three numbers for every month of age and each sex: L for skew, M for the median weight, and S for spread. The calculator looks up the three numbers for the baby&apos;s age and sex, converts the weight into a z-score, and converts the z-score into a percentile.</p>
+          <p>Firstly, enter the baby&apos;s sex, age in months, and weight. Secondly, the calculator finds the L, M, and S values for that age and sex. Finally, it computes the z-score and reads the percentile from the standard normal distribution.</p>
+          <p><code>z = ((weight / M)^L - 1) / (L x S)</code>, and the percentile equals the standard normal cumulative distribution of z, times 100. When L equals zero, the formula becomes <code>z = ln(weight / M) / S</code>.</p>
+          <p>WHO supplies the values from birth to 24 months. The CDC supplies the values from 24 months to 60 months. The CDC and the American Academy of Pediatrics recommend the WHO standards for infants under 24 months and the CDC charts for children aged 2 years and older.</p>
+          <h3>Weight at the 3rd, 50th, and 97th percentiles (kg)</h3>
+          <p>The table below shows the reference weights for girls and boys at common ages, computed from the same WHO and CDC values the calculator uses. The 50th percentile is the median weight. The 3rd and 97th percentiles mark the outer edges of the reference range.</p>
+          <table>
+            <thead>
+              <tr><th>Age</th><th>Girls 3rd</th><th>Girls 50th</th><th>Girls 97th</th><th>Boys 3rd</th><th>Boys 50th</th><th>Boys 97th</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Birth (WHO)</td><td>2.44</td><td>3.23</td><td>4.17</td><td>2.51</td><td>3.35</td><td>4.35</td></tr>
+              <tr><td>2 mo (WHO)</td><td>4.00</td><td>5.13</td><td>6.53</td><td>4.39</td><td>5.57</td><td>6.99</td></tr>
+              <tr><td>4 mo (WHO)</td><td>5.09</td><td>6.42</td><td>8.11</td><td>5.64</td><td>7.00</td><td>8.63</td></tr>
+              <tr><td>6 mo (WHO)</td><td>5.81</td><td>7.30</td><td>9.20</td><td>6.44</td><td>7.93</td><td>9.72</td></tr>
+              <tr><td>9 mo (WHO)</td><td>6.56</td><td>8.23</td><td>10.39</td><td>7.24</td><td>8.90</td><td>10.90</td></tr>
+              <tr><td>12 mo (WHO)</td><td>7.14</td><td>8.95</td><td>11.33</td><td>7.85</td><td>9.65</td><td>11.83</td></tr>
+              <tr><td>18 mo (WHO)</td><td>8.17</td><td>10.23</td><td>12.99</td><td>8.87</td><td>10.94</td><td>13.48</td></tr>
+              <tr><td>24 mo (CDC)</td><td>9.99</td><td>12.06</td><td>15.00</td><td>10.38</td><td>12.67</td><td>15.60</td></tr>
+              <tr><td>36 mo (CDC)</td><td>11.33</td><td>13.87</td><td>17.87</td><td>11.76</td><td>14.33</td><td>17.94</td></tr>
+              <tr><td>48 mo (CDC)</td><td>12.71</td><td>15.79</td><td>21.14</td><td>13.23</td><td>16.23</td><td>20.87</td></tr>
+              <tr><td>60 mo (CDC)</td><td>14.27</td><td>17.93</td><td>24.79</td><td>14.79</td><td>18.39</td><td>24.31</td></tr>
+            </tbody>
+          </table>
+          <p>A worked example makes the ranking concrete. A 12-month-old boy who weighs 8.00 kg sits at about the 4th percentile, below the typical range. A 12-month-old girl who weighs 8.00 kg sits at about the 18th percentile, within the typical range. The same weight means different things for each sex, which is why the calculator asks for sex first.</p>
+          <h3>When to talk to your baby&apos;s doctor</h3>
+          <p>Call the pediatrician when the percentile falls below the 5th or above the 95th, when the percentile crosses two lines between visits, or when weight gain stalls for more than a month. A single low or high reading rarely signals a problem on its own. The trend across visits matters more than any one number.</p>
+          <p>Bring the growth chart to every visit. The pediatrician reads the percentile together with length, head circumference, feeding, and development. Weight alone never tells the whole story.</p>
+          <h3>Source</h3>
+          <p>This calculator uses the WHO Child Growth Standards (2006), weight-for-age, for birth to 24 months, and the CDC 2000 Growth Charts, weight-for-age, for 24 to 60 months. The <a href="https://www.cdc.gov/growthcharts/">CDC growth charts</a> publish the reference tables and the LMS data files the calculator reads.</p>
+          <p><strong>Disclaimer.</strong> This tool is for informational purposes only and does not constitute medical advice. Always consult a healthcare provider about your baby&apos;s growth.</p>
         </section>`;
   }
 

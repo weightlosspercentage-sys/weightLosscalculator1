@@ -1230,6 +1230,13 @@ export const SiloContentSections: React.FC<SiloContentSectionsProps> = ({
             </a>
             , which examines the earliest feeding checks in finer detail.
           </p>
+          <p>
+            After the first month, the percentage from birth weight stops being the right measure. The{' '}
+            <a href="/calculators/baby-weight-percentile/" className="text-[#c2410c] dark:text-orange-400 font-bold hover:underline">
+              baby weight percentile calculator
+            </a>{' '}
+            places the same weight on the WHO and CDC growth chart for the baby&apos;s age and sex, so parents can track growth month by month instead of against birth weight.
+          </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">

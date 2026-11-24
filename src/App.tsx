@@ -23,6 +23,7 @@ const SiteInfoPages = lazy(() =>
   import('./components/SiteInfoPages').then((m) => ({ default: m.SiteInfoPages }))
 );
 import { BmiTopicalPages, BmiTopicalRoute } from './components/BmiTopicalPages';
+import { BabyWeightPercentilePage } from './components/BabyWeightPercentilePage';
 import { BlogArticleContent } from './components/BlogArticleContent';
 import { SearchableToolItem } from './utils/toolSearch';
 import {
@@ -885,6 +886,8 @@ export const App: React.FC = () => {
                   activeRoute={routeIntent.canonicalPath as BmiTopicalRoute}
                   onNavigate={navigateCanonicalHub}
                 />
+              ) : routeIntent.canonicalPath === '/calculators/baby-weight-percentile/' ? (
+                <BabyWeightPercentilePage onNavigate={navigateCanonicalHub} />
               ) : (
                 <HeroToolBox
                   externalMode={activeToolMode}

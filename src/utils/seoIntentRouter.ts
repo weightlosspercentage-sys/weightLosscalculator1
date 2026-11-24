@@ -1047,6 +1047,34 @@ export function resolveSearchIntentFromPath(rawPathname: string): RouteIntentRes
     };
   }
 
+  // NEW PAGE: /calculators/baby-weight-percentile/ (Baby Weight Percentile Calculator, WHO + CDC)
+  if (
+    cleanPath === '/calculators/baby-weight-percentile' ||
+    cleanPath === '/calculators/baby-weight-percentile/' ||
+    cleanPath.endsWith('/calculators/baby-weight-percentile') ||
+    cleanPath.endsWith('/calculators/baby-weight-percentile/')
+  ) {
+    return {
+      locale,
+      shouldRedirectToHome: false,
+      redirectTarget: normalizedCanonical,
+      canonicalPath: normalizedCanonical,
+      toolMode: 'newborn',
+      clinicalFocus: 'standard',
+      restaurantBrand: 'subway',
+      defaultWeightUnit,
+      defaultBabyUnit,
+      customMetaTitle: 'Baby Weight Percentile Calculator: WHO & CDC Growth Chart (0-60 Months)',
+      customMetaDescription:
+        'Find your baby weight percentile by age and sex. Enter age in months and weight to see the percentile on the WHO and CDC growth charts, plus the 3rd, 50th and 97th percentile weights.',
+      customHeroTitle: 'Baby Weight Percentile Calculator: WHO & CDC Growth Chart (0-60 Months)',
+      customHeroIntro:
+        'A baby weight percentile calculator is a growth chart tool that converts a baby weight and age into a percentile for that age and sex, using the WHO Child Growth Standards from birth to 24 months and the CDC 2000 Growth Charts from 24 to 60 months.',
+      intentBadge: 'WHO (0-24 mo) • CDC (24-60 mo) • LMS Growth Chart Method',
+      scrollSectionId: 'baby-weight-percentile-page'
+    };
+  }
+
   if (cleanPath.includes('/calculators/walking')) {
     return {
       locale,

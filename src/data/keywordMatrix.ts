@@ -164,7 +164,8 @@ export const PRESERVED_ROUTES = [
   '/category/weight-loss/',
   '/calculators/bmi/',
   '/calculators/bmi-chart/',
-  '/calculators/ideal-weight/'
+  '/calculators/ideal-weight/',
+  '/calculators/baby-weight-percentile/'
 ];
 
 export const SILOS_DATA: SiloMetadata[] = [
